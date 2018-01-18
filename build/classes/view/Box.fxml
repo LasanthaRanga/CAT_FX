@@ -28,10 +28,6 @@
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>
       <JFXButton prefHeight="301.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" />
-      <JFXButton accessibleText="users" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="System Users" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font></JFXButton>
       <JFXButton accessibleText="btn_exit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />

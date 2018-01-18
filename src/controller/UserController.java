@@ -62,26 +62,26 @@ public class UserController implements Initializable {
         loadSQ();
 
         btn_saveuser.setOnAction((ActionEvent event) -> {
-            saveUsers();
+            
         });
 
     }
 
-    public modle.Users collectUserInfo() {
-        Users users = new modle.Users();
-        users.setCatagory(com_cat.getSelectionModel().getSelectedItem());
-        users.setSQ(com_sq.getSelectionModel().getSelectedItem());
-        users.setFullName(txt_fname.getText());
-        users.setNic(txt_nic.getText());
-        users.setMobile(txt_mobile.getText());
-        users.setSqa(txt_answer.getText());
-        users.setUname(txt_uname.getText());
-        users.setPword(txt_pword.getText());
-
-        System.out.println(users.getPword());
-        return users;
-
-    }
+//    public modle.Users collectUserInfo() {
+////        Users users = new modle.Users();
+////        users.setCatagory(com_cat.getSelectionModel().getSelectedItem());
+////        users.setSQ(com_sq.getSelectionModel().getSelectedItem());
+////        users.setFullName(txt_fname.getText());
+////        users.setNic(txt_nic.getText());
+////        users.setMobile(txt_mobile.getText());
+////        users.setSqa(txt_answer.getText());
+////        users.setUname(txt_uname.getText());
+////        users.setPword(txt_pword.getText());
+////
+////        System.out.println(users.getPword());
+////        return users;
+//
+//    }
     
     public void clear(){
         txt_fname.setText(null);
@@ -92,11 +92,11 @@ public class UserController implements Initializable {
         txt_pword.setText(null);        
     }
 
-    public void saveUsers() {
-        Users users = collectUserInfo();
-        users.saveUser();
-        clear();
-    }
+//    public void saveUsers() {
+//        Users users = collectUserInfo();
+//        users.saveUser();
+//        clear();
+//    }
 
     public void loadCat() {
         ObservableList loadCatList = new modle.Catagory().loadCatList();

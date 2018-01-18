@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 18, 2018 3:54:54 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Application" table="application" catalog="cat" optimistic-lock="version">
         <id name="idApplication" type="java.lang.Integer">
@@ -11,21 +11,23 @@
         <many-to-one name="customer" class="pojo.Customer" fetch="select">
             <column name="Customer_idCustomer" not-null="true" />
         </many-to-one>
+        <many-to-one name="subNature" class="pojo.SubNature" fetch="select">
+            <column name="Sub_Nature_idSub_Nature" not-null="true" />
+        </many-to-one>
         <many-to-one name="tradeNature" class="pojo.TradeNature" fetch="select">
             <column name="Trade_Nature_idTrade_Nature" not-null="true" />
         </many-to-one>
         <many-to-one name="tradeType" class="pojo.TradeType" fetch="select">
             <column name="Trade_Type_idTrade_Type" not-null="true" />
         </many-to-one>
-        <property name="subNatureIdSubNature" type="java.lang.Integer">
-            <column name="Sub_Nature_idSub_Nature" />
-        </property>
-        <property name="roIdRo" type="java.lang.Integer">
-            <column name="Ro_idRo" />
-        </property>
-        <property name="applicationNo" type="java.lang.Integer">
-            <column name="application_no" />
-        </property>
+        <many-to-one name="user" class="pojo.User" fetch="select">
+            <column name="User_idUser" not-null="true">
+                <comment>RO Catagary Eke User Application Eka aragena awa kena</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="userLog" class="pojo.UserLog" fetch="select">
+            <column name="User_Log_idUser_Log" not-null="true" />
+        </many-to-one>
         <property name="applicationDate" type="date">
             <column name="application_date" length="10" />
         </property>
@@ -59,14 +61,6 @@
         <property name="taxAmount" type="java.lang.Double">
             <column name="tax_amount" precision="22" scale="0" />
         </property>
-        <property name="approve" type="java.lang.Integer">
-            <column name="approve" />
-        </property>
-        <property name="sendId" type="java.lang.Integer">
-            <column name="`SEND-ID`">
-                <comment>approv karanna yawana kenage ID eka</comment>
-            </column>
-        </property>
         <property name="discription" type="string">
             <column name="discription" />
         </property>
@@ -79,11 +73,5 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
-        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="Application_idApplication" not-null="true" />
-            </key>
-            <one-to-many class="pojo.Payment" />
-        </set>
     </class>
 </hibernate-mapping>

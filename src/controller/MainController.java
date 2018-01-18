@@ -68,19 +68,19 @@ public class MainController implements Initializable {
         ses.beginTransaction().commit();
         ses.close();
 
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {
-            pojo.UserLog lu = (pojo.UserLog) session.createCriteria(pojo.UserLog.class).add(Restrictions.eq("idUserLog", 1)).uniqueResult();
-            System.out.println(lu);
-            String fullName = lu.getUser().getFullName();
-            System.out.println(fullName);
-            lbl_logUser.setText(fullName);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+      //  Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+//        try {
+//            pojo.UserLog lu = (pojo.UserLog) session.createCriteria(pojo.UserLog.class).add(Restrictions.eq("idUserLog", 1)).uniqueResult();
+//            System.out.println(lu);
+//            String fullName = lu.getUser().getFullName();
+//            System.out.println(fullName);
+//            lbl_logUser.setText(fullName);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
 
         try {
 

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="anc_ward" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #FFFFFF;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.WardController">
+   <children>
+      <JFXTextField fx:id="txt_wardname" labelFloat="true" layoutX="290.0" layoutY="134.0" onKeyReleased="#keyListener" prefHeight="25.0" prefWidth="317.0" promptText="Ward Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <JFXButton fx:id="btn_ward_add" layoutX="290.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_ward_update" layoutX="407.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_ward_delete" layoutX="515.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="table_ward" layoutX="664.0" layoutY="109.0" prefHeight="170.0" prefWidth="379.0">
+         <columns>
+            <TableColumn fx:id="idward" editable="false" prefWidth="79.0" text="Ward ID" />
+            <TableColumn fx:id="wardname" editable="false" prefWidth="283.0" text="Ward Name" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txt_strret" labelFloat="true" layoutX="287.0" layoutY="435.0" prefHeight="25.0" prefWidth="317.0" promptText="Strret Name">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </JFXTextField>
+      <TableView fx:id="tbl_strret" layoutX="663.0" layoutY="385.0" prefHeight="170.0" prefWidth="379.0">
+         <columns>
+            <TableColumn fx:id="col_idStreet" prefWidth="86.0" text="Strret ID" />
+            <TableColumn fx:id="col_streetName" editable="false" prefWidth="280.0" text="Street Name" />
+         </columns>
+      </TableView>
+      <JFXButton fx:id="btn_street_add" layoutX="287.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_street_update" layoutX="401.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_street_delete" layoutX="513.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <Label layoutX="492.0" layoutY="14.0" prefHeight="53.0" prefWidth="353.0" text="Add Ward And Street " textAlignment="CENTER" textFill="#009708">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

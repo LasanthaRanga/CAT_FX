@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.CatagoryHasRo" table="catagory_has_ro" catalog="cat" optimistic-lock="version">
+        <id name="idCatagoryHasRo" type="java.lang.Integer">
+            <column name="idCatagory_has_Ro" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="catagory" class="pojo.Catagory" fetch="select">
+            <column name="Ro_catagory_idRo_catagory" not-null="true" />
+        </many-to-one>
+        <many-to-one name="ro" class="pojo.Ro" fetch="select">
+            <column name="Ro_idRo" not-null="true" />
+        </many-to-one>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+    </class>
+</hibernate-mapping>

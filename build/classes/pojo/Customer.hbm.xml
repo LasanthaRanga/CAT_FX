@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Customer" table="customer" catalog="cat" optimistic-lock="version">
+        <id name="idCustomer" type="java.lang.Integer">
+            <column name="idCustomer" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="userLog" class="pojo.UserLog" fetch="select">
+            <column name="User_Log_idUser_Log" not-null="true" />
+        </many-to-one>
+        <property name="nic" type="string">
+            <column name="nic" length="45" />
+        </property>
+        <property name="fullName" type="string">
+            <column name="full_name" length="45" />
+        </property>
+        <property name="customercol" type="string">
+            <column name="Customercol" length="45" />
+        </property>
+        <property name="regDate" type="date">
+            <column name="reg_date" length="10" />
+        </property>
+        <property name="statues" type="java.lang.Integer">
+            <column name="statues" />
+        </property>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+        <set name="customerHasTradeLicenses" table="customer_has_trade_license" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Customer_idCustomer" not-null="true" />
+            </key>
+            <one-to-many class="pojo.CustomerHasTradeLicense" />
+        </set>
+        <set name="customerHasAssessments" table="customer_has_assessment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Customer_idCustomer" not-null="true" />
+            </key>
+            <one-to-many class="pojo.CustomerHasAssessment" />
+        </set>
+        <set name="applications" table="application" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Customer_idCustomer" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Application" />
+        </set>
+        <set name="contacts" table="contact" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Customer_idCustomer" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Contact" />
+        </set>
+    </class>
+</hibernate-mapping>

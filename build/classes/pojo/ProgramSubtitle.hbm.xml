@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.ProgramSubtitle" table="program_subtitle" catalog="cat" optimistic-lock="version">
+        <id name="idProgramSubTitle" type="java.lang.Integer">
+            <column name="idProgram_SubTitle" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="programTitle" class="pojo.ProgramTitle" fetch="select">
+            <column name="Program_Title_idProgram_Title" not-null="true" />
+        </many-to-one>
+        <property name="subTitleNo" type="string">
+            <column name="sub_title_no" length="45" />
+        </property>
+        <property name="subTitleName" type="string">
+            <column name="sub_title_name" length="45" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+        <set name="vorts" table="vort" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Program_SubTitle_idProgram_SubTitle" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Vort" />
+        </set>
+    </class>
+</hibernate-mapping>

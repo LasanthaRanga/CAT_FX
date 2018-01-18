@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.NatureController">
+   <children>
+      <Label layoutX="595.0" layoutY="14.0" text="Nature" textAlignment="CENTER" textFill="#008d1a">
+         <font>
+            <Font size="36.0" />
+         </font></Label>
+      <JFXComboBox fx:id="com_tname" layoutX="226.0" layoutY="106.0" prefHeight="25.0" prefWidth="424.0" promptText="Tread Type" />
+      <JFXTextField fx:id="txt_nno" layoutX="226.0" layoutY="149.0" prefHeight="25.0" prefWidth="91.0" promptText="Nature NO" />
+      <JFXTextField fx:id="txt_nature" layoutX="342.0" layoutY="149.0" prefHeight="25.0" prefWidth="308.0" promptText="Nature" />
+      <JFXButton fx:id="btn_add" layoutX="226.0" layoutY="208.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_update" layoutX="387.0" layoutY="208.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_delete" layoutX="547.0" layoutY="208.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <TableView fx:id="tbl_nature" layoutX="684.0" layoutY="94.0" prefHeight="173.0" prefWidth="474.0">
+        <columns>
+          <TableColumn fx:id="col_idNature" prefWidth="42.0" text="ID" />
+          <TableColumn fx:id="col_nature_no" editable="false" prefWidth="114.0" text="Nature NO" />
+            <TableColumn fx:id="col_nature" prefWidth="296.0" text="Nature" />
+        </columns>
+      </TableView>
+      <TableView fx:id="tbl_subnature" layoutX="684.0" layoutY="361.0" prefHeight="173.0" prefWidth="474.0">
+         <columns>
+            <TableColumn fx:id="col_idSub" prefWidth="41.0" text="ID" />
+            <TableColumn fx:id="col_sub_nature_no" editable="false" prefWidth="116.0" text="Sub Nature NO" />
+            <TableColumn fx:id="col_sub_nature" prefWidth="299.0" text="Sub Nature" />
+         </columns>
+      </TableView>
+      <JFXTextField fx:id="txt_sno" layoutX="227.0" layoutY="406.0" prefHeight="25.0" prefWidth="91.0" promptText="Sub Nature NO" />
+      <JFXTextField fx:id="txt_subnature" layoutX="343.0" layoutY="406.0" prefHeight="25.0" prefWidth="308.0" promptText="Sub Nature" />
+      <JFXButton fx:id="btn_add_sub" layoutX="227.0" layoutY="465.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_update_sub" layoutX="388.0" layoutY="465.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_delete_sub" layoutX="548.0" layoutY="465.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <StackPane fx:id="stakpain" layoutX="1076.0" layoutY="501.0" prefHeight="67.0" prefWidth="210.0" />
+   </children>
+</AnchorPane>

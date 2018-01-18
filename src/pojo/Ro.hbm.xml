@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Ro" table="ro" catalog="cat" optimistic-lock="version">
+        <id name="idRo" type="java.lang.Integer">
+            <column name="idRo" />
+            <generator class="identity" />
+        </id>
+        <property name="roname" type="string">
+            <column name="roname" length="45" />
+        </property>
+        <property name="nic" type="string">
+            <column name="nic" length="45" />
+        </property>
+        <property name="mobile" type="string">
+            <column name="mobile" length="45" />
+        </property>
+        <property name="statues" type="java.lang.Integer">
+            <column name="statues" />
+        </property>
+        <property name="roNumber" type="string">
+            <column name="RO_Number" length="45" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+        <set name="catagoryHasRos" table="catagory_has_ro" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Ro_idRo" not-null="true" />
+            </key>
+            <one-to-many class="pojo.CatagoryHasRo" />
+        </set>
+    </class>
+</hibernate-mapping>

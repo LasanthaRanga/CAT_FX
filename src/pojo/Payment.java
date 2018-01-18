@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 15, 2018 9:38:27 AM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Payment  implements java.io.Serializable {
 
 
      private Integer idPayment;
-     private Application application;
+     private UserLog userLog;
      private Vort vort;
      private Integer applicationNo;
      private Integer year;
@@ -34,12 +34,12 @@ public class Payment  implements java.io.Serializable {
     }
 
 	
-    public Payment(Application application, Vort vort) {
-        this.application = application;
+    public Payment(UserLog userLog, Vort vort) {
+        this.userLog = userLog;
         this.vort = vort;
     }
-    public Payment(Application application, Vort vort, Integer applicationNo, Integer year, Integer month, Date paymentDate, String receiptNo, Double taxAmount, Double vat, Double nbt, Double spamp, Double totaleAmount, String cashCheack, Integer status, Integer syn, Set<TradeLicense> tradeLicenses) {
-       this.application = application;
+    public Payment(UserLog userLog, Vort vort, Integer applicationNo, Integer year, Integer month, Date paymentDate, String receiptNo, Double taxAmount, Double vat, Double nbt, Double spamp, Double totaleAmount, String cashCheack, Integer status, Integer syn, Set<TradeLicense> tradeLicenses) {
+       this.userLog = userLog;
        this.vort = vort;
        this.applicationNo = applicationNo;
        this.year = year;
@@ -64,12 +64,12 @@ public class Payment  implements java.io.Serializable {
     public void setIdPayment(Integer idPayment) {
         this.idPayment = idPayment;
     }
-    public Application getApplication() {
-        return this.application;
+    public UserLog getUserLog() {
+        return this.userLog;
     }
     
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setUserLog(UserLog userLog) {
+        this.userLog = userLog;
     }
     public Vort getVort() {
         return this.vort;

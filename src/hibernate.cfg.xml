@@ -47,7 +47,6 @@ Contributor(s):
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">root</property>
     <mapping resource="pojo/Assessment.hbm.xml"/>
-    <mapping resource="pojo/CatagoryHasRo.hbm.xml"/>
     <mapping resource="pojo/TradeType.hbm.xml"/>
     <mapping resource="pojo/CustomerHasTradeLicense.hbm.xml"/>
     <mapping resource="pojo/User.hbm.xml"/>
@@ -59,7 +58,6 @@ Contributor(s):
     <mapping resource="pojo/BankInfo.hbm.xml"/>
     <mapping resource="pojo/CustomerHasAssessment.hbm.xml"/>
     <mapping resource="pojo/Vort.hbm.xml"/>
-    <mapping resource="pojo/Ro.hbm.xml"/>
     <mapping resource="pojo/Street.hbm.xml"/>
     <mapping resource="pojo/SubNature.hbm.xml"/>
     <mapping resource="pojo/Application.hbm.xml"/>

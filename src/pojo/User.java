@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 15, 2018 9:38:27 AM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class User  implements java.io.Serializable {
 
 
      private Integer idUser;
+     private int otheritisCatIdOtheritisCat;
      private String fullName;
      private String nic;
      private String mobile;
@@ -22,6 +23,7 @@ public class User  implements java.io.Serializable {
      private Integer status;
      private Integer syn;
      private Set<Privilage> privilages = new HashSet<Privilage>(0);
+     private Set<Application> applications = new HashSet<Application>(0);
      private Set<UserHasCatagory> userHasCatagories = new HashSet<UserHasCatagory>(0);
      private Set<UserLog> userLogs = new HashSet<UserLog>(0);
      private Set<Login> logins = new HashSet<Login>(0);
@@ -29,7 +31,12 @@ public class User  implements java.io.Serializable {
     public User() {
     }
 
-    public User(String fullName, String nic, String mobile, Date regDate, String sq, String sqa, Integer status, Integer syn, Set<Privilage> privilages, Set<UserHasCatagory> userHasCatagories, Set<UserLog> userLogs, Set<Login> logins) {
+	
+    public User(int otheritisCatIdOtheritisCat) {
+        this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
+    }
+    public User(int otheritisCatIdOtheritisCat, String fullName, String nic, String mobile, Date regDate, String sq, String sqa, Integer status, Integer syn, Set<Privilage> privilages, Set<Application> applications, Set<UserHasCatagory> userHasCatagories, Set<UserLog> userLogs, Set<Login> logins) {
+       this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
        this.fullName = fullName;
        this.nic = nic;
        this.mobile = mobile;
@@ -39,6 +46,7 @@ public class User  implements java.io.Serializable {
        this.status = status;
        this.syn = syn;
        this.privilages = privilages;
+       this.applications = applications;
        this.userHasCatagories = userHasCatagories;
        this.userLogs = userLogs;
        this.logins = logins;
@@ -50,6 +58,13 @@ public class User  implements java.io.Serializable {
     
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
+    }
+    public int getOtheritisCatIdOtheritisCat() {
+        return this.otheritisCatIdOtheritisCat;
+    }
+    
+    public void setOtheritisCatIdOtheritisCat(int otheritisCatIdOtheritisCat) {
+        this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
     }
     public String getFullName() {
         return this.fullName;
@@ -113,6 +128,13 @@ public class User  implements java.io.Serializable {
     
     public void setPrivilages(Set<Privilage> privilages) {
         this.privilages = privilages;
+    }
+    public Set<Application> getApplications() {
+        return this.applications;
+    }
+    
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
     }
     public Set<UserHasCatagory> getUserHasCatagories() {
         return this.userHasCatagories;

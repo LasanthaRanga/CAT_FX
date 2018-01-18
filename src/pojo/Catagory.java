@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 15, 2018 9:38:27 AM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -17,19 +17,17 @@ public class Catagory  implements java.io.Serializable {
      private String catagorycol;
      private Integer status;
      private Integer syn;
-     private Set<CatagoryHasRo> catagoryHasRos = new HashSet<CatagoryHasRo>(0);
      private Set<UserHasCatagory> userHasCatagories = new HashSet<UserHasCatagory>(0);
 
     public Catagory() {
     }
 
-    public Catagory(String catagoryName, String catagoryNo, String catagorycol, Integer status, Integer syn, Set<CatagoryHasRo> catagoryHasRos, Set<UserHasCatagory> userHasCatagories) {
+    public Catagory(String catagoryName, String catagoryNo, String catagorycol, Integer status, Integer syn, Set<UserHasCatagory> userHasCatagories) {
        this.catagoryName = catagoryName;
        this.catagoryNo = catagoryNo;
        this.catagorycol = catagorycol;
        this.status = status;
        this.syn = syn;
-       this.catagoryHasRos = catagoryHasRos;
        this.userHasCatagories = userHasCatagories;
     }
    
@@ -74,13 +72,6 @@ public class Catagory  implements java.io.Serializable {
     
     public void setSyn(Integer syn) {
         this.syn = syn;
-    }
-    public Set<CatagoryHasRo> getCatagoryHasRos() {
-        return this.catagoryHasRos;
-    }
-    
-    public void setCatagoryHasRos(Set<CatagoryHasRo> catagoryHasRos) {
-        this.catagoryHasRos = catagoryHasRos;
     }
     public Set<UserHasCatagory> getUserHasCatagories() {
         return this.userHasCatagories;

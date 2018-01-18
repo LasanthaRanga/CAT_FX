@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 15, 2018 9:38:27 AM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -18,7 +18,9 @@ public class UserLog  implements java.io.Serializable {
      private Date inTyme;
      private Integer status;
      private Integer syn;
+     private Set<Payment> payments = new HashSet<Payment>(0);
      private Set<Customer> customers = new HashSet<Customer>(0);
+     private Set<Application> applications = new HashSet<Application>(0);
 
     public UserLog() {
     }
@@ -27,13 +29,15 @@ public class UserLog  implements java.io.Serializable {
     public UserLog(User user) {
         this.user = user;
     }
-    public UserLog(User user, Date outTyme, Date inTyme, Integer status, Integer syn, Set<Customer> customers) {
+    public UserLog(User user, Date outTyme, Date inTyme, Integer status, Integer syn, Set<Payment> payments, Set<Customer> customers, Set<Application> applications) {
        this.user = user;
        this.outTyme = outTyme;
        this.inTyme = inTyme;
        this.status = status;
        this.syn = syn;
+       this.payments = payments;
        this.customers = customers;
+       this.applications = applications;
     }
    
     public Integer getIdUserLog() {
@@ -78,12 +82,26 @@ public class UserLog  implements java.io.Serializable {
     public void setSyn(Integer syn) {
         this.syn = syn;
     }
+    public Set<Payment> getPayments() {
+        return this.payments;
+    }
+    
+    public void setPayments(Set<Payment> payments) {
+        this.payments = payments;
+    }
     public Set<Customer> getCustomers() {
         return this.customers;
     }
     
     public void setCustomers(Set<Customer> customers) {
         this.customers = customers;
+    }
+    public Set<Application> getApplications() {
+        return this.applications;
+    }
+    
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
     }
 
 

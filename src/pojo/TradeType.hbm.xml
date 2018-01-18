@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 15, 2018 9:38:29 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 18, 2018 3:54:54 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.TradeType" table="trade_type" catalog="cat" optimistic-lock="version">
         <id name="idTradeType" type="java.lang.Integer">

@@ -51,10 +51,11 @@ public class Log_User {
             session.beginTransaction().commit();
 
             Login log = (pojo.Login) session.createCriteria(pojo.Login.class).add(Restrictions.and(Restrictions.eq("uname", uname), Restrictions.eq("pword", pass))).uniqueResult();
-            Integer idUser = log.getUser().getIdUser();
-
-            if (log == null) {
+            if (log != null) {
+                
+                Integer idUser = log.getUser().getIdUser();
                 return idUser;
+                
             } else {
                 return 0;
             }

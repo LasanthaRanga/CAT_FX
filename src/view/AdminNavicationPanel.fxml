@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #01579B;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXButton prefHeight="159.0" prefWidth="200.0" text="Admin Panel" />
+      <JFXButton fx:id="btn_test" accessibleText="btn_users" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="User Registration" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="btn_x" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #424242;" text="x" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="customer" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="xx" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="Aplication" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="xxx" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="payment" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="xxxx" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton prefHeight="301.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" />
+      <JFXButton accessibleText="btn_exit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
+</VBox>

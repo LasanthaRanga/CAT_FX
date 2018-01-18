@@ -86,26 +86,27 @@ public class LoginController implements Initializable {
         int b = log_User.loginCheack(uname, pass);
 
         if (b == 1) {
-            System.out.println("PAY");
+            System.out.println("Admin Login.....");
 
-//            try {
-//                System.out.println("");;
-//                btn_singin.getParent().getScene().getWindow().hide();
-//                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/AdminView.fxml"));
-//                btn_singin.getParent().getScene();
-//                Scene scene = new Scene(paymant);
-//                Stage stage = new Stage();
-//                stage.initStyle(StageStyle.TRANSPARENT);
-//                stage.setScene(scene);
-//                stage.show();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            try {
+                System.out.println("");;
+                btn_singin.getParent().getScene().getWindow().hide();
+                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/AdminView.fxml"));
+                btn_singin.getParent().getScene();
+                Scene scene = new Scene(paymant);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         } else if (b == 0) {
-
+            System.out.println("*********************NO USER fot this user pass*******************");
         } else if (b > 1) {
+            System.out.println("simple USET LOGIN");
             try {
                 System.out.println("");;
                 btn_singin.getParent().getScene().getWindow().hide();

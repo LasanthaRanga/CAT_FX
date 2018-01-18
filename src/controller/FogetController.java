@@ -5,9 +5,14 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -16,6 +21,17 @@ import javafx.fxml.Initializable;
  */
 public class FogetController implements Initializable {
 
+    @FXML
+    private JFXTextArea txta_sq;
+    @FXML
+    private JFXTextField txt_ans;
+    @FXML
+    private JFXButton btn_check;
+    @FXML
+    private JFXTextField txt_username;
+    @FXML
+    private JFXButton btn_get;
+
     /**
      * Initializes the controller class.
      */
@@ -23,5 +39,18 @@ public class FogetController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+
+    @FXML
+    private void check(MouseEvent event) {
+        
+    }
+
+    @FXML
+    private void get(MouseEvent event) {
+        String text = txt_username.getText();
+        if(!text.isEmpty()){
+            
+        }
+    }
     
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 18, 2018 3:54:54 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 18, 2018 5:16:43 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.User" table="user" catalog="cat" optimistic-lock="version">
         <id name="idUser" type="java.lang.Integer">
             <column name="idUser" />
             <generator class="identity" />
         </id>
-        <property name="otheritisCatIdOtheritisCat" type="int">
+        <many-to-one name="otheritiscat" class="pojo.Otheritiscat" fetch="select">
             <column name="OtheritisCat_idOtheritisCat" not-null="true" />
-        </property>
+        </many-to-one>
         <property name="fullName" type="string">
             <column name="full_name" length="45" />
         </property>
@@ -49,6 +49,12 @@
             </key>
             <one-to-many class="pojo.Application" />
         </set>
+        <set name="apprualstatueses" table="apprualstatues" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="pojo.Apprualstatues" />
+        </set>
         <set name="userHasCatagories" table="user_has_catagory" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="User_idUser" not-null="true" />
@@ -60,6 +66,12 @@
                 <column name="User_idUser" not-null="true" />
             </key>
             <one-to-many class="pojo.UserLog" />
+        </set>
+        <set name="userHasDepartments" table="user_has_department" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="pojo.UserHasDepartment" />
         </set>
         <set name="logins" table="login" inverse="true" lazy="true" fetch="select">
             <key>

@@ -52,7 +52,10 @@ Contributor(s):
     <mapping resource="pojo/User.hbm.xml"/>
     <mapping resource="pojo/Ward.hbm.xml"/>
     <mapping resource="pojo/Customer.hbm.xml"/>
+    <mapping resource="pojo/UserHasDepartment.hbm.xml"/>
+    <mapping resource="pojo/Apprualstatues.hbm.xml"/>
     <mapping resource="pojo/ProgramTitle.hbm.xml"/>
+    <mapping resource="pojo/Otheritiscat.hbm.xml"/>
     <mapping resource="pojo/Contact.hbm.xml"/>
     <mapping resource="pojo/UserHasCatagory.hbm.xml"/>
     <mapping resource="pojo/BankInfo.hbm.xml"/>
@@ -67,8 +70,10 @@ Contributor(s):
     <mapping resource="pojo/TaxValue.hbm.xml"/>
     <mapping resource="pojo/UserLog.hbm.xml"/>
     <mapping resource="pojo/Payment.hbm.xml"/>
+    <mapping resource="pojo/AplicationPayment.hbm.xml"/>
     <mapping resource="pojo/Login.hbm.xml"/>
     <mapping resource="pojo/TradeLicense.hbm.xml"/>
+    <mapping resource="pojo/Department.hbm.xml"/>
     <mapping resource="pojo/Program.hbm.xml"/>
     <mapping resource="pojo/CashFlow.hbm.xml"/>
     <mapping resource="pojo/TradeNature.hbm.xml"/>

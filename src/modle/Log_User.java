@@ -44,27 +44,28 @@ public class Log_User {
         return uname;
     }
 
-    public boolean loginCheack(String uname, String pass) {
+    public int loginCheack(String uname, String pass) {
         boolean b = false;
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction().commit();
-            
+
             Login log = (pojo.Login) session.createCriteria(pojo.Login.class).add(Restrictions.and(Restrictions.eq("uname", uname), Restrictions.eq("pword", pass))).uniqueResult();
+            Integer idUser = log.getUser().getIdUser();
 
             if (log == null) {
-                b = false;
+                return idUser;
             } else {
-                b = true;
+                return 0;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
+            return 0;
         } finally {
             session.close();
         }
 
-        return b;
     }
 
 }

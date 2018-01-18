@@ -55,7 +55,6 @@ public class MainController implements Initializable {
     @FXML
     private JFXHamburger hambuger;
 
-    @FXML
     public static StackPane mainStack;
 
     @FXML

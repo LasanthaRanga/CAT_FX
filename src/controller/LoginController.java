@@ -48,16 +48,7 @@ public class LoginController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        
-        Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
-        openSession.beginTransaction().commit();
-        openSession.close();
-        
-        
-        
-        
-        
+
         btn_singin.setOnAction((event) -> {
             login();
         });
@@ -92,15 +83,32 @@ public class LoginController implements Initializable {
 
         Log_User log_User = new modle.Log_User();
 
-        boolean b = log_User.loginCheack(uname, pass);
+        int b = log_User.loginCheack(uname, pass);
 
-        if (b) {
-
+        if (b == 1) {
             System.out.println("PAY");
+
+//            try {
+//                System.out.println("");;
+//                btn_singin.getParent().getScene().getWindow().hide();
+//                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/AdminView.fxml"));
+//                btn_singin.getParent().getScene();
+//                Scene scene = new Scene(paymant);
+//                Stage stage = new Stage();
+//                stage.initStyle(StageStyle.TRANSPARENT);
+//                stage.setScene(scene);
+//                stage.show();
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
+        } else if (b == 0) {
+
+        } else if (b > 1) {
             try {
                 System.out.println("");;
                 btn_singin.getParent().getScene().getWindow().hide();
-
                 AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
@@ -108,14 +116,10 @@ public class LoginController implements Initializable {
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
-
             } catch (IOException ex) {
                 ex.printStackTrace();
                 Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } else {
-            System.out.println("Wrong");
         }
 
     }

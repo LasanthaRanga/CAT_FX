@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 5:16:41 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,7 +13,7 @@ public class User  implements java.io.Serializable {
 
 
      private Integer idUser;
-     private int otheritisCatIdOtheritisCat;
+     private Otheritiscat otheritiscat;
      private String fullName;
      private String nic;
      private String mobile;
@@ -24,19 +24,21 @@ public class User  implements java.io.Serializable {
      private Integer syn;
      private Set<Privilage> privilages = new HashSet<Privilage>(0);
      private Set<Application> applications = new HashSet<Application>(0);
+     private Set<Apprualstatues> apprualstatueses = new HashSet<Apprualstatues>(0);
      private Set<UserHasCatagory> userHasCatagories = new HashSet<UserHasCatagory>(0);
      private Set<UserLog> userLogs = new HashSet<UserLog>(0);
+     private Set<UserHasDepartment> userHasDepartments = new HashSet<UserHasDepartment>(0);
      private Set<Login> logins = new HashSet<Login>(0);
 
     public User() {
     }
 
 	
-    public User(int otheritisCatIdOtheritisCat) {
-        this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
+    public User(Otheritiscat otheritiscat) {
+        this.otheritiscat = otheritiscat;
     }
-    public User(int otheritisCatIdOtheritisCat, String fullName, String nic, String mobile, Date regDate, String sq, String sqa, Integer status, Integer syn, Set<Privilage> privilages, Set<Application> applications, Set<UserHasCatagory> userHasCatagories, Set<UserLog> userLogs, Set<Login> logins) {
-       this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
+    public User(Otheritiscat otheritiscat, String fullName, String nic, String mobile, Date regDate, String sq, String sqa, Integer status, Integer syn, Set<Privilage> privilages, Set<Application> applications, Set<Apprualstatues> apprualstatueses, Set<UserHasCatagory> userHasCatagories, Set<UserLog> userLogs, Set<UserHasDepartment> userHasDepartments, Set<Login> logins) {
+       this.otheritiscat = otheritiscat;
        this.fullName = fullName;
        this.nic = nic;
        this.mobile = mobile;
@@ -47,8 +49,10 @@ public class User  implements java.io.Serializable {
        this.syn = syn;
        this.privilages = privilages;
        this.applications = applications;
+       this.apprualstatueses = apprualstatueses;
        this.userHasCatagories = userHasCatagories;
        this.userLogs = userLogs;
+       this.userHasDepartments = userHasDepartments;
        this.logins = logins;
     }
    
@@ -59,12 +63,12 @@ public class User  implements java.io.Serializable {
     public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
-    public int getOtheritisCatIdOtheritisCat() {
-        return this.otheritisCatIdOtheritisCat;
+    public Otheritiscat getOtheritiscat() {
+        return this.otheritiscat;
     }
     
-    public void setOtheritisCatIdOtheritisCat(int otheritisCatIdOtheritisCat) {
-        this.otheritisCatIdOtheritisCat = otheritisCatIdOtheritisCat;
+    public void setOtheritiscat(Otheritiscat otheritiscat) {
+        this.otheritiscat = otheritiscat;
     }
     public String getFullName() {
         return this.fullName;
@@ -136,6 +140,13 @@ public class User  implements java.io.Serializable {
     public void setApplications(Set<Application> applications) {
         this.applications = applications;
     }
+    public Set<Apprualstatues> getApprualstatueses() {
+        return this.apprualstatueses;
+    }
+    
+    public void setApprualstatueses(Set<Apprualstatues> apprualstatueses) {
+        this.apprualstatueses = apprualstatueses;
+    }
     public Set<UserHasCatagory> getUserHasCatagories() {
         return this.userHasCatagories;
     }
@@ -149,6 +160,13 @@ public class User  implements java.io.Serializable {
     
     public void setUserLogs(Set<UserLog> userLogs) {
         this.userLogs = userLogs;
+    }
+    public Set<UserHasDepartment> getUserHasDepartments() {
+        return this.userHasDepartments;
+    }
+    
+    public void setUserHasDepartments(Set<UserHasDepartment> userHasDepartments) {
+        this.userHasDepartments = userHasDepartments;
     }
     public Set<Login> getLogins() {
         return this.logins;

@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 18, 2018 3:54:52 PM by Hibernate Tools 4.3.1
+// Generated Jan 18, 2018 5:16:41 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -29,6 +29,7 @@ public class Payment  implements java.io.Serializable {
      private Integer status;
      private Integer syn;
      private Set<TradeLicense> tradeLicenses = new HashSet<TradeLicense>(0);
+     private Set<AplicationPayment> aplicationPayments = new HashSet<AplicationPayment>(0);
 
     public Payment() {
     }
@@ -38,7 +39,7 @@ public class Payment  implements java.io.Serializable {
         this.userLog = userLog;
         this.vort = vort;
     }
-    public Payment(UserLog userLog, Vort vort, Integer applicationNo, Integer year, Integer month, Date paymentDate, String receiptNo, Double taxAmount, Double vat, Double nbt, Double spamp, Double totaleAmount, String cashCheack, Integer status, Integer syn, Set<TradeLicense> tradeLicenses) {
+    public Payment(UserLog userLog, Vort vort, Integer applicationNo, Integer year, Integer month, Date paymentDate, String receiptNo, Double taxAmount, Double vat, Double nbt, Double spamp, Double totaleAmount, String cashCheack, Integer status, Integer syn, Set<TradeLicense> tradeLicenses, Set<AplicationPayment> aplicationPayments) {
        this.userLog = userLog;
        this.vort = vort;
        this.applicationNo = applicationNo;
@@ -55,6 +56,7 @@ public class Payment  implements java.io.Serializable {
        this.status = status;
        this.syn = syn;
        this.tradeLicenses = tradeLicenses;
+       this.aplicationPayments = aplicationPayments;
     }
    
     public Integer getIdPayment() {
@@ -175,6 +177,13 @@ public class Payment  implements java.io.Serializable {
     
     public void setTradeLicenses(Set<TradeLicense> tradeLicenses) {
         this.tradeLicenses = tradeLicenses;
+    }
+    public Set<AplicationPayment> getAplicationPayments() {
+        return this.aplicationPayments;
+    }
+    
+    public void setAplicationPayments(Set<AplicationPayment> aplicationPayments) {
+        this.aplicationPayments = aplicationPayments;
     }
 
 

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 18, 2018 5:16:43 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.Otheritiscat" table="otheritiscat" catalog="cat" optimistic-lock="version">
+        <id name="idOtheritisCat" type="java.lang.Integer">
+            <column name="idOtheritisCat" />
+            <generator class="identity" />
+        </id>
+        <property name="catname" type="string">
+            <column name="catname" length="45" />
+        </property>
+        <property name="disignation" type="string">
+            <column name="disignation" length="45" />
+        </property>
+        <set name="users" table="user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OtheritisCat_idOtheritisCat" not-null="true" />
+            </key>
+            <one-to-many class="pojo.User" />
+        </set>
+    </class>
+</hibernate-mapping>

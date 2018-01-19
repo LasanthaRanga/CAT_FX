@@ -12,9 +12,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
-import pojo.Login;
-import pojo.User;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -33,6 +34,10 @@ public class FogetController implements Initializable {
     private JFXTextField txt_username;
     @FXML
     private JFXButton btn_get;
+    @FXML
+    private JFXTextField txt_newpassword;
+    @FXML
+    private JFXButton btn_update;
 
     /**
      * Initializes the controller class.
@@ -40,26 +45,35 @@ public class FogetController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void check(MouseEvent event) {
-        User user = new pojo.User();
-        user.setNic("asdasd");
-        Login login = new pojo.Login();
-        login.setUname("u");
-        login.setPword("p");
-        user.getLogins().add(login);
-        
         
     }
 
     @FXML
     private void get(MouseEvent event) {
         String text = txt_username.getText();
-        if(!text.isEmpty()){
+        if (!text.isEmpty()) {
             
+        } else {
+            Notifications.create()
+                    .title("Warning")
+                    .text("Please Enter Username.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
         }
     }
+
+    @FXML
+    private void update(MouseEvent event) {
+
+    }
     
+    @FXML
+    private void close(MouseEvent event) {
+        System.out.println("close");
+    }
+
 }

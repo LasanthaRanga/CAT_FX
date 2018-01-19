@@ -8,6 +8,7 @@ package modle;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import pojo.User;
 
 /**
@@ -86,7 +87,16 @@ public class Users implements DAO<pojo.User> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
-    public void getUserByNIC(String nic){
-        
+    public pojo.User getByNIC(String nic){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("nic", nic)).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally{
+            session.close();
+        }
     }
+    
 }

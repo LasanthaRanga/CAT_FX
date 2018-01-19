@@ -9,6 +9,9 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
@@ -21,20 +24,20 @@ import javafx.scene.control.TableView;
  */
 public class Admin_user_catController implements Initializable {
 
-   @FXML
+    @FXML
     private JFXTextField txt_catagory;
 
     @FXML
     private JFXButton btn_add_cat;
 
     @FXML
-    private TableView<?> tbl_catagory;
+    private TableView<Cat> tbl_catagory;
 
     @FXML
-    private TableColumn<?, ?> col_id_cat;
+    private TableColumn<Cat, Integer> col_id_cat;
 
     @FXML
-    private TableColumn<?, ?> col_cat;
+    private TableColumn<Cat, String> col_cat;
 
     @FXML
     private JFXButton btn_add_autorities;
@@ -66,32 +69,55 @@ public class Admin_user_catController implements Initializable {
     @FXML
     private JFXTextField txt_department;
 
-    
-    
-    
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         btn_add_cat.setOnAction((event) -> {
             System.out.println("Sout");
         });
-        
-        
-    }    
+
+    }
+
+    public class Cat {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the cat
+         */
+        public String getCat() {
+            return cat.get();
+        }
+
+        /**
+         * @return the statues
+         */
+        public int getStatues() {
+            return statues;
+        }
+
+        private int id;
+        private SimpleStringProperty cat;
+        private int statues;
+
+        public Cat(int id, String cat, int statues) {
+            this.id = id;
+            this.cat = new SimpleStringProperty(cat);
+            this.statues = statues;
+        }
+
+    }
+     ObservableList catList = FXCollections.observableArrayList();
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
 }

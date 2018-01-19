@@ -7,6 +7,7 @@ package modle;
 
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 
@@ -89,6 +90,20 @@ public class Login implements DAO<pojo.Login>{
         try {
             return (pojo.Login) session.createCriteria(pojo.Login.class)
                     .add(Restrictions.eq("uname", username))
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }finally{
+            session.close();
+        }
+    }
+    
+    public pojo.Login getByUsernameWithUser(String username){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (pojo.Login) session.createCriteria(pojo.Login.class)
+                    .add(Restrictions.eq("uname", username)).setFetchMode("user", FetchMode.JOIN)
                     .uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();

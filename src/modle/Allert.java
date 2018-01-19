@@ -9,7 +9,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -17,6 +20,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  *
@@ -80,6 +85,43 @@ public class Allert {
         });
         content.setActions(button);
         jfxDialog.show();
+    }
+
+    public static void notificationGood(String title, String mg) {
+        Image image = new Image("/tick.png");
+        Notifications.create()
+                .title(title)
+                .text(mg)
+                .hideAfter(Duration.seconds(3))
+                .position(Pos.BOTTOM_RIGHT)
+                .graphic(new ImageView(image))            
+                .darkStyle()
+                .show();
+    }
+    
+    
+    public static void notificationError(String title, String mg) {
+        Image image = new Image("/error.png");
+        Notifications.create()
+                .title(title)
+                .text(mg)
+                .hideAfter(Duration.seconds(3))
+                .position(Pos.BOTTOM_RIGHT)
+                .graphic(new ImageView(image))            
+                .darkStyle()
+                .show();
+    }
+    
+    public static void notificationInfo(String title, String mg) {
+        Image image = new Image("/info.png");
+        Notifications.create()
+                .title(title)
+                .text(mg)
+                .hideAfter(Duration.seconds(3))
+                .position(Pos.BOTTOM_RIGHT)
+                .graphic(new ImageView(image))            
+                .darkStyle()
+                .show();
     }
 
 }

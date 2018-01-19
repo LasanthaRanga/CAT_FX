@@ -7,15 +7,23 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Duration;
+import modle.Nature;
+import org.controlsfx.control.Notifications;
+import pojo.TradeNature;
 
 /**
  * FXML Controller class
@@ -69,16 +77,28 @@ public class Admin_user_catController implements Initializable {
     @FXML
     private JFXTextField txt_department;
 
+    modle.Catagory cat;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        cat = new modle.Catagory();
 
         btn_add_cat.setOnAction((event) -> {
-            System.out.println("Sout");
+            if (cat.save(txt_catagory.getText())) {
+                modle.Allert.notificationGood("Saved", txt_catagory.getText());
+            } else {
+                modle.Allert.notificationError("Fail", txt_catagory.getText());
+            }
         });
+
+    }
+
+    @FXML
+    public void addCatClick() {
 
     }
 
@@ -116,8 +136,21 @@ public class Admin_user_catController implements Initializable {
         }
 
     }
-     ObservableList catList = FXCollections.observableArrayList();
+    ObservableList catList = FXCollections.observableArrayList();
+
     
+     
     
 
+    public void loadCatTbl() {
+
+        col_id_cat.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_cat.setCellValueFactory(new PropertyValueFactory<>("nname"));
+
+        
+      
+    }
+
 }
+
+

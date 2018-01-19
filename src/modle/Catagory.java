@@ -5,11 +5,18 @@
  */
 package modle;
 
+import controller.NatureController;
+import java.io.Serializable;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.cell.PropertyValueFactory;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import pojo.TradeNature;
 
 /**
  *
@@ -123,4 +130,69 @@ public class Catagory {
         return List;
 
     }
+
+    public boolean save(String cat) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            pojo.Catagory catagory = new pojo.Catagory();
+            catagory.setCatagoryName(cat);
+
+            catagory.setStatus(1);
+            catagory.setSyn(1);
+            session.save(catagory);
+            bt.commit();
+            if (catagory.getIdCatagory() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (Exception e) {
+            if (bt != null) {
+                bt.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+    }
+
+    public class Cat {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the cat
+         */
+        public String getCat() {
+            return cat.get();
+        }
+
+        /**
+         * @return the statues
+         */
+        public int getStatues() {
+            return statues;
+        }
+
+        private int id;
+        private SimpleStringProperty cat;
+        private int statues;
+
+        public Cat(int id, String cat, int statues) {
+            this.id = id;
+            this.cat = new SimpleStringProperty(cat);
+            this.statues = statues;
+        }
+
+    }
+
+    
 }

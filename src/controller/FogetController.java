@@ -13,6 +13,8 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
+import pojo.Login;
+import pojo.User;
 
 /**
  * FXML Controller class
@@ -42,6 +44,13 @@ public class FogetController implements Initializable {
 
     @FXML
     private void check(MouseEvent event) {
+        User user = new pojo.User();
+        user.setNic("asdasd");
+        Login login = new pojo.Login();
+        login.setUname("u");
+        login.setPword("p");
+        user.getLogins().add(login);
+        
         
     }
 

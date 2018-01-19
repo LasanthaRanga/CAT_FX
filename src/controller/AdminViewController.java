@@ -54,12 +54,11 @@ public class AdminViewController implements Initializable {
         ses.beginTransaction().commit();
         ses.close();
 
-
         try {
 
             VBox box = FXMLLoader.load(getClass().getResource("/view/AdminNavicationPanel.fxml"));
             AnchorPane user = FXMLLoader.load(getClass().getResource("/view/Admin_user.fxml"));
-            
+            AnchorPane usercat = FXMLLoader.load(getClass().getResource("/view/Admin_user_cat.fxml"));
 
             drawer.setSidePane(box);
 
@@ -70,10 +69,14 @@ public class AdminViewController implements Initializable {
 
                     node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
                         container.getChildren().removeAll(user);
-                       
+
                         switch (accessibleText) {
                             case "btn_users":
                                 container.getChildren().add(user);
+                                break;
+
+                            case "user_types":
+                                container.getChildren().add(usercat);
                                 break;
 
                             case "btn_exit":

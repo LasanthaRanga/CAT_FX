@@ -5,6 +5,7 @@
  */
 package modle;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -166,6 +167,19 @@ public class Users implements DAO<pojo.User> {
         } catch (Exception e) {
             e.printStackTrace();
             return dip;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<pojo.UserHasDepartment> getUserDepartments(int userId){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", userId)).uniqueResult());
+            return new ArrayList<>(user.getUserHasDepartments());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             session.close();
         }

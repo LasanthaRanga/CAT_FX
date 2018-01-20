@@ -7,6 +7,7 @@ package modle;
 
 import controller.NatureController;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -159,40 +160,21 @@ public class Catagory {
         }
     }
 
-    public class Cat {
+    public List<pojo.Catagory> loadCatListForTable() {
 
-        /**
-         * @return the id
-         */
-        public int getId() {
-            return id;
+        List<pojo.Catagory> list = null;
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            list = session.createCriteria(pojo.Catagory.class).add(Restrictions.eq("status", 1)).list();
+            
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
         }
-
-        /**
-         * @return the cat
-         */
-        public String getCat() {
-            return cat.get();
-        }
-
-        /**
-         * @return the statues
-         */
-        public int getStatues() {
-            return statues;
-        }
-
-        private int id;
-        private SimpleStringProperty cat;
-        private int statues;
-
-        public Cat(int id, String cat, int statues) {
-            this.id = id;
-            this.cat = new SimpleStringProperty(cat);
-            this.statues = statues;
-        }
-
+        return list;
     }
 
-    
 }

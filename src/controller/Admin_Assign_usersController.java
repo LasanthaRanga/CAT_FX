@@ -1,22 +1,34 @@
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import modle.Users;
+import org.hibernate.Session;
 import pojo.Department;
 import pojo.User;
+import pojo.UserHasCatagory;
+import pojo.UserHasDepartment;
+import pojo.UserHasOtheritiscat;
 
 /**
  * FXML Controller class
@@ -46,7 +58,7 @@ public class Admin_Assign_usersController implements Initializable {
     @FXML
     private TableColumn<UserTbl, String> col_statues;
 
-     @FXML
+    @FXML
     private JFXComboBox<String> com_department;
 
     @FXML
@@ -54,6 +66,24 @@ public class Admin_Assign_usersController implements Initializable {
 
     @FXML
     private JFXComboBox<String> com_authorities;
+
+    @FXML
+    private JFXButton btn_dip_assign;
+
+    @FXML
+    private JFXButton btn_cat_assign;
+
+    @FXML
+    private JFXButton btn_outh_assign;
+
+    @FXML
+    private TableView<TableCat> tbl_dip;
+
+    @FXML
+    private TableColumn<TableCat, Integer> col_dip_id;
+
+    @FXML
+    private TableColumn<TableCat, String> col_dip_dipartment;
 
     /**
      * Initializes the controller class.
@@ -63,7 +93,15 @@ public class Admin_Assign_usersController implements Initializable {
         // TODO
         loadUserTbl();
         loadDepartmentCombo();
-
+        loadCatagoryCombo();
+        loadOutherCombo();
+        selectUserFromTable();
+        selectDepartmentFromCombo();
+        assignDipartment();
+        selectCatagoryFromCombo();
+        selectOutherFromCombo();
+        assignCatagory();
+        assignAuthority();
     }
 
     public class UserTbl {
@@ -153,19 +191,184 @@ public class Admin_Assign_usersController implements Initializable {
     public void loadDepartmentCombo() {
 
         List<pojo.Department> list = new modle.Department().getList();
-       
+
         ObservableList dList = FXCollections.observableArrayList();
         try {
 
             list.forEach((dip) -> {
                 dList.add(dip.getDepartment());
-               
+
             });
 
             com_department.setItems(dList);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadCatagoryCombo() {
+
+        List<pojo.Catagory> list = new modle.Catagory().getList();
+        ObservableList cList = FXCollections.observableArrayList();
+        try {
+            list.forEach((dip) -> {
+                cList.add(dip.getCatagoryName());
+
+            });
+            com_catagory.setItems(cList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void loadOutherCombo() {
+        List<pojo.Otheritiscat> list = new modle.Authority().getList();
+        ObservableList aList = FXCollections.observableArrayList();
+        try {
+            list.forEach((dip) -> {
+                aList.add(dip.getCatname());
+
+            });
+            com_authorities.setItems(aList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    pojo.User user;
+
+    public void selectUserFromTable() {
+        tbl_user.setOnMouseReleased((MouseEvent event) -> {
+            int idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
+            Users usersmod = new modle.Users();
+            user = usersmod.getByIdUser(idUser);
+            loadDepartmentByUser(usersmod);
+        });
+    }
+
+    pojo.Department dip;
+    pojo.Catagory cat;
+    pojo.Otheritiscat other;
+
+    public void selectDepartmentFromCombo() {
+        com_department.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String selectionModel = com_department.getSelectionModel().getSelectedItem();
+                System.out.println(selectionModel);
+                dip = new modle.Department().getDepartmentByDepartmentName(selectionModel);
+
+            }
+        });
+    }
+
+    public void selectCatagoryFromCombo() {
+        com_catagory.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String selectionModel = com_catagory.getSelectionModel().getSelectedItem();
+                System.out.println(selectionModel);
+                cat = new modle.Catagory().getCatagoryByCatagoryName(selectionModel);
+            }
+        });
+    }
+
+    public void selectOutherFromCombo() {
+        com_authorities.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String selectionModel = com_authorities.getSelectionModel().getSelectedItem();
+                System.out.println(selectionModel);
+                other = new modle.Authority().getAuthorityByAuthorityName(selectionModel);
+            }
+        });
+    }
+
+    public void assignDipartment() {
+        btn_dip_assign.setOnAction((event) -> {
+            if (user != null && dip != null) {
+                UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1, 1);
+                if (new modle.UserHas_Dip().save(uhd)) {
+                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                } else {
+                    modle.Allert.notificationError("Error", "");
+                }
+            }
+
+        });
+    }
+
+    public void assignCatagory() {
+        btn_cat_assign.setOnAction((event) -> {
+            if (user != null && cat != null) {
+                UserHasCatagory uhc = new pojo.UserHasCatagory(cat, user, 1, 1);
+
+                if (new modle.UserHas_Catagory().save(uhc)) {
+                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                } else {
+                    modle.Allert.notificationError("Error", "");
+                }
+            }
+
+        });
+    }
+
+    public void assignAuthority() {
+        btn_outh_assign.setOnAction((event) -> {
+            if (user != null && other != null) {
+                UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);
+                if (new modle.UserHas_Authorities().save(uha)) {
+                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                } else {
+                    modle.Allert.notificationError("Error", "");
+                }
+            }
+        });
+    }
+
+    ObservableList dipList = FXCollections.observableArrayList();
+
+    public void loadDepartmentByUser(modle.Users usermod) {
+
+        col_dip_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_dip_dipartment.setCellValueFactory(new PropertyValueFactory<>("dip"));
+
+        HashMap<Integer, String> departments = usermod.getDepartments(user.getIdUser());
+        Set keySet = departments.keySet();
+        dipList.clear();
+        for (Integer key : departments.keySet()) {
+            dipList.add(new TableCat(key, departments.get(key)));
+        }
+        tbl_dip.setItems(dipList);
+
+    }
+
+    public class TableCat {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the dip
+         */
+        public String getDip() {
+            return dip.get();
+        }
+
+        private int id;
+        private SimpleStringProperty dip;
+
+        public TableCat(int id, String dip) {
+            this.id = id;
+            this.dip = new SimpleStringProperty(dip);
+        }
+
     }
 
 }

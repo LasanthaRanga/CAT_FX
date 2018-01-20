@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -24,10 +25,10 @@
       <JFXComboBox fx:id="com_department" layoutX="871.0" layoutY="32.0" prefHeight="25.0" prefWidth="256.0" />
       <JFXComboBox fx:id="com_catagory" layoutX="872.0" layoutY="233.0" prefHeight="25.0" prefWidth="256.0" />
       <JFXComboBox fx:id="com_authorities" layoutX="872.0" layoutY="438.0" prefHeight="25.0" prefWidth="256.0" />
-      <TableView layoutX="703.0" layoutY="76.0" prefHeight="116.0" prefWidth="425.0">
+      <TableView fx:id="tbl_dip" layoutX="703.0" layoutY="76.0" prefHeight="116.0" prefWidth="425.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn fx:id="col_dip_id" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="col_dip_dipartment" prefWidth="327.0" text="Department" />
         </columns>
       </TableView>
       <TableView layoutX="703.0" layoutY="282.0" prefHeight="116.0" prefWidth="425.0">
@@ -42,5 +43,8 @@
             <TableColumn prefWidth="75.0" text="C2" />
          </columns>
       </TableView>
+      <JFXButton fx:id="btn_dip_assign" layoutX="1166.0" layoutY="32.0" text="Assign" />
+      <JFXButton fx:id="btn_cat_assign" layoutX="1166.0" layoutY="233.0" text="Assign" />
+      <JFXButton fx:id="btn_outh_assign" layoutX="1166.0" layoutY="438.0" text="Assign" />
    </children>
 </AnchorPane>

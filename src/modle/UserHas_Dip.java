@@ -1,19 +1,25 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package modle;
 
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
-import pojo.Otheritiscat;
+import pojo.User;
+import pojo.UserHasDepartment;
 
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class Authority implements DAO<pojo.Otheritiscat> {
+public class UserHas_Dip implements DAO<pojo.UserHasDepartment> {
 
     @Override
-    public boolean save(Otheritiscat t) {
+    public boolean save(UserHasDepartment t) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
@@ -22,71 +28,57 @@ public class Authority implements DAO<pojo.Otheritiscat> {
             return true;
         } catch (Exception e) {
             bt.rollback();
+            e.printStackTrace();
             return false;
         } finally {
             session.close();
         }
-
     }
 
     @Override
-    public boolean save(List<Otheritiscat> list) {
+    public boolean save(List<UserHasDepartment> list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(Otheritiscat t) {
+    public boolean update(UserHasDepartment t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean update(List<Otheritiscat> list) {
+    public boolean update(List<UserHasDepartment> list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean saveOrUpdate(Otheritiscat t) {
+    public boolean saveOrUpdate(UserHasDepartment t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean saveOrUpdate(List<Otheritiscat> list) {
+    public boolean saveOrUpdate(List<UserHasDepartment> list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete(Otheritiscat t) {
+    public boolean delete(UserHasDepartment t) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Otheritiscat> getList() {
-        List<pojo.Otheritiscat> list = null;
-
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {
-            list = session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("statues", 1)).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-        return list;
-    }
-    
-    public pojo.Otheritiscat getAuthorityByAuthorityName(String DepartmentName) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        pojo.Otheritiscat dep = null;
-        try {
-            dep = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("catname", DepartmentName)).uniqueResult();
-            return dep;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            session.close();
-        }
+    public List<UserHasDepartment> getList() {
+//       Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+//        List<pojo.Catagory> list = null;
+//        try {
+//            list = session.createCriteria(pojo.Catagory.class).add(Restrictions.eq("status", 1)).list();
+//            return list;
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            return null;
+//        } finally {
+//            session.close();
+//        }
+        return null;
     }
 
 }

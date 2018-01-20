@@ -58,6 +58,21 @@ public class Admin_user_catController implements Initializable {
     @FXML
     private JFXTextField txt_department;
 
+    @FXML
+    private JFXTextField txt_authorities;
+
+    @FXML
+    private JFXButton btn_add_authorities;
+
+    @FXML
+    private TableView<?> tbl_authorities;
+
+    @FXML
+    private TableColumn<?, ?> col_id_authorities;
+
+    @FXML
+    private TableColumn<?, ?> col_authorities;
+
     modle.Catagory cat;
 
     /**
@@ -90,6 +105,10 @@ public class Admin_user_catController implements Initializable {
 
         });
         loadDepTbl();
+        
+        btn_add_authorities.setOnAction((event) -> {
+            modle.Allert.notificationGood("Added", "asdf");
+        });
 
     }
 

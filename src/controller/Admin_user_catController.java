@@ -25,6 +25,7 @@ import javafx.util.Duration;
 import modle.Nature;
 import org.controlsfx.control.Notifications;
 import pojo.Catagory;
+import pojo.Department;
 import pojo.TradeNature;
 
 /**
@@ -98,9 +99,22 @@ public class Admin_user_catController implements Initializable {
             }
         });
         loadCatTbl();
-        
-        
-        
+
+        btn_add_autorities.setOnAction((event) -> {
+            //new pojo.Otheritiscat(user, catname, disignation, Integer.BYTES, Integer.SIZE)
+
+        });
+
+        btn_add_department.setOnAction((event) -> {
+
+            pojo.Department department = new pojo.Department(txt_department.getText(), null, 1, 1, null);
+            if (new modle.Department().save(department)) {
+                modle.Allert.notificationGood("Added", department.getDepartment());
+            } else {
+                modle.Allert.notificationError("Error", txt_department.getText());
+            }
+
+        });
 
     }
 
@@ -158,5 +172,10 @@ public class Admin_user_catController implements Initializable {
         tbl_catagory.setItems(catList);
 
     }
+    
+    
+    
+    
+    
 
 }

@@ -1,0 +1,71 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package modle;
+
+import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+/**
+ *
+ * @author RM.LasanthaRanga@gmail.com
+ */
+public class Department implements DAO<pojo.Department> {
+
+    @Override
+    public boolean save(pojo.Department t) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+
+        try {
+            session.save(t);
+            bt.commit();            
+            return true;
+        } catch (Exception e) {
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+
+    }
+
+    @Override
+    public boolean save(List<pojo.Department> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(pojo.Department t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(List<pojo.Department> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(pojo.Department t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(List<pojo.Department> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(pojo.Department t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<pojo.Department> getList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+}

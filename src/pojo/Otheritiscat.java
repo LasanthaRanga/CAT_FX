@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 19, 2018 11:37:25 PM by Hibernate Tools 4.3.1
+// Generated Jan 20, 2018 8:59:03 AM by Hibernate Tools 4.3.1
 
 
 
@@ -13,6 +13,8 @@ public class Otheritiscat  implements java.io.Serializable {
      private User user;
      private String catname;
      private String disignation;
+     private Integer statues;
+     private Integer syn;
 
     public Otheritiscat() {
     }
@@ -21,10 +23,12 @@ public class Otheritiscat  implements java.io.Serializable {
     public Otheritiscat(User user) {
         this.user = user;
     }
-    public Otheritiscat(User user, String catname, String disignation) {
+    public Otheritiscat(User user, String catname, String disignation, Integer statues, Integer syn) {
        this.user = user;
        this.catname = catname;
        this.disignation = disignation;
+       this.statues = statues;
+       this.syn = syn;
     }
    
     public Integer getIdOtheritisCat() {
@@ -54,6 +58,20 @@ public class Otheritiscat  implements java.io.Serializable {
     
     public void setDisignation(String disignation) {
         this.disignation = disignation;
+    }
+    public Integer getStatues() {
+        return this.statues;
+    }
+    
+    public void setStatues(Integer statues) {
+        this.statues = statues;
+    }
+    public Integer getSyn() {
+        return this.syn;
+    }
+    
+    public void setSyn(Integer syn) {
+        this.syn = syn;
     }
 
 

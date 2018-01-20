@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -24,14 +27,28 @@
             <TableColumn fx:id="tbl_clmn_contact" editable="false" prefWidth="143.0" text="Contact" />
         </columns>
       </TableView>
-      <VBox layoutX="412.0" layoutY="55.0" prefHeight="504.0" prefWidth="277.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="412.0" AnchorPane.topAnchor="55.0">
+      <VBox layoutX="412.0" layoutY="55.0" prefHeight="353.0" prefWidth="277.0" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="412.0" AnchorPane.topAnchor="55.0">
          <children>
             <JFXTextField fx:id="txt_fname" prefHeight="35.0" prefWidth="288.0" promptText="Full Name" />
             <Region prefHeight="15.0" prefWidth="288.0" />
             <JFXTextField fx:id="txt_nic" prefHeight="35.0" promptText="NIC" />
             <Region prefHeight="15.0" prefWidth="288.0" />
             <JFXTextField fx:id="txt_mobile" layoutX="10.0" layoutY="60.0" prefHeight="35.0" promptText="Mobile" />
+            <Region layoutX="10.0" layoutY="95.0" prefHeight="15.0" prefWidth="288.0" />
+            <JFXTextField fx:id="txt_regisdate" layoutX="10.0" layoutY="110.0" prefHeight="35.0" promptText="Register Date" />
          </children>
       </VBox>
+      <HBox layoutX="412.0" layoutY="521.0" prefHeight="39.0" prefWidth="406.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="12.0">
+         <children>
+            <JFXButton prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #f44336;" text="Deactivate" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>

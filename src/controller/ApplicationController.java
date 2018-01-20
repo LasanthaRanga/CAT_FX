@@ -1,4 +1,3 @@
-
 package controller;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
 import modle.SuccessMessage;
+import pojo.Application;
 
 /**
  * FXML Controller class
@@ -89,11 +89,15 @@ public class ApplicationController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {       
+    public void initialize(URL url, ResourceBundle rb) {
         btn_save_app.setOnAction((event) -> {
 
-           
         });
+    }
+
+    public void saveAplication() {
+        Application ap = new pojo.Application();
+        
     }
 
 }

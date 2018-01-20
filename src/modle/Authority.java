@@ -3,6 +3,7 @@ package modle;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 import pojo.Otheritiscat;
 
 /**
@@ -15,9 +16,9 @@ public class Authority implements DAO<pojo.Otheritiscat> {
     public boolean save(Otheritiscat t) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
-       
         try {
-            
+            session.save(t);
+            bt.commit();
             return true;
         } catch (Exception e) {
             bt.rollback();
@@ -60,7 +61,18 @@ public class Authority implements DAO<pojo.Otheritiscat> {
 
     @Override
     public List<Otheritiscat> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<pojo.Otheritiscat> list = null;
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            list = session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("statues", 1)).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return list;
     }
 
 }

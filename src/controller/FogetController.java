@@ -108,7 +108,6 @@ public class FogetController implements Initializable {
         if (!newpassword.isEmpty()) {
             userlogin.setPword(newpassword);
             if (login.update(userlogin)) {
-                System.out.println("done");
                 Notifications.create()
                         .title("Warning")
                         .text("Update Success.")

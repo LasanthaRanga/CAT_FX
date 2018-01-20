@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
@@ -17,16 +16,10 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.util.Duration;
-import modle.Nature;
-import org.controlsfx.control.Notifications;
 import pojo.Catagory;
-import pojo.Department;
-import pojo.TradeNature;
 
 /**
  * FXML Controller class
@@ -51,31 +44,16 @@ public class Admin_user_catController implements Initializable {
     private TableColumn<Cat, String> col_cat;
 
     @FXML
-    private JFXButton btn_add_autorities;
-
-    @FXML
-    private TableView<?> tbl_authorities;
-
-    @FXML
-    private TableColumn<?, ?> col_id_autho;
-
-    @FXML
-    private TableColumn<?, ?> col_autho;
-
-    @FXML
-    private JFXTextField txt_authorities;
-
-    @FXML
     private JFXButton btn_add_department;
 
     @FXML
-    private TableView<?> tbl_department;
+    private TableView<Dep> tbl_department;
 
     @FXML
-    private TableColumn<?, ?> col_id_dep;
+    private TableColumn<Dep, Integer> col_id_dep;
 
     @FXML
-    private TableColumn<?, ?> col_dep;
+    private TableColumn<Dep, String> col_dep;
 
     @FXML
     private JFXTextField txt_department;
@@ -100,21 +78,18 @@ public class Admin_user_catController implements Initializable {
         });
         loadCatTbl();
 
-        btn_add_autorities.setOnAction((event) -> {
-            //new pojo.Otheritiscat(user, catname, disignation, Integer.BYTES, Integer.SIZE)
-
-        });
-
         btn_add_department.setOnAction((event) -> {
 
             pojo.Department department = new pojo.Department(txt_department.getText(), null, 1, 1, null);
             if (new modle.Department().save(department)) {
                 modle.Allert.notificationGood("Added", department.getDepartment());
+                loadDepTbl();
             } else {
                 modle.Allert.notificationError("Error", txt_department.getText());
             }
 
         });
+        loadDepTbl();
 
     }
 
@@ -162,8 +137,7 @@ public class Admin_user_catController implements Initializable {
     public void loadCatTbl() {
         col_id_cat.setCellValueFactory(new PropertyValueFactory<>("id"));
         col_cat.setCellValueFactory(new PropertyValueFactory<>("cat"));
-        List<Catagory> loadCatListForTable = cat.loadCatListForTable();
-
+        List<pojo.Catagory> loadCatListForTable = cat.loadCatListForTable();
         catList.clear();
         for (Catagory catagory : loadCatListForTable) {
             Cat cat1 = new Cat(catagory.getIdCatagory(), catagory.getCatagoryName(), catagory.getStatus());
@@ -172,10 +146,47 @@ public class Admin_user_catController implements Initializable {
         tbl_catagory.setItems(catList);
 
     }
-    
-    
-    
-    
-    
+
+    public class Dep {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the dip
+         */
+        public String getDip() {
+            return dip.get();
+        }
+
+        private int id;
+        private SimpleStringProperty dip;
+
+        public Dep(int id, String dip) {
+            this.id = id;
+            this.dip = new SimpleStringProperty(dip);
+        }
+
+    }
+
+    ObservableList depList = FXCollections.observableArrayList();
+
+    public void loadDepTbl() {
+        col_id_dep.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_dep.setCellValueFactory(new PropertyValueFactory<>("dip"));
+        List<pojo.Department> loadCatListForTable = new modle.Department().getList();
+
+        depList.clear();
+        for (pojo.Department dip : loadCatListForTable) {
+            Dep d = new Dep(dip.getIdDepartment(), dip.getDepartment());
+            depList.add(d);
+        }
+        tbl_department.setItems(depList);
+
+    }
 
 }

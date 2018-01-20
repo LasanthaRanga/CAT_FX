@@ -6,32 +6,23 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.Admin_user_catController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_user_catController">
    <children>
-      <JFXTextField fx:id="txt_catagory" layoutX="35.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" promptText="User Catagory" />
-      <JFXButton fx:id="btn_add_cat" layoutX="233.0" layoutY="89.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
-      <TableView fx:id="tbl_catagory" layoutX="35.0" layoutY="134.0" prefHeight="107.0" prefWidth="251.0">
+      <JFXTextField fx:id="txt_catagory" layoutX="750.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" promptText="User Catagory" />
+      <JFXButton fx:id="btn_add_cat" layoutX="948.0" layoutY="89.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
+      <TableView fx:id="tbl_catagory" layoutX="750.0" layoutY="134.0" prefHeight="107.0" prefWidth="251.0">
         <columns>
           <TableColumn fx:id="col_id_cat" prefWidth="75.0" text="#" />
           <TableColumn fx:id="col_cat" prefWidth="161.0" text="Catagory" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btn_add_autorities" layoutX="233.0" layoutY="338.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
-      <TableView fx:id="tbl_authorities" layoutX="35.0" layoutY="379.0" prefHeight="107.0" prefWidth="251.0">
-         <columns>
-            <TableColumn fx:id="col_id_autho" prefWidth="75.0" text="#" />
-            <TableColumn fx:id="col_autho" prefWidth="161.0" text="Authorities" />
-         </columns>
-      </TableView>
-      <JFXTextField fx:id="txt_authorities" layoutX="35.0" layoutY="300.0" prefHeight="25.0" prefWidth="251.0" promptText="Authorities" />
-      <JFXButton fx:id="btn_add_department" layoutX="597.0" layoutY="89.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
-      <TableView fx:id="tbl_department" layoutX="399.0" layoutY="134.0" prefHeight="107.0" prefWidth="251.0">
+      <JFXButton fx:id="btn_add_department" layoutX="511.0" layoutY="89.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
+      <TableView fx:id="tbl_department" layoutX="313.0" layoutY="134.0" prefHeight="107.0" prefWidth="251.0">
          <columns>
             <TableColumn fx:id="col_id_dep" prefWidth="75.0" text="#" />
             <TableColumn fx:id="col_dep" prefWidth="161.0" text="Department" />
          </columns>
       </TableView>
-      <JFXTextField fx:id="txt_department" layoutX="399.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" promptText="Department" />
+      <JFXTextField fx:id="txt_department" layoutX="313.0" layoutY="44.0" prefHeight="25.0" prefWidth="251.0" promptText="Department" />
    </children>
 </AnchorPane>

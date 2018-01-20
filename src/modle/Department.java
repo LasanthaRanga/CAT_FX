@@ -8,6 +8,7 @@ package modle;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -22,7 +23,7 @@ public class Department implements DAO<pojo.Department> {
 
         try {
             session.save(t);
-            bt.commit();            
+            bt.commit();
             return true;
         } catch (Exception e) {
             bt.rollback();
@@ -65,7 +66,17 @@ public class Department implements DAO<pojo.Department> {
 
     @Override
     public List<pojo.Department> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        List<pojo.Department> list = null;
+        try {
+            list = session.createCriteria(pojo.Department.class).add(Restrictions.eq("statues", 1)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
 }

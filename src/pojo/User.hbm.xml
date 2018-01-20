@@ -76,7 +76,7 @@
             </key>
             <one-to-many class="pojo.UserHasDepartment" />
         </set>
-        <set name="logins" table="login" inverse="true" lazy="true" fetch="select" cascade="All">
+        <set name="logins" table="login" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="User_idUser" not-null="true" />
             </key>

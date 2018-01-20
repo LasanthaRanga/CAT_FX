@@ -59,8 +59,8 @@ Contributor(s):
     <mapping resource="pojo/Contact.hbm.xml"/>
     <mapping resource="pojo/UserHasCatagory.hbm.xml"/>
     <mapping resource="pojo/BankInfo.hbm.xml"/>
-    <mapping resource="pojo/CustomerHasAssessment.hbm.xml"/>
     <mapping resource="pojo/Vort.hbm.xml"/>
+    <mapping resource="pojo/CustomerHasAssessment.hbm.xml"/>
     <mapping resource="pojo/Street.hbm.xml"/>
     <mapping resource="pojo/SubNature.hbm.xml"/>
     <mapping resource="pojo/Application.hbm.xml"/>
@@ -69,6 +69,7 @@ Contributor(s):
     <mapping resource="pojo/Privilage.hbm.xml"/>
     <mapping resource="pojo/TaxValue.hbm.xml"/>
     <mapping resource="pojo/UserLog.hbm.xml"/>
+    <mapping resource="pojo/UserHasOtheritiscat.hbm.xml"/>
     <mapping resource="pojo/Payment.hbm.xml"/>
     <mapping resource="pojo/AplicationPayment.hbm.xml"/>
     <mapping resource="pojo/Login.hbm.xml"/>

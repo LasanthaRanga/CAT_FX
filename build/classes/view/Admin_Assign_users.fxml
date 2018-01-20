@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.Admin_Assign_usersController">
+   <children>
+      <TableView layoutX="122.0" layoutY="76.0" prefHeight="223.0" prefWidth="503.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="user id" />
+          <TableColumn prefWidth="75.0" text="Full Name" />
+            <TableColumn prefWidth="75.0" text="Nic" />
+            <TableColumn prefWidth="75.0" text="Statues" />
+            <TableColumn prefWidth="75.0" text="Mobile" />
+            <TableColumn prefWidth="75.0" text="Reg Date" />
+        </columns>
+      </TableView>
+      <Label layoutX="684.0" layoutY="76.0" prefHeight="17.0" prefWidth="142.0" text="Depatment" />
+      <Label layoutX="684.0" layoutY="171.0" prefHeight="17.0" prefWidth="142.0" text="Catagory" />
+      <Label layoutX="684.0" layoutY="282.0" prefHeight="17.0" prefWidth="142.0" text="Authorities" />
+      <JFXComboBox layoutX="930.0" layoutY="64.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox layoutX="930.0" layoutY="159.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox layoutX="930.0" layoutY="278.0" prefHeight="25.0" prefWidth="256.0" />
+   </children>
+</AnchorPane>

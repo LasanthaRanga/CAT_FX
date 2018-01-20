@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 20, 2018 8:59:05 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 20, 2018 9:51:39 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.User" table="user" catalog="cat" optimistic-lock="version">
         <id name="idUser" type="java.lang.Integer">
@@ -38,6 +38,12 @@
             </key>
             <one-to-many class="pojo.Privilage" />
         </set>
+        <set name="userHasOtheritiscats" table="user_has_otheritiscat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="User_idUser" not-null="true" />
+            </key>
+            <one-to-many class="pojo.UserHasOtheritiscat" />
+        </set>
         <set name="applications" table="application" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="User_idUser" not-null="true">
@@ -63,12 +69,6 @@
                 <column name="User_idUser" not-null="true" />
             </key>
             <one-to-many class="pojo.UserLog" />
-        </set>
-        <set name="otheritiscats" table="otheritiscat" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="User_idUser" not-null="true" />
-            </key>
-            <one-to-many class="pojo.Otheritiscat" />
         </set>
         <set name="userHasDepartments" table="user_has_department" inverse="true" lazy="true" fetch="select">
             <key>

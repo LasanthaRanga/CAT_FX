@@ -56,7 +56,8 @@ public class Admin_user_updateController implements Initializable {
     @FXML
     private void loadUser(MouseEvent event) {
         Integer idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
-       
+        User byIdUser = user.getByIdUser(0);
+        
     }
     
 }

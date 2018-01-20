@@ -46,8 +46,7 @@ public class UserController implements Initializable {
     @FXML
     private JFXTextField txt_answer;
 
-    @FXML
-    private JFXComboBox<String> com_cat;
+    
 
     @FXML
     private JFXButton btn_saveuser;
@@ -58,7 +57,7 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        loadCat();
+      //  loadCat();
         loadSQ();
 
         btn_saveuser.setOnAction((ActionEvent event) -> {
@@ -98,10 +97,10 @@ public class UserController implements Initializable {
 //        clear();
 //    }
 
-    public void loadCat() {
-        ObservableList loadCatList = new modle.Catagory().loadCatList();
-        com_cat.setItems(loadCatList);
-    }
+//    public void loadCat() {
+//        ObservableList loadCatList = new modle.Catagory().loadCatList();
+//        com_cat.setItems(loadCatList);
+//    }
 
     public void loadSQ() {
         ObservableList sq = new modle.SQ().getSQ();

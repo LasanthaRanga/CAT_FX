@@ -121,7 +121,6 @@ public class Admin_Assign_usersController implements Initializable {
     ObservableList userList = FXCollections.observableArrayList();
 
     public void loadUserTbl() {
-
         col_idUser.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         col_fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
         col_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));

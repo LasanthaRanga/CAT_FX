@@ -2,10 +2,14 @@ package controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 /**
  * FXML Controller class
@@ -41,6 +45,81 @@ public class Admin_Assign_usersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+
+    public class UserTbl {
+
+        public UserTbl(int idUser, SimpleStringProperty fullname, SimpleStringProperty nic, SimpleStringProperty mobile, SimpleStringProperty date, SimpleStringProperty statues) {
+            this.idUser = idUser;
+            this.fullname = fullname;
+            this.nic = nic;
+            this.mobile = mobile;
+            this.date = date;
+            this.statues = statues;
+        }
+
+        /**
+         * @return the idUser
+         */
+        public int getIdUser() {
+            return idUser;
+        }
+
+        /**
+         * @return the fullname
+         */
+        public String getFullname() {
+            return fullname.get();
+        }
+
+        /**
+         * @return the nic
+         */
+        public String getNic() {
+            return nic.get();
+        }
+
+        /**
+         * @return the mobile
+         */
+        public String getMobile() {
+            return mobile.get();
+        }
+
+        /**
+         * @return the date
+         */
+        public String getDate() {
+            return date.get();
+        }
+
+        /**
+         * @return the statues
+         */
+        public String getStatues() {
+            return statues.get();
+        }
+
+        private int idUser;
+        private SimpleStringProperty fullname;
+        private SimpleStringProperty nic;
+        private SimpleStringProperty mobile;
+        private SimpleStringProperty date;
+        private SimpleStringProperty statues;
+
+    }
+    
+    ObservableList userList = FXCollections.observableArrayList();
+    public void loadUserTbl(){
+        
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("idUser"));
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_idUser.setCellValueFactory(new PropertyValueFactory<>("statues"));
+    
+    
     }
 
 }

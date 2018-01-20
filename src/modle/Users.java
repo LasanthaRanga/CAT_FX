@@ -129,17 +129,10 @@ public class Users implements DAO<pojo.User> {
         }
     }
 
-<<<<<<< HEAD
     public List<pojo.User> getActiveUsers(){
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).setFirstResult(2).list();
-=======
-    public pojo.User getByIdUser(int idUser) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {
-            return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", idUser)).uniqueResult();
->>>>>>> b1004f9daaab1fc06ad9fecc22bd6689065537a6
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -147,9 +140,18 @@ public class Users implements DAO<pojo.User> {
             session.close();
         }
     }
-<<<<<<< HEAD
-=======
-
+    
+    public pojo.User getByIdUser(int idUser) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", idUser)).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
     public HashMap getDepartments(int user) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         HashMap<Integer, String> dip = new HashMap<>();
@@ -169,5 +171,4 @@ public class Users implements DAO<pojo.User> {
         }
     }
 
->>>>>>> b1004f9daaab1fc06ad9fecc22bd6689065537a6
 }

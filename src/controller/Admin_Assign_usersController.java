@@ -1,6 +1,7 @@
 package controller;
 
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,25 +23,25 @@ import pojo.User;
 public class Admin_Assign_usersController implements Initializable {
 
     @FXML
-    private TableView<?> tbl_user;
+    private TableView<UserTbl> tbl_user;
 
     @FXML
-    private TableColumn<?, ?> col_idUser;
+    private TableColumn<UserTbl, Integer> col_idUser;
 
     @FXML
-    private TableColumn<?, ?> col_fullname;
+    private TableColumn<UserTbl, String> col_fullname;
 
     @FXML
-    private TableColumn<?, ?> col_nic;
+    private TableColumn<UserTbl, String> col_nic;
 
     @FXML
-    private TableColumn<?, ?> col_mobile;
+    private TableColumn<UserTbl, String> col_mobile;
 
     @FXML
-    private TableColumn<?, ?> col_date;
+    private TableColumn<UserTbl, String> col_date;
 
     @FXML
-    private TableColumn<?, ?> col_statues;
+    private TableColumn<UserTbl, String> col_statues;
 
     /**
      * Initializes the controller class.
@@ -48,6 +49,7 @@ public class Admin_Assign_usersController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadUserTbl();
     }
 
     public class UserTbl {
@@ -57,8 +59,7 @@ public class Admin_Assign_usersController implements Initializable {
             this.fullname = new SimpleStringProperty(fullname);
             this.nic = new SimpleStringProperty(nic);
             this.mobile = new SimpleStringProperty(mobile);
-            
-           // this.date = new SimpleStringProperty(new SimpleDateFormat("yyyy-mm-dd "));
+            this.date = new SimpleStringProperty(new SimpleDateFormat("yyyy-MM-dd ").format(date));
             this.statues = statues;
         }
 
@@ -127,12 +128,12 @@ public class Admin_Assign_usersController implements Initializable {
         col_mobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
         col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
-        
         List<User> list = new modle.Users().getList();
+        userList.clear();
         for (User user : list) {
-          //  userList.add(new UserTbl(user.getIdUser(), user.getFullName(), user.getNic(), user.getMobile(), user.getRegDate(), user.getStatus()));
+            userList.add(new UserTbl(user.getIdUser(), user.getFullName(), user.getNic(), user.getMobile(), user.getRegDate(), user.getStatus()));
         }
-        
+        tbl_user.setItems(userList);
 
     }
 

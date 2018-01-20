@@ -90,15 +90,28 @@ public class Users implements DAO<pojo.User> {
 
     @Override
     public List<User> getList() {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        List<pojo.User> list = null;
         try {
-            return session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).list();
+            List<pojo.User> list1 = session.createCriteria(pojo.User.class).list();
+            list1.remove(1);
+//            for (pojo.User object : list1) {
+//                if (object.getIdUser() == 1) {
+//                    
+//                } else {
+//                    list.add(object);
+//                }
+//
+//            }
+            return list1;
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         } finally {
             session.close();
         }
+
     }
 
     public pojo.User getByNIC(String nic) {

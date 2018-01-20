@@ -5,11 +5,14 @@
  */
 package modle;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import pojo.User;
+import pojo.UserHasDepartment;
 
 /**
  *
@@ -94,7 +97,7 @@ public class Users implements DAO<pojo.User> {
         List<pojo.User> list = null;
         try {
             List<pojo.User> list1 = session.createCriteria(pojo.User.class).list();
-            list1.remove(1);
+            list1.remove(0);
 //            for (pojo.User object : list1) {
 //                if (object.getIdUser() == 1) {
 //                    
@@ -126,4 +129,45 @@ public class Users implements DAO<pojo.User> {
         }
     }
 
+<<<<<<< HEAD
+    public List<pojo.User> getActiveUsers(){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).setFirstResult(2).list();
+=======
+    public pojo.User getByIdUser(int idUser) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", idUser)).uniqueResult();
+>>>>>>> b1004f9daaab1fc06ad9fecc22bd6689065537a6
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+<<<<<<< HEAD
+=======
+
+    public HashMap getDepartments(int user) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        HashMap<Integer, String> dip = new HashMap<>();
+
+        try {
+            pojo.User User = (pojo.User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", user)).uniqueResult();
+            Set<UserHasDepartment> userHasDepartments = User.getUserHasDepartments();
+            for (UserHasDepartment userHasDepartment : userHasDepartments) {
+                dip.put(userHasDepartment.getDepartment().getIdDepartment(), userHasDepartment.getDepartment().getDepartment());
+            }
+            return dip;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return dip;
+        } finally {
+            session.close();
+        }
+    }
+
+>>>>>>> b1004f9daaab1fc06ad9fecc22bd6689065537a6
 }

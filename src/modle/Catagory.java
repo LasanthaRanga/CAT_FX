@@ -167,7 +167,7 @@ public class Catagory {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             list = session.createCriteria(pojo.Catagory.class).add(Restrictions.eq("status", 1)).list();
-            
+
             return list;
         } catch (Exception e) {
             e.printStackTrace();
@@ -175,6 +175,34 @@ public class Catagory {
             session.close();
         }
         return list;
+    }
+
+    public List<pojo.Catagory> getList() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        List<pojo.Catagory> list = null;
+        try {
+            list = session.createCriteria(pojo.Catagory.class).add(Restrictions.eq("status", 1)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public pojo.Catagory getCatagoryByCatagoryName(String Catagoryname) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        pojo.Catagory dep = null;
+        try {
+            dep = (pojo.Catagory) session.createCriteria(pojo.Catagory.class).add(Restrictions.eq("catagoryName", Catagoryname)).uniqueResult();
+            return dep;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
 }

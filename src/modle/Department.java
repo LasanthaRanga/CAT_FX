@@ -79,4 +79,18 @@ public class Department implements DAO<pojo.Department> {
         }
     }
 
+    public pojo.Department getDepartmentByDepartmentName(String DepartmentName) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        pojo.Department dep = null;
+        try {
+            dep = (pojo.Department) session.createCriteria(pojo.Department.class).add(Restrictions.eq("department", DepartmentName)).uniqueResult();
+            return dep;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

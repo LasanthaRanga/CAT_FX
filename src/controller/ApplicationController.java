@@ -1,11 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -21,6 +20,66 @@ import modle.SuccessMessage;
 public class ApplicationController implements Initializable {
 
     @FXML
+    private JFXComboBox<?> com_ward;
+
+    @FXML
+    private JFXComboBox<?> com_street;
+
+    @FXML
+    private JFXTextField txt_assesmantNO;
+
+    @FXML
+    private JFXComboBox<?> com_trade_type;
+
+    @FXML
+    private JFXComboBox<?> com_nature;
+
+    @FXML
+    private JFXComboBox<?> com_subnature;
+
+    @FXML
+    private JFXTextField txt_cus_nic;
+
+    @FXML
+    private JFXTextField txt_cus_fname;
+
+    @FXML
+    private JFXTextField txt_ro;
+
+    @FXML
+    private JFXTextField txt_aplicaton_No;
+
+    @FXML
+    private JFXTextField txt_year;
+
+    @FXML
+    private JFXTextField txt_month;
+
+    @FXML
+    private JFXTextField txt_day;
+
+    @FXML
+    private JFXTextField txt_allocaton;
+
+    @FXML
+    private JFXTextField txt_trade_name;
+
+    @FXML
+    private JFXTextField txt_adl1;
+
+    @FXML
+    private JFXTextField txt_adl2;
+
+    @FXML
+    private JFXTextField txt_adl3;
+
+    @FXML
+    private JFXTextField txt_taxt_amount;
+
+    @FXML
+    private JFXTextArea txt_discription;
+
+    @FXML
     private JFXButton btn_save_app;
 
     @FXML
@@ -30,16 +89,11 @@ public class ApplicationController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-
+    public void initialize(URL url, ResourceBundle rb) {       
         btn_save_app.setOnAction((event) -> {
 
-            SuccessMessage successMessage = new modle.SuccessMessage("OK", "OK", stackPain);
-            successMessage.start();
-            
+           
         });
-
     }
 
 }

@@ -1,6 +1,8 @@
 package controller;
 
 import java.net.URL;
+import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -10,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pojo.User;
 
 /**
  * FXML Controller class
@@ -49,12 +52,13 @@ public class Admin_Assign_usersController implements Initializable {
 
     public class UserTbl {
 
-        public UserTbl(int idUser, SimpleStringProperty fullname, SimpleStringProperty nic, SimpleStringProperty mobile, SimpleStringProperty date, SimpleStringProperty statues) {
+        public UserTbl(int idUser, String fullname, String nic, String mobile, Date date, int statues) {
             this.idUser = idUser;
-            this.fullname = fullname;
-            this.nic = nic;
-            this.mobile = mobile;
-            this.date = date;
+            this.fullname = new SimpleStringProperty(fullname);
+            this.nic = new SimpleStringProperty(nic);
+            this.mobile = new SimpleStringProperty(mobile);
+            
+           // this.date = new SimpleStringProperty(new SimpleDateFormat("yyyy-mm-dd "));
             this.statues = statues;
         }
 
@@ -97,7 +101,11 @@ public class Admin_Assign_usersController implements Initializable {
          * @return the statues
          */
         public String getStatues() {
-            return statues.get();
+            if (statues == 1) {
+                return "Active";
+            } else {
+                return "Deactive";
+            }
         }
 
         private int idUser;
@@ -105,21 +113,27 @@ public class Admin_Assign_usersController implements Initializable {
         private SimpleStringProperty nic;
         private SimpleStringProperty mobile;
         private SimpleStringProperty date;
-        private SimpleStringProperty statues;
+        private int statues;
 
     }
-    
+
     ObservableList userList = FXCollections.observableArrayList();
-    public void loadUserTbl(){
-        
+
+    public void loadUserTbl() {
+
         col_idUser.setCellValueFactory(new PropertyValueFactory<>("idUser"));
-        col_idUser.setCellValueFactory(new PropertyValueFactory<>("fullname"));
-        col_idUser.setCellValueFactory(new PropertyValueFactory<>("nic"));
-        col_idUser.setCellValueFactory(new PropertyValueFactory<>("mobile"));
-        col_idUser.setCellValueFactory(new PropertyValueFactory<>("date"));
-        col_idUser.setCellValueFactory(new PropertyValueFactory<>("statues"));
-    
-    
+        col_fullname.setCellValueFactory(new PropertyValueFactory<>("fullname"));
+        col_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
+        col_mobile.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
+        
+        List<User> list = new modle.Users().getList();
+        for (User user : list) {
+          //  userList.add(new UserTbl(user.getIdUser(), user.getFullName(), user.getNic(), user.getMobile(), user.getRegDate(), user.getStatus()));
+        }
+        
+
     }
 
 }

@@ -24,8 +24,11 @@ public class Users implements DAO<pojo.User> {
         try {
             session.save(t);
             bt.commit();
-            if(t.getIdUser()>0)return true;
-            else return false;
+            if (t.getIdUser() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             if (bt != null) {
                 bt.rollback();
@@ -49,8 +52,11 @@ public class Users implements DAO<pojo.User> {
         try {
             session.update(t);
             bt.commit();
-            if(t.getIdUser()>0)return true;
-            else return false;
+            if (t.getIdUser() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             if (bt != null) {
                 bt.rollback();
@@ -84,19 +90,27 @@ public class Users implements DAO<pojo.User> {
 
     @Override
     public List<User> getList() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
+        try {
+            return session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
-    
-    public pojo.User getByNIC(String nic){
+
+    public pojo.User getByNIC(String nic) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("nic", nic)).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }finally{
+        } finally {
             session.close();
         }
     }
-    
+
 }

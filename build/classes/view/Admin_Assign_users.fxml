@@ -6,8 +6,7 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.Admin_Assign_usersController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_Assign_usersController">
    <children>
       <TableView fx:id="tbl_user" layoutX="30.0" layoutY="39.0" prefHeight="572.0" prefWidth="647.0">
         <columns>
@@ -22,9 +21,9 @@
       <Label layoutX="703.0" layoutY="36.0" prefHeight="17.0" prefWidth="142.0" text="Depatment" />
       <Label layoutX="703.0" layoutY="237.0" prefHeight="17.0" prefWidth="142.0" text="Catagory" />
       <Label layoutX="703.0" layoutY="442.0" prefHeight="17.0" prefWidth="142.0" text="Authorities" />
-      <JFXComboBox layoutX="871.0" layoutY="32.0" prefHeight="25.0" prefWidth="256.0" />
-      <JFXComboBox layoutX="872.0" layoutY="233.0" prefHeight="25.0" prefWidth="256.0" />
-      <JFXComboBox layoutX="872.0" layoutY="438.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox fx:id="com_department" layoutX="871.0" layoutY="32.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox fx:id="com_catagory" layoutX="872.0" layoutY="233.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox fx:id="com_authorities" layoutX="872.0" layoutY="438.0" prefHeight="25.0" prefWidth="256.0" />
       <TableView layoutX="703.0" layoutY="76.0" prefHeight="116.0" prefWidth="425.0">
         <columns>
           <TableColumn prefWidth="75.0" text="C1" />

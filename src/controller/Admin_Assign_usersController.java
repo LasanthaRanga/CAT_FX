@@ -1,7 +1,9 @@
 package controller;
 
+import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -13,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import pojo.Department;
 import pojo.User;
 
 /**
@@ -43,6 +46,15 @@ public class Admin_Assign_usersController implements Initializable {
     @FXML
     private TableColumn<UserTbl, String> col_statues;
 
+     @FXML
+    private JFXComboBox<String> com_department;
+
+    @FXML
+    private JFXComboBox<String> com_catagory;
+
+    @FXML
+    private JFXComboBox<String> com_authorities;
+
     /**
      * Initializes the controller class.
      */
@@ -50,6 +62,8 @@ public class Admin_Assign_usersController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadUserTbl();
+        loadDepartmentCombo();
+
     }
 
     public class UserTbl {
@@ -134,6 +148,24 @@ public class Admin_Assign_usersController implements Initializable {
         }
         tbl_user.setItems(userList);
 
+    }
+
+    public void loadDepartmentCombo() {
+
+        List<pojo.Department> list = new modle.Department().getList();
+       
+        ObservableList dList = FXCollections.observableArrayList();
+        try {
+
+            list.forEach((dip) -> {
+                dList.add(dip.getDepartment());
+               
+            });
+
+            com_department.setItems(dList);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }

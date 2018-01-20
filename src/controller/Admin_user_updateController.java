@@ -11,6 +11,7 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -46,7 +47,7 @@ public class Admin_user_updateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         user=new modle.Users();
-        ObservableList<User> list_active_users = (ObservableList<User>) user.getActiveUsers();
+        ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(user.getActiveUsers());
         tbl_clmn_name.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));

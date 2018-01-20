@@ -22,6 +22,6 @@
       <JFXPasswordField fx:id="txt_pword" labelFloat="true" layoutX="560.0" layoutY="416.0" prefHeight="25.0" prefWidth="180.0" promptText="Password" />
       <JFXComboBox fx:id="com_sq" labelFloat="true" layoutX="436.0" layoutY="232.0" prefHeight="25.0" prefWidth="180.0" promptText="Security Questions" />
       <JFXTextField fx:id="txt_answer" labelFloat="true" layoutX="690.0" layoutY="232.0" prefHeight="25.0" prefWidth="180.0" promptText="Answer" />
-      <JFXButton fx:id="btn_saveuser" layoutX="550.0" layoutY="494.0" prefHeight="38.0" prefWidth="194.0" text="Sing Up" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="556.0" />
+      <JFXButton fx:id="btn_saveuser" layoutX="550.0" layoutY="494.0" onMouseClicked="#saveUser" prefHeight="38.0" prefWidth="194.0" text="Sing Up" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="556.0" />
    </children>
 </AnchorPane>

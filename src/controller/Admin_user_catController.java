@@ -20,6 +20,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import pojo.Catagory;
+import pojo.Otheritiscat;
 
 /**
  * FXML Controller class
@@ -58,6 +59,21 @@ public class Admin_user_catController implements Initializable {
     @FXML
     private JFXTextField txt_department;
 
+    @FXML
+    private JFXTextField txt_authorities;
+
+    @FXML
+    private JFXButton btn_add_authorities;
+
+    @FXML
+    private TableView<?> tbl_authorities;
+
+    @FXML
+    private TableColumn<?, ?> col_id_authorities;
+
+    @FXML
+    private TableColumn<?, ?> col_authorities;
+
     modle.Catagory cat;
 
     /**
@@ -90,6 +106,19 @@ public class Admin_user_catController implements Initializable {
 
         });
         loadDepTbl();
+
+        btn_add_authorities.setOnAction((event) -> {
+
+            Otheritiscat otheritiscat = new pojo.Otheritiscat(txt_authorities.getText(), "", 1, 1, null);
+            if (new modle.Authority().save(otheritiscat)) {
+                modle.Allert.notificationGood("Added", otheritiscat.getCatname());
+                loadOtherTable();
+            } else {
+                modle.Allert.notificationError("Error", txt_authorities.getText());
+            }
+
+        });
+        loadOtherTable();
 
     }
 
@@ -187,6 +216,45 @@ public class Admin_user_catController implements Initializable {
         }
         tbl_department.setItems(depList);
 
+    }
+
+    public class Other {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the Othercat
+         */
+        public String getOthercat() {
+            return Othercat.get();
+        }
+
+        private int id;
+        private SimpleStringProperty Othercat;
+
+        public Other(int id, String Othercat) {
+            this.id = id;
+            this.Othercat = new SimpleStringProperty(Othercat);
+        }
+
+    }
+    ObservableList olist = FXCollections.observableArrayList();
+
+    public void loadOtherTable() {
+        col_id_authorities.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_authorities.setCellValueFactory(new PropertyValueFactory<>("Othercat"));
+
+        List<Otheritiscat> list = new modle.Authority().getList();
+        olist.clear();
+        for (Otheritiscat otheritiscat : list) {
+            olist.add(new Other(otheritiscat.getIdOtheritisCat(), otheritiscat.getCatname()));
+        }
+        tbl_authorities.setItems(olist);
     }
 
 }

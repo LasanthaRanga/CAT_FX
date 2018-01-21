@@ -13,11 +13,15 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import modle.Customer;
 import modle.CustomerHasAssesment;
+import modle.Nature;
+import pojo.TradeNature;
 import pojo.Ward;
 
 /**
@@ -102,6 +106,9 @@ public class ApplicationController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadWardCombo();
         loadStrretCombo();
+        loadTreadTypeCombo();
+        getTradyType();
+        getSelectedNature();
 
     }
 
@@ -191,7 +198,65 @@ public class ApplicationController implements Initializable {
     }
 
     public void loadTreadTypeCombo() {
-        
+        List<pojo.TradeType> loadTreadType = new modle.TradeType().loadTreadType();
+        ObservableList List = FXCollections.observableArrayList();
+        for (pojo.TradeType tradeType1 : loadTreadType) {
+            List.add(tradeType1.getTypeName());
+        }
+
+        com_trade_type.setItems(List);
+    }
+
+    int tt = 0;
+
+    public void getTradyType() {
+        com_trade_type.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                String selectedItem = com_trade_type.getSelectionModel().getSelectedItem();
+                tt = new modle.TradeType().loadTreadType(selectedItem).getIdTradeType();
+                loadNature();
+            }
+        });
+
+    }
+
+    public void loadNature() {
+        ObservableList natureList = FXCollections.observableArrayList();
+        Nature tn = new modle.Nature();
+        tn.setTradeType(new modle.TradeType().loadTreadType(tt));
+        List<TradeNature> nlist = tn.getNaturesList();
+        natureList.clear();
+        for (pojo.TradeNature tnn : nlist) {
+            natureList.add(tnn.getNature());
+        }
+        com_nature.setItems(natureList);
+
+    }
+
+    String tnature;
+
+    public void getSelectedNature() {
+        com_nature.setOnAction((event) -> {
+            String natureString = com_nature.getSelectionModel().getSelectedItem();
+            tnature = natureString;
+            System.out.println(natureString);
+            loadSubNature();
+        });
+    }
+
+    public void loadSubNature() {
+
+        ObservableList subList = FXCollections.observableArrayList();
+        modle.SubNature sn = new modle.SubNature(0, new modle.Nature().getSubNatureByNature(tnature), null, null, 0, 0);
+        List<pojo.SubNature> loadNature = sn.loadNature();
+
+        subList.clear();
+        for (pojo.SubNature tnn : loadNature) {
+            subList.add(tnn.getSubNature());
+        }
+        com_subnature.setItems(subList);
+
     }
 
     public void loadNatureCombo() {

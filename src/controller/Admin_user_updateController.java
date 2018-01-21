@@ -62,6 +62,7 @@ public class Admin_user_updateController implements Initializable {
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         tbl_user.setItems(list_active_users);
+        System.out.println("done");
     }
 
     @FXML

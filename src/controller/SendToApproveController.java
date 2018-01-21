@@ -4,6 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -13,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import modle.Authority;
 import pojo.Application;
+import pojo.Apprualstatues;
 import pojo.Otheritiscat;
 import pojo.User;
 
@@ -73,9 +75,15 @@ public class SendToApproveController implements Initializable {
     public void save() {
         btn_send.setOnAction((event) -> {
             getSelected();
-            System.out.println("Save");
-           
-           
+
+            Apprualstatues apprualstatues = new pojo.Apprualstatues();
+            apprualstatues.setApplication(app);
+            apprualstatues.setDate(new Date());
+            apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
+            apprualstatues.setStatues(0);
+            apprualstatues.setSyn(1);
+
+            new modle.ApplicationStatus().save(apprualstatues);
 
         });
     }

@@ -6,17 +6,32 @@
 package modle;
 
 import java.util.List;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojo.Apprualstatues;
 
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class ApplicationStatus implements DAO<pojo.Apprualstatues>{
+public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
 
     @Override
     public boolean save(Apprualstatues t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.save(t);
+            bt.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+
     }
 
     @Override
@@ -53,5 +68,5 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues>{
     public List<Apprualstatues> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

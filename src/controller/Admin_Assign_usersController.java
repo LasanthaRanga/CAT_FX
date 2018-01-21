@@ -289,7 +289,8 @@ public class Admin_Assign_usersController implements Initializable {
     public void assignDipartment() {
         btn_dip_assign.setOnAction((event) -> {
             if (user != null && dip != null) {
-                UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1, 1);
+                UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1);
+                //    UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1, 1);
                 if (new modle.UserHas_Dip().save(uhd)) {
                     modle.Allert.notificationGood("Assign Compleet", user.getFullName());
                 } else {
@@ -318,7 +319,8 @@ public class Admin_Assign_usersController implements Initializable {
     public void assignAuthority() {
         btn_outh_assign.setOnAction((event) -> {
             if (user != null && other != null) {
-                UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);
+                UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1);
+                //  UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);
                 if (new modle.UserHas_Authorities().save(uha)) {
                     modle.Allert.notificationGood("Assign Compleet", user.getFullName());
                 } else {

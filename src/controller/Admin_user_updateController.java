@@ -10,20 +10,16 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pojo.Catagory;
@@ -62,6 +58,8 @@ public class Admin_user_updateController implements Initializable {
     private JFXButton btn_rest;
     @FXML
     private JFXListView<pojo.Catagory> lv_category;
+    @FXML
+    private JFXButton btn_update;
 
     /**
      * Initializes the controller class.
@@ -79,7 +77,7 @@ public class Admin_user_updateController implements Initializable {
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         tbl_user.setItems(list_active_users);
-        
+
     }
 
     @FXML
@@ -138,6 +136,45 @@ public class Admin_user_updateController implements Initializable {
         txt_mobile.setText("");
         txt_nic.setText("");
         txt_regisdate.setText("");
+    }
+
+    @FXML
+    private void updateUser(MouseEvent event) {
+        pojo.User u = tbl_user.getSelectionModel().getSelectedItem();
+        if (u != null) {
+            String fname = txt_fname.getText();
+            if (!fname.isEmpty()) {
+                u.setFullName(fname);
+                u.setMobile(txt_mobile.getText());
+                u.setNic(txt_nic.getText());
+                if (user.update(u)) {
+                    Notifications.create()
+                            .title("Success")
+                            .text("Update Success.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showInformation();
+                    this.loadTable();
+                } else {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Update failed.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            } else {
+                Notifications.create()
+                        .title("Warning")
+                        .text("Enter Name.")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT).showWarning();
+            }
+        } else {
+            Notifications.create()
+                    .title("Warning")
+                    .text("Not Found User.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
+        }
     }
 
 }

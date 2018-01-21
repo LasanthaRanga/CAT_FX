@@ -36,7 +36,7 @@
             <Region prefHeight="15.0" prefWidth="288.0" />
             <JFXTextField fx:id="txt_mobile" layoutX="10.0" layoutY="60.0" prefHeight="35.0" promptText="Mobile" />
             <Region layoutX="10.0" layoutY="95.0" prefHeight="15.0" prefWidth="288.0" />
-            <JFXTextField fx:id="txt_regisdate" layoutX="10.0" layoutY="110.0" prefHeight="35.0" promptText="Register Date" />
+            <JFXTextField fx:id="txt_regisdate" editable="false" layoutX="10.0" layoutY="110.0" prefHeight="35.0" promptText="Register Date" />
          </children>
       </VBox>
       <HBox layoutX="412.0" layoutY="521.0" prefHeight="39.0" prefWidth="406.0" spacing="6.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="412.0" AnchorPane.rightAnchor="12.0">
@@ -47,6 +47,11 @@
                </font>
             </JFXButton>
             <JFXButton fx:id="btn_deactive" onMouseClicked="#deactiveUser" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #f44336;" text="Deactivate" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_update" layoutX="112.0" layoutY="15.0" onMouseClicked="#updateUser" prefHeight="25.0" prefWidth="96.0" style="-fx-background-color: #4caf50;" text="Update" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

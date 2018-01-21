@@ -19,11 +19,19 @@
       </Label>
       <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Ward" />
       <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="65.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Strret" />
+<<<<<<< HEAD
       <JFXTextField fx:id="txt_assesmantNO" labelFloat="true" layoutX="65.0" layoutY="186.0" onKeyReleased="#keyListener" prefHeight="25.0" prefWidth="150.0" promptText="Assesment NO." />
       <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="251.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Type" />
       <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="251.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
       <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="251.0" layoutY="183.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Sub Nature" />
       <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="65.0" layoutY="237.0" onKeyReleased="#nicCheack" prefHeight="25.0" prefWidth="150.0" promptText="Customer NIC" />
+=======
+      <JFXTextField fx:id="txt_assesmantNO" labelFloat="true" layoutX="65.0" layoutY="186.0" prefHeight="25.0" prefWidth="150.0" promptText="Assesment NO." />
+      <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="251.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Type" />
+      <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="251.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
+      <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="251.0" layoutY="183.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Sub Nature" />
+      <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="65.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer NIC" />
+>>>>>>> 7f5f6dd8acccf35bc598b4248f7de10c24a3027e
       <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="65.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer Name" />
       <JFXTextField fx:id="txt_ro" labelFloat="true" layoutX="251.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="RO" />
       <JFXTextField fx:id="txt_aplicaton_No" labelFloat="true" layoutX="495.0" layoutY="80.0" prefHeight="25.0" prefWidth="160.0" promptText="Aplication NO." />

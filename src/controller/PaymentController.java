@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -23,6 +25,8 @@ public class PaymentController implements Initializable {
 
     @FXML
     private JFXButton btn_paynow;
+    @FXML
+    private TableView<?> tbl_approved_list;
 
     /**
      * Initializes the controller class.
@@ -30,6 +34,9 @@ public class PaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        
+        
         btn_paynow.setOnAction((event) -> {
             System.out.println("PAY");
             try {
@@ -48,6 +55,11 @@ public class PaymentController implements Initializable {
 
         });
 
+    }
+
+    @FXML
+    private void selectApplication(MouseEvent event) {
+        
     }
 
 }

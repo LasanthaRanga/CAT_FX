@@ -1,4 +1,9 @@
-D:\Techno Action\CAT_FX\nbproject\private\private.properties
-D:\Techno Action\CAT_FX\dist\
-D:\Techno Action\CAT_FX\build\
+/nbproject/private/
+/build/
+/dist/
 
+DB and ER/CAT.mwb.bak
+build/classes/modle/Log_User.class
+build/classes/modle/Aplication.class
+build/classes/controller/ApplicationController.class
+build/built-jar.properties

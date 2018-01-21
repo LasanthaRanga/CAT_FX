@@ -3,6 +3,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -73,14 +74,8 @@ public class SendToApproveController implements Initializable {
         btn_send.setOnAction((event) -> {
             getSelected();
             System.out.println("Save");
-            List<Integer> users = new modle.RO().getUsersByAutority(au);
-
-            for (int user : users) {
-                System.out.println(user);
-                
-                
-                
-            }
+           
+           
 
         });
     }

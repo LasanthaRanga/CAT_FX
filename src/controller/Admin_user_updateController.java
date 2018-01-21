@@ -52,6 +52,8 @@ public class Admin_user_updateController implements Initializable {
     private JFXButton btn_deactive;
     @FXML
     private TableColumn<pojo.User, Integer> tbl_clmn_id;
+    @FXML
+    private JFXButton btn_rest;
 
     /**
      * Initializes the controller class.
@@ -62,7 +64,7 @@ public class Admin_user_updateController implements Initializable {
         this.loadTable();
     }
 
-    private void loadTable(){
+    private void loadTable() {
         ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(user.getActiveUsers());
         tbl_clmn_id.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         tbl_clmn_name.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -70,11 +72,11 @@ public class Admin_user_updateController implements Initializable {
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         tbl_user.setItems(list_active_users);
     }
-    
+
     @FXML
     private void loadUser(MouseEvent event) {
         Integer idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
-        User byIdUser = user.getByIdUser(0);
+        User byIdUser = user.getByIdUser(idUser);
         if (byIdUser != null) {
             txt_fname.setText(byIdUser.getFullName());
             txt_mobile.setText(byIdUser.getMobile());
@@ -96,19 +98,19 @@ public class Admin_user_updateController implements Initializable {
         User byIdUser = user.getByIdUser(0);
         if (byIdUser != null) {
             byIdUser.setStatus(0);
-            if(user.update(byIdUser)){
+            if (user.update(byIdUser)) {
                 Notifications.create()
-                    .title("Success")
-                    .text("Deactivation Success.")
-                    .hideAfter(Duration.seconds(3))
-                    .position(Pos.BOTTOM_RIGHT).showInformation();
+                        .title("Success")
+                        .text("Deactivation Success.")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT).showInformation();
                 this.loadTable();
-            }else{
+            } else {
                 Notifications.create()
-                    .title("Warning")
-                    .text("Deactivation failed.")
-                    .hideAfter(Duration.seconds(3))
-                    .position(Pos.BOTTOM_RIGHT).showWarning();
+                        .title("Warning")
+                        .text("Deactivation failed.")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT).showWarning();
             }
         } else {
             Notifications.create()
@@ -117,6 +119,15 @@ public class Admin_user_updateController implements Initializable {
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_RIGHT).showWarning();
         }
+    }
+
+    @FXML
+    private void reset(MouseEvent event) {
+        this.loadTable();
+        txt_fname.setText("");
+        txt_mobile.setText("");
+        txt_nic.setText("");
+        txt_regisdate.setText("");
     }
 
 }

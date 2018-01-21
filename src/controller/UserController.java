@@ -53,8 +53,6 @@ public class UserController implements Initializable {
     @FXML
     private JFXTextField txt_answer;
 
-    
-
     @FXML
     private JFXButton btn_saveuser;
 
@@ -88,7 +86,7 @@ public class UserController implements Initializable {
         txt_answer.setText(null);
         txt_nic.setText(null);
         txt_pword.setText(null);
-        txt_pword.setText(null);        
+        txt_pword.setText(null);
     }
 
 //    public void saveUsers() {
@@ -96,12 +94,10 @@ public class UserController implements Initializable {
 //        users.saveUser();
 //        clear();
 //    }
-
 //    public void loadCat() {
 //        ObservableList loadCatList = new modle.Catagory().loadCatList();
 //        com_cat.setItems(loadCatList);
 //    }
-
     public void loadSQ() {
         ObservableList sq = new modle.SQ().getSQ();
         com_sq.setItems(sq);
@@ -112,90 +108,86 @@ public class UserController implements Initializable {
         String fname = txt_fname.getText();
         if (!fname.isEmpty()) {
             String nic = txt_nic.getText();
-            if (!nic.isEmpty()) {
-                String mobile = txt_mobile.getText();
-                if (!mobile.isEmpty()) {
-                    String sq = com_sq.getValue();
-                    if (!sq.isEmpty()) {
-                        String ans = txt_answer.getText();
-                        if (!ans.isEmpty()) {
-                            String uname = txt_uname.getText();
-                            if (!uname.isEmpty()) {
-                                String pword = txt_pword.getText();
-                                if (!pword.isEmpty()) {
-                                    // set data to user
-                                    User user = new pojo.User();
-                                    user.setSq(com_sq.getSelectionModel().getSelectedItem());
-                                    user.setFullName(txt_fname.getText());
-                                    user.setNic(txt_nic.getText());
-                                    user.setMobile(txt_mobile.getText());
-                                    user.setSqa(txt_answer.getText());
-                                    user.setRegDate(new Date());
-                                    user.setStatus(1);
-                                    user.setSyn(1);
-                                    // set data to login
-                                    Login login = new pojo.Login();
-                                    login.setUname(txt_uname.getText());
-                                    login.setPword(txt_pword.getText());
-                                    login.setStatus(1);
-                                    login.setSyn(1);
-                                    // init to database
-                                    Users modle_user = new modle.Users();
-                                    if (modle_user.save(user)) {
-                                        Notifications.create()
-                                                .title("Success")
-                                                .text("User added success.")
-                                                .hideAfter(Duration.seconds(3))
-                                                .position(Pos.BOTTOM_RIGHT).showInformation();
-                                    } else {
-                                        Notifications.create()
-                                                .title("Fail")
-                                                .text("User adding failed.")
-                                                .hideAfter(Duration.seconds(3))
-                                                .position(Pos.BOTTOM_RIGHT).showError();
-}
+            String mobile = txt_mobile.getText();
+            if (!mobile.isEmpty()) {
+                String sq = com_sq.getValue();
+                if (!sq.isEmpty()) {
+                    String ans = txt_answer.getText();
+                    if (!ans.isEmpty()) {
+                        String uname = txt_uname.getText();
+                        if (!uname.isEmpty()) {
+                            String pword = txt_pword.getText();
+                            if (!pword.isEmpty()) {
+                                // set data to user
+                                User user = new pojo.User();
+                                user.setSq(com_sq.getSelectionModel().getSelectedItem());
+                                user.setFullName(fname);
+                                user.setNic(nic);
+                                user.setMobile(mobile);
+                                user.setSqa(txt_answer.getText());
+                                user.setRegDate(new Date());
+                                user.setStatus(1);
+                                user.setSyn(1);
+                                // set data to login
+                                Login login = new pojo.Login();
+                                login.setUname(txt_uname.getText());
+                                login.setPword(txt_pword.getText());
+                                login.setStatus(1);
+                                login.setSyn(1);
+                                login.setUser(user);
+                                
+                                user.getLogins().add(login);
+                                // init to database
+                                Users modle_user = new modle.Users();
+                                if (modle_user.saveOrUpdate(user)) {
+                                    Notifications.create()
+                                            .title("Success")
+                                            .text("User added success.")
+                                            .hideAfter(Duration.seconds(3))
+                                            .position(Pos.BOTTOM_RIGHT).showInformation();
                                 } else {
                                     Notifications.create()
-                                            .title("Warning")
-                                            .text("Please Enter Password.")
+                                            .title("Fail")
+                                            .text("User adding failed.")
                                             .hideAfter(Duration.seconds(3))
-                                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                                            .position(Pos.BOTTOM_RIGHT).showError();
                                 }
                             } else {
                                 Notifications.create()
                                         .title("Warning")
-                                        .text("Please Enter Username.")
+                                        .text("Please Enter Password.")
                                         .hideAfter(Duration.seconds(3))
                                         .position(Pos.BOTTOM_RIGHT).showWarning();
                             }
                         } else {
                             Notifications.create()
                                     .title("Warning")
-                                    .text("Please Enter Answer.")
+                                    .text("Please Enter Username.")
                                     .hideAfter(Duration.seconds(3))
                                     .position(Pos.BOTTOM_RIGHT).showWarning();
                         }
                     } else {
                         Notifications.create()
                                 .title("Warning")
-                                .text("Please Select Security Question.")
+                                .text("Please Enter Answer.")
                                 .hideAfter(Duration.seconds(3))
                                 .position(Pos.BOTTOM_RIGHT).showWarning();
                     }
                 } else {
                     Notifications.create()
                             .title("Warning")
-                            .text("Please Enter Mobile Number.")
+                            .text("Please Select Security Question.")
                             .hideAfter(Duration.seconds(3))
                             .position(Pos.BOTTOM_RIGHT).showWarning();
                 }
             } else {
                 Notifications.create()
                         .title("Warning")
-                        .text("Please Enter NIC.")
+                        .text("Please Enter Mobile Number.")
                         .hideAfter(Duration.seconds(3))
                         .position(Pos.BOTTOM_RIGHT).showWarning();
             }
+
         } else {
             Notifications.create()
                     .title("Warning")

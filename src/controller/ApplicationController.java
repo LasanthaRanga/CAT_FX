@@ -5,7 +5,10 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
@@ -83,17 +86,30 @@ public class ApplicationController implements Initializable {
     @FXML
     private StackPane stackPain;
 
+    public modle.Ward  ward= null;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        loadWardCombo();
+        ward = new modle.Ward();
     }
 
     public void loadWardCombo() {
+        List<pojo.Ward> loaWards = ward.loadWardTable();
+        ObservableList List = FXCollections.observableArrayList();
+
+        for (pojo.Ward wa : loaWards) {
+            List.add(wa.getWardName());
+
+        }
+
+        com_ward.setItems(List);
+
+       loadStrretCombo();
     }
-    
 
     public void loadStrretCombo() {
     }
@@ -106,18 +122,25 @@ public class ApplicationController implements Initializable {
 
     public void loadSubCombo() {
     }
-    
+
     public pojo.Ward getWardPojo() {
         return null;
     }
+
     public pojo.Street getStrretPojo() {
         return null;
     }
-//    public pojo.Ward getWardPojo() {
-//        return null;
-//    }
-//    public pojo.Ward getWardPojo() {
-//        return null;
-//    }
+
+    public pojo.Ward getTradTypePojo() {
+        return null;
+    }
+
+    public pojo.Ward getNaturePojo() {
+        return null;
+    }
+
+    public pojo.Ward getSubNaturePojo() {
+        return null;
+    }
 
 }

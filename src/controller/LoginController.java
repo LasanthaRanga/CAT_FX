@@ -92,7 +92,6 @@ public class LoginController implements Initializable {
             System.out.println("Admin Login.....");
 
             try {
-                System.out.println("");;
                 btn_singin.getParent().getScene().getWindow().hide();
                 AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/AdminView.fxml"));
                 btn_singin.getParent().getScene();
@@ -115,7 +114,6 @@ public class LoginController implements Initializable {
         } else if (b > 1) {
             System.out.println("simple USET LOGIN");
             try {
-                System.out.println("");;
                 btn_singin.getParent().getScene().getWindow().hide();
                 AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
                 btn_singin.getParent().getScene();

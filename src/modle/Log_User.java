@@ -8,6 +8,7 @@ package modle;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojo.Login;
+import pojo.User;
 
 /**
  *
@@ -51,9 +52,12 @@ public class Log_User {
         try {
             session.beginTransaction().commit();
 
-            Login log = (pojo.Login) session.createCriteria(pojo.Login.class).add(Restrictions.and(Restrictions.eq("uname", uname), Restrictions.eq("pword", pass))).uniqueResult();
+            Login log = (pojo.Login) session.createCriteria(pojo.Login.class)
+                    .add(Restrictions.and(Restrictions.eq("uname", uname), 
+                            Restrictions.eq("pword", pass)))
+                    .uniqueResult();
             if (log != null) {
-                
+                AuthUser.setUser(log.getUser());
                 Integer idUser = log.getUser().getIdUser();
                 return idUser;
                 
@@ -70,4 +74,18 @@ public class Log_User {
 
     }
 
+    public pojo.User login(String uname, String pass){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (User) session.createCriteria(pojo.Login.class)
+                    .add(Restrictions.and(Restrictions.eq("uname", uname), 
+                            Restrictions.eq("pword", pass)))
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

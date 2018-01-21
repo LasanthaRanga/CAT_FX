@@ -5,7 +5,9 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -113,6 +115,9 @@ public class ApplicationController implements Initializable {
         getTradyType();
         getSelectedNature();
         loadRo();
+        SetDate();
+        setApplicationid();
+        saveApplication();
 
     }
 
@@ -273,9 +278,92 @@ public class ApplicationController implements Initializable {
         TextFields.bindAutoCompletion(txt_ro, roList);
 
     }
+
+    public void SetDate() {
+        Date date = new Date();
+        SimpleDateFormat yeare = new SimpleDateFormat("yyyy");
+        SimpleDateFormat month = new SimpleDateFormat("MM");
+        SimpleDateFormat day = new SimpleDateFormat("dd");
+
+        txt_year.setText(yeare.format(date));
+        txt_month.setText(month.format(date));
+        txt_day.setText(day.format(date));
+
+    }
+
+    public void setApplicationid() {
+        int ano = new modle.Aplication().getLastApllicationID();
+        System.out.println(ano);
+        txt_aplicaton_No.setText(ano + "");
+        // txt_aplicaton_No.setDisable(true);
+
+    }
+
+    String alocation;
+    String txtAmount;
+    String tradeNaem;
+    String adl1;
+    String adl2;
+    String adl3;
+    String discription;
+    String year;
+    String month;
+    String day;
+    String ro;
+    String assesno;
+    String cus_name;
+    String cus_nic;
     
+    String wardname;
+    String streetname;
+    String tradeType;
+    String nature;
+    String subnature;
     
-    
+    pojo.Ward pWard;
+    pojo.Street pStreet;
+    pojo.TradeType pTradeType;
+    pojo.TradeNature pNature;
+    pojo.SubNature pSubNature;
+   
+
+    public void collectData() {
+        alocation = txt_allocaton.getText();
+        txtAmount = txt_taxt_amount.getText();
+        tradeNaem = txt_trade_name.getText();
+        adl1 = txt_adl1.getText();
+        adl2 = txt_adl2.getText();
+        adl3 = txt_adl3.getText();
+        discription = txt_discription.getText();
+        year = txt_year.getText();
+        month = txt_month.getText();
+        day = txt_day.getText();
+        ro = txt_ro.getText();
+        assesno = txt_assesmantNO.getText();
+        cus_name = txt_cus_fname.getText();
+        cus_nic = txt_cus_nic.getText();
+
+        wardname = com_ward.getSelectionModel().getSelectedItem();
+        streetname = com_street.getSelectionModel().getSelectedItem();
+        tradeType  = com_trade_type.getSelectionModel().getSelectedItem();
+        nature = com_nature.getSelectionModel().getSelectedItem();
+        subnature = com_subnature.getSelectionModel().getSelectedItem();
+        
+        
+        
+        
+        
+
+    }
+
+    public void saveApplication() {
+        btn_save_app.setOnAction((event) -> {
+            collectData();
+            System.out.println(wardname + "ward Name");
+            System.out.println(day + "day");
+        });
+
+    }
 
     public void loadNatureCombo() {
     }

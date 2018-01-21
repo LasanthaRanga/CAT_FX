@@ -6,8 +6,12 @@
 package modle;
 
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projection;
+import org.hibernate.criterion.Projections;
 import pojo.Application;
 
 /**
@@ -77,6 +81,26 @@ public class Aplication implements DAO<pojo.Application> {
     @Override
     public List<Application> getList() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public int getLastApllicationID() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            Criteria c = session.createCriteria(pojo.Application.class);
+            c.addOrder(Order.desc("idApplication"));
+            c.setMaxResults(1);
+            Application name = (pojo.Application) c.uniqueResult();
+            int id = 0;
+            id = name.getIdApplication();
+            return id + 1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return 0;
+        } finally {
+            session.close();
+        }
     }
 
 }

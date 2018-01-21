@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.PaymentController">
@@ -16,36 +19,89 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TableView fx:id="tbl_approved_list" layoutX="54.0" layoutY="113.0" onMouseClicked="#selectApplication" prefHeight="450.0" prefWidth="438.0">
+      <TableView fx:id="tbl_approved_list" layoutX="25.0" layoutY="74.0" onMouseClicked="#selectApplication" prefHeight="531.0" prefWidth="438.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="74.0">
         <columns>
           <TableColumn fx:id="tbl_clmn_application_no" prefWidth="129.99996948242188" text="Application No" />
             <TableColumn fx:id="tbl_clmn_allocation" prefWidth="127.0" text="Allocation" />
             <TableColumn fx:id="tbl_clmn_application_date" prefWidth="180.0" text="Application Date" />
         </columns>
       </TableView>
-      <Label layoutX="54.0" layoutY="84.0" text="Approved ApplicationList">
+      <Label layoutX="25.0" layoutY="41.0" text="Approved ApplicationList" AnchorPane.bottomAnchor="559.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="41.0">
          <font>
             <Font size="16.0" />
          </font>
       </Label>
-      <JFXTextField layoutX="597.0" layoutY="238.0" prefHeight="25.0" prefWidth="79.0" promptText="Year" />
-      <JFXTextField layoutX="681.0" layoutY="238.0" prefHeight="25.0" prefWidth="49.0" promptText="Month" />
-      <JFXTextField layoutX="735.0" layoutY="238.0" prefHeight="25.0" prefWidth="49.0" promptText="Day" />
-      <JFXTextField editable="false" layoutX="1031.0" layoutY="238.0" prefHeight="25.0" prefWidth="139.0" promptText="Next Receipt No." />
-      <JFXTextField alignment="CENTER_RIGHT" layoutX="638.0" layoutY="313.0" promptText="Tax Amount" />
-      <JFXTextField alignment="CENTER_RIGHT" layoutX="659.0" layoutY="384.0" prefHeight="25.0" prefWidth="106.0" promptText="VAT" />
-      <JFXTextField alignment="CENTER_RIGHT" layoutX="663.0" layoutY="445.0" prefHeight="25.0" prefWidth="99.0" promptText="NBT" />
-      <JFXTextField alignment="CENTER_RIGHT" layoutX="659.0" layoutY="511.0" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" />
-      <JFXTextField alignment="CENTER_RIGHT" layoutX="857.0" layoutY="511.0" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount" />
-      <Label layoutX="597.0" layoutY="120.0" text="ApplicationID" />
-      <Label layoutX="595.0" layoutY="165.0" text="ApplicationNo" />
-      <JFXTextField layoutX="857.0" layoutY="116.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Licen NO." />
-      <JFXTextField editable="false" layoutX="857.0" layoutY="161.0" prefHeight="25.0" prefWidth="314.0" promptText="Customer Name" />
-      <JFXButton fx:id="btn_paynow" layoutX="1101.0" layoutY="511.0" text="Pay Now" />
-      <Label layoutX="595.0" layoutY="205.0" text="Vote" />
-      <Label layoutX="693.0" layoutY="205.0" text="Acount" />
-      <JFXCheckBox layoutX="554.0" layoutY="388.0" />
-      <JFXCheckBox layoutX="552.0" layoutY="449.0" />
-      <JFXCheckBox layoutX="554.0" layoutY="515.0" />
+      <VBox layoutX="481.0" layoutY="74.0" prefHeight="461.0" prefWidth="242.0">
+         <children>
+            <Label text="Application Details" />
+            <JFXTextField fx:id="txt_application_no" editable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="204.0" promptText="Application No" />
+            <Region layoutX="10.0" layoutY="60.0" prefHeight="15.0" prefWidth="242.0" />
+            <HBox prefHeight="35.0" prefWidth="242.0">
+               <children>
+                  <JFXTextField fx:id="txt_year" prefHeight="25.0" prefWidth="79.0" promptText="Year" />
+                  <JFXTextField fx:id="txt_month" prefHeight="25.0" prefWidth="49.0" promptText="Month" />
+                  <JFXTextField fx:id="txt_day" prefHeight="25.0" prefWidth="49.0" promptText="Day" />
+               </children>
+            </HBox>
+            <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="242.0" />
+            <JFXTextField fx:id="txt_trade_licen_no" prefHeight="25.0" prefWidth="204.0" promptText="Trade Licen NO." />
+            <Region prefHeight="15.0" prefWidth="242.0" />
+            <Label layoutX="10.0" layoutY="10.0" text="Customer Details" />
+            <JFXTextField fx:id="txt_customer_name" editable="false" prefHeight="25.0" prefWidth="314.0" promptText="Customer Name" />
+            <JFXTextField fx:id="txt_customer_nic" editable="false" layoutX="15.0" layoutY="194.0" prefHeight="25.0" prefWidth="314.0" promptText="Customer NIC" />
+            <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="242.0" />
+            <Label layoutX="10.0" layoutY="172.0" text="Trade Details" />
+            <JFXTextField fx:id="txt_trade_name" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Name" />
+            <Region layoutX="10.0" layoutY="225.0" prefHeight="15.0" prefWidth="242.0" />
+            <JFXTextField fx:id="txt_trade_address1" editable="false" layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
+            <JFXTextField fx:id="txt_trade_address2" editable="false" layoutX="10.0" layoutY="290.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
+            <JFXTextField fx:id="txt_trade_address3" editable="false" layoutX="10.0" layoutY="315.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
+            <Region layoutX="10.0" layoutY="250.0" prefHeight="15.0" prefWidth="242.0" />
+            <JFXTextField fx:id="txt_allocation" editable="false" layoutX="10.0" layoutY="155.0" prefHeight="25.0" prefWidth="314.0" promptText="Allocation" />
+            <Region layoutX="10.0" layoutY="180.0" prefHeight="15.0" prefWidth="242.0" />
+            <JFXTextField fx:id="txt_tax" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Tax" />
+         </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+      <VBox layoutX="789.0" layoutY="98.0" prefHeight="265.0" prefWidth="287.0">
+         <children>
+            <Label layoutX="10.0" layoutY="50.0" text="TAX" />
+            <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" promptText="Tax Amount" />
+            <Region prefHeight="15.0" prefWidth="287.0" />
+            <Label text="VAT" />
+            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#txtChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00" />
+            <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="287.0" />
+            <Label layoutX="10.0" layoutY="55.0" text="NBT" />
+            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00" />
+            <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="287.0" />
+            <Label layoutX="10.0" layoutY="117.0" text="Stamp" />
+            <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00" />
+            <Region layoutX="10.0" layoutY="125.0" prefHeight="20.0" prefWidth="287.0" />
+            <Label layoutX="10.0" layoutY="181.0" text="Total" />
+            <JFXTextField fx:id="txt_total_amount" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="btn_paynow" layoutX="848.0" layoutY="545.0" onMouseClicked="#paynow" prefHeight="40.0" prefWidth="242.0" style="-fx-background-color: #66bb6a;" text="Pay Now" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </JFXButton>
+      <HBox layoutX="481.0" layoutY="565.0" prefHeight="40.0" prefWidth="322.0">
+         <children>
+            <JFXButton fx:id="btn_reset" onMouseClicked="#reset" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #ef5350;" text="Reset" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
+      </HBox>
    </children>
 </AnchorPane>

@@ -545,4 +545,15 @@ public class Customer {
         return ar;
     }
 
+    public pojo.Customer getById(int id){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.eq("idCustomer", id));
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

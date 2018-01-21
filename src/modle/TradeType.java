@@ -47,6 +47,7 @@ public class TradeType {
         try {
             tt = (pojo.TradeType)ses.createCriteria(pojo.TradeType.class).add(Restrictions.eq("idTradeType", idTradeType)).uniqueResult();
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             ses.close();
         }
@@ -54,12 +55,13 @@ public class TradeType {
 
     }
      
-      public pojo.TradeType loadTreadTypeByTypeName(String tradtype) {
+      public pojo.TradeType getTreadTypeByTypeName(String tradtype) {
         Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
         pojo.TradeType tt = null;
         try {
             tt = (pojo.TradeType)ses.createCriteria(pojo.TradeType.class).add(Restrictions.eq("typeName", tradtype)).uniqueResult();
         } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             ses.close();
         }

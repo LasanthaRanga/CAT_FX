@@ -74,6 +74,10 @@ public class SubNature {
         this.syn = syn;
     }
 
+    public SubNature() {
+        super();
+    }
+
     public void saveNature() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
@@ -97,10 +101,10 @@ public class SubNature {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
 
         try {
-            
-            pojo.SubNature snature = (pojo.SubNature)session.createCriteria(pojo.SubNature.class).add(Restrictions.eq("idSubNature", getIdSubNature())).uniqueResult();
+
+            pojo.SubNature snature = (pojo.SubNature) session.createCriteria(pojo.SubNature.class).add(Restrictions.eq("idSubNature", getIdSubNature())).uniqueResult();
             snature.setSubNatureNo(getSubNatureNo());
-            snature.setSubNature(getSubNature());            
+            snature.setSubNature(getSubNature());
             snature.setSyn(1);
             session.update(snature);
             session.beginTransaction().commit();
@@ -117,8 +121,8 @@ public class SubNature {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
 
         try {
-            
-            pojo.SubNature snature = (pojo.SubNature)session.createCriteria(pojo.SubNature.class).add(Restrictions.eq("idSubNature", getIdSubNature())).uniqueResult();                    
+
+            pojo.SubNature snature = (pojo.SubNature) session.createCriteria(pojo.SubNature.class).add(Restrictions.eq("idSubNature", getIdSubNature())).uniqueResult();
             snature.setStatus(0);
             session.update(snature);
             session.beginTransaction().commit();
@@ -129,14 +133,13 @@ public class SubNature {
             session.close();
         }
 
-
     }
 
     public List<pojo.SubNature> loadNature() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         List<pojo.SubNature> sub = null;
         try {
-           sub = session.createCriteria(pojo.SubNature.class).add(Restrictions.and(Restrictions.eq("tradeNature", getTradeNature()),Restrictions.eq("status", 1))).list();
+            sub = session.createCriteria(pojo.SubNature.class).add(Restrictions.and(Restrictions.eq("tradeNature", getTradeNature()), Restrictions.eq("status", 1))).list();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -145,10 +148,11 @@ public class SubNature {
         return sub;
     }
 
-    public pojo.SubNature getNatureById() {
+    public pojo.SubNature getNatureBySubNatureName(String sub) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-
         try {
+            pojo.SubNature subNature = (pojo.SubNature) session.createCriteria(pojo.SubNature.class).add(Restrictions.eq("subNature", sub)).uniqueResult();
+            return subNature;
 
         } catch (Exception e) {
             e.printStackTrace();

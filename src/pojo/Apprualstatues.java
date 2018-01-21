@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 21, 2018 11:23:10 AM by Hibernate Tools 4.3.1
+// Generated Jan 22, 2018 1:10:23 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -17,6 +17,7 @@ public class Apprualstatues  implements java.io.Serializable {
      private String description;
      private Date date;
      private Integer syn;
+     private Integer idOtheritisCat;
 
     public Apprualstatues() {
     }
@@ -26,13 +27,14 @@ public class Apprualstatues  implements java.io.Serializable {
         this.application = application;
         this.user = user;
     }
-    public Apprualstatues(Application application, User user, Integer statues, String description, Date date, Integer syn) {
+    public Apprualstatues(Application application, User user, Integer statues, String description, Date date, Integer syn, Integer idOtheritisCat) {
        this.application = application;
        this.user = user;
        this.statues = statues;
        this.description = description;
        this.date = date;
        this.syn = syn;
+       this.idOtheritisCat = idOtheritisCat;
     }
    
     public Integer getIdApprualStatues() {
@@ -83,6 +85,13 @@ public class Apprualstatues  implements java.io.Serializable {
     
     public void setSyn(Integer syn) {
         this.syn = syn;
+    }
+    public Integer getIdOtheritisCat() {
+        return this.idOtheritisCat;
+    }
+    
+    public void setIdOtheritisCat(Integer idOtheritisCat) {
+        this.idOtheritisCat = idOtheritisCat;
     }
 
 

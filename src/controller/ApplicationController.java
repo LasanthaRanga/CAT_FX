@@ -422,6 +422,7 @@ public class ApplicationController implements Initializable {
                 boolean save = new modle.Aplication().save(app);
 
                 if (save) {
+                    modle.StaticBadu.setApp(app);
                     modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
                 } else {
                     modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());

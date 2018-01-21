@@ -50,6 +50,8 @@ public class Admin_user_updateController implements Initializable {
     private JFXTextField txt_regisdate;
     @FXML
     private JFXButton btn_deactive;
+    @FXML
+    private TableColumn<pojo.User, Integer> tbl_clmn_id;
 
     /**
      * Initializes the controller class.
@@ -57,14 +59,18 @@ public class Admin_user_updateController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         user = new modle.Users();
+        this.loadTable();
+    }
+
+    private void loadTable(){
         ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(user.getActiveUsers());
+        tbl_clmn_id.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         tbl_clmn_name.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         tbl_user.setItems(list_active_users);
-        System.out.println("done");
     }
-
+    
     @FXML
     private void loadUser(MouseEvent event) {
         Integer idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
@@ -96,6 +102,7 @@ public class Admin_user_updateController implements Initializable {
                     .text("Deactivation Success.")
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_RIGHT).showInformation();
+                this.loadTable();
             }else{
                 Notifications.create()
                     .title("Warning")

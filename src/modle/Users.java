@@ -151,7 +151,9 @@ public class Users implements DAO<pojo.User> {
     public List<pojo.User> getActiveUsers(){
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            return session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).setFirstResult(2).list();
+            List list = session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).list();
+            list.remove(0);
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

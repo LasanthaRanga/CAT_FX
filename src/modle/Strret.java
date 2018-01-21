@@ -222,4 +222,18 @@ public class Strret implements DAO<pojo.Street> {
 
     }
 
+    public pojo.Street getStreetsByStreetName(String strret) {
+        Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Street stre = (pojo.Street) ses.createCriteria(pojo.Street.class).add(Restrictions.eq("streetName", strret)).uniqueResult();
+            return stre;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ses.close();
+        }
+        return null;
+
+    }
+
 }

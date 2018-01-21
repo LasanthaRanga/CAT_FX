@@ -122,14 +122,8 @@ public class ApplicationController implements Initializable {
     }
 
     public pojo.Ward getWardPojo() {
-        com_ward.setOnAction((event) -> {
-
-            String selecteditem = com_ward.getSelectionModel().getSelectedItem();
-            Ward wardByWardName = new modle.Ward().getWardByWardName(selecteditem);
-            System.out.println(wardByWardName.getWardName());
-            return wardByWardName;
-        });
-
+       
+        return null;
     }
 
     public pojo.Street getStrretPojo() {

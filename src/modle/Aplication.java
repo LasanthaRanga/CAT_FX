@@ -30,6 +30,7 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
+            session.save(t);
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -43,7 +44,18 @@ public class Aplication implements DAO<pojo.Application> {
 
     @Override
     public boolean save(List<Application> list) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -106,9 +118,6 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 }
-
-
-
 
 //    public List<pojo.Application> getApprovedApplications(){
 //        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();

@@ -364,16 +364,11 @@ public class ApplicationController implements Initializable {
     public void saveApplication() {
         btn_save_app.setOnAction((event) -> {
             collectData();
-            System.out.println("begin");
-            System.out.println(pward.getWardName());
-            System.out.println(pStreet.getStreetName());
-            System.out.println(pTradeType.getIdTradeType());
-            System.out.println(pNature.getNature());
-            System.out.println(pSubNature.getSubNature());
-            System.out.println("done");
-
+           
+            
+            
+            
         });
-
     }
 
 }

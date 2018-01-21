@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -73,18 +75,26 @@ public class SendToApproveController implements Initializable {
     }
 
     public void save() {
-        btn_send.setOnAction((event) -> {
-            getSelected();
+        btn_send.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                getSelected();
 
-            Apprualstatues apprualstatues = new pojo.Apprualstatues();
-            apprualstatues.setApplication(app);
-            apprualstatues.setDate(new Date());
-            apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
-            apprualstatues.setStatues(0);
-            apprualstatues.setSyn(1);
+                Apprualstatues apprualstatues = new pojo.Apprualstatues();
+                apprualstatues.setApplication(app);
+                apprualstatues.setDate(new Date());
+                apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
+                apprualstatues.setStatues(0);
+                apprualstatues.setSyn(1);
 
-            new modle.ApplicationStatus().save(apprualstatues);
+                boolean save = new modle.ApplicationStatus().save(apprualstatues);
 
+                if (save) {
+                    modle.Allert.notificationGood("Send To", au);
+                } else {
+                    modle.Allert.notificationError("error", au);
+                }
+            }
         });
     }
 

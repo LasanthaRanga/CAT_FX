@@ -112,7 +112,10 @@ public class Aplication implements DAO<pojo.Application> {
             c.setMaxResults(1);
             Application name = (pojo.Application) c.uniqueResult();
             int id = 0;
-            id = name.getIdApplication();
+            if (name != null) {
+                id = name.getIdApplication();
+            }
+
             return id + 1;
         } catch (Exception e) {
             e.printStackTrace();

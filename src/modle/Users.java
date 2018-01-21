@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import pojo.User;
+import pojo.UserHasCatagory;
 import pojo.UserHasDepartment;
 
 /**
@@ -205,4 +206,41 @@ public class Users implements DAO<pojo.User> {
         }
     }
 
+    public List<pojo.Catagory> getUserCategories(int userId){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class)
+                    .add(Restrictions.eq("idUser", userId))
+                    .uniqueResult());
+            ArrayList<pojo.Catagory> list=new ArrayList();
+            for (UserHasCatagory userHasCatagory : user.getUserHasCatagories()) {
+                list.add(userHasCatagory.getCatagory());
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<pojo.Catagory> getUserCategories(pojo.User u){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class)
+                    .add(Restrictions.eq("idUser", u.getIdUser()))
+                    .uniqueResult());
+            ArrayList<pojo.Catagory> list=new ArrayList();
+            for (UserHasCatagory userHasCatagory : user.getUserHasCatagories()) {
+                list.add(userHasCatagory.getCatagory());
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 }

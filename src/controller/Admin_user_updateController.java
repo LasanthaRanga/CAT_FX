@@ -6,21 +6,27 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import pojo.Catagory;
 import pojo.User;
 
 /**
@@ -54,6 +60,8 @@ public class Admin_user_updateController implements Initializable {
     private TableColumn<pojo.User, Integer> tbl_clmn_id;
     @FXML
     private JFXButton btn_rest;
+    @FXML
+    private JFXListView<pojo.Catagory> lv_category;
 
     /**
      * Initializes the controller class.
@@ -71,6 +79,7 @@ public class Admin_user_updateController implements Initializable {
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
         tbl_user.setItems(list_active_users);
+        
     }
 
     @FXML
@@ -82,6 +91,8 @@ public class Admin_user_updateController implements Initializable {
             txt_mobile.setText(byIdUser.getMobile());
             txt_nic.setText(byIdUser.getNic());
             txt_regisdate.setText(new SimpleDateFormat("yyyy-MM-dd").format(byIdUser.getRegDate()));
+            ObservableList<Catagory> list_cate = FXCollections.observableArrayList(user.getUserCategories(byIdUser));
+            lv_category.setItems(list_cate);
         } else {
             Notifications.create()
                     .title("Warning")

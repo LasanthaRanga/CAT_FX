@@ -79,7 +79,25 @@ public class Users implements DAO<pojo.User> {
 
     @Override
     public boolean saveOrUpdate(User t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.saveOrUpdate(t);
+            bt.commit();
+            if (t.getIdUser() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            if (bt != null) {
+                bt.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

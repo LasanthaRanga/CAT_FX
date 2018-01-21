@@ -24,6 +24,7 @@ import modle.CustomerHasAssesment;
 import modle.Nature;
 import org.controlsfx.control.textfield.TextFields;
 import pojo.TradeNature;
+import pojo.User;
 import pojo.Ward;
 
 /**
@@ -111,6 +112,7 @@ public class ApplicationController implements Initializable {
         loadTreadTypeCombo();
         getTradyType();
         getSelectedNature();
+        loadRo();
 
     }
 
@@ -261,13 +263,19 @@ public class ApplicationController implements Initializable {
 
     }
 
-    public void loadRo() { 
-     //   ArrayList list = cus.getCustomerFnameList();
-      //  TextFields.bindAutoCompletion(txt_ro, list);
-        
-        
-        
+    public void loadRo() {
+        List<String> roList = new modle.RO().getRoList();
+
+//        ArrayList<String> list = new ArrayList();
+//        for (User user : roList) {
+//            list.add(user.getFullName());
+//        }
+        TextFields.bindAutoCompletion(txt_ro, roList);
+
     }
+    
+    
+    
 
     public void loadNatureCombo() {
     }

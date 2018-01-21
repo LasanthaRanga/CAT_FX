@@ -22,7 +22,9 @@ import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
 import org.controlsfx.control.textfield.TextFields;
+import pojo.Street;
 import pojo.TradeNature;
+import pojo.TradeType;
 import pojo.Ward;
 
 /**
@@ -348,10 +350,12 @@ public class ApplicationController implements Initializable {
         ward.setWardname(wardname);
         pward = ward.getWardByWardName(wardname);
 
+        pTradeType = new modle.TradeType().loadTreadTypeByTypeName(tradeType);
+
         Nature natu = new modle.Nature();
         pNature = natu.getNatureByNature(nature);
-        
-        
+
+        pStreet = new modle.Strret().getStreetsByStreetName(streetname);
 
     }
 

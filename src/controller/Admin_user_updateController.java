@@ -105,11 +105,10 @@ public class Admin_user_updateController implements Initializable {
 
     @FXML
     private void deactiveUser(MouseEvent event) {
-        Integer idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
-        User byIdUser = user.getByIdUser(0);
-        if (byIdUser != null) {
-            byIdUser.setStatus(0);
-            if (user.update(byIdUser)) {
+        pojo.User u = tbl_user.getSelectionModel().getSelectedItem();
+        if (u != null) {
+            u.setStatus(0);
+            if (user.update(u)) {
                 Notifications.create()
                         .title("Success")
                         .text("Deactivation Success.")

@@ -69,6 +69,7 @@ Contributor(s):
     <mapping resource="pojo/Privilage.hbm.xml"/>
     <mapping resource="pojo/TaxValue.hbm.xml"/>
     <mapping resource="pojo/UserLog.hbm.xml"/>
+    <mapping resource="pojo/UserHasOtheritiscat.hbm.xml"/>
     <mapping resource="pojo/Payment.hbm.xml"/>
     <mapping resource="pojo/AplicationPayment.hbm.xml"/>
     <mapping resource="pojo/Login.hbm.xml"/>

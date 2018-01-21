@@ -1,16 +1,13 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 21, 2018 11:09:39 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 21, 2018 11:23:11 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Otheritiscat" table="otheritiscat" catalog="cat" optimistic-lock="version">
         <id name="idOtheritisCat" type="java.lang.Integer">
             <column name="idOtheritisCat" />
             <generator class="identity" />
         </id>
-        <many-to-one name="user" class="pojo.User" fetch="select">
-            <column name="User_idUser" not-null="true" />
-        </many-to-one>
         <property name="catname" type="string">
             <column name="catname" length="45" />
         </property>
@@ -23,5 +20,11 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
+        <set name="userHasOtheritiscats" table="user_has_otheritiscat" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="OtheritisCat_idOtheritisCat" not-null="true" />
+            </key>
+            <one-to-many class="pojo.UserHasOtheritiscat" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 20, 2018 9:51:37 AM by Hibernate Tools 4.3.1
+// Generated Jan 21, 2018 11:09:37 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -36,6 +36,7 @@ public class Application  implements java.io.Serializable {
      private Integer syn;
      private Set<AplicationPayment> aplicationPayments = new HashSet<AplicationPayment>(0);
      private Set<Apprualstatues> apprualstatueses = new HashSet<Apprualstatues>(0);
+     private Set<TradeLicense> tradeLicenses = new HashSet<TradeLicense>(0);
 
     public Application() {
     }
@@ -49,7 +50,7 @@ public class Application  implements java.io.Serializable {
         this.user = user;
         this.userLog = userLog;
     }
-    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, String applicationcol, Integer statues, Integer syn, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses) {
+    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, String applicationcol, Integer statues, Integer syn, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
        this.customer = customer;
        this.subNature = subNature;
        this.tradeNature = tradeNature;
@@ -73,6 +74,7 @@ public class Application  implements java.io.Serializable {
        this.syn = syn;
        this.aplicationPayments = aplicationPayments;
        this.apprualstatueses = apprualstatueses;
+       this.tradeLicenses = tradeLicenses;
     }
    
     public Integer getIdApplication() {
@@ -242,6 +244,13 @@ public class Application  implements java.io.Serializable {
     
     public void setApprualstatueses(Set<Apprualstatues> apprualstatueses) {
         this.apprualstatueses = apprualstatueses;
+    }
+    public Set<TradeLicense> getTradeLicenses() {
+        return this.tradeLicenses;
+    }
+    
+    public void setTradeLicenses(Set<TradeLicense> tradeLicenses) {
+        this.tradeLicenses = tradeLicenses;
     }
 
 

@@ -83,15 +83,41 @@ public class ApplicationController implements Initializable {
     @FXML
     private StackPane stackPain;
 
-    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-    
 
     }
 
+    public void loadWardCombo() {
+    }
     
+
+    public void loadStrretCombo() {
+    }
+
+    public void loadTreadTypeCombo() {
+    }
+
+    public void loadNatureCombo() {
+    }
+
+    public void loadSubCombo() {
+    }
+    
+    public pojo.Ward getWardPojo() {
+        return null;
+    }
+    public pojo.Street getStrretPojo() {
+        return null;
+    }
+//    public pojo.Ward getWardPojo() {
+//        return null;
+//    }
+//    public pojo.Ward getWardPojo() {
+//        return null;
+//    }
+
 }

@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 20, 2018 9:51:37 AM by Hibernate Tools 4.3.1
+// Generated Jan 21, 2018 11:09:37 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class TradeLicense  implements java.io.Serializable {
 
 
      private Integer idTradeLicense;
+     private Application application;
      private Payment payment;
      private String licenNo;
      private String tradeLicensecol;
@@ -27,10 +28,12 @@ public class TradeLicense  implements java.io.Serializable {
     }
 
 	
-    public TradeLicense(Payment payment) {
+    public TradeLicense(Application application, Payment payment) {
+        this.application = application;
         this.payment = payment;
     }
-    public TradeLicense(Payment payment, String licenNo, String tradeLicensecol, Date tradeLicenseDate, String tradeLicensecol1, String tradeLicensecol2, Integer status, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
+    public TradeLicense(Application application, Payment payment, String licenNo, String tradeLicensecol, Date tradeLicenseDate, String tradeLicensecol1, String tradeLicensecol2, Integer status, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
+       this.application = application;
        this.payment = payment;
        this.licenNo = licenNo;
        this.tradeLicensecol = tradeLicensecol;
@@ -48,6 +51,13 @@ public class TradeLicense  implements java.io.Serializable {
     
     public void setIdTradeLicense(Integer idTradeLicense) {
         this.idTradeLicense = idTradeLicense;
+    }
+    public Application getApplication() {
+        return this.application;
+    }
+    
+    public void setApplication(Application application) {
+        this.application = application;
     }
     public Payment getPayment() {
         return this.payment;

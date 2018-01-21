@@ -127,7 +127,8 @@ public class MainController implements Initializable {
 
                             case "btn_exit":
                                 System.out.println("EXIT");
-                                ((Node) (e.getSource())).getScene().getWindow().hide();
+                                Platform.exit();
+                                //((Node) (e.getSource())).getScene().getWindow().hide();
                                 break;
 
                         }

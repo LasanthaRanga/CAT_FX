@@ -10,40 +10,37 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.ApplicationController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationController">
    <children>
       <Label layoutX="570.0" layoutY="14.0" text="Aplication" textFill="#029400">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXComboBox labelFloat="true" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Ward" />
-      <JFXComboBox labelFloat="true" layoutX="65.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Strret" />
-      <JFXTextField labelFloat="true" layoutX="65.0" layoutY="186.0" prefHeight="25.0" prefWidth="150.0" promptText="Assesment NO." />
-      <JFXComboBox labelFloat="true" layoutX="251.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Type" />
-      <JFXComboBox labelFloat="true" layoutX="251.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
-      <JFXComboBox labelFloat="true" layoutX="251.0" layoutY="183.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Sub Nature" />
-      <JFXTextField labelFloat="true" layoutX="65.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer NIC" />
-      <JFXTextField labelFloat="true" layoutX="65.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer Name" />
-      <JFXTextField labelFloat="true" layoutX="251.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="RO" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="80.0" prefHeight="25.0" prefWidth="160.0" promptText="Aplication NO." />
-      <JFXTextField labelFloat="true" layoutX="251.0" layoutY="302.0" prefHeight="25.0" prefWidth="52.0" promptText="Year" />
-      <JFXTextField labelFloat="true" layoutX="311.0" layoutY="302.0" prefHeight="25.0" prefWidth="40.0" promptText="Month" />
-      <JFXTextField labelFloat="true" layoutX="361.0" layoutY="302.0" prefHeight="25.0" prefWidth="40.0" promptText="Day" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" promptText="Alocation" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="183.0" prefHeight="25.0" prefWidth="160.0" promptText="Type" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="237.0" prefHeight="25.0" prefWidth="160.0" promptText="Trade Name" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="302.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 1" />
-      <JFXTextField labelFloat="true" layoutX="500.0" layoutY="365.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 2" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="420.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 3" />
-      <JFXTextField labelFloat="true" layoutX="495.0" layoutY="476.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
-      <JFXTextField labelFloat="true" layoutX="700.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Tax Amount" />
+      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="65.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Ward" />
+      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="65.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Strret" />
+      <JFXTextField fx:id="txt_assesmantNO" labelFloat="true" layoutX="65.0" layoutY="186.0" prefHeight="25.0" prefWidth="150.0" promptText="Assesment NO." />
+      <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="251.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Type" />
+      <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="251.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
+      <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="251.0" layoutY="183.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Sub Nature" />
+      <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="65.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer NIC" />
+      <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="65.0" layoutY="300.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer Name" />
+      <JFXTextField fx:id="txt_ro" labelFloat="true" layoutX="251.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="RO" />
+      <JFXTextField fx:id="txt_aplicaton_No" labelFloat="true" layoutX="495.0" layoutY="80.0" prefHeight="25.0" prefWidth="160.0" promptText="Aplication NO." />
+      <JFXTextField fx:id="txt_year" labelFloat="true" layoutX="251.0" layoutY="302.0" prefHeight="25.0" prefWidth="52.0" promptText="Year" />
+      <JFXTextField fx:id="txt_month" labelFloat="true" layoutX="311.0" layoutY="302.0" prefHeight="25.0" prefWidth="40.0" promptText="Month" />
+      <JFXTextField fx:id="txt_day" labelFloat="true" layoutX="361.0" layoutY="302.0" prefHeight="25.0" prefWidth="40.0" promptText="Day" />
+      <JFXTextField fx:id="txt_allocaton" labelFloat="true" layoutX="495.0" layoutY="128.0" prefHeight="25.0" prefWidth="160.0" promptText="Alocation" />
+      <JFXTextField fx:id="txt_trade_name" labelFloat="true" layoutX="495.0" layoutY="237.0" prefHeight="25.0" prefWidth="160.0" promptText="Trade Name" />
+      <JFXTextField fx:id="txt_adl1" labelFloat="true" layoutX="495.0" layoutY="302.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 1" />
+      <JFXTextField fx:id="txt_adl2" labelFloat="true" layoutX="495.0" layoutY="365.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 2" />
+      <JFXTextField fx:id="txt_adl3" labelFloat="true" layoutX="495.0" layoutY="420.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 3" />
+      <JFXTextField fx:id="txt_taxt_amount" labelFloat="true" layoutX="700.0" layoutY="80.0" prefHeight="25.0" prefWidth="150.0" promptText="Tax Amount" />
       <JFXCheckBox layoutX="757.0" layoutY="416.0" text="Approval Select 1" />
       <JFXCheckBox layoutX="757.0" layoutY="520.0" text="Approval Select 1" />
       <JFXCheckBox layoutX="757.0" layoutY="449.0" text="Approval Select 1" />
       <JFXCheckBox layoutX="757.0" layoutY="482.0" text="Approval Select 1" />
-      <JFXTextArea labelFloat="true" layoutX="700.0" layoutY="177.0" prefHeight="170.0" prefWidth="542.0" promptText="Discription" />
+      <JFXTextArea fx:id="txt_discription" labelFloat="true" layoutX="700.0" layoutY="177.0" prefHeight="170.0" prefWidth="542.0" promptText="Discription" />
       <JFXButton fx:id="btn_save_app" buttonType="RAISED" layoutX="1009.0" layoutY="489.0" text="Save" />
       <JFXButton buttonType="RAISED" layoutX="1117.0" layoutY="489.0" text="Send To Approve" />
       <StackPane fx:id="stackPain" layoutX="1059.0" layoutY="540.0" prefHeight="80.0" prefWidth="241.0" />

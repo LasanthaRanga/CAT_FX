@@ -41,4 +41,21 @@ public class RO {
             session.close();
         }
     }
+
+    public pojo.User getRobyRoname(String Roname) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria cry = session.createCriteria(pojo.User.class);
+            cry.add(Restrictions.eq("fullName", Roname));
+            pojo.User ot = (pojo.User) cry.uniqueResult();
+            return ot;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

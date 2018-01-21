@@ -26,6 +26,7 @@ import pojo.Street;
 import pojo.SubNature;
 import pojo.TradeNature;
 import pojo.TradeType;
+import pojo.User;
 import pojo.Ward;
 
 /**
@@ -324,6 +325,7 @@ public class ApplicationController implements Initializable {
     pojo.TradeType pTradeType;
     pojo.TradeNature pNature;
     pojo.SubNature pSubNature;
+    pojo.User pro;
 
     public void collectData() {
         alocation = txt_allocaton.getText();
@@ -350,23 +352,26 @@ public class ApplicationController implements Initializable {
         modle.Ward ward = new modle.Ward();
         ward.setWardname(wardname);
         pward = ward.getWardByWardName(wardname);
-
         pTradeType = new modle.TradeType().getTreadTypeByTypeName(tradeType);
-
         Nature natu = new modle.Nature();
         pNature = natu.getNatureByNature(nature);
-
         pStreet = new modle.Strret().getStreetsByStreetName(streetname);
-
         pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
+        pro = new modle.RO().getRobyRoname(ro);
 
     }
 
     public void saveApplication() {
         btn_save_app.setOnAction((event) -> {
             collectData();
-            System.out.println(wardname + "ward Name");
-            System.out.println(day + "day");
+            System.out.println("begin");
+            System.out.println(pward.getWardName());
+            System.out.println(pStreet.getStreetName());
+            System.out.println(pTradeType.getIdTradeType());
+            System.out.println(pNature.getNature());
+            System.out.println(pSubNature.getSubNature());
+            System.out.println("done");
+
         });
 
     }

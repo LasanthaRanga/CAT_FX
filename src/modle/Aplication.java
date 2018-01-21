@@ -8,6 +8,7 @@ package modle;
 import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -18,6 +19,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import pojo.Application;
+import pojo.Apprualstatues;
 
 /**
  *
@@ -118,29 +120,31 @@ public class Aplication implements DAO<pojo.Application> {
             return 0;
         }
     }
+
+    public List<pojo.Application> getUnpaiedApprovedApplications() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class)
+                    .setFetchMode("aplicationPayments", FetchMode.JOIN)
+                    .setFetchMode("apprualstatueses", FetchMode.JOIN).list();
+            ArrayList<Application> ap_list = new ArrayList<pojo.Application>();
+            for (Application application : list) {
+                if (application.getAplicationPayments().size() == 0) {
+                    boolean status = true;
+                    for (Apprualstatues apprualstatuese : application.getApprualstatueses()) {
+                        if (apprualstatuese.getStatues() != 1) {
+                            status = false;
+                        }
+                    }
+                    if (status) {
+                        ap_list.add(application);
+                    }
+                }
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
-
-//    public List<pojo.Application> getApprovedApplications(){
-//        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-//        try {
-////            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class)
-////                    .add(Restrictions.eq("idUser", u.getIdUser()))
-////                    .uniqueResult());
-//            ArrayList<pojo.Application> list=new ArrayList();
-////            for (UserHasCatagory userHasCatagory : user.getUserHasCatagories()) {
-////                list.add(userHasCatagory.getCatagory());
-////            }
-//            return list;
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            return null;
-//>>>>>>> b7fde0cf0d1aeb4b2f6aaf036645deeed85b083e
-//        } finally {
-//            session.close();
-//        }
-//    }
-//<<<<<<< HEAD
-//
-//=======
-//>>>>>>> b7fde0cf0d1aeb4b2f6aaf036645deeed85b083e
-

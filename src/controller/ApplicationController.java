@@ -9,9 +9,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
+import modle.Customer;
+import modle.CustomerHasAssesment;
 import pojo.Ward;
 
 /**
@@ -95,6 +101,7 @@ public class ApplicationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadWardCombo();
+        loadStrretCombo();
 
     }
 
@@ -105,14 +112,86 @@ public class ApplicationController implements Initializable {
             List.add(ward.getWardName());
         }
         com_ward.setItems(List);
-        getWardPojo();
+
     }
 
     public void loadStrretCombo() {
 
+        com_ward.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                modle.Ward ward = new modle.Ward();
+                String selectedItem = com_ward.getSelectionModel().getSelectedItem();
+                ward.setWardname(selectedItem);
+                ObservableList list = ward.getStreetBySelectedWard();
+                com_street.setItems(list);
+            }
+        });
+
+    }
+
+    @FXML
+    public void keyListener(KeyEvent event) {
+        int length = txt_assesmantNO.getLength();
+        // System.out.println(length);
+
+        if (event.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER GEHUWAA");
+            searchCustomerByAssesment();
+        }
+
+    }
+
+    String selectedStreet = null;
+    String selectedWard = null;
+
+    public void getSelectedWaredStrret() {
+        selectedWard = com_ward.getSelectionModel().getSelectedItem();
+        selectedStreet = com_street.getSelectionModel().getSelectedItem();
+    }
+
+    public void searchCustomerByAssesment() {
+        getSelectedWaredStrret();
+        String asno = txt_assesmantNO.getText();
+        CustomerHasAssesment cha = new modle.CustomerHasAssesment();
+        cha.setAssesment(asno);
+        cha.setStreet(selectedStreet);
+        cha.setWard(selectedWard);
+
+        modle.Customer customer = cha.searchCustometByAssesmentAndWardStrret();
+
+    }
+
+    @FXML
+    public void nicCheack(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER GEHUWAA");
+            searchCustomerByNIC();
+        }
+    }
+
+    @FXML
+    public void searchCustomerByNIC() {
+
+        String text = txt_cus_nic.getText();
+        modle.Customer customer = new modle.Customer();
+        customer.setNic(text);
+
+        Customer cus = customer.searchCustomerByNic();
+        // upcus = cus;
+        if (cus.getFullName() == null) {
+
+        } else {
+
+        }
+        if (cus != null) {
+            txt_cus_fname.setText(cus.getFullName());
+
+        }
     }
 
     public void loadTreadTypeCombo() {
+        
     }
 
     public void loadNatureCombo() {
@@ -122,7 +201,7 @@ public class ApplicationController implements Initializable {
     }
 
     public pojo.Ward getWardPojo() {
-       
+
         return null;
     }
 

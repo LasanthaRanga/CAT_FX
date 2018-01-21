@@ -4,21 +4,29 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
@@ -104,6 +112,9 @@ public class ApplicationController implements Initializable {
     @FXML
     private StackPane stackPain;
 
+    @FXML
+    private JFXButton btn_send_approve;
+
     pojo.Ward pward = null;
 
     /**
@@ -120,6 +131,7 @@ public class ApplicationController implements Initializable {
         SetDate();
         setApplicationid();
         saveApplication();
+        sendToApprove();
 
     }
 
@@ -415,6 +427,26 @@ public class ApplicationController implements Initializable {
                     modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
                 }
             }
+        });
+    }
+
+    public void sendToApprove() {
+        btn_send_approve.setOnAction((event) -> {
+            System.out.println("Approve");
+            try {
+                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/SendToApprove.fxml"));
+                btn_send_approve.getParent().getScene();
+                Scene scene = new Scene(paymant);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
         });
     }
 

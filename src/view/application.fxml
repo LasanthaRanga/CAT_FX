@@ -35,9 +35,9 @@
       <JFXTextField fx:id="txt_adl2" labelFloat="true" layoutX="766.0" layoutY="365.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 2" />
       <JFXTextField fx:id="txt_adl3" labelFloat="true" layoutX="766.0" layoutY="420.0" prefHeight="25.0" prefWidth="160.0" promptText="Address Line 3" />
       <JFXTextField fx:id="txt_taxt_amount" labelFloat="true" layoutX="1092.0" layoutY="93.0" prefHeight="25.0" prefWidth="150.0" promptText="Tax Amount" />
-      <JFXTextArea fx:id="txt_discription" labelFloat="true" layoutX="926.0" layoutY="177.0" prefHeight="170.0" prefWidth="316.0" promptText="Discription" />
+      <JFXTextArea fx:id="txt_discription" labelFloat="true" layoutX="964.0" layoutY="177.0" prefHeight="170.0" prefWidth="278.0" promptText="Discription" />
       <JFXButton fx:id="btn_save_app" buttonType="RAISED" layoutX="863.0" layoutY="489.0" text="Save" />
-      <JFXButton buttonType="RAISED" layoutX="1081.0" layoutY="489.0" text="Send To Approve" />
+      <JFXButton fx:id="btn_send_approve" buttonType="RAISED" layoutX="1081.0" layoutY="489.0" text="Send To Approve" />
       <StackPane fx:id="stackPain" layoutX="1059.0" layoutY="540.0" prefHeight="80.0" prefWidth="241.0" />
    </children>
 </AnchorPane>

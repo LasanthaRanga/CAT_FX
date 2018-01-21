@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import pojo.Contact;
 import pojo.UserLog;
@@ -355,8 +356,9 @@ public class Customer {
         this.synCon = synCon;
     }
 
-    public void saveCustomer() {
+    public boolean saveCustomer() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
         try {
 
             pojo.Customer cus = new pojo.Customer();
@@ -392,10 +394,13 @@ public class Customer {
             contact.setSyn(1);
 
             session.save(contact);
-            session.beginTransaction().commit();
+            bt.commit();
+            return true;
 
         } catch (Exception e) {
+            bt.rollback();
             e.printStackTrace();
+            return false;
         } finally {
             session.close();
         }

@@ -16,6 +16,7 @@ import pojo.Login;
 public class Log_User {
 
     public static pojo.UserLog getLogUser() {
+        // meka edit karanna one thawa
         pojo.UserLog lu = null;
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
 

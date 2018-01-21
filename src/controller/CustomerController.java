@@ -106,12 +106,7 @@ public class CustomerController implements Initializable {
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
         deactivCustomer();
-//        new AutoCompletionTextFieldBinding(txt_fname, new Callback<AutoCompletionBinding.ISuggestionRequest, Collection>() {
-//            @Override
-//            public Collection call(AutoCompletionBinding.ISuggestionRequest param) {
-//                return Arrays.asList(natureList);
-//            }
-//        });
+
     }
 
     public void loadWard() {
@@ -149,37 +144,42 @@ public class CustomerController implements Initializable {
     }
 
     public void saveCustomer() {
-        btn_add.setOnAction((event) -> {
+        btn_add.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                customer = new Customer();
+                String nic1 = txt_nic.getText();
+                customer.setNic(nic1);
 
-            customer = new Customer();
-            String nic1 = txt_nic.getText();
-            customer.setNic(nic1);
+                Customer searchCustomerByNic = customer.searchCustomerByNic();
+                if (searchCustomerByNic.getFullName() == null) {
 
-            Customer searchCustomerByNic = customer.searchCustomerByNic();
-            if (searchCustomerByNic.getFullName() == null) {
+                    customer.setSelectedWard(selectedWard);
+                    customer.setSelectedStreet(selectedStreet);
+                    customer.setAssesmentNO(txt_assesment.getText());
 
-                customer.setSelectedWard(selectedWard);
-                customer.setSelectedStreet(selectedStreet);
-                customer.setAssesmentNO(txt_assesment.getText());
+                    customer.setFullName(txt_fname.getText());
+                    customer.setAddress1(txt_adress1.getText());
+                    customer.setAddress2(txt_adress2.getText());
+                    customer.setAddress3(txt_adress3.getText());
+                    customer.setCity(txt_city.getText());
 
-                customer.setFullName(txt_fname.getText());
-                customer.setAddress1(txt_adress1.getText());
-                customer.setAddress2(txt_adress2.getText());
-                customer.setAddress3(txt_adress3.getText());
-                customer.setCity(txt_city.getText());
+                    customer.setPhone(txt_phone.getText());
+                    customer.setMobile(txt_mobile.getText());
+                    customer.setEmail(txt_email.getText());
 
-                customer.setPhone(txt_phone.getText());
-                customer.setMobile(txt_mobile.getText());
-                customer.setEmail(txt_email.getText());
+                    boolean saveCustomer = customer.saveCustomer();
 
-                customer.saveCustomer();
+                    if (saveCustomer) {
+                        modle.Allert.notificationGood("Added", customer.getFullName());
+                        cleareCus();
+                    } else {
+                        modle.Allert.notificationError("Error", null);
+                    }
 
-                modle.Allert.messagSuccsess(stakpain, "Saved", "sucsses");
-                cleareCus();
-            } else {
+                } else {
 
-                modle.Allert.messagInfo(stakpain, "Cant Save Again", "NIC is duplicate");
-
+                }
             }
         });
     }

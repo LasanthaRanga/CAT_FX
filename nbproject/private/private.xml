@@ -5,7 +5,9 @@
         <group>
             <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Ward.java</file>
             <file>file:/D:/Techno%20Action/CAT_FX/src/controller/ApplicationController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Aplication.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/WardController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/CustomerController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/NatureController.java</file>
         </group>
     </open-files>
 </project-private>

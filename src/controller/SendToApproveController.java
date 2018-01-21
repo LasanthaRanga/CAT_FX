@@ -13,6 +13,7 @@ import javafx.scene.control.Label;
 import modle.Authority;
 import pojo.Application;
 import pojo.Otheritiscat;
+import pojo.User;
 
 /**
  * FXML Controller class
@@ -35,6 +36,8 @@ public class SendToApproveController implements Initializable {
 
     Authority authority;
     pojo.Otheritiscat outo;
+    String au;
+    pojo.Application app;
 
     /**
      * Initializes the controller class.
@@ -43,7 +46,7 @@ public class SendToApproveController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         authority = new modle.Authority();
         // TODO
-        Application app = modle.StaticBadu.getApp();
+        app = modle.StaticBadu.getApp();
         //System.out.println(app.getIdApplication());
         loadApprovCombo();
         save();
@@ -62,15 +65,23 @@ public class SendToApproveController implements Initializable {
     }
 
     public void getSelected() {
-        String au = com_autho.getSelectionModel().getSelectedItem();
+        au = com_autho.getSelectionModel().getSelectedItem();
         outo = authority.getAuthorityByAuthorityName(au);
     }
 
     public void save() {
         btn_send.setOnAction((event) -> {
-
             getSelected();
-            System.out.println(outo.getCatname());
+            System.out.println("Save");
+            List<Integer> users = new modle.RO().getUsersByAutority(au);
+
+            for (int user : users) {
+                System.out.println(user);
+                
+                
+                
+            }
+
         });
     }
 

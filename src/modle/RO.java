@@ -58,4 +58,28 @@ public class RO {
         }
     }
 
+    public List<Integer> getUsersByAutority(String auto) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria cry = session.createCriteria(pojo.Otheritiscat.class);
+            cry.add(Restrictions.eq("catname", auto));
+            cry.add(Restrictions.eq("statues", 1));
+            Otheritiscat ot = (pojo.Otheritiscat) cry.uniqueResult();
+
+            Criteria cryy = session.createCriteria(pojo.UserHasOtheritiscat.class);
+            List<pojo.UserHasOtheritiscat> list = cryy.add(Restrictions.eq("otheritiscat", ot)).list();
+            ArrayList<Integer> users = new ArrayList<>();
+            for (pojo.UserHasOtheritiscat ol : list) {
+                users.add(ol.getUser().getIdUser());
+            }
+            return users;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

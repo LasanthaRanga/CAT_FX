@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -21,6 +22,7 @@ import javafx.scene.layout.StackPane;
 import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
+import org.controlsfx.control.textfield.TextFields;
 import pojo.TradeNature;
 import pojo.Ward;
 
@@ -257,6 +259,14 @@ public class ApplicationController implements Initializable {
         }
         com_subnature.setItems(subList);
 
+    }
+
+    public void loadRo() { 
+     //   ArrayList list = cus.getCustomerFnameList();
+      //  TextFields.bindAutoCompletion(txt_ro, list);
+        
+        
+        
     }
 
     public void loadNatureCombo() {

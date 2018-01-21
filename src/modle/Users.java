@@ -242,5 +242,5 @@ public class Users implements DAO<pojo.User> {
         } finally {
             session.close();
         }
-    }
+    }  
 }

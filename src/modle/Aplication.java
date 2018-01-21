@@ -5,13 +5,18 @@
  */
 package modle;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+<<<<<<< HEAD
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
+=======
+import org.hibernate.criterion.Restrictions;
+>>>>>>> b7fde0cf0d1aeb4b2f6aaf036645deeed85b083e
 import pojo.Application;
 
 /**
@@ -83,6 +88,7 @@ public class Aplication implements DAO<pojo.Application> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+<<<<<<< HEAD
     public int getLastApllicationID() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -98,9 +104,28 @@ public class Aplication implements DAO<pojo.Application> {
             e.printStackTrace();
             bt.rollback();
             return 0;
+=======
+    public List<pojo.Application> getApprovedApplications(){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+//            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class)
+//                    .add(Restrictions.eq("idUser", u.getIdUser()))
+//                    .uniqueResult());
+            ArrayList<pojo.Application> list=new ArrayList();
+//            for (UserHasCatagory userHasCatagory : user.getUserHasCatagories()) {
+//                list.add(userHasCatagory.getCatagory());
+//            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+>>>>>>> b7fde0cf0d1aeb4b2f6aaf036645deeed85b083e
         } finally {
             session.close();
         }
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> b7fde0cf0d1aeb4b2f6aaf036645deeed85b083e
 }

@@ -16,12 +16,15 @@ import java.util.logging.Logger;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 import modle.Log_User;
+import org.controlsfx.control.Notifications;
 import org.hibernate.Session;
 
 /**
@@ -67,7 +70,7 @@ public class LoginController implements Initializable {
             btn_singin.getParent().getScene();
             Scene scene = new Scene(paymant);
             Stage stage = new Stage();
-            stage.initStyle(StageStyle.TRANSPARENT);
+            //stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -95,7 +98,7 @@ public class LoginController implements Initializable {
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
                 Stage stage = new Stage();
-                stage.initStyle(StageStyle.TRANSPARENT);
+                //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
@@ -104,7 +107,11 @@ public class LoginController implements Initializable {
             }
 
         } else if (b == 0) {
-            System.out.println("*********************NO USER fot this user pass*******************");
+            Notifications.create()
+                    .title("Warning")
+                    .text("Check username and password again.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
         } else if (b > 1) {
             System.out.println("simple USET LOGIN");
             try {
@@ -114,7 +121,7 @@ public class LoginController implements Initializable {
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
                 Stage stage = new Stage();
-                stage.initStyle(StageStyle.TRANSPARENT);
+                //stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {

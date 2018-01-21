@@ -6,7 +6,11 @@ build/built-jar.properties
 dist/CAT_FX.html
 dist/CAT_FX.jar
 dist/CAT_FX.jnlp
+<<<<<<< HEAD
 dist/CAT_FX.jar
 build/built-jar.properties
 build/built-jar.properties
 dist/CAT_FX.jar
+=======
+build/built-jar.properties
+>>>>>>> f51ef1686c06c274ad3477cb3be15571df677898

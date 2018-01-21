@@ -105,6 +105,7 @@ public class ApplicationController implements Initializable {
             List.add(ward.getWardName());
         }
         com_ward.setItems(List);
+        getWardPojo();
     }
 
     public void loadStrretCombo() {
@@ -121,6 +122,7 @@ public class ApplicationController implements Initializable {
     }
 
     public pojo.Ward getWardPojo() {
+       
         return null;
     }
 

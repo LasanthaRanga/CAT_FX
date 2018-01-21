@@ -22,6 +22,7 @@ import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
 import org.controlsfx.control.textfield.TextFields;
+import pojo.Application;
 import pojo.Street;
 import pojo.SubNature;
 import pojo.TradeNature;
@@ -326,6 +327,10 @@ public class ApplicationController implements Initializable {
     pojo.TradeNature pNature;
     pojo.SubNature pSubNature;
     pojo.User pro;
+    pojo.Customer pCustomer;
+
+    public ApplicationController() {
+    }
 
     public void collectData() {
         alocation = txt_allocaton.getText();
@@ -358,16 +363,16 @@ public class ApplicationController implements Initializable {
         pStreet = new modle.Strret().getStreetsByStreetName(streetname);
         pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
         pro = new modle.RO().getRobyRoname(ro);
+        pCustomer = new modle.Customer().searchCustomer(cus_nic, cus_name);
 
     }
 
     public void saveApplication() {
         btn_save_app.setOnAction((event) -> {
             collectData();
-           
-            
-            
-            
+            System.out.println(pCustomer.getFullName());
+            Application app = new pojo.Application();
+
         });
     }
 

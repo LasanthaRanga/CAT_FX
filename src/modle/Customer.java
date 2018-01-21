@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -468,12 +469,17 @@ public class Customer {
 
     }
 
-    public void searchCustomer() {
+    public pojo.Customer searchCustomer(String nic, String fname) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-
+            Criteria cry = session.createCriteria(pojo.Customer.class);
+            cry.add(Restrictions.eq("nic", nic));
+            cry.add(Restrictions.eq("fullName", fname));
+            pojo.Customer name = (pojo.Customer) cry.uniqueResult();
+            return name;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         } finally {
             session.close();
         }

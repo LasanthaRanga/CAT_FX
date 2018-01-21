@@ -363,7 +363,7 @@ public class Customer {
         try {
 
             pojo.Customer cus = new pojo.Customer();
-            cus.setUserLog(modle.Log_User.getLogUser());
+            cus.setUserLog(modle.AuthUser.getUserLog());
             String nic1 = getNic();
 
             if (nic1 == null || nic1.length() < 5) {

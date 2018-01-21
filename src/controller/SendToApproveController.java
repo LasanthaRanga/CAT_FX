@@ -86,6 +86,7 @@ public class SendToApproveController implements Initializable {
                 apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
                 apprualstatues.setStatues(0);
                 apprualstatues.setSyn(1);
+                apprualstatues.setUser(modle.AuthUser.getUser());
 
                 boolean save = new modle.ApplicationStatus().save(apprualstatues);
 

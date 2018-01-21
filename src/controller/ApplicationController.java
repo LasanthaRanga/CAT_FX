@@ -86,32 +86,30 @@ public class ApplicationController implements Initializable {
     @FXML
     private StackPane stackPain;
 
-    public modle.Ward  ward= null;
-    
+    public modle.Ward ward = null;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        loadWardCombo();
+       // loadWardCombo();
         ward = new modle.Ward();
     }
 
     public void loadWardCombo() {
         List<pojo.Ward> loaWards = ward.loadWardTable();
         ObservableList List = FXCollections.observableArrayList();
-
         for (pojo.Ward wa : loaWards) {
             List.add(wa.getWardName());
 
         }
-
         com_ward.setItems(List);
-
-       loadStrretCombo();
+        loadStrretCombo();
     }
 
     public void loadStrretCombo() {
+        
     }
 
     public void loadTreadTypeCombo() {

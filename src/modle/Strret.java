@@ -14,7 +14,7 @@ import pojo.Street;
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class Strret {
+public class Strret implements DAO<pojo.Street> {
 
     /**
      * @return the idStrret
@@ -154,6 +154,71 @@ public class Strret {
         } finally {
             ses.close();
         }
+
+    }
+
+    @Override
+    public boolean save(Street t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean save(List<Street> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(Street t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(List<Street> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(Street t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(List<Street> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(Street t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<Street> getList() {
+        List<pojo.Street> list = null;
+        Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.Ward ward = (pojo.Ward) ses.createCriteria(pojo.Ward.class).add(Restrictions.and(Restrictions.eq("idWard", getIdWard()), Restrictions.eq("status", 1))).uniqueResult();
+            list = ses.createCriteria(pojo.Street.class).add(Restrictions.and(Restrictions.eq("ward", ward), Restrictions.eq("status", 1))).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ses.close();
+        }
+        return list;
+    }
+
+    public List<pojo.Street> getStreetsByWard() {
+        List<pojo.Street> list = null;
+        Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.Ward ward = (pojo.Ward) ses.createCriteria(pojo.Ward.class).add(Restrictions.and(Restrictions.eq("idWard", getIdWard()), Restrictions.eq("status", 1))).uniqueResult();
+            list = ses.createCriteria(pojo.Street.class).add(Restrictions.and(Restrictions.eq("ward", ward), Restrictions.eq("status", 1))).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ses.close();
+        }
+        return list;
 
     }
 

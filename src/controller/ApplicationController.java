@@ -12,6 +12,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
+import pojo.Ward;
 
 /**
  * FXML Controller class
@@ -86,30 +87,28 @@ public class ApplicationController implements Initializable {
     @FXML
     private StackPane stackPain;
 
-    public modle.Ward ward = null;
+    pojo.Ward pward = null;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       // loadWardCombo();
-        ward = new modle.Ward();
+        loadWardCombo();
+
     }
 
     public void loadWardCombo() {
-        List<pojo.Ward> loaWards = ward.loadWardTable();
+        List<Ward> list = new modle.Ward().getList();
         ObservableList List = FXCollections.observableArrayList();
-        for (pojo.Ward wa : loaWards) {
-            List.add(wa.getWardName());
-
+        for (Ward ward : list) {
+            List.add(ward.getWardName());
         }
         com_ward.setItems(List);
-        loadStrretCombo();
     }
 
     public void loadStrretCombo() {
-        
+
     }
 
     public void loadTreadTypeCombo() {

@@ -18,7 +18,7 @@ import pojo.Street;
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class Ward {
+public class Ward implements DAO<pojo.Ward> {
 
     private int idWard;
     private String wardname;
@@ -123,8 +123,8 @@ public class Ward {
             pojo.Ward upWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getWardname())).uniqueResult();
             streets = upWard.getStreets();
             List = FXCollections.observableArrayList();
-            for (Street street : streets) {               
-                    List.add(street.getStreetName());
+            for (Street street : streets) {
+                List.add(street.getStreetName());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -132,6 +132,70 @@ public class Ward {
             session.close();
         }
         return List;
+    }
+
+    @Override
+    public boolean save(pojo.Ward t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean save(List<pojo.Ward> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(pojo.Ward t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(List<pojo.Ward> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(pojo.Ward t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean saveOrUpdate(List<pojo.Ward> list) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean delete(pojo.Ward t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<pojo.Ward> getList() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().commit();
+        List list = null;
+        try {
+            list = session.createCriteria(pojo.Ward.class).add(Restrictions.eq("status", 1)).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return list;
+    }
+
+    public pojo.Ward getWardByWardName(String wardname) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        session.beginTransaction().commit();
+        try {
+            pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", wardname)).uniqueResult();
+            return ward;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
 }

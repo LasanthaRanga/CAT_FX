@@ -188,7 +188,7 @@ public class Nature {
         }
         return upNature;
     }
-    
+
     public pojo.TradeNature getSubNatureByNature(String natureName) {
         System.out.println("mekata awa");
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -205,5 +205,20 @@ public class Nature {
         return upNature;
     }
 
+    public pojo.TradeNature getNatureByNature(String natureName) {
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        pojo.TradeNature upNature = null;
+        try {
+            upNature = (pojo.TradeNature) session.createCriteria(pojo.TradeNature.class).add(Restrictions.eq("nature", natureName)).uniqueResult();
+
+            session.beginTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return upNature;
+    }
 
 }

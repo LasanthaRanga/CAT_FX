@@ -309,19 +309,18 @@ public class ApplicationController implements Initializable {
     String assesno;
     String cus_name;
     String cus_nic;
-    
+
     String wardname;
     String streetname;
     String tradeType;
     String nature;
     String subnature;
-    
+
     pojo.Ward pWard;
     pojo.Street pStreet;
     pojo.TradeType pTradeType;
     pojo.TradeNature pNature;
     pojo.SubNature pSubNature;
-   
 
     public void collectData() {
         alocation = txt_allocaton.getText();
@@ -341,12 +340,16 @@ public class ApplicationController implements Initializable {
 
         wardname = com_ward.getSelectionModel().getSelectedItem();
         streetname = com_street.getSelectionModel().getSelectedItem();
-        tradeType  = com_trade_type.getSelectionModel().getSelectedItem();
+        tradeType = com_trade_type.getSelectionModel().getSelectedItem();
         nature = com_nature.getSelectionModel().getSelectedItem();
         subnature = com_subnature.getSelectionModel().getSelectedItem();
-        
-        
-        
+
+        modle.Ward ward = new modle.Ward();
+        ward.setWardname(wardname);
+        pward = ward.getWardByWardName(wardname);
+
+        Nature natu = new modle.Nature();
+        pNature = natu.getNatureByNature(nature);
         
         
 
@@ -359,33 +362,6 @@ public class ApplicationController implements Initializable {
             System.out.println(day + "day");
         });
 
-    }
-
-    public void loadNatureCombo() {
-    }
-
-    public void loadSubCombo() {
-    }
-
-    public pojo.Ward getWardPojo() {
-
-        return null;
-    }
-
-    public pojo.Street getStrretPojo() {
-        return null;
-    }
-
-    public pojo.Ward getTradTypePojo() {
-        return null;
-    }
-
-    public pojo.Ward getNaturePojo() {
-        return null;
-    }
-
-    public pojo.Ward getSubNaturePojo() {
-        return null;
     }
 
 }

@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -16,17 +15,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
 import org.controlsfx.control.textfield.TextFields;
 import pojo.TradeNature;
-import pojo.User;
 import pojo.Ward;
 
 /**

@@ -31,6 +31,7 @@ public class Aplication implements DAO<pojo.Application> {
         Transaction bt = session.beginTransaction();
         try {
             session.save(t);
+            bt.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();

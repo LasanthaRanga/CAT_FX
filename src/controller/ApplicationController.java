@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -314,6 +315,7 @@ public class ApplicationController implements Initializable {
     String assesno;
     String cus_name;
     String cus_nic;
+    Date apdat;
 
     String wardname;
     String streetname;
@@ -343,6 +345,13 @@ public class ApplicationController implements Initializable {
         year = txt_year.getText();
         month = txt_month.getText();
         day = txt_day.getText();
+
+        try {
+            apdat = new SimpleDateFormat("yyyy-MM-dd").parse(year + "-" + month + "-" + day);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         ro = txt_ro.getText();
         assesno = txt_assesmantNO.getText();
         cus_name = txt_cus_fname.getText();
@@ -368,11 +377,44 @@ public class ApplicationController implements Initializable {
     }
 
     public void saveApplication() {
-        btn_save_app.setOnAction((event) -> {
-            collectData();
-            System.out.println(pCustomer.getFullName());
-            Application app = new pojo.Application();
+        btn_save_app.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                collectData();
+                //  System.out.println(pCustomer.getFullName());
+                Application app = new pojo.Application();
+                app.setCustomer(pCustomer);
+                app.setSubNature(pSubNature);
+                app.setTradeNature(pNature);
 
+                app.setTradeType(pTradeType);
+                app.setUser(pro);
+                //log wela inna user
+                app.setUserLog(modle.Log_User.getLogUser());
+
+                app.setApplicationDate(apdat);
+                app.setYear(Integer.parseInt(year));
+                app.setMonth(Integer.parseInt(month));
+                app.setAllocation(Double.parseDouble(alocation));
+
+                app.setTradeName(tradeNaem);
+                app.setTradeAddress1(adl1);
+                app.setTradeAddress2(adl2);
+                app.setTradeAddress3(adl3);
+
+                app.setTaxAmount(Double.parseDouble(txtAmount));
+                app.setDiscription(discription);
+                app.setStatues(1);
+                app.setSyn(1);
+
+                boolean save = new modle.Aplication().save(app);
+
+                if (save) {
+                    modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
+                } else {
+                    modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+                }
+            }
         });
     }
 

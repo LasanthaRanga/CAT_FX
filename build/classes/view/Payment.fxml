@@ -24,7 +24,7 @@
             <TableColumn prefWidth="131.0" text="Application Date" />
         </columns>
       </TableView>
-      <Label layoutX="54.0" layoutY="84.0" text="ApprovedApplicationList">
+      <Label layoutX="54.0" layoutY="84.0" text="Approved ApplicationList">
          <font>
             <Font size="16.0" />
          </font>

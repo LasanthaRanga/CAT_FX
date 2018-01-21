@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 20, 2018 9:51:39 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 21, 2018 11:23:11 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.UserHasDepartment" table="user_has_department" catalog="cat" optimistic-lock="version">
         <id name="idUserHasDepartment" type="java.lang.Integer">
@@ -14,9 +14,6 @@
         <many-to-one name="user" class="pojo.User" fetch="select">
             <column name="User_idUser" not-null="true" />
         </many-to-one>
-        <property name="statues" type="java.lang.Integer">
-            <column name="statues" />
-        </property>
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>

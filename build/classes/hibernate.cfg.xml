@@ -59,8 +59,8 @@ Contributor(s):
     <mapping resource="pojo/Contact.hbm.xml"/>
     <mapping resource="pojo/UserHasCatagory.hbm.xml"/>
     <mapping resource="pojo/BankInfo.hbm.xml"/>
-    <mapping resource="pojo/Vort.hbm.xml"/>
     <mapping resource="pojo/CustomerHasAssessment.hbm.xml"/>
+    <mapping resource="pojo/Vort.hbm.xml"/>
     <mapping resource="pojo/Street.hbm.xml"/>
     <mapping resource="pojo/SubNature.hbm.xml"/>
     <mapping resource="pojo/Application.hbm.xml"/>

@@ -18,6 +18,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import modle.ApplicationStatus;
 import modle.Authority;
 import pojo.Application;
 import pojo.Apprualstatues;
@@ -44,19 +46,19 @@ public class SendToApproveController implements Initializable {
     private JFXButton btn_done;
 
     @FXML
-    private TableView<?> tbl_approve;
+    private TableView<approve> tbl_approve;
 
     @FXML
-    private TableColumn<?, ?> col_id;
+    private TableColumn<approve, Integer> col_id;
 
     @FXML
-    private TableColumn<?, ?> col_approve_by;
+    private TableColumn<approve, String> col_approve_by;
 
     @FXML
-    private TableColumn<?, ?> col_statues;
+    private TableColumn<approve, Integer> col_statues;
 
     @FXML
-    private TableColumn<?, ?> col_date;
+    private TableColumn<approve, String> col_date;
 
     Authority authority;
     pojo.Otheritiscat outo;
@@ -75,6 +77,7 @@ public class SendToApproveController implements Initializable {
         lbl_idApplication.setText(app.getIdApplication().toString());
         loadApprovCombo();
         save();
+        loadTable();
     }
 
     public void loadApprovCombo() {
@@ -112,6 +115,7 @@ public class SendToApproveController implements Initializable {
 
                 if (save) {
                     modle.Allert.notificationGood("Send To", au);
+                    loadTable();
                 } else {
                     modle.Allert.notificationError("error", au);
                 }
@@ -161,21 +165,23 @@ public class SendToApproveController implements Initializable {
         }
 
     }
- ObservableList natureList = FXCollections.observableArrayList();
+    ObservableList natureList = FXCollections.observableArrayList();
 
-//    public void loadTable() {
-//         col_idNature.setCellValueFactory(new PropertyValueFactory<>("nid"));
-//        col_nature.setCellValueFactory(new PropertyValueFactory<>("nname"));
-//        col_nature_no.setCellValueFactory(new PropertyValueFactory<>("nno"));
-//
-//        Nature tn = new modle.Nature();
-//        tn.setTradeType(new modle.TradeType().loadTreadType(tt));
-//        List<TradeNature> nlist = tn.getNaturesList();
-//        natureList.clear();
-//        for (pojo.TradeNature tnn : nlist) {
-//            natureList.add(new NatureTbl(tnn.getIdTradeNature(), tnn.getNature(), tnn.getNatureNo()));
-//        }
-//        tbl_nature.setItems(natureList);
-//    }
+    public void loadTable() {
+        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_approve_by.setCellValueFactory(new PropertyValueFactory<>("autho"));
+        col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
+
+        ApplicationStatus applicationStatus = new modle.ApplicationStatus();
+        List<Apprualstatues> list = applicationStatus.getListByApplication(app);
+       
+        
+        natureList.clear();
+        for (pojo.Apprualstatues tnn : list) {
+            natureList.add(new approve(tnn.getIdApprualStatues(), tnn.getStatues(), tnn.getIdOtheritisCat()+"", tnn.getDate()));
+        }
+        tbl_approve.setItems(natureList);
+    }
 
 }

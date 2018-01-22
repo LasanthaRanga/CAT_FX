@@ -149,10 +149,19 @@ public class TradeLicen implements DAO<pojo.TradeLicense>{
     public int getNextTradeLicenNo(){
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            session.createCriteria(pojo.TradeLicense.class).setMaxResults(1).addOrder(Order.desc("id")).list();
+            List<pojo.TradeLicense> list = session.createCriteria(pojo.TradeLicense.class).setMaxResults(1).addOrder(Order.desc("idTradeLicense")).list();
+            if(list.size()>0){
+                try {
+                    return Integer.parseInt(list.get(0).getLicenNo());
+                } catch (Exception e) {
+                    return -1;
+                }
+            }else{
+                return 1;
+            }
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return -1;
         } finally {
             session.close();
         }

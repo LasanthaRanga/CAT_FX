@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -21,6 +22,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -114,6 +116,9 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private JFXButton btn_send_approve;
+    
+    @FXML
+    public static Label lbl_idCus;
 
     pojo.Ward pward = null;
 
@@ -132,7 +137,41 @@ public class ApplicationController implements Initializable {
         setApplicationid();
         saveApplication();
         sendToApprove();
+        Customer cus = new modle.Customer();
+        ArrayList list = cus.getCustomerFnameList();
+        TextFields.bindAutoCompletion(txt_cus_fname, list);
 
+    }
+
+    @FXML
+    public void loadCusByFullname(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER GEHUWAA");
+            String fname = txt_cus_fname.getText();
+            modle.StaticBadu.setCus_fullname(fname);
+
+            List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
+            modle.StaticBadu.setCuslist(searchCustomer);
+
+            if (searchCustomer.size() > 1) {
+                if (searchCustomer != null) {
+                    try {
+                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                        txt_cus_fname.getParent().getScene();
+                        Scene scene = new Scene(paymant);
+                        Stage stage = new Stage();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.show();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            }
+
+        }
     }
 
     public void loadWardCombo() {
@@ -447,7 +486,7 @@ public class ApplicationController implements Initializable {
                 ex.printStackTrace();
                 Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         });
     }
 

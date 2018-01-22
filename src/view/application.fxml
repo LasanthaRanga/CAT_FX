@@ -23,7 +23,7 @@
       <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="392.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Nature" />
       <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="392.0" layoutY="183.0" prefHeight="25.0" prefWidth="150.0" promptText="Trade Sub Nature" />
       <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="183.0" layoutY="243.0" onKeyReleased="#nicCheack" prefHeight="25.0" prefWidth="150.0" promptText="Customer NIC" />
-      <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="183.0" layoutY="306.0" prefHeight="25.0" prefWidth="150.0" promptText="Customer Name" />
+      <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="183.0" layoutY="306.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="150.0" promptText="Customer Name" />
       <JFXTextField fx:id="txt_ro" labelFloat="true" layoutX="392.0" layoutY="237.0" prefHeight="25.0" prefWidth="150.0" promptText="RO" />
       <JFXTextField fx:id="txt_aplicaton_No" labelFloat="true" layoutX="766.0" layoutY="80.0" prefHeight="25.0" prefWidth="160.0" promptText="Aplication NO." />
       <JFXTextField fx:id="txt_year" labelFloat="true" layoutX="392.0" layoutY="302.0" prefHeight="25.0" prefWidth="52.0" promptText="Year" />
@@ -39,5 +39,6 @@
       <JFXButton fx:id="btn_save_app" buttonType="RAISED" layoutX="863.0" layoutY="489.0" text="Save" />
       <JFXButton fx:id="btn_send_approve" buttonType="RAISED" layoutX="1081.0" layoutY="489.0" text="Send To Approve" />
       <StackPane fx:id="stackPain" layoutX="1059.0" layoutY="540.0" prefHeight="80.0" prefWidth="241.0" />
+      <Label fx:id="lbl_idCus" layoutX="115.0" layoutY="310.0" prefHeight="17.0" prefWidth="52.0" text="0000" />
    </children>
 </AnchorPane>

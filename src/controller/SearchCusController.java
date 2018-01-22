@@ -152,8 +152,7 @@ public class SearchCusController implements Initializable {
         customer.setIdCustomer(idCus);
 
         modle.StaticBadu.setpCustomer(customer.getById(idCus));
-        controller.CustomerController.selectPcus = customer.getById(idCus);
-
+        controller.CustomerController.selectPcus = customer.getById(idCus);        
         btn_get.getScene().getWindow().hide();
 
     }

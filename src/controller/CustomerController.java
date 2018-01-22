@@ -22,6 +22,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -88,6 +89,8 @@ public class CustomerController implements Initializable {
 
     @FXML
     private JFXButton btn_aplication;
+
+    
 
     modle.Ward ward = null;
     modle.Customer customer = null;

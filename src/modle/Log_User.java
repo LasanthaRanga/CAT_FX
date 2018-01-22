@@ -5,6 +5,7 @@
  */
 package modle;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 import org.hibernate.Session;
@@ -69,18 +70,13 @@ public class Log_User {
                 Integer idUser = log.getUser().getIdUser();
 
                 Set<UserHasOtheritiscat> userHasOtheritiscats = AuthUser.getUser().getUserHasOtheritiscats();
-
+                ArrayList<UserCat> ucs = new ArrayList<UserCat>();
                 if (userHasOtheritiscats != null) {
-                    for (UserHasOtheritiscat userHasOtheritiscat : userHasOtheritiscats) {
-                        System.out.println(userHasOtheritiscat.getOtheritiscat().getCatname());
-
+                    for (UserHasOtheritiscat uho : userHasOtheritiscats) {
+                        ucs.add(new UserCat(uho.getOtheritiscat().getIdOtheritisCat(), uho.getOtheritiscat().getCatname()));
                     }
-                } else {
-
                 }
-
-               
-                
+                AuthUser.setUserCats(ucs);
                 return idUser;
 
             } else {

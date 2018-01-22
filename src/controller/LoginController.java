@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -26,6 +27,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import modle.AuthUser;
 import modle.Log_User;
+import modle.UserCat;
 import org.controlsfx.control.Notifications;
 import org.hibernate.Session;
 import pojo.UserHasOtheritiscat;
@@ -116,22 +118,41 @@ public class LoginController implements Initializable {
                     .position(Pos.BOTTOM_RIGHT).showWarning();
         } else if (b > 1) {
 
-            
+            List<UserCat> userCats = AuthUser.getUserCats();
+            if (userCats.size() == 0) {
+                try {
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
 
-            System.out.println("simple USET LOGIN");
-            try {
-                btn_singin.getParent().getScene().getWindow().hide();
-                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
-                btn_singin.getParent().getScene();
-                Scene scene = new Scene(paymant);
-                Stage stage = new Stage();
-                //stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+            } else if (userCats.size() == 1) {
+                try {
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/authoritist.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                System.out.println("User Cat Godai");
             }
+
         }
 
     }

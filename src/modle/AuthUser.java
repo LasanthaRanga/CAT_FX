@@ -47,4 +47,18 @@ public class AuthUser {
     public static void setUserLog(pojo.UserLog aUserLog) {
         userLog = aUserLog;
     }
+
+    /**
+     * @return the userCats
+     */
+    public static List<UserCat> getUserCats() {
+        return userCats;
+    }
+
+    /**
+     * @param aUserCats the userCats to set
+     */
+    public static void setUserCats(List<UserCat> aUserCats) {
+        userCats = aUserCats;
+    }
 }

@@ -38,9 +38,13 @@ public class UserCat {
     public void setOthoname(String othoname) {
         this.othoname = othoname;
     }
-    
+
     private int othoid;
-    private String othoname;   
-   
-    
+    private String othoname;
+
+    public UserCat(int othoid, String othoname) {
+        this.othoid = othoid;
+        this.othoname = othoname;
+    }
+
 }

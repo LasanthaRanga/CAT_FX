@@ -3,8 +3,24 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/D:/Techno%20Action/CAT_FX/src/controller/SendToApproveController.java</file>
             <file>file:/D:/Techno%20Action/CAT_FX/src/controller/NatureController.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/ApplicationController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/Admin_user_updateController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/PaymentController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Aplication.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/Application.java</file>
+=======
+            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Customer.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/PaymentController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Log_User.java</file>
+>>>>>>> 366c43e84f32c326421bb21c6289145fbe05a7b8
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/LoginController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/ApplicationStatus.java</file>
+>>>>>>> 21a0aab963b1bfe652001bce3dc4444b5b27deed
         </group>
     </open-files>
 </project-private>

@@ -16,7 +16,6 @@
             <TableColumn fx:id="c_nature" prefWidth="75.0" text="Nature" />
             <TableColumn fx:id="c_alocation" prefWidth="75.0" text="Alocaion" />
             <TableColumn fx:id="c_tax" prefWidth="75.0" text="Tax" />
-            <TableColumn fx:id="c_tname" prefWidth="75.0" text="Trade Name" />
             <TableColumn fx:id="c_approve" prefWidth="132.0" text="Approve To Paymant" />
         </columns>
       </TableView>

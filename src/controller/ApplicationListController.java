@@ -18,6 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import modle.Aplication;
 import modle.ApplicationStatus;
 
 /**
@@ -28,28 +29,25 @@ import modle.ApplicationStatus;
 public class ApplicationListController implements Initializable {
 
     @FXML
-    private TableView<?> tbl_applicaion;
+    private TableView<AppTbl> tbl_applicaion;
 
     @FXML
-    private TableColumn<?, ?> c_idApp;
+    private TableColumn<AppTbl, Integer> c_idApp;
 
     @FXML
-    private TableColumn<?, ?> c_type;
+    private TableColumn<AppTbl, String> c_type;
 
     @FXML
-    private TableColumn<?, ?> c_nature;
+    private TableColumn<AppTbl, String> c_nature;
 
     @FXML
-    private TableColumn<?, ?> c_alocation;
+    private TableColumn<AppTbl, Double> c_alocation;
 
     @FXML
-    private TableColumn<?, ?> c_tax;
+    private TableColumn<AppTbl, Double> c_tax;
 
     @FXML
-    private TableColumn<?, ?> c_tname;
-
-    @FXML
-    private TableColumn<?, ?> c_approve;
+    private TableColumn<AppTbl, String> c_approve;
 
     /**
      * Initializes the controller class.
@@ -58,75 +56,129 @@ public class ApplicationListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-    
-    
-    
-    public class App {
 
-        /**
-         * @return the id
-         */
-        public int getId() {
-            return id;
+    public class AppTbl {
+
+        public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp) {
+            this.appno = appno;
+            this.Type = new SimpleStringProperty(Type);
+            this.nature = new SimpleStringProperty(nature);
+            this.alocation = alocation;
+            this.txt = txt;
+            this.payapp = payapp;
         }
 
         /**
-         * @return the statues
+         * @return the appno
          */
-        public String getStatues() {
-            if (statues == 0) {
-                return "Pending";
-            } else if (statues == 1) {
-                return "approve";
-            } else if (statues == 2) {
-                return "Non Approve";
+        public int getAppno() {
+            return appno;
+        }
+
+        /**
+         * @param appno the appno to set
+         */
+        public void setAppno(int appno) {
+            this.appno = appno;
+        }
+
+        /**
+         * @return the Type
+         */
+        public String getType() {
+            return Type.get();
+        }
+
+        /**
+         * @param Type the Type to set
+         */
+        public void setType(SimpleStringProperty Type) {
+            this.Type = Type;
+        }
+
+        /**
+         * @return the nature
+         */
+        public String getNature() {
+            return nature.get();
+        }
+
+        /**
+         * @param nature the nature to set
+         */
+        public void setNature(SimpleStringProperty nature) {
+            this.nature = nature;
+        }
+
+        /**
+         * @return the alocation
+         */
+        public Double getAlocation() {
+            return alocation;
+        }
+
+        /**
+         * @param alocation the alocation to set
+         */
+        public void setAlocation(Double alocation) {
+            this.alocation = alocation;
+        }
+
+        /**
+         * @return the txt
+         */
+        public Double getTxt() {
+            return txt;
+        }
+
+        /**
+         * @param txt the txt to set
+         */
+        public void setTxt(Double txt) {
+            this.txt = txt;
+        }
+
+        /**
+         * @return the payapp
+         */
+        public String getPayapp() {
+            if (payapp == 1) {
+                return "Approve";
             } else {
-                return null;
+                return "Non Approve";
             }
-
         }
 
         /**
-         * @return the autho
+         * @param payapp the payapp to set
          */
-        public String getAutho() {
-            return autho.get();
+        public void setPayapp(int payapp) {
+            this.payapp = payapp;
         }
 
-        /**
-         * @return the date
-         */
-        public String getDate() {
-            return date.get();
-        }
-        private int id;
-        private int statues;
-        private SimpleStringProperty autho;
-        private SimpleStringProperty date;
-
-        
+        private int appno;
+        private SimpleStringProperty Type;
+        private SimpleStringProperty nature;
+        private Double alocation;
+        private Double txt;
+        private int payapp;
 
     }
-    ObservableList natureList = FXCollections.observableArrayList();
+
+    ObservableList appList = FXCollections.observableArrayList();
 
     public void loadTable() {
-//        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        col_approve_by.setCellValueFactory(new PropertyValueFactory<>("autho"));
-//        col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
-//        col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
-//
-//        ApplicationStatus applicationStatus = new modle.ApplicationStatus();
-//        List<modle.Approve> list = applicationStatus.getListByApplication(app);
-//
-//        natureList.clear();
-//        for (modle.Approve tnn : list) {
-//            natureList.add(new approve(tnn.getIdApprove(), tnn.getStatues(), tnn.getOutherCatName(), tnn.getDate()));
-//        }
-//        tbl_approve.setItems(natureList);
-    }
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
+        c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
+        c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
+        c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
 
-    
-    
-    
+        Aplication aplication = new modle.Aplication();
+        List<modle.AppTbl> appTbls = aplication.getAppListToTable();
+
+        appList.addAll(appTbls);
+    }
 
 }

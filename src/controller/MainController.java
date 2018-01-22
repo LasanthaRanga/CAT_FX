@@ -88,6 +88,7 @@ public class MainController implements Initializable {
             AnchorPane nature = FXMLLoader.load(getClass().getResource("/view/nature.fxml"));
             AnchorPane customer = FXMLLoader.load(getClass().getResource("/view/customer.fxml"));
             AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
+            AnchorPane applist = FXMLLoader.load(getClass().getResource("/view/ApplicationList.fxml"));
           
             AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
             drawer.setSidePane(box);
@@ -103,6 +104,7 @@ public class MainController implements Initializable {
                         container.getChildren().removeAll(customer);
                         container.getChildren().removeAll(aplication);                      
                         container.getChildren().removeAll(paymant);
+                        container.getChildren().removeAll(applist);
                         switch (accessibleText) {
 
                             case "btn_test1":
@@ -121,6 +123,10 @@ public class MainController implements Initializable {
                                 container.getChildren().add(aplication);
                                 break;
 
+                            case "applist":
+                                container.getChildren().add(applist);
+                                break;
+                                
                             case "payment":
                                 container.getChildren().add(paymant);
                                 break;

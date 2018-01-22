@@ -142,4 +142,22 @@ public class Aplication implements DAO<pojo.Application> {
             return null;
         }
     }
+
+    public List<modle.AppTbl> getAppListToTable() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+
+            for (Application application : list) {
+                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

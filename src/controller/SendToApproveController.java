@@ -78,6 +78,11 @@ public class SendToApproveController implements Initializable {
         loadApprovCombo();
         save();
         loadTable();
+
+        btn_done.setOnAction((event) -> {
+            btn_done.getParent().getScene().getWindow().hide();
+        });
+
     }
 
     public void loadApprovCombo() {

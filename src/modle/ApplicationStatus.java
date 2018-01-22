@@ -92,6 +92,7 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
 
             return appl;
         } catch (Exception e) {
+            System.out.println("++++++++++++++++++++");
             e.printStackTrace();
             bt.rollback();
             return null;

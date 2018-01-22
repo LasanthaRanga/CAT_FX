@@ -1,9 +1,11 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,9 +16,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -26,6 +30,8 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pojo.Application;
 import pojo.Customer;
+import pojo.Payment;
+import pojo.TradeLicense;
 
 /**
  * FXML Controller class
@@ -82,6 +88,20 @@ public class PaymentController implements Initializable {
     private JFXTextField txt_stamp_amount;
     @FXML
     private JFXTextField txt_total_amount;
+    @FXML
+    private JFXTextField txt_receipt_no;
+    @FXML
+    private CheckBox chb_cash;
+    @FXML
+    private CheckBox chb_check;
+    @FXML
+    private JFXTextField txt_cheque_no;
+    @FXML
+    private JFXDatePicker txt_cheque_date;
+    @FXML
+    private JFXTextField txt_pay_amount_cash;
+    @FXML
+    private JFXTextField txt_pay_amount_cheque;
 
     /**
      * Initializes the controller class.
@@ -156,6 +176,105 @@ public class PaymentController implements Initializable {
 
     @FXML
     private void paynow(MouseEvent event) {
+        Application application = tbl_approved_list.getSelectionModel().getSelectedItem();
+        if (application != null) {
+            boolean cash = chb_cash.isSelected();
+            boolean cheque = chb_check.isSelected();
+            if (cash || cheque) {
+                try {
+                    boolean status = true;
+
+                    Payment payment = new pojo.Payment();
+                    TradeLicense tradeLicense = new pojo.TradeLicense();
+
+                    application.getTradeLicenses().add(tradeLicense);
+                    tradeLicense.setApplication(application);
+                    tradeLicense.setPayment(payment);
+                    payment.getTradeLicenses().add(tradeLicense);
+
+                    // cash
+                    if (cash) {
+                        String cash_amount = txt_pay_amount_cash.getText();
+                        if (!cash_amount.isEmpty()) {
+
+                        } else {
+                            status = false;
+                            Notifications.create()
+                                    .title("Warning")
+                                    .text("Please enter amount.")
+                                    .hideAfter(Duration.seconds(3))
+                                    .position(Pos.BOTTOM_RIGHT).showWarning();
+                        }
+                    }
+
+                    if (cheque) {
+
+                    }
+
+                    if (status) {
+                        if (!txt_total_amount.getText().isEmpty()) {
+                            payment.setPaymentDate(new Date());
+                            payment.setApplicationNo(application.getIdApplication());
+                            payment.setYear(application.getYear());
+                            payment.setMonth(application.getMonth());
+                            payment.setTaxAmount(Double.parseDouble(txt_tax_amount.getText()));
+                            // vat
+                            if (!txt_vat_amount.getText().isEmpty()) {
+                                payment.setVat(Double.parseDouble(txt_vat_amount.getText()));
+                            } else {
+                                payment.setVat(0.0);
+                            }
+                            // nbt
+                            if (!txt_nbt_amount.getText().isEmpty()) {
+                                payment.setNbt(Double.parseDouble(txt_nbt_amount.getText()));
+                            } else {
+                                payment.setNbt(0.0);
+                            }
+                            // stamp
+                            if (!txt_stamp_amount.getText().isEmpty()) {
+                                payment.setSpamp(Double.parseDouble(txt_stamp_amount.getText()));
+                            } else {
+                                payment.setSpamp(0.0);
+                            }
+                            payment.setTotaleAmount(Double.parseDouble(txt_total_amount.getText()));
+                            payment.setStatus(1);
+                            payment.setSyn(1);
+                            payment.setUserLog(modle.Log_User.getLogUser());
+                            
+                            tradeLicense.setTradeLicenseDate(new Date());
+                            tradeLicense.setStatus(1);
+                            tradeLicense.setSyn(1);
+                            
+                        } else {
+                            Notifications.create()
+                                    .title("Warning")
+                                    .text("Not found total.")
+                                    .hideAfter(Duration.seconds(3))
+                                    .position(Pos.BOTTOM_RIGHT).showWarning();
+                        }
+                    }
+
+                } catch (NumberFormatException e) {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Please enter valid number.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            } else {
+                Notifications.create()
+                        .title("Warning")
+                        .text("Please select payment type.")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT).showWarning();
+            }
+        } else {
+            Notifications.create()
+                    .title("Warning")
+                    .text("Not found application.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
+        }
     }
 
     @FXML
@@ -181,12 +300,12 @@ public class PaymentController implements Initializable {
 
     private void setTotal() {
         try {
-            double total=0.0;
-            total+=Double.parseDouble(txt_tax_amount.getText());
-            total+=Double.parseDouble(txt_vat_amount.getText());
-            total+=Double.parseDouble(txt_nbt_amount.getText());
-            total+=Double.parseDouble(txt_stamp_amount.getText());
-            txt_total_amount.setText(total+"");
+            double total = 0.0;
+            total += Double.parseDouble(txt_tax_amount.getText());
+            total += Double.parseDouble(txt_vat_amount.getText());
+            total += Double.parseDouble(txt_nbt_amount.getText());
+            total += Double.parseDouble(txt_stamp_amount.getText());
+            txt_total_amount.setText(total + "");
         } catch (NumberFormatException numberFormatException) {
             Notifications.create()
                     .title("Warning")
@@ -197,8 +316,45 @@ public class PaymentController implements Initializable {
     }
 
     @FXML
-    private void txtChange(InputMethodEvent event) {
-        System.out.println("asdasd");
+    private void taxAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void vatAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void nbtAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void stampAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void cashClicked(MouseEvent event) {
+        if (chb_cash.isSelected()) {
+            txt_pay_amount_cash.setDisable(false);
+        } else {
+            txt_pay_amount_cash.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void chequeClicked(ContextMenuEvent event) {
+        if (chb_check.isSelected()) {
+            txt_cheque_no.setDisable(false);
+            txt_cheque_date.setDisable(false);
+            txt_pay_amount_cheque.setDisable(false);
+        } else {
+            txt_pay_amount_cheque.setDisable(true);
+            txt_cheque_no.setDisable(true);
+            txt_cheque_date.setDisable(true);
+        }
     }
 
 }

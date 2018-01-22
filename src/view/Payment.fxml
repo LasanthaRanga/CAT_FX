@@ -33,7 +33,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="481.0" layoutY="77.0" prefHeight="461.0" prefWidth="242.0" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="77.0">
+      <VBox layoutX="481.0" layoutY="77.0" prefHeight="461.0" prefWidth="242.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label text="Application Details" />
             <JFXTextField fx:id="txt_application_no" editable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="204.0" promptText="Application No" />
@@ -70,7 +70,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="757.0" layoutY="77.0" prefHeight="289.0" prefWidth="287.0" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
+      <VBox layoutX="757.0" layoutY="77.0" prefHeight="289.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label layoutX="10.0" layoutY="50.0" text="TAX" />
             <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount" />
@@ -87,8 +87,11 @@
             <Label layoutX="10.0" layoutY="181.0" text="Total" />
             <JFXTextField fx:id="txt_total_amount" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount" />
          </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
       </VBox>
-      <HBox layoutX="481.0" layoutY="565.0" prefHeight="40.0" prefWidth="242.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="481.0">
+      <HBox layoutX="481.0" layoutY="565.0" prefHeight="40.0" prefWidth="242.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="481.0">
          <children>
             <JFXButton fx:id="btn_reset" onMouseClicked="#reset" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #ef5350;" text="Reset" textFill="WHITE">
                <font>
@@ -100,17 +103,12 @@
             <Insets top="5.0" />
          </padding>
       </HBox>
-      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="422.0" style="-fx-border-color: #f5f5f5;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
+      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="422.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
          <children>
-            <HBox prefHeight="46.0" prefWidth="422.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="81.0" text="Receipt No." />
-                  <JFXTextField fx:id="txt_receipt_no" alignment="BOTTOM_RIGHT" editable="false" prefHeight="25.0" prefWidth="158.0" promptText="Receipt Number" />
-               </children>
-            </HBox>
-            <HBox prefHeight="26.0" prefWidth="422.0" spacing="9.0">
+            <HBox prefHeight="26.0" prefWidth="422.0" spacing="10.0">
                <children>
                   <CheckBox fx:id="chb_cash" mnemonicParsing="false" onMouseClicked="#cashClicked" selected="true" text="Cash" />
+                  <Region prefHeight="19.0" prefWidth="136.0" />
                   <CheckBox fx:id="chb_check" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onContextMenuRequested="#chequeClicked" text="Cheque" />
                </children>
                <padding>

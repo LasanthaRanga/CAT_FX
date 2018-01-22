@@ -26,7 +26,7 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
-        <set name="customerHasTradeLicenses" table="customer_has_trade_license" inverse="true" lazy="true" fetch="select">
+        <set name="customerHasTradeLicenses" table="customer_has_trade_license" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="Trade_License_idTrade_License" not-null="true" />
             </key>

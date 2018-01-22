@@ -5,7 +5,9 @@
  */
 package modle;
 
+import java.util.ArrayList;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -76,6 +78,7 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
+            ArrayList<Object> arrayList = new ArrayList<>();
             Criteria cry = session.createCriteria(pojo.Apprualstatues.class);
             List list = cry.add(Restrictions.eq("application", app)).list();
             return list;
@@ -88,5 +91,11 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
         }
 
     }
+    
+    
+    
+    
+    
+    
 
 }

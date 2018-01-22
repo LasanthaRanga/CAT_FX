@@ -4,7 +4,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -55,7 +55,7 @@ public class SendToApproveController implements Initializable {
     private TableColumn<approve, String> col_approve_by;
 
     @FXML
-    private TableColumn<approve, Integer> col_statues;
+    private TableColumn<approve, String> col_statues;
 
     @FXML
     private TableColumn<approve, String> col_date;
@@ -135,8 +135,17 @@ public class SendToApproveController implements Initializable {
         /**
          * @return the statues
          */
-        public int getStatues() {
-            return statues;
+        public String getStatues() {
+            if (statues == 0) {
+                return "Pending";
+            } else if (statues == 1) {
+                return "approve";
+            } else if (statues == 2) {
+                return "Non Approve";
+            } else {
+                return null;
+            }
+
         }
 
         /**
@@ -175,11 +184,10 @@ public class SendToApproveController implements Initializable {
 
         ApplicationStatus applicationStatus = new modle.ApplicationStatus();
         List<Apprualstatues> list = applicationStatus.getListByApplication(app);
-       
-        
+
         natureList.clear();
         for (pojo.Apprualstatues tnn : list) {
-            natureList.add(new approve(tnn.getIdApprualStatues(), tnn.getStatues(), tnn.getIdOtheritisCat()+"", tnn.getDate()));
+            natureList.add(new approve(tnn.getIdApprualStatues(), tnn.getStatues(), tnn.getIdOtheritisCat() + "", tnn.getDate()));
         }
         tbl_approve.setItems(natureList);
     }

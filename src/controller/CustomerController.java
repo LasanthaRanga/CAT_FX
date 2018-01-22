@@ -92,6 +92,7 @@ public class CustomerController implements Initializable {
     modle.Ward ward = null;
     modle.Customer customer = null;
     modle.CustomerHasAssesment cha = null;
+    static pojo.Customer selectPcus = null;
 
     /**
      * Initializes the controller class.
@@ -128,7 +129,6 @@ public class CustomerController implements Initializable {
 
             if (searchCustomer.size() > 1) {
                 if (searchCustomer != null) {
-
                     try {
                         AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
                         txt_fname.getParent().getScene();
@@ -137,7 +137,6 @@ public class CustomerController implements Initializable {
                         stage.initStyle(StageStyle.TRANSPARENT);
                         stage.setScene(scene);
                         stage.show();
-
                     } catch (IOException ex) {
                         ex.printStackTrace();
                         Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
@@ -333,7 +332,9 @@ public class CustomerController implements Initializable {
     public void updateCustomer() {
 
         btn_update.setOnAction((event) -> {
-
+            if (selectPcus != null) {
+                upcus.setIdCustomer(selectPcus.getIdCustomer());
+            }
             upcus.setFullName(txt_fname.getText());
             upcus.setNic(txt_nic.getText());
             upcus.setAddress1(txt_adress1.getText());
@@ -372,7 +373,9 @@ public class CustomerController implements Initializable {
 
     public void deactivCustomer() {
         btn_delete.setOnAction((event) -> {
-
+            if (selectPcus != null) {
+                upcus.setIdCustomer(selectPcus.getIdCustomer());
+            }
             upcus.deactiveCustomer();
             upcus = null;
             cleareCus();

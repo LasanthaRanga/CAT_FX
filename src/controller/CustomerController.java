@@ -117,10 +117,10 @@ public class CustomerController implements Initializable {
             modle.StaticBadu.setCus_fullname(fname);
 
             List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
-            modle.StaticBadu.setCuslist(searchCustomer);
+        //  new  modle.StaticBadu.setCuslist(searchCustomer);
 
             if (searchCustomer.size() > 1) {
-                
+
             }
 
         }

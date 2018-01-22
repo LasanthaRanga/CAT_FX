@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 22, 2018 10:27:33 AM by Hibernate Tools 4.3.1
+// Generated Jan 22, 2018 1:40:54 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -31,7 +31,6 @@ public class Application  implements java.io.Serializable {
      private String tradeNature_1;
      private Double taxAmount;
      private String discription;
-     private String applicationcol;
      private Integer statues;
      private Integer syn;
      private Integer approveToPaymant;
@@ -51,7 +50,7 @@ public class Application  implements java.io.Serializable {
         this.user = user;
         this.userLog = userLog;
     }
-    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, String applicationcol, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
+    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
        this.customer = customer;
        this.subNature = subNature;
        this.tradeNature = tradeNature;
@@ -70,7 +69,6 @@ public class Application  implements java.io.Serializable {
        this.tradeNature_1 = tradeNature_1;
        this.taxAmount = taxAmount;
        this.discription = discription;
-       this.applicationcol = applicationcol;
        this.statues = statues;
        this.syn = syn;
        this.approveToPaymant = approveToPaymant;
@@ -211,13 +209,6 @@ public class Application  implements java.io.Serializable {
     
     public void setDiscription(String discription) {
         this.discription = discription;
-    }
-    public String getApplicationcol() {
-        return this.applicationcol;
-    }
-    
-    public void setApplicationcol(String applicationcol) {
-        this.applicationcol = applicationcol;
     }
     public Integer getStatues() {
         return this.statues;

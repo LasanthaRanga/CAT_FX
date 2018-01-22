@@ -16,7 +16,7 @@
             <TableColumn fx:id="c_nic" prefWidth="131.0" text="Nic" />
             <TableColumn fx:id="c_address" prefWidth="276.0" text="Address" />
             <TableColumn fx:id="c_mobile" prefWidth="139.0" text="Mobile" />
-            <TableColumn prefWidth="117.0" text="Email" />
+            <TableColumn fx:id="c_email" prefWidth="117.0" text="Email" />
         </columns>
       </TableView>
       <JFXTextField fx:id="txt_idCus" layoutX="297.0" layoutY="288.0" prefHeight="25.0" prefWidth="76.0" promptText="Select ID" />

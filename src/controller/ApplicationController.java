@@ -434,6 +434,7 @@ public class ApplicationController implements Initializable {
                 collectData();
                 //  System.out.println(pCustomer.getFullName());
                 Application app = new pojo.Application();
+                app.setApproveToPaymant(0);
                 app.setCustomer(pCustomer);
                 app.setSubNature(pSubNature);
                 app.setTradeNature(pNature);

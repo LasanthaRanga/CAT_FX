@@ -107,7 +107,7 @@ public class SendToApproveController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 getSelected();
-
+                
                 Apprualstatues apprualstatues = new pojo.Apprualstatues();
                 apprualstatues.setApplication(app);
                 apprualstatues.setDate(new Date());

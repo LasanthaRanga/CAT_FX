@@ -109,6 +109,20 @@ public class CustomerController implements Initializable {
 
     }
 
+    @FXML
+    public void loadCusByFullname(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER GEHUWAA");
+            String fname = txt_fname.getText();
+            modle.StaticBadu.setCus_fullname(fname);
+            
+            System.out.println(modle.StaticBadu.getCus_fullname());
+            
+            
+            
+        }
+    }
+
     public void loadWard() {
         List<pojo.Ward> loaWards = ward.loadWardTable();
         ObservableList List = FXCollections.observableArrayList();

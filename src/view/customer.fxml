@@ -28,7 +28,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="580.0" layoutY="204.0" prefHeight="25.0" prefWidth="324.0" promptText="Full Name" />
+      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="580.0" layoutY="204.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="324.0" promptText="Full Name" />
       <JFXTextField fx:id="txt_phone" labelFloat="true" layoutX="400.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Phone No." />
       <JFXTextField fx:id="txt_mobile" labelFloat="true" layoutX="581.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Mobile No." />
       <JFXTextField fx:id="txt_email" labelFloat="true" layoutX="757.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Email " />

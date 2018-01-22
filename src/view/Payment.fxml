@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -31,7 +33,7 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="481.0" layoutY="74.0" prefHeight="461.0" prefWidth="242.0">
+      <VBox layoutX="481.0" layoutY="77.0" prefHeight="461.0" prefWidth="242.0" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label text="Application Details" />
             <JFXTextField fx:id="txt_application_no" editable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="204.0" promptText="Application No" />
@@ -68,30 +70,25 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="789.0" layoutY="98.0" prefHeight="265.0" prefWidth="287.0">
+      <VBox layoutX="757.0" layoutY="77.0" prefHeight="289.0" prefWidth="287.0" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label layoutX="10.0" layoutY="50.0" text="TAX" />
-            <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" promptText="Tax Amount" />
+            <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount" />
             <Region prefHeight="15.0" prefWidth="287.0" />
             <Label text="VAT" />
-            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#txtChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00" />
+            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#vatAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00" />
             <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="55.0" text="NBT" />
-            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00" />
+            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#nbtAmountChange" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00" />
             <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="117.0" text="Stamp" />
-            <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00" />
+            <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#stampAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00" />
             <Region layoutX="10.0" layoutY="125.0" prefHeight="20.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="181.0" text="Total" />
             <JFXTextField fx:id="txt_total_amount" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount" />
          </children>
       </VBox>
-      <JFXButton fx:id="btn_paynow" layoutX="848.0" layoutY="545.0" onMouseClicked="#paynow" prefHeight="40.0" prefWidth="242.0" style="-fx-background-color: #66bb6a;" text="Pay Now" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="15.0" />
-         </font>
-      </JFXButton>
-      <HBox layoutX="481.0" layoutY="565.0" prefHeight="40.0" prefWidth="322.0">
+      <HBox layoutX="481.0" layoutY="565.0" prefHeight="40.0" prefWidth="242.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="481.0">
          <children>
             <JFXButton fx:id="btn_reset" onMouseClicked="#reset" prefHeight="25.0" prefWidth="102.0" style="-fx-background-color: #ef5350;" text="Reset" textFill="WHITE">
                <font>
@@ -103,5 +100,77 @@
             <Insets top="5.0" />
          </padding>
       </HBox>
+      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="422.0" style="-fx-border-color: #f5f5f5;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
+         <children>
+            <HBox prefHeight="46.0" prefWidth="422.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="81.0" text="Receipt No." />
+                  <JFXTextField fx:id="txt_receipt_no" alignment="BOTTOM_RIGHT" editable="false" prefHeight="25.0" prefWidth="158.0" promptText="Receipt Number" />
+               </children>
+            </HBox>
+            <HBox prefHeight="26.0" prefWidth="422.0" spacing="9.0">
+               <children>
+                  <CheckBox fx:id="chb_cash" mnemonicParsing="false" onMouseClicked="#cashClicked" selected="true" text="Cash" />
+                  <CheckBox fx:id="chb_check" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onContextMenuRequested="#chequeClicked" text="Cheque" />
+               </children>
+               <padding>
+                  <Insets left="7.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <VBox prefHeight="90.0" prefWidth="190.0">
+                     <children>
+                        <Label layoutX="10.0" layoutY="10.0" text="Cash :" />
+                        <HBox prefHeight="73.0" prefWidth="208.0" spacing="11.0">
+                           <children>
+                              <Label text="Rs." />
+                              <JFXTextField fx:id="txt_pay_amount_cash" prefHeight="25.0" prefWidth="142.0" promptText="Amount">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXTextField>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="90.0" prefWidth="198.0">
+                     <children>
+                        <Label text="Cheque :" />
+                        <JFXTextField fx:id="txt_cheque_no" disable="true" promptText="Cheque Number" />
+                        <HBox prefHeight="39.0" prefWidth="198.0" spacing="5.0">
+                           <children>
+                              <Label text="Rs." />
+                              <JFXTextField fx:id="txt_pay_amount_cheque" disable="true" prefHeight="25.0" prefWidth="156.0" promptText="Amount">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                              </JFXTextField>
+                           </children>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                        </HBox>
+                        <JFXDatePicker fx:id="txt_cheque_date" disable="true" prefHeight="25.0" prefWidth="190.0" promptText="Cheque Date" />
+                     </children>
+                  </VBox>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
+            <JFXButton fx:id="btn_paynow" onMouseClicked="#paynow" prefHeight="38.0" prefWidth="192.0" style="-fx-background-color: #66bb6a;" text="Pay Now" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+         </children>
+         <padding>
+            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
    </children>
 </AnchorPane>

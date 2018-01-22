@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,8 +31,10 @@ import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pojo.Application;
 import pojo.Customer;
+import pojo.CustomerHasTradeLicense;
 import pojo.Payment;
 import pojo.TradeLicense;
+import pojo.Vort;
 
 /**
  * FXML Controller class
@@ -183,14 +186,20 @@ public class PaymentController implements Initializable {
             if (cash || cheque) {
                 try {
                     boolean status = true;
-
+                    // declaring
                     Payment payment = new pojo.Payment();
                     TradeLicense tradeLicense = new pojo.TradeLicense();
-
+                    CustomerHasTradeLicense customerHasTradeLicense = new pojo.CustomerHasTradeLicense();
+                    List<Vort> list_vote = new modle.Vort().getList();
+                    
+                    // binding
                     application.getTradeLicenses().add(tradeLicense);
                     tradeLicense.setApplication(application);
                     tradeLicense.setPayment(payment);
                     payment.getTradeLicenses().add(tradeLicense);
+                    customerHasTradeLicense.setCustomer(application.getCustomer());
+                    customerHasTradeLicense.setTradeLicense(tradeLicense);
+                    tradeLicense.getCustomerHasTradeLicenses().add(customerHasTradeLicense);
 
                     // cash
                     if (cash) {
@@ -244,6 +253,15 @@ public class PaymentController implements Initializable {
                             tradeLicense.setTradeLicenseDate(new Date());
                             tradeLicense.setStatus(1);
                             tradeLicense.setSyn(1);
+                            
+                            customerHasTradeLicense.setSyn(1);
+                            Vort vort = list_vote.get(0);
+                            vort.setVoteCurrentBalance(
+                                    vort.getVoteCurrentBalance()+
+                                            (Double.parseDouble(txt_tax_amount.getText()))
+                            );
+                            payment.setVort(vort);
+                            
                             
                         } else {
                             Notifications.create()

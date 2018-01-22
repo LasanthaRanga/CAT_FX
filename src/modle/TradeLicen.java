@@ -8,6 +8,8 @@ package modle;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.TradeLicense;
 
@@ -139,6 +141,27 @@ public class TradeLicen implements DAO<pojo.TradeLicense>{
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public int getNextTradeLicenNo(){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.TradeLicense> list = session.createCriteria(pojo.TradeLicense.class).setMaxResults(1).addOrder(Order.desc("idTradeLicense")).list();
+            if(list.size()>0){
+                try {
+                    return Integer.parseInt(list.get(0).getLicenNo());
+                } catch (Exception e) {
+                    return -1;
+                }
+            }else{
+                return 1;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
         } finally {
             session.close();
         }

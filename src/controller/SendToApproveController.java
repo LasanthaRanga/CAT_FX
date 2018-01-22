@@ -183,13 +183,13 @@ public class SendToApproveController implements Initializable {
         col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
 
         ApplicationStatus applicationStatus = new modle.ApplicationStatus();
-        List<Apprualstatues> list = applicationStatus.getListByApplication(app);
-
-        natureList.clear();
-        for (pojo.Apprualstatues tnn : list) {
-            natureList.add(new approve(tnn.getIdApprualStatues(), tnn.getStatues(), tnn.getIdOtheritisCat() + "", tnn.getDate()));
-        }
-        tbl_approve.setItems(natureList);
+//        List<Apprualstatues> list = applicationStatus.getListByApplication(app);
+//
+//        natureList.clear();
+//        for (pojo.Apprualstatues tnn : list) {
+//            natureList.add(new approve(tnn.getIdApprualStatues(), tnn.getStatues(), tnn.getIdOtheritisCat() + "", tnn.getDate()));
+//        }
+//        tbl_approve.setItems(natureList);
     }
 
 }

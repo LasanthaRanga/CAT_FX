@@ -17,7 +17,7 @@ import pojo.User;
  */
 public class Approve {
 
-    public Approve(int idApprove, int statues, User user, int idUser, Application aplication, int idApplication, Otheritiscat autho, int idOtheritisCat, String Description, Date date) {
+    public Approve(int idApprove, int statues, User user, int idUser, Application aplication, int idApplication, Otheritiscat autho, String OutherCatName, int idOtheritisCat, String Description, Date date, int ApproveToPayment) {
         this.idApprove = idApprove;
         this.statues = statues;
         this.user = user;
@@ -25,11 +25,16 @@ public class Approve {
         this.aplication = aplication;
         this.idApplication = idApplication;
         this.autho = autho;
+        this.OutherCatName = OutherCatName;
         this.idOtheritisCat = idOtheritisCat;
         this.Description = Description;
         this.date = date;
+        this.ApproveToPayment = ApproveToPayment;
     }
 
+    
+    
+    
     public Approve() {
         super();
     }
@@ -173,6 +178,21 @@ public class Approve {
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    
+    /**
+     * @return the ApproveToPayment
+     */
+    public int getApproveToPayment() {
+        return ApproveToPayment;
+    }
+
+    /**
+     * @param ApproveToPayment the ApproveToPayment to set
+     */
+    public void setApproveToPayment(int ApproveToPayment) {
+        this.ApproveToPayment = ApproveToPayment;
+    }
 
     private int idApprove;
     private int statues;
@@ -181,8 +201,25 @@ public class Approve {
     private pojo.Application aplication;
     private int idApplication;
     private pojo.Otheritiscat autho;
+    private String OutherCatName;
     private int idOtheritisCat;
     private String Description;
     private Date date;
+    private int ApproveToPayment;
+
+    /**
+     * @return the OutherCatName
+     */
+    public String getOutherCatName() {
+        return OutherCatName;
+    }
+
+    /**
+     * @param OutherCatName the OutherCatName to set
+     */
+    public void setOutherCatName(String OutherCatName) {
+        this.OutherCatName = OutherCatName;
+    }
+
 
 }

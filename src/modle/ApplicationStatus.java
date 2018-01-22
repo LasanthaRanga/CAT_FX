@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 import pojo.Apprualstatues;
+import pojo.Otheritiscat;
 
 /**
  *
@@ -73,19 +74,32 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    public List<Apprualstatues> getListByApplication(pojo.Application app) {
+    public void getListByApplication(pojo.Application app) {
 
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
-            ArrayList<Object> arrayList = new ArrayList<>();
+            ArrayList<modle.Approve> arrayList = new ArrayList<>();
+            
+            
+            
             Criteria cry = session.createCriteria(pojo.Apprualstatues.class);
-            List list = cry.add(Restrictions.eq("application", app)).list();
-            return list;
+            List<pojo.Apprualstatues> list = cry.add(Restrictions.eq("application", app)).list();
+            
+            for (pojo.Apprualstatues aps : list) {
+                
+                
+                Otheritiscat otc = (pojo.Otheritiscat)session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritiscat", aps.getIdOtheritisCat())).uniqueResult();
+//                public Approve(int idApprove, int statues, User user, int idUser, Application aplication, int idApplication, Otheritiscat autho, String OutherCatName, int idOtheritisCat, String Description, Date date, int ApproveToPayment) {
+              //  arrayList.add(new Approve(aps.getIdApprualStatues(), aps.getStatues(), aps.getUser(), aps.getUser().getIdUser(), app, app.getIdApplication(), otc, otc.getCatname(), aps.getIdOtheritisCat(), aps.getDescription(), aps.getDate(), aps.getApproveToPayment()));
+            }
+            
+            
+         //   return list;
         } catch (Exception e) {
             e.printStackTrace();
             bt.rollback();
-            return null;
+           // return null;
         } finally {
             session.close();
         }

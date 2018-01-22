@@ -126,22 +126,24 @@ public class CustomerController implements Initializable {
             List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
             modle.StaticBadu.setCuslist(searchCustomer);
 
-            if (searchCustomer != null) {
+            if (searchCustomer.size() > 1) {
+                if (searchCustomer != null) {
 
-                try {
-                    AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
-                    txt_fname.getParent().getScene();
-                    Scene scene = new Scene(paymant);
-                    Stage stage = new Stage();
-                    stage.initStyle(StageStyle.TRANSPARENT);
-                    stage.setScene(scene);
-                    stage.show();
+                    try {
+                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                        txt_fname.getParent().getScene();
+                        Scene scene = new Scene(paymant);
+                        Stage stage = new Stage();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.show();
 
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
-
             }
 
         }

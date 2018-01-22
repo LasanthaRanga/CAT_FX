@@ -3,11 +3,13 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import modle.Customer;
 
 /**
  * FXML Controller class
@@ -16,7 +18,7 @@ import javafx.scene.control.TableView;
  */
 public class SearchCusController implements Initializable {
 
-     @FXML
+    @FXML
     private JFXTextField txt_fullname;
 
     @FXML
@@ -42,12 +44,16 @@ public class SearchCusController implements Initializable {
 
     @FXML
     private JFXButton btn_get;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        List<Customer> cuslist = modle.StaticBadu.getCuslist();
+        for (Customer customer : cuslist) {
+            System.out.println(customer.getIdCustomer());
+        }
     }
 
 }

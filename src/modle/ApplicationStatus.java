@@ -79,14 +79,15 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
+
             ArrayList<modle.Approve> appl = new ArrayList<>();
 
             Criteria cry = session.createCriteria(pojo.Apprualstatues.class);
             List<pojo.Apprualstatues> list = cry.add(Restrictions.eq("application", app)).list();
 
             for (pojo.Apprualstatues aps : list) {
-
-                Otheritiscat otc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritiscat", aps.getIdOtheritisCat())).uniqueResult();
+                // Otheritiscat otc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritiscat", aps.getIdOtheritisCat())).uniqueResult();
+                Otheritiscat otc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritisCat", aps.getIdOtheritisCat())).uniqueResult();
                 appl.add(new Approve(aps.getIdApprualStatues(), aps.getStatues(), aps.getUser(), aps.getUser().getIdUser(), app, app.getIdApplication(), otc, otc.getCatname(), aps.getIdOtheritisCat(), aps.getDescription(), aps.getDate()));
             }
 

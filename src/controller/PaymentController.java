@@ -95,8 +95,6 @@ public class PaymentController implements Initializable {
     @FXML
     private JFXTextField txt_total_amount;
     @FXML
-    private JFXTextField txt_receipt_no;
-    @FXML
     private CheckBox chb_cash;
     @FXML
     private CheckBox chb_check;

@@ -13,9 +13,6 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.hibernate.criterion.Order;
-import org.hibernate.criterion.Projection;
-import org.hibernate.criterion.Projections;
-
 import org.hibernate.criterion.Restrictions;
 
 import pojo.Application;
@@ -128,20 +125,15 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             List<pojo.Application> list = session.createCriteria(pojo.Application.class)
+                    .add(Restrictions.eq("approveToPaymant", 1))
                     .setFetchMode("aplicationPayments", FetchMode.JOIN)
+                    .setFetchMode("tradeType", FetchMode.JOIN)
+                    .setFetchMode("customer", FetchMode.JOIN)
                     .setFetchMode("apprualstatueses", FetchMode.JOIN).list();
             ArrayList<Application> ap_list = new ArrayList<pojo.Application>();
             for (Application application : list) {
                 if (application.getAplicationPayments().size() == 0) {
-                    boolean status = true;
-                    for (Apprualstatues apprualstatuese : application.getApprualstatueses()) {
-                        if (apprualstatuese.getStatues() != 1) {
-                            status = false;
-                        }
-                    }
-                    if (status) {
-                        ap_list.add(application);
-                    }
+                    ap_list.add(application);
                 }
             }
             return ap_list;

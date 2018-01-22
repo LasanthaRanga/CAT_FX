@@ -30,6 +30,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pojo.Application;
+import pojo.CashFlow;
 import pojo.Customer;
 import pojo.CustomerHasTradeLicense;
 import pojo.Payment;
@@ -190,7 +191,8 @@ public class PaymentController implements Initializable {
                     Payment payment = new pojo.Payment();
                     TradeLicense tradeLicense = new pojo.TradeLicense();
                     CustomerHasTradeLicense customerHasTradeLicense = new pojo.CustomerHasTradeLicense();
-                    List<Vort> list_vote = new modle.Vort().getList();
+                    CashFlow cashFlow = new pojo.CashFlow();
+                    Vort vort = new modle.Vort().getById(application.getTradeType().getVort().getIdVort());
                     
                     // binding
                     application.getTradeLicenses().add(tradeLicense);
@@ -200,12 +202,18 @@ public class PaymentController implements Initializable {
                     customerHasTradeLicense.setCustomer(application.getCustomer());
                     customerHasTradeLicense.setTradeLicense(tradeLicense);
                     tradeLicense.getCustomerHasTradeLicenses().add(customerHasTradeLicense);
+                    vort.getCashFlows().add(cashFlow);
+                    cashFlow.setVort(vort);
+                    vort.getPayments().add(payment);
 
+                    int nextReceiptNo = new modle.Payment().getNextReceiptNo();
+                    int nextTradeLicenNo = new modle.TradeLicen().getNextTradeLicenNo();
+                    
                     // cash
                     if (cash) {
                         String cash_amount = txt_pay_amount_cash.getText();
                         if (!cash_amount.isEmpty()) {
-
+                            
                         } else {
                             status = false;
                             Notifications.create()
@@ -217,7 +225,17 @@ public class PaymentController implements Initializable {
                     }
 
                     if (cheque) {
-
+                        String cheque_no = txt_cheque_no.getText();
+                        if(!cheque_no.isEmpty()){
+                            
+                        }else{
+                            status = false;
+                            Notifications.create()
+                                    .title("Warning")
+                                    .text("Please enter cheque number.")
+                                    .hideAfter(Duration.seconds(3))
+                                    .position(Pos.BOTTOM_RIGHT).showWarning();
+                        }
                     }
 
                     if (status) {
@@ -249,19 +267,24 @@ public class PaymentController implements Initializable {
                             payment.setStatus(1);
                             payment.setSyn(1);
                             payment.setUserLog(modle.Log_User.getLogUser());
+                            payment.setReceiptNo(nextReceiptNo+"");
                             
                             tradeLicense.setTradeLicenseDate(new Date());
+                            tradeLicense.setLicenNo(nextTradeLicenNo+"");
                             tradeLicense.setStatus(1);
                             tradeLicense.setSyn(1);
                             
                             customerHasTradeLicense.setSyn(1);
-                            Vort vort = list_vote.get(0);
+                            
                             vort.setVoteCurrentBalance(
-                                    vort.getVoteCurrentBalance()+
-                                            (Double.parseDouble(txt_tax_amount.getText()))
+                                    vort.getVoteCurrentBalance()+(Double.parseDouble(txt_tax_amount.getText()))
                             );
                             payment.setVort(vort);
                             
+                            cashFlow.setApplicationNo(application.getIdApplication()+"");
+                            cashFlow.setBankInfo(vort.getBankInfo());
+                            cashFlow.setReciptNo(nextReceiptNo+"");
+                            cashFlow.setChequeNo(txt_cheque_no.getText());
                             
                         } else {
                             Notifications.create()

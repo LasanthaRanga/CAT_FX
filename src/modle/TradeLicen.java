@@ -152,7 +152,7 @@ public class TradeLicen implements DAO<pojo.TradeLicense>{
             List<pojo.TradeLicense> list = session.createCriteria(pojo.TradeLicense.class).setMaxResults(1).addOrder(Order.desc("idTradeLicense")).list();
             if(list.size()>0){
                 try {
-                    return Integer.parseInt(list.get(0).getLicenNo());
+                    return Integer.parseInt(list.get(0).getLicenNo())+1;
                 } catch (Exception e) {
                     return -1;
                 }

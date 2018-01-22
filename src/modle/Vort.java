@@ -8,6 +8,7 @@ package modle;
 import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
 
 /**
  *
@@ -109,6 +110,18 @@ public class Vort implements DAO<pojo.Vort>{
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return session.createCriteria(pojo.Vort.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public pojo.Vort getById(int id){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (pojo.Vort) session.createCriteria(pojo.Vort.class).add(Restrictions.eq("idVort", id)).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -23,9 +24,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import modle.AuthUser;
 import modle.Log_User;
 import org.controlsfx.control.Notifications;
 import org.hibernate.Session;
+import pojo.UserHasOtheritiscat;
 
 /**
  * FXML Controller class
@@ -112,6 +115,9 @@ public class LoginController implements Initializable {
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_RIGHT).showWarning();
         } else if (b > 1) {
+
+            
+
             System.out.println("simple USET LOGIN");
             try {
                 btn_singin.getParent().getScene().getWindow().hide();

@@ -6,10 +6,12 @@
 package modle;
 
 import java.util.Date;
+import java.util.Set;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojo.Login;
 import pojo.User;
+import pojo.UserHasOtheritiscat;
 import pojo.UserLog;
 
 /**
@@ -55,17 +57,32 @@ public class Log_User {
             session.beginTransaction().commit();
 
             Login log = (pojo.Login) session.createCriteria(pojo.Login.class)
-                    .add(Restrictions.and(Restrictions.eq("uname", uname), 
+                    .add(Restrictions.and(Restrictions.eq("uname", uname),
                             Restrictions.eq("pword", pass)))
                     .uniqueResult();
             if (log != null) {
-                AuthUser.setUser(log.getUser());
-                Integer idUser = log.getUser().getIdUser();
+
                 UserLog userLog = new pojo.UserLog(log.getUser(), null, new Date(), 1, 1, null, null, null);
                 session.save(userLog);
-                modle.AuthUser.setUserLog(userLog);
-                return idUser;
+                AuthUser.setUser(log.getUser());
+                AuthUser.setUserLog(userLog);
+                Integer idUser = log.getUser().getIdUser();
+
+                Set<UserHasOtheritiscat> userHasOtheritiscats = AuthUser.getUser().getUserHasOtheritiscats();
+
+                if (userHasOtheritiscats != null) {
+                    for (UserHasOtheritiscat userHasOtheritiscat : userHasOtheritiscats) {
+                        System.out.println(userHasOtheritiscat.getOtheritiscat().getCatname());
+
+                    }
+                } else {
+
+                }
+
+               
                 
+                return idUser;
+
             } else {
                 return 0;
             }
@@ -79,11 +96,11 @@ public class Log_User {
 
     }
 
-    public pojo.User login(String uname, String pass){
+    public pojo.User login(String uname, String pass) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return (User) session.createCriteria(pojo.Login.class)
-                    .add(Restrictions.and(Restrictions.eq("uname", uname), 
+                    .add(Restrictions.and(Restrictions.eq("uname", uname),
                             Restrictions.eq("pword", pass)))
                     .uniqueResult();
         } catch (Exception e) {

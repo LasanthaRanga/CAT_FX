@@ -5,6 +5,7 @@
  */
 package modle;
 
+import java.util.List;
 import pojo.User;
 
 /**
@@ -12,22 +13,25 @@ import pojo.User;
  * @author suhada
  */
 public class AuthUser {
-    
+
     private static pojo.User user;
     private static pojo.UserLog userLog;
+    private static List<UserCat> userCats;
 
     public static User getUser() {
         return AuthUser.user;
     }
 
-    public static  void setUser(User user) {
+    public static void setUser(User user) {
         AuthUser.user = user;
     }
-    public static boolean isLogin(){
-        if(AuthUser.user!=null)
+
+    public static boolean isLogin() {
+        if (AuthUser.user != null) {
             return true;
-        else
+        } else {
             return false;
+        }
     }
 
     /**

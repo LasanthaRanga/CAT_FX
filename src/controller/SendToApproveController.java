@@ -3,16 +3,24 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import modle.Authority;
 import pojo.Application;
+import pojo.Apprualstatues;
 import pojo.Otheritiscat;
 import pojo.User;
 
@@ -35,6 +43,21 @@ public class SendToApproveController implements Initializable {
     @FXML
     private JFXButton btn_done;
 
+    @FXML
+    private TableView<?> tbl_approve;
+
+    @FXML
+    private TableColumn<?, ?> col_id;
+
+    @FXML
+    private TableColumn<?, ?> col_approve_by;
+
+    @FXML
+    private TableColumn<?, ?> col_statues;
+
+    @FXML
+    private TableColumn<?, ?> col_date;
+
     Authority authority;
     pojo.Otheritiscat outo;
     String au;
@@ -49,6 +72,7 @@ public class SendToApproveController implements Initializable {
         // TODO
         app = modle.StaticBadu.getApp();
         //System.out.println(app.getIdApplication());
+        lbl_idApplication.setText(app.getIdApplication().toString());
         loadApprovCombo();
         save();
     }
@@ -71,13 +95,71 @@ public class SendToApproveController implements Initializable {
     }
 
     public void save() {
-        btn_send.setOnAction((event) -> {
-            getSelected();
-            System.out.println("Save");
-           
-           
+        btn_send.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                getSelected();
 
+                Apprualstatues apprualstatues = new pojo.Apprualstatues();
+                apprualstatues.setApplication(app);
+                apprualstatues.setDate(new Date());
+                apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
+                apprualstatues.setStatues(0);
+                apprualstatues.setSyn(1);
+                apprualstatues.setUser(modle.AuthUser.getUser());
+
+                boolean save = new modle.ApplicationStatus().save(apprualstatues);
+
+                if (save) {
+                    modle.Allert.notificationGood("Send To", au);
+                } else {
+                    modle.Allert.notificationError("error", au);
+                }
+            }
         });
+    }
+
+    public class approve {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the statues
+         */
+        public int getStatues() {
+            return statues;
+        }
+
+        /**
+         * @return the autho
+         */
+        public String getAutho() {
+            return autho.get();
+        }
+
+        /**
+         * @return the date
+         */
+        public String getDate() {
+            return date.get();
+        }
+        private int id;
+        private int statues;
+        private SimpleStringProperty autho;
+        private SimpleStringProperty date;
+
+        public approve(int id, int statues, String autho, Date date) {
+            this.id = id;
+            this.statues = statues;
+            this.autho = new SimpleStringProperty(autho);
+            this.date = new SimpleStringProperty(new SimpleDateFormat("yyyy.MM.dd").format(date));
+        }
+
     }
 
 }

@@ -14,6 +14,7 @@ import pojo.User;
 public class AuthUser {
     
     private static pojo.User user;
+    private static pojo.UserLog userLog;
 
     public static User getUser() {
         return AuthUser.user;
@@ -27,5 +28,19 @@ public class AuthUser {
             return true;
         else
             return false;
+    }
+
+    /**
+     * @return the userLog
+     */
+    public static pojo.UserLog getUserLog() {
+        return userLog;
+    }
+
+    /**
+     * @param aUserLog the userLog to set
+     */
+    public static void setUserLog(pojo.UserLog aUserLog) {
+        userLog = aUserLog;
     }
 }

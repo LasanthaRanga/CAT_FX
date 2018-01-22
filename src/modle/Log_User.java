@@ -5,10 +5,12 @@
  */
 package modle;
 
+import java.util.Date;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojo.Login;
 import pojo.User;
+import pojo.UserLog;
 
 /**
  *
@@ -59,6 +61,9 @@ public class Log_User {
             if (log != null) {
                 AuthUser.setUser(log.getUser());
                 Integer idUser = log.getUser().getIdUser();
+                UserLog userLog = new pojo.UserLog(log.getUser(), null, new Date(), 1, 1, null, null, null);
+                session.save(userLog);
+                modle.AuthUser.setUserLog(userLog);
                 return idUser;
                 
             } else {

@@ -486,6 +486,43 @@ public class Customer {
 
     }
 
+    public pojo.Customer searchCustomer(String fname) {
+        modle.Customer cus = new modle.Customer();
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            session.createCriteria(pojo.Customer.class).add(Restrictions.and(Restrictions.eq("fullName", fname), Restrictions.eq("statues", 1))).list();
+
+//            if (c != null) {
+//
+//                cus.setFullName(c.getFullName());
+//                cus.setNic(c.getNic());
+//                cus.setIdCustomer(c.getIdCustomer());
+//
+//                Set<Contact> contacts = c.getContacts();
+//                for (Contact contact : contacts) {
+//                    if (contact.getStatues() == 1) {
+//                        cus.setAddress1(contact.getAddress1());
+//                        cus.setAddress2(contact.getAddress2());
+//                        cus.setAddress3(contact.getAddress3());
+//                        cus.setCity(contact.getCity());
+//                        cus.setEmail(contact.getEmail());
+//                        cus.setPhone(contact.getPhone());
+//                        cus.setMobile(contact.getMobile());
+//                        cus.setIdContact(contact.getIdContact());
+//                    }
+//                }
+//            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
+        return null;
+
+    }
+
     public modle.Customer searchCustomerByNic() {
         modle.Customer cus = new modle.Customer();
 
@@ -545,7 +582,7 @@ public class Customer {
         return ar;
     }
 
-    public pojo.Customer getById(int id){
+    public pojo.Customer getById(int id) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.eq("idCustomer", id));

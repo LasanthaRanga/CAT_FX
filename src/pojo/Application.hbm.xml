@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 22, 2018 11:51:11 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 22, 2018 10:27:35 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Application" table="application" catalog="cat" optimistic-lock="version">
         <id name="idApplication" type="java.lang.Integer">
@@ -64,11 +64,17 @@
         <property name="discription" type="string">
             <column name="discription" />
         </property>
+        <property name="applicationcol" type="string">
+            <column name="Applicationcol" length="45" />
+        </property>
         <property name="statues" type="java.lang.Integer">
             <column name="statues" />
         </property>
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
+        </property>
+        <property name="approveToPaymant" type="java.lang.Integer">
+            <column name="approve_to_paymant" />
         </property>
         <set name="aplicationPayments" table="aplication_payment" inverse="true" lazy="true" fetch="select">
             <key>

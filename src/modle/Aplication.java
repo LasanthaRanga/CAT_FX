@@ -160,4 +160,18 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
+    public pojo.Application getApllicationPojoByID(int no) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            Criteria c = session.createCriteria(pojo.Application.class);
+            pojo.Application uniqueResult = (pojo.Application) c.add(Restrictions.eq("idApplication", no)).uniqueResult();
+            return uniqueResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return null;
+        }
+    }
+
 }

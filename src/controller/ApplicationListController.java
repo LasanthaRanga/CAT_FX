@@ -5,8 +5,11 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -20,6 +23,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modle.Aplication;
 import modle.ApplicationStatus;
+import pojo.Application;
 
 /**
  * FXML Controller class
@@ -49,12 +53,47 @@ public class ApplicationListController implements Initializable {
     @FXML
     private TableColumn<AppTbl, String> c_approve;
 
+    @FXML
+    private TableView<approve> tbl_approve;
+
+    @FXML
+    private TableColumn<approve, Integer> col_id;
+
+    @FXML
+    private TableColumn<approve, String> col_approve_by;
+
+    @FXML
+    private TableColumn<approve, String> col_statues;
+
+    @FXML
+    private TableColumn<approve, String> col_date;
+
+    @FXML
+    private JFXButton btn_load;
+
+    @FXML
+    private JFXTextField txt_idApp;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        loadTable();
+
+        tbl_applicaion.setOnMouseReleased((event) -> {
+
+            int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
+
+            app = new modle.Aplication().getApllicationPojoByID(appno);
+
+            loadTableApprove();
+            
+            txt_idApp.setText(app.getIdApplication()+"");
+
+        });
+
     }
 
     public class AppTbl {
@@ -178,7 +217,83 @@ public class ApplicationListController implements Initializable {
         Aplication aplication = new modle.Aplication();
         List<modle.AppTbl> appTbls = aplication.getAppListToTable();
 
-        appList.addAll(appTbls);
+        for (modle.AppTbl a : appTbls) {
+            appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+        }
+        tbl_applicaion.setItems(appList);
+
+    }
+
+    public class approve {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the statues
+         */
+        public String getStatues() {
+            if (statues == 0) {
+                return "Pending";
+            } else if (statues == 1) {
+                return "approve";
+            } else if (statues == 2) {
+                return "Non Approve";
+            } else {
+                return null;
+            }
+
+        }
+
+        /**
+         * @return the autho
+         */
+        public String getAutho() {
+            return autho.get();
+        }
+
+        /**
+         * @return the date
+         */
+        public String getDate() {
+            return date.get();
+        }
+        private int id;
+        private int statues;
+        private SimpleStringProperty autho;
+        private SimpleStringProperty date;
+
+        public approve(int id, int statues, String autho, Date date) {
+            this.id = id;
+            this.statues = statues;
+            this.autho = new SimpleStringProperty(autho);
+            this.date = new SimpleStringProperty(new SimpleDateFormat("yyyy.MM.dd").format(date));
+        }
+
+    }
+
+    pojo.Application app;
+
+    ObservableList natureList = FXCollections.observableArrayList();
+
+    public void loadTableApprove() {
+        col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_approve_by.setCellValueFactory(new PropertyValueFactory<>("autho"));
+        col_date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        col_statues.setCellValueFactory(new PropertyValueFactory<>("statues"));
+
+        ApplicationStatus applicationStatus = new modle.ApplicationStatus();
+        List<modle.Approve> list = applicationStatus.getListByApplication(app);
+
+        natureList.clear();
+        for (modle.Approve tnn : list) {
+            natureList.add(new approve(tnn.getIdApprove(), tnn.getStatues(), tnn.getOutherCatName(), tnn.getDate()));
+        }
+        tbl_approve.setItems(natureList);
     }
 
 }

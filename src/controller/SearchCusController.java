@@ -56,6 +56,12 @@ public class SearchCusController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         loadTable();
+        selectCustomer();
+
+        btn_get.setOnAction((event) -> {
+            setCustomerID();
+        });
+
     }
 
     public class cus {
@@ -128,6 +134,22 @@ public class SearchCusController implements Initializable {
 
         tbl_cus.setItems(List);
 
+    }
+
+    int idCus;
+
+    public void selectCustomer() {
+        tbl_cus.setOnMouseReleased((event) -> {
+            idCus = tbl_cus.getSelectionModel().getSelectedItem().getIdcus();
+            txt_idCus.setText(idCus + "");
+
+        });
+    }
+
+    public void setCustomerID() {
+        Customer customer = new modle.Customer();
+        customer.setIdCustomer(idCus);
+        modle.StaticBadu.setpCustomer(customer.getById(idCus));
     }
 
 }

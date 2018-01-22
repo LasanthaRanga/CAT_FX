@@ -16,6 +16,7 @@ public class StaticBadu {
     private static pojo.Application app;
     private static String cus_fullname;
     private static List<modle.Customer> cuslist;
+    private static pojo.Customer pCustomer;
 
     /**
      * @return the app
@@ -57,6 +58,20 @@ public class StaticBadu {
      */
     public static void setCuslist(List<modle.Customer> aCuslist) {
         cuslist = aCuslist;
+    }
+
+    /**
+     * @return the pCustomer
+     */
+    public static pojo.Customer getpCustomer() {
+        return pCustomer;
+    }
+
+    /**
+     * @param apCustomer the pCustomer to set
+     */
+    public static void setpCustomer(pojo.Customer apCustomer) {
+        pCustomer = apCustomer;
     }
 
 }

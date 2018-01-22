@@ -276,7 +276,6 @@ public class CustomerController implements Initializable {
         cha.setAssesment(asno);
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
-
         customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
 

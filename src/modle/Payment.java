@@ -7,6 +7,7 @@ package modle;
 
 import java.util.List;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.criterion.Order;
 
 /**
@@ -17,7 +18,25 @@ public class Payment implements DAO<pojo.Payment>{
 
     @Override
     public boolean save(pojo.Payment t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.save(t);
+            bt.commit();
+            if (t.getIdPayment() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            if (bt != null) {
+                bt.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -27,7 +46,25 @@ public class Payment implements DAO<pojo.Payment>{
 
     @Override
     public boolean update(pojo.Payment t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.update(t);
+            bt.commit();
+            if (t.getIdPayment() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            if (bt != null) {
+                bt.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override
@@ -37,7 +74,21 @@ public class Payment implements DAO<pojo.Payment>{
 
     @Override
     public boolean saveOrUpdate(pojo.Payment t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.saveOrUpdate(t);
+            bt.commit();
+            return true;
+        } catch (Exception e) {
+            if (bt != null) {
+                bt.rollback();
+            }
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
     }
 
     @Override

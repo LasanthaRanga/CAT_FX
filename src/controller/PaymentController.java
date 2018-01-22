@@ -30,6 +30,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
+import pojo.AplicationPayment;
 import pojo.Application;
 import pojo.CashFlow;
 import pojo.Customer;
@@ -194,18 +195,9 @@ public class PaymentController implements Initializable {
                     CustomerHasTradeLicense customerHasTradeLicense = new pojo.CustomerHasTradeLicense();
                     CashFlow cashFlow = new pojo.CashFlow();
                     Vort vort = new modle.Vort().getById(application.getTradeType().getVort().getIdVort());
-
-                    // binding
-                    application.getTradeLicenses().add(tradeLicense);
-                    tradeLicense.setApplication(application);
-                    tradeLicense.setPayment(payment);
-                    payment.getTradeLicenses().add(tradeLicense);
-                    customerHasTradeLicense.setCustomer(application.getCustomer());
-                    customerHasTradeLicense.setTradeLicense(tradeLicense);
-                    tradeLicense.getCustomerHasTradeLicenses().add(customerHasTradeLicense);
-                    vort.getCashFlows().add(cashFlow);
-                    cashFlow.setVort(vort);
-                    vort.getPayments().add(payment);
+                    AplicationPayment aplicationPayment = new pojo.AplicationPayment();
+                    aplicationPayment.setApplication(application);
+                    aplicationPayment.setPayment(payment);
 
                     int nextReceiptNo = new modle.Payment().getNextReceiptNo();
                     int nextTradeLicenNo = new modle.TradeLicen().getNextTradeLicenNo();
@@ -252,6 +244,20 @@ public class PaymentController implements Initializable {
 
                     if (status) {
                         if (!txt_total_amount.getText().isEmpty()) {
+
+                            // binding
+                            application.getTradeLicenses().add(tradeLicense);
+                            tradeLicense.setApplication(application);
+                            tradeLicense.setPayment(payment);
+                            payment.getTradeLicenses().add(tradeLicense);
+                            customerHasTradeLicense.setCustomer(application.getCustomer());
+                            customerHasTradeLicense.setTradeLicense(tradeLicense);
+                            tradeLicense.getCustomerHasTradeLicenses().add(customerHasTradeLicense);
+                            vort.getCashFlows().add(cashFlow);
+                            cashFlow.setVort(vort);
+                            vort.getPayments().add(payment);
+                            
+                            // setup payment
                             payment.setPaymentDate(new Date());
                             payment.setApplicationNo(application.getIdApplication());
                             payment.setYear(application.getYear());
@@ -280,12 +286,14 @@ public class PaymentController implements Initializable {
                             payment.setSyn(1);
                             payment.setUserLog(modle.Log_User.getLogUser());
                             payment.setReceiptNo(nextReceiptNo + "");
-
+                            
+                            // setup trade licen
                             tradeLicense.setTradeLicenseDate(new Date());
                             tradeLicense.setLicenNo(nextTradeLicenNo + "");
                             tradeLicense.setStatus(1);
                             tradeLicense.setSyn(1);
 
+                            // setup customer trade licen
                             customerHasTradeLicense.setSyn(1);
 
                             vort.setVoteCurrentBalance(
@@ -296,6 +304,26 @@ public class PaymentController implements Initializable {
                             cashFlow.setApplicationNo(application.getIdApplication() + "");
                             cashFlow.setBankInfo(vort.getBankInfo());
                             cashFlow.setReciptNo(nextReceiptNo + "");
+                            cashFlow.setTotale(Double.parseDouble(txt_total_amount.getText()));
+                            cashFlow.setYear(application.getYear());
+                            cashFlow.setMont(application.getMonth());
+                            cashFlow.setCfDate(new Date());
+
+                            aplicationPayment.setSyn(1);
+
+                            if (new modle.Payment().saveOrUpdate(payment)) {
+                                Notifications.create()
+                                        .title("Success")
+                                        .text("Payment success.")
+                                        .hideAfter(Duration.seconds(3))
+                                        .position(Pos.BOTTOM_RIGHT).showInformation();
+                            } else {
+                                Notifications.create()
+                                        .title("Warning")
+                                        .text("Payment failed.")
+                                        .hideAfter(Duration.seconds(3))
+                                        .position(Pos.BOTTOM_RIGHT).showWarning();
+                            }
 
                         } else {
                             Notifications.create()

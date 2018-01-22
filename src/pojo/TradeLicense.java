@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 21, 2018 11:23:10 AM by Hibernate Tools 4.3.1
+// Generated Jan 22, 2018 11:51:09 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -16,10 +16,7 @@ public class TradeLicense  implements java.io.Serializable {
      private Application application;
      private Payment payment;
      private String licenNo;
-     private String tradeLicensecol;
      private Date tradeLicenseDate;
-     private String tradeLicensecol1;
-     private String tradeLicensecol2;
      private Integer status;
      private Integer syn;
      private Set<CustomerHasTradeLicense> customerHasTradeLicenses = new HashSet<CustomerHasTradeLicense>(0);
@@ -32,14 +29,11 @@ public class TradeLicense  implements java.io.Serializable {
         this.application = application;
         this.payment = payment;
     }
-    public TradeLicense(Application application, Payment payment, String licenNo, String tradeLicensecol, Date tradeLicenseDate, String tradeLicensecol1, String tradeLicensecol2, Integer status, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
+    public TradeLicense(Application application, Payment payment, String licenNo, Date tradeLicenseDate, Integer status, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
        this.application = application;
        this.payment = payment;
        this.licenNo = licenNo;
-       this.tradeLicensecol = tradeLicensecol;
        this.tradeLicenseDate = tradeLicenseDate;
-       this.tradeLicensecol1 = tradeLicensecol1;
-       this.tradeLicensecol2 = tradeLicensecol2;
        this.status = status;
        this.syn = syn;
        this.customerHasTradeLicenses = customerHasTradeLicenses;
@@ -73,33 +67,12 @@ public class TradeLicense  implements java.io.Serializable {
     public void setLicenNo(String licenNo) {
         this.licenNo = licenNo;
     }
-    public String getTradeLicensecol() {
-        return this.tradeLicensecol;
-    }
-    
-    public void setTradeLicensecol(String tradeLicensecol) {
-        this.tradeLicensecol = tradeLicensecol;
-    }
     public Date getTradeLicenseDate() {
         return this.tradeLicenseDate;
     }
     
     public void setTradeLicenseDate(Date tradeLicenseDate) {
         this.tradeLicenseDate = tradeLicenseDate;
-    }
-    public String getTradeLicensecol1() {
-        return this.tradeLicensecol1;
-    }
-    
-    public void setTradeLicensecol1(String tradeLicensecol1) {
-        this.tradeLicensecol1 = tradeLicensecol1;
-    }
-    public String getTradeLicensecol2() {
-        return this.tradeLicensecol2;
-    }
-    
-    public void setTradeLicensecol2(String tradeLicensecol2) {
-        this.tradeLicensecol2 = tradeLicensecol2;
     }
     public Integer getStatus() {
         return this.status;

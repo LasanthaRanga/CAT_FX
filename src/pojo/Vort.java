@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 21, 2018 11:23:10 AM by Hibernate Tools 4.3.1
+// Generated Jan 22, 2018 11:51:09 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,6 +12,7 @@ public class Vort  implements java.io.Serializable {
 
 
      private Integer idVort;
+     private BankInfo bankInfo;
      private ProgramSubtitle programSubtitle;
      private String voteNo;
      private String voteName;
@@ -27,10 +28,12 @@ public class Vort  implements java.io.Serializable {
     }
 
 	
-    public Vort(ProgramSubtitle programSubtitle) {
+    public Vort(BankInfo bankInfo, ProgramSubtitle programSubtitle) {
+        this.bankInfo = bankInfo;
         this.programSubtitle = programSubtitle;
     }
-    public Vort(ProgramSubtitle programSubtitle, String voteNo, String voteName, Double voteCurrentBalance, Double voteAlocation, Integer status, Integer syn, Set<CashFlow> cashFlows, Set<Payment> payments, Set<TradeType> tradeTypes) {
+    public Vort(BankInfo bankInfo, ProgramSubtitle programSubtitle, String voteNo, String voteName, Double voteCurrentBalance, Double voteAlocation, Integer status, Integer syn, Set<CashFlow> cashFlows, Set<Payment> payments, Set<TradeType> tradeTypes) {
+       this.bankInfo = bankInfo;
        this.programSubtitle = programSubtitle;
        this.voteNo = voteNo;
        this.voteName = voteName;
@@ -49,6 +52,13 @@ public class Vort  implements java.io.Serializable {
     
     public void setIdVort(Integer idVort) {
         this.idVort = idVort;
+    }
+    public BankInfo getBankInfo() {
+        return this.bankInfo;
+    }
+    
+    public void setBankInfo(BankInfo bankInfo) {
+        this.bankInfo = bankInfo;
     }
     public ProgramSubtitle getProgramSubtitle() {
         return this.programSubtitle;

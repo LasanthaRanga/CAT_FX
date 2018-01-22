@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 21, 2018 11:23:10 AM by Hibernate Tools 4.3.1
+// Generated Jan 22, 2018 11:51:09 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -19,11 +19,12 @@ public class BankInfo  implements java.io.Serializable {
      private Integer status;
      private Integer syn;
      private Set<CashFlow> cashFlows = new HashSet<CashFlow>(0);
+     private Set<Vort> vorts = new HashSet<Vort>(0);
 
     public BankInfo() {
     }
 
-    public BankInfo(String bankName, String acountNo, String acountName, Double currentBallance, Integer status, Integer syn, Set<CashFlow> cashFlows) {
+    public BankInfo(String bankName, String acountNo, String acountName, Double currentBallance, Integer status, Integer syn, Set<CashFlow> cashFlows, Set<Vort> vorts) {
        this.bankName = bankName;
        this.acountNo = acountNo;
        this.acountName = acountName;
@@ -31,6 +32,7 @@ public class BankInfo  implements java.io.Serializable {
        this.status = status;
        this.syn = syn;
        this.cashFlows = cashFlows;
+       this.vorts = vorts;
     }
    
     public Integer getIdBankInfo() {
@@ -88,6 +90,13 @@ public class BankInfo  implements java.io.Serializable {
     
     public void setCashFlows(Set<CashFlow> cashFlows) {
         this.cashFlows = cashFlows;
+    }
+    public Set<Vort> getVorts() {
+        return this.vorts;
+    }
+    
+    public void setVorts(Set<Vort> vorts) {
+        this.vorts = vorts;
     }
 
 

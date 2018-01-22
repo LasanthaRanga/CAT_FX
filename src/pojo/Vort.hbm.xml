@@ -1,13 +1,16 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 21, 2018 11:23:11 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 22, 2018 11:51:11 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Vort" table="vort" catalog="cat" optimistic-lock="version">
         <id name="idVort" type="java.lang.Integer">
             <column name="idVort" />
             <generator class="identity" />
         </id>
+        <many-to-one name="bankInfo" class="pojo.BankInfo" fetch="select">
+            <column name="Bank_Info_idBank_Info" not-null="true" />
+        </many-to-one>
         <many-to-one name="programSubtitle" class="pojo.ProgramSubtitle" fetch="select">
             <column name="Program_SubTitle_idProgram_SubTitle" not-null="true" />
         </many-to-one>

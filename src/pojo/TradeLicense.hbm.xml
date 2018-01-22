@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 21, 2018 11:23:11 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 22, 2018 11:51:11 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.TradeLicense" table="trade_license" catalog="cat" optimistic-lock="version">
         <id name="idTradeLicense" type="java.lang.Integer">
@@ -17,17 +17,8 @@
         <property name="licenNo" type="string">
             <column name="licen_no" length="45" />
         </property>
-        <property name="tradeLicensecol" type="string">
-            <column name="Trade_Licensecol" length="45" />
-        </property>
         <property name="tradeLicenseDate" type="date">
             <column name="trade_license_date" length="10" />
-        </property>
-        <property name="tradeLicensecol1" type="string">
-            <column name="Trade_Licensecol1" length="45" />
-        </property>
-        <property name="tradeLicensecol2" type="string">
-            <column name="Trade_Licensecol2" length="45" />
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />

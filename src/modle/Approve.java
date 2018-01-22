@@ -17,7 +17,7 @@ import pojo.User;
  */
 public class Approve {
 
-    public Approve(int idApprove, int statues, User user, int idUser, Application aplication, int idApplication, Otheritiscat autho, String OutherCatName, int idOtheritisCat, String Description, Date date, int ApproveToPayment) {
+    public Approve(int idApprove, int statues, User user, int idUser, Application aplication, int idApplication, Otheritiscat autho, String OutherCatName, int idOtheritisCat, String Description, Date date) {
         this.idApprove = idApprove;
         this.statues = statues;
         this.user = user;
@@ -29,7 +29,6 @@ public class Approve {
         this.idOtheritisCat = idOtheritisCat;
         this.Description = Description;
         this.date = date;
-        this.ApproveToPayment = ApproveToPayment;
     }
 
     
@@ -180,19 +179,7 @@ public class Approve {
     }
     
     
-    /**
-     * @return the ApproveToPayment
-     */
-    public int getApproveToPayment() {
-        return ApproveToPayment;
-    }
-
-    /**
-     * @param ApproveToPayment the ApproveToPayment to set
-     */
-    public void setApproveToPayment(int ApproveToPayment) {
-        this.ApproveToPayment = ApproveToPayment;
-    }
+    
 
     private int idApprove;
     private int statues;
@@ -205,7 +192,7 @@ public class Approve {
     private int idOtheritisCat;
     private String Description;
     private Date date;
-    private int ApproveToPayment;
+    
 
     /**
      * @return the OutherCatName

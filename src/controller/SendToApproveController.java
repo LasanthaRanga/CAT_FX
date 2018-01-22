@@ -161,5 +161,21 @@ public class SendToApproveController implements Initializable {
         }
 
     }
+ ObservableList natureList = FXCollections.observableArrayList();
+
+//    public void loadTable() {
+//         col_idNature.setCellValueFactory(new PropertyValueFactory<>("nid"));
+//        col_nature.setCellValueFactory(new PropertyValueFactory<>("nname"));
+//        col_nature_no.setCellValueFactory(new PropertyValueFactory<>("nno"));
+//
+//        Nature tn = new modle.Nature();
+//        tn.setTradeType(new modle.TradeType().loadTreadType(tt));
+//        List<TradeNature> nlist = tn.getNaturesList();
+//        natureList.clear();
+//        for (pojo.TradeNature tnn : nlist) {
+//            natureList.add(new NatureTbl(tnn.getIdTradeNature(), tnn.getNature(), tnn.getNatureNo()));
+//        }
+//        tbl_nature.setItems(natureList);
+//    }
 
 }

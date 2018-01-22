@@ -12,13 +12,11 @@
       <JFXTextField fx:id="txt_fullname" layoutX="84.0" layoutY="28.0" prefHeight="25.0" prefWidth="578.0" promptText="Full Name" />
       <TableView fx:id="tbl_cus" layoutX="14.0" layoutY="79.0" prefHeight="200.0" prefWidth="722.0">
         <columns>
-          <TableColumn fx:id="c_id" prefWidth="27.0" text="ID " />
-          <TableColumn fx:id="c_ward" prefWidth="54.0" text="Ward" />
-            <TableColumn fx:id="c_strret" prefWidth="59.0" text="Street" />
-            <TableColumn fx:id="c_assesmant" prefWidth="106.0" text="Assesmant" />
-            <TableColumn fx:id="c_nic" prefWidth="113.0" text="Nic" />
-            <TableColumn fx:id="c_address" prefWidth="239.0" text="Address" />
-            <TableColumn fx:id="c_mobile" prefWidth="107.0" text="Mobile" />
+          <TableColumn fx:id="c_id" prefWidth="42.0" text="ID " />
+            <TableColumn fx:id="c_nic" prefWidth="131.0" text="Nic" />
+            <TableColumn fx:id="c_address" prefWidth="276.0" text="Address" />
+            <TableColumn fx:id="c_mobile" prefWidth="139.0" text="Mobile" />
+            <TableColumn prefWidth="117.0" text="Email" />
         </columns>
       </TableView>
       <JFXTextField fx:id="txt_idCus" layoutX="297.0" layoutY="288.0" prefHeight="25.0" prefWidth="76.0" promptText="Select ID" />

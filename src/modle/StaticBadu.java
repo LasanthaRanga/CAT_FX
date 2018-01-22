@@ -5,6 +5,8 @@
  */
 package modle;
 
+import java.util.List;
+
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
@@ -13,6 +15,7 @@ public class StaticBadu {
 
     private static pojo.Application app;
     private static String cus_fullname;
+    private static List<modle.Customer> cuslist;
 
     /**
      * @return the app
@@ -40,6 +43,20 @@ public class StaticBadu {
      */
     public static void setCus_fullname(String aCus_fullname) {
         cus_fullname = aCus_fullname;
+    }
+
+    /**
+     * @return the cuslist
+     */
+    public static List<modle.Customer> getCuslist() {
+        return cuslist;
+    }
+
+    /**
+     * @param aCuslist the cuslist to set
+     */
+    public static void setCuslist(List<modle.Customer> aCuslist) {
+        cuslist = aCuslist;
     }
 
 }

@@ -115,11 +115,14 @@ public class CustomerController implements Initializable {
             System.out.println("ENTER GEHUWAA");
             String fname = txt_fname.getText();
             modle.StaticBadu.setCus_fullname(fname);
-            
-            System.out.println(modle.StaticBadu.getCus_fullname());
-            
-            
-            
+
+            List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
+            modle.StaticBadu.setCuslist(searchCustomer);
+
+            if (searchCustomer.size() > 1) {
+                
+            }
+
         }
     }
 

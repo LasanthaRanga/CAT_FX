@@ -486,41 +486,44 @@ public class Customer {
 
     }
 
-    public pojo.Customer searchCustomer(String fname) {
-        modle.Customer cus = new modle.Customer();
-
+    public List<Customer> searchCustomer(String fname) {
+        List<Customer> clist = new ArrayList<Customer>();
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            session.createCriteria(pojo.Customer.class).add(Restrictions.and(Restrictions.eq("fullName", fname), Restrictions.eq("statues", 1))).list();
+            List<pojo.Customer> list = session.createCriteria(pojo.Customer.class).add(Restrictions.and(Restrictions.eq("fullName", fname), Restrictions.eq("statues", 1))).list();
 
-//            if (c != null) {
-//
-//                cus.setFullName(c.getFullName());
-//                cus.setNic(c.getNic());
-//                cus.setIdCustomer(c.getIdCustomer());
-//
-//                Set<Contact> contacts = c.getContacts();
-//                for (Contact contact : contacts) {
-//                    if (contact.getStatues() == 1) {
-//                        cus.setAddress1(contact.getAddress1());
-//                        cus.setAddress2(contact.getAddress2());
-//                        cus.setAddress3(contact.getAddress3());
-//                        cus.setCity(contact.getCity());
-//                        cus.setEmail(contact.getEmail());
-//                        cus.setPhone(contact.getPhone());
-//                        cus.setMobile(contact.getMobile());
-//                        cus.setIdContact(contact.getIdContact());
-//                    }
-//                }
-//            }
+            for (pojo.Customer c : list) {
+                modle.Customer cus = new modle.Customer();
+
+                if (c != null) {
+
+                    cus.setFullName(c.getFullName());
+                    cus.setNic(c.getNic());
+                    cus.setIdCustomer(c.getIdCustomer());
+
+                    Set<Contact> contacts = c.getContacts();
+                    for (Contact contact : contacts) {
+                        if (contact.getStatues() == 1) {
+                            cus.setAddress1(contact.getAddress1());
+                            cus.setAddress2(contact.getAddress2());
+                            cus.setAddress3(contact.getAddress3());
+                            cus.setCity(contact.getCity());
+                            cus.setEmail(contact.getEmail());
+                            cus.setPhone(contact.getPhone());
+                            cus.setMobile(contact.getMobile());
+                            cus.setIdContact(contact.getIdContact());
+                        }
+                    }
+                }
+                clist.add(cus);
+            }
+            return clist;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         } finally {
             session.close();
         }
-
-        return null;
-
     }
 
     public modle.Customer searchCustomerByNic() {

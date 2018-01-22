@@ -16,7 +16,7 @@ import javafx.scene.control.TableView;
  */
 public class SearchCusController implements Initializable {
 
-    @FXML
+     @FXML
     private JFXTextField txt_fullname;
 
     @FXML
@@ -24,15 +24,6 @@ public class SearchCusController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> c_id;
-
-    @FXML
-    private TableColumn<?, ?> c_ward;
-
-    @FXML
-    private TableColumn<?, ?> c_strret;
-
-    @FXML
-    private TableColumn<?, ?> c_assesmant;
 
     @FXML
     private TableColumn<?, ?> c_nic;
@@ -44,11 +35,13 @@ public class SearchCusController implements Initializable {
     private TableColumn<?, ?> c_mobile;
 
     @FXML
+    private TableColumn<?, ?> c_email;
+
+    @FXML
     private JFXTextField txt_idCus;
 
     @FXML
     private JFXButton btn_get;
-
     /**
      * Initializes the controller class.
      */

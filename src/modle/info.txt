@@ -1,0 +1,3 @@
+
+user hbm xml
+    <set name="logins" table="login" inverse="true" lazy="true" fetch="select" cascade="all">

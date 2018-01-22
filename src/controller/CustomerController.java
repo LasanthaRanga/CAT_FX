@@ -8,19 +8,26 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.Customer;
 import org.controlsfx.control.textfield.TextFields;
 
@@ -119,8 +126,22 @@ public class CustomerController implements Initializable {
             List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
             modle.StaticBadu.setCuslist(searchCustomer);
 
-            if (searchCustomer.size() > 1) {
-                
+            if (searchCustomer != null) {
+
+                try {
+                    AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                    txt_fname.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
             }
 
         }

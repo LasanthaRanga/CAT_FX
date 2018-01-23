@@ -6,6 +6,7 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -23,6 +24,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modle.Aplication;
 import modle.ApplicationStatus;
@@ -105,6 +107,18 @@ public class AuthoritistController implements Initializable {
     @FXML
     private JFXButton btn_reload;
 
+    @FXML
+    private ToggleGroup status;
+
+    @FXML
+    private JFXRadioButton radio_panding;
+
+    @FXML
+    private JFXRadioButton radio_approve;
+
+    @FXML
+    private JFXRadioButton radio_none;
+
     /**
      * Initializes the controller class.
      */
@@ -127,8 +141,7 @@ public class AuthoritistController implements Initializable {
         LoadApproveData();
         approve();
         nonApprove();
-
-     
+        radio();
 
     }
 
@@ -349,7 +362,43 @@ public class AuthoritistController implements Initializable {
 
         Aplication aplication = modApp;
         List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho();
+         appList.clear();
+        for (modle.AppTbl a : appTbls) {
+            appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+        }
+        tbl_applicaion.setItems(appList);
 
+    }
+
+    public void loadApproveTable() {
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
+        c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
+        c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
+        c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
+
+        Aplication aplication = modApp;
+        List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho_Approve();
+         appList.clear();
+        for (modle.AppTbl a : appTbls) {
+            appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+        }
+        tbl_applicaion.setItems(appList);
+
+    }
+
+    public void loadApproveTable_None() {
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
+        c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
+        c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
+        c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
+
+        Aplication aplication = modApp;
+        List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho_None();
+         appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
         }
@@ -431,12 +480,26 @@ public class AuthoritistController implements Initializable {
 
         Integer idUser = app.getUser().getIdUser();
 
-        User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
+        if (apprualstatues != null) {
+            User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
 
-        lbl_username.setText(user.getFullName());
+            lbl_username.setText(user.getFullName());
 
-        lbl_idApp.setText(app.getIdApplication() + "");
+            lbl_idApp.setText(app.getIdApplication() + "");
+        }
+    }
 
+    public void radio() {
+        radio_panding.setOnAction((event) -> {
+            loadTable();
+        });
+        radio_approve.setOnAction((event) -> {
+            loadApproveTable();
+        });
+
+        radio_none.setOnAction((event) -> {
+            loadApproveTable_None();
+        });
     }
 
 }

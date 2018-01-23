@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -20,7 +22,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXButton layoutX="26.0" layoutY="66.0" prefHeight="25.0" prefWidth="76.0" text="Reoad" />
+      <JFXButton fx:id="btn_reload" layoutX="518.0" layoutY="66.0" prefHeight="25.0" prefWidth="76.0" />
       <JFXButton fx:id="btn_approve" layoutX="613.0" layoutY="548.0" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: #388E3C;" text="Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
@@ -62,5 +64,12 @@
       <Label fx:id="lbl_user" layoutX="613.0" layoutY="290.0" prefHeight="17.0" prefWidth="516.0" />
       <Label layoutX="61.0" layoutY="418.0" text="User ID :" />
       <Label fx:id="lbl_username" layoutX="128.0" layoutY="418.0" prefHeight="17.0" prefWidth="466.0" />
+      <JFXRadioButton fx:id="radio_panding" layoutX="26.0" layoutY="70.0" selected="true" text="Pending">
+         <toggleGroup>
+            <ToggleGroup fx:id="status" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_approve" layoutX="129.0" layoutY="70.0" text="Approve" toggleGroup="$status" />
+      <JFXRadioButton fx:id="radio_none" layoutX="238.0" layoutY="70.0" text="None" toggleGroup="$status" />
    </children>
 </AnchorPane>

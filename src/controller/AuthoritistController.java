@@ -150,6 +150,7 @@ public class AuthoritistController implements Initializable {
         nonApprove();
         radio();
         sendToApprove();
+        close();
 
     }
 
@@ -512,9 +513,9 @@ public class AuthoritistController implements Initializable {
 
     public void sendToApprove() {
         btn_send.setOnAction((event) -> {
-            
+
             modle.StaticBadu.setApp(app);
-            
+
             System.out.println("Approve");
             try {
                 AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SendToApprove.fxml"));
@@ -530,6 +531,13 @@ public class AuthoritistController implements Initializable {
                 Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
             }
 
+        });
+    }
+
+    public void close() {
+
+        btn_reload.setOnAction((event) -> {
+            btn_reload.getParent().getScene().getWindow().hide();
         });
     }
 

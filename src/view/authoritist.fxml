@@ -22,7 +22,10 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btn_reload" layoutX="518.0" layoutY="66.0" prefHeight="25.0" prefWidth="76.0" />
+      <JFXButton fx:id="btn_reload" layoutX="1114.0" layoutY="10.0" prefHeight="39.0" prefWidth="30.0" text="X" textFill="#da0000">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
       <JFXButton fx:id="btn_approve" layoutX="613.0" layoutY="548.0" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: #388E3C;" text="Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />

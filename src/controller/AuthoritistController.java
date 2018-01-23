@@ -102,6 +102,9 @@ public class AuthoritistController implements Initializable {
     @FXML
     private Label lbl_username;
 
+    @FXML
+    private JFXButton btn_reload;
+
     /**
      * Initializes the controller class.
      */
@@ -125,6 +128,23 @@ public class AuthoritistController implements Initializable {
         approve();
         nonApprove();
 
+     
+
+    }
+
+    public void reload() {
+        btn_reload.setOnAction((event) -> {
+            modApp = new modle.Aplication();
+            modState = new modle.ApplicationStatus();
+            List<UserCat> userCats = modle.AuthUser.getUserCats();
+            uc = userCats.get(0);
+            lbl_atype.setText(uc.getOthoname());
+            loadTable();
+            LoadApprovTable();
+            LoadApproveData();
+            approve();
+            nonApprove();
+        });
     }
 
     public void LoadApproveData() {
@@ -412,6 +432,7 @@ public class AuthoritistController implements Initializable {
         Integer idUser = app.getUser().getIdUser();
 
         User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
+
         lbl_username.setText(user.getFullName());
 
         lbl_idApp.setText(app.getIdApplication() + "");

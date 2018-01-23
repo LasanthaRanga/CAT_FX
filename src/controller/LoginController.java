@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -57,6 +58,10 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+        openSession.beginTransaction().commit();
+        openSession.close();
+
         btn_singin.setOnAction((event) -> {
             login();
         });
@@ -75,7 +80,7 @@ public class LoginController implements Initializable {
             btn_singin.getParent().getScene();
             Scene scene = new Scene(paymant);
             Stage stage = new Stage();
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -102,7 +107,7 @@ public class LoginController implements Initializable {
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
                 Stage stage = new Stage();
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
@@ -126,7 +131,7 @@ public class LoginController implements Initializable {
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ex) {
@@ -145,7 +150,7 @@ public class LoginController implements Initializable {
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ex) {
@@ -155,16 +160,22 @@ public class LoginController implements Initializable {
 
             } else {
                 try {
+                    Set<UserHasOtheritiscat> userHasOtheritiscats = AuthUser.getUser().getUserHasOtheritiscats();
+                    ArrayList<UserCat> ucs = new ArrayList<UserCat>();
+                    if (userHasOtheritiscats != null) {
+                        for (UserHasOtheritiscat uho : userHasOtheritiscats) {
+                            ucs.add(new UserCat(uho.getOtheritiscat().getIdOtheritisCat(), uho.getOtheritiscat().getCatname()));
+                        }
+                    }
+                    AuthUser.setUserCats(ucs);
 
-                    UserCat oCat = userCats.get(0);
-                    AuthUser.setIdOc(oCat.getOthoid());
-
+                  
                     btn_singin.getParent().getScene().getWindow().hide();
                     AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/SelectLoginType.fxml"));
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
-                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ex) {

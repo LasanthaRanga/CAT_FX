@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectLoginTypeController">
-    
+<AnchorPane id="AnchorPane" prefHeight="216.0" prefWidth="426.0" style="-fx-background-color: #AED581;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SelectLoginTypeController">
+   <children>
+      <Label layoutX="28.0" layoutY="26.0" text="Select Login Type :" textFill="#10a400">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <JFXComboBox fx:id="com_type" focusColor="#009000" labelFloat="true" layoutX="28.0" layoutY="78.0" prefHeight="25.0" prefWidth="370.0" promptText="Type" unFocusColor="#2bee35" visibleRowCount="5" />
+      <JFXButton fx:id="btn_log" layoutX="28.0" layoutY="163.0" prefHeight="25.0" prefWidth="370.0" text="LOGIN" textFill="#009a00">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+   </children>
 </AnchorPane>

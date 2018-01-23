@@ -8,11 +8,14 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextArea;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,10 +25,14 @@ import javafx.scene.control.Label;
 import modle.UserCat;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.Aplication;
 import modle.ApplicationStatus;
 import pojo.Apprualstatues;
@@ -142,6 +149,7 @@ public class AuthoritistController implements Initializable {
         approve();
         nonApprove();
         radio();
+        sendToApprove();
 
     }
 
@@ -362,7 +370,7 @@ public class AuthoritistController implements Initializable {
 
         Aplication aplication = modApp;
         List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho();
-         appList.clear();
+        appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
         }
@@ -380,7 +388,7 @@ public class AuthoritistController implements Initializable {
 
         Aplication aplication = modApp;
         List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho_Approve();
-         appList.clear();
+        appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
         }
@@ -398,7 +406,7 @@ public class AuthoritistController implements Initializable {
 
         Aplication aplication = modApp;
         List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho_None();
-         appList.clear();
+        appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
         }
@@ -499,6 +507,29 @@ public class AuthoritistController implements Initializable {
 
         radio_none.setOnAction((event) -> {
             loadApproveTable_None();
+        });
+    }
+
+    public void sendToApprove() {
+        btn_send.setOnAction((event) -> {
+            
+            modle.StaticBadu.setApp(app);
+            
+            System.out.println("Approve");
+            try {
+                AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SendToApprove.fxml"));
+                btn_send.getParent().getScene();
+                Scene scene = new Scene(paymant);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
         });
     }
 

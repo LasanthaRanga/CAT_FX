@@ -154,7 +154,23 @@ public class LoginController implements Initializable {
                 }
 
             } else {
-                System.out.println("User Cat Godai");
+                try {
+
+                    UserCat oCat = userCats.get(0);
+                    AuthUser.setIdOc(oCat.getOthoid());
+
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/SelectLoginType.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    //stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }

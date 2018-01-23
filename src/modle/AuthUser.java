@@ -17,6 +17,7 @@ public class AuthUser {
     private static pojo.User user;
     private static pojo.UserLog userLog;
     private static List<UserCat> userCats;
+    private static int idOc;
 
     public static User getUser() {
         return AuthUser.user;
@@ -60,5 +61,19 @@ public class AuthUser {
      */
     public static void setUserCats(List<UserCat> aUserCats) {
         userCats = aUserCats;
+    }
+
+    /**
+     * @return the idOc
+     */
+    public static int getIdOc() {
+        return idOc;
+    }
+
+    /**
+     * @param aIdOc the idOc to set
+     */
+    public static void setIdOc(int aIdOc) {
+        idOc = aIdOc;
     }
 }

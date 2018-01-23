@@ -136,6 +136,10 @@ public class LoginController implements Initializable {
 
             } else if (userCats.size() == 1) {
                 try {
+
+                    UserCat oCat = userCats.get(0);
+                    AuthUser.setIdOc(oCat.getOthoid());
+
                     btn_singin.getParent().getScene().getWindow().hide();
                     AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/authoritist.fxml"));
                     btn_singin.getParent().getScene();

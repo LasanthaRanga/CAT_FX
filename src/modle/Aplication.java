@@ -7,6 +7,7 @@ package modle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -151,6 +152,37 @@ public class Aplication implements DAO<pojo.Application> {
 
             for (Application application : list) {
                 ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<modle.AppTbl> getAppListToTableForOtho() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+
+                if (application.getApproveToPaymant() == 0) { // Paymant Walata Approv karapu nethi
+
+                    Set<Apprualstatues> app = application.getApprualstatueses();
+                    for (Apprualstatues apprualstatues : app) {
+                        Integer idoc = apprualstatues.getIdOtheritisCat();
+                        int idOc = AuthUser.getIdOc();
+                        if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
+                            Integer statues = apprualstatues.getStatues();
+                            if (statues == 0) {// approv karala nethi application
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                            }
+                        }
+
+                    }
+                }
 
             }
             return ap_list;

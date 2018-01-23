@@ -26,6 +26,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modle.Aplication;
 import modle.ApplicationStatus;
+import pojo.Apprualstatues;
+import pojo.User;
 
 /**
  * FXML Controller class
@@ -94,25 +96,110 @@ public class AuthoritistController implements Initializable {
     @FXML
     private JFXButton btn_approve;
 
+    @FXML
+    private Label lbl_user;
+
+    @FXML
+    private Label lbl_username;
+
     /**
      * Initializes the controller class.
      */
     UserCat uc;
     pojo.Application app;
+    pojo.Apprualstatues apprualstatues;
+    modle.Aplication modApp;
+    modle.ApplicationStatus modState;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        modApp = new modle.Aplication();
+        modState = new modle.ApplicationStatus();
         List<UserCat> userCats = modle.AuthUser.getUserCats();
         uc = userCats.get(0);
         lbl_atype.setText(uc.getOthoname());
         loadTable();
+        LoadApprovTable();
+        LoadApproveData();
+        approve();
+        nonApprove();
+
+    }
+
+    public void LoadApproveData() {
+        tbl_approve.setOnMouseReleased((event) -> {
+            int id = tbl_approve.getSelectionModel().getSelectedItem().getId();
+            apprualstatues = modApp.getApproveStatus(id);
+            txt_coment.setText(apprualstatues.getDescription());
+            User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
+            lbl_user.setText(user.getFullName());
+        });
+    }
+
+    public void approve() {
+
+        btn_approve.setOnAction((event) -> {
+            if (apprualstatues != null) {
+                Integer idOtheritisCat = apprualstatues.getIdOtheritisCat();
+                int idOc = modle.AuthUser.getIdOc();
+                if (idOc == idOtheritisCat) {
+                    String mycoment = txt_myComment.getText();
+                    apprualstatues.setDate(new Date());
+                    apprualstatues.setDescription(mycoment);
+                    apprualstatues.setUser(modle.AuthUser.getUser());
+                    apprualstatues.setStatues(1);
+                    apprualstatues.setSyn(1);
+                    boolean update = modState.update(apprualstatues);
+                    if (update) {
+                        modle.Allert.notificationGood("Approved", mycoment);
+                    } else {
+                        modle.Allert.notificationError("Error", "Some Thing Was Wrong");
+                    }
+                } else {
+                    modle.Allert.notificationInfo("Select Your Authoritist", lbl_atype.getText());
+                }
+            }
+
+        });
+
+    }
+
+    public void nonApprove() {
+
+        btn_non.setOnAction((event) -> {
+            if (apprualstatues != null) {
+                Integer idOtheritisCat = apprualstatues.getIdOtheritisCat();
+                int idOc = modle.AuthUser.getIdOc();
+                if (idOc == idOtheritisCat) {
+                    String mycoment = txt_myComment.getText();
+                    apprualstatues.setDate(new Date());
+                    apprualstatues.setDescription(mycoment);
+                    apprualstatues.setUser(modle.AuthUser.getUser());
+                    apprualstatues.setStatues(2);
+                    apprualstatues.setSyn(1);
+                    boolean update = modState.update(apprualstatues);
+                    if (update) {
+                        modle.Allert.notificationGood("NON approved", mycoment);
+                    } else {
+                        modle.Allert.notificationError("Error", "Some Thing Was Wrong");
+                    }
+                } else {
+                    modle.Allert.notificationInfo("Select Your Authoritist", lbl_atype.getText());
+                }
+            }
+
+        });
+
+    }
+
+    public void LoadApprovTable() {
 
         tbl_applicaion.setOnMouseReleased((event) -> {
 
             int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
 
-            app = new modle.Aplication().getApllicationPojoByID(appno);
+            app = modApp.getApllicationPojoByID(appno);
 
             loadTableApprove();
             loadAppDetails();
@@ -240,7 +327,7 @@ public class AuthoritistController implements Initializable {
         c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
         c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
 
-        Aplication aplication = new modle.Aplication();
+        Aplication aplication = modApp;
         List<modle.AppTbl> appTbls = aplication.getAppListToTableForOtho();
 
         for (modle.AppTbl a : appTbls) {
@@ -319,13 +406,16 @@ public class AuthoritistController implements Initializable {
         }
         tbl_approve.setItems(natureList);
     }
-    
-    
-    public void loadAppDetails(){
-    
-        lbl_idApp.setText(app.getIdApplication()+"");
-        
+
+    public void loadAppDetails() {
+
+        Integer idUser = app.getUser().getIdUser();
+
+        User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
+        lbl_username.setText(user.getFullName());
+
+        lbl_idApp.setText(app.getIdApplication() + "");
+
     }
-    
 
 }

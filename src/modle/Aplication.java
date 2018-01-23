@@ -119,6 +119,8 @@ public class Aplication implements DAO<pojo.Application> {
             e.printStackTrace();
             bt.rollback();
             return 0;
+        } finally {
+            session.close();
         }
     }
 
@@ -141,6 +143,8 @@ public class Aplication implements DAO<pojo.Application> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
         }
     }
 
@@ -158,6 +162,8 @@ public class Aplication implements DAO<pojo.Application> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
         }
     }
 
@@ -189,6 +195,8 @@ public class Aplication implements DAO<pojo.Application> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
         }
     }
 
@@ -203,6 +211,24 @@ public class Aplication implements DAO<pojo.Application> {
             e.printStackTrace();
             bt.rollback();
             return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public pojo.Apprualstatues getApproveStatus(int no) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            Criteria c = session.createCriteria(pojo.Apprualstatues.class);
+            pojo.Apprualstatues uniqueResult = (pojo.Apprualstatues) c.add(Restrictions.eq("idApprualStatues", no)).uniqueResult();
+            return uniqueResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return null;
+        } finally {
+            session.close();
         }
     }
 

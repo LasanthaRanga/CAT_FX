@@ -119,23 +119,23 @@ public class PaymentController implements Initializable {
         tbl_clmn_application_date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         this.setTable();
 
-        btn_paynow.setOnAction((event) -> {
-            System.out.println("PAY");
-            try {
-                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/pay.fxml"));
-                btn_paynow.getParent().getScene();
-                Scene scene = new Scene(paymant);
-                Stage stage = new Stage();
-                stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-
-        });
+//        btn_paynow.setOnAction((event) -> {
+//            System.out.println("PAY");
+//            try {
+//                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/pay.fxml"));
+//                btn_paynow.getParent().getScene();
+//                Scene scene = new Scene(paymant);
+//                Stage stage = new Stage();
+//                stage.initStyle(StageStyle.TRANSPARENT);
+//                stage.setScene(scene);
+//                stage.show();
+//
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//
+//        });
 
     }
 

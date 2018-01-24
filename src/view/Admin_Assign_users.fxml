@@ -6,10 +6,11 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_Assign_usersController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_Assign_usersController">
    <children>
-      <TableView fx:id="tbl_user" layoutX="30.0" layoutY="39.0" prefHeight="572.0" prefWidth="647.0">
+      <TableView fx:id="tbl_user" layoutX="58.0" layoutY="73.0" prefHeight="502.0" prefWidth="647.0">
         <columns>
           <TableColumn fx:id="col_idUser" prefWidth="53.0" text="User Id" />
           <TableColumn fx:id="col_fullname" prefWidth="237.0" text="Full Name" />
@@ -19,32 +20,46 @@
             <TableColumn fx:id="col_statues" prefWidth="64.0" text="Statues" />
         </columns>
       </TableView>
-      <Label layoutX="703.0" layoutY="36.0" prefHeight="17.0" prefWidth="142.0" text="Depatment" />
-      <Label layoutX="703.0" layoutY="237.0" prefHeight="17.0" prefWidth="142.0" text="Catagory" />
-      <Label layoutX="703.0" layoutY="442.0" prefHeight="17.0" prefWidth="142.0" text="Authorities" />
-      <JFXComboBox fx:id="com_department" layoutX="871.0" layoutY="32.0" prefHeight="25.0" prefWidth="256.0" />
-      <JFXComboBox fx:id="com_catagory" layoutX="872.0" layoutY="233.0" prefHeight="25.0" prefWidth="256.0" />
-      <JFXComboBox fx:id="com_authorities" layoutX="872.0" layoutY="438.0" prefHeight="25.0" prefWidth="256.0" />
-      <TableView fx:id="tbl_dip" layoutX="703.0" layoutY="76.0" prefHeight="116.0" prefWidth="425.0">
+      <Label layoutX="820.0" layoutY="86.0" prefHeight="17.0" prefWidth="80.0" text="Depatment" />
+      <Label layoutX="820.0" layoutY="268.0" prefHeight="17.0" prefWidth="80.0" text="Catagory" />
+      <Label layoutX="820.0" layoutY="444.0" prefHeight="17.0" prefWidth="80.0" text="Authorities" />
+      <JFXComboBox fx:id="com_department" layoutX="905.0" layoutY="82.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox fx:id="com_catagory" layoutX="905.0" layoutY="264.0" prefHeight="25.0" prefWidth="256.0" />
+      <JFXComboBox fx:id="com_authorities" layoutX="905.0" layoutY="440.0" prefHeight="25.0" prefWidth="256.0" />
+      <TableView fx:id="tbl_dip" layoutX="820.0" layoutY="118.0" prefHeight="99.0" prefWidth="425.0">
         <columns>
           <TableColumn fx:id="col_dip_id" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="col_dip_dipartment" prefWidth="327.0" text="Department" />
         </columns>
       </TableView>
-      <TableView layoutX="703.0" layoutY="282.0" prefHeight="116.0" prefWidth="425.0">
+      <TableView layoutX="820.0" layoutY="299.0" prefHeight="99.0" prefWidth="425.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1" />
             <TableColumn prefWidth="75.0" text="C2" />
          </columns>
       </TableView>
-      <TableView layoutX="703.0" layoutY="495.0" prefHeight="116.0" prefWidth="425.0">
+      <TableView layoutX="820.0" layoutY="476.0" prefHeight="99.0" prefWidth="425.0">
          <columns>
             <TableColumn prefWidth="75.0" text="C1" />
             <TableColumn prefWidth="75.0" text="C2" />
          </columns>
       </TableView>
-      <JFXButton fx:id="btn_dip_assign" layoutX="1166.0" layoutY="32.0" text="Assign" />
-      <JFXButton fx:id="btn_cat_assign" layoutX="1166.0" layoutY="233.0" text="Assign" />
-      <JFXButton fx:id="btn_outh_assign" layoutX="1166.0" layoutY="438.0" text="Assign" />
+      <JFXButton fx:id="btn_dip_assign" layoutX="1191.0" layoutY="82.0" style="-fx-background-color: #1976D2;" text="Assign" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btn_cat_assign" layoutX="1191.0" layoutY="264.0" style="-fx-background-color: #1976D2;" text="Assign" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btn_outh_assign" layoutX="1191.0" layoutY="440.0" style="-fx-background-color: #1976D2;" text="Assign" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <Label layoutX="550.0" layoutY="7.0" text="Assign Users" textFill="#0f9700">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

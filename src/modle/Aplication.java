@@ -7,6 +7,7 @@ package modle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -118,6 +119,8 @@ public class Aplication implements DAO<pojo.Application> {
             e.printStackTrace();
             bt.rollback();
             return 0;
+        } finally {
+            session.close();
         }
     }
 
@@ -140,6 +143,8 @@ public class Aplication implements DAO<pojo.Application> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
         }
     }
 
@@ -157,6 +162,109 @@ public class Aplication implements DAO<pojo.Application> {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<modle.AppTbl> getAppListToTableForOtho() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+
+                if (application.getApproveToPaymant() == 0) { // Paymant Walata Approv karapu nethi
+
+                    Set<Apprualstatues> app = application.getApprualstatueses();
+                    for (Apprualstatues apprualstatues : app) {
+                        Integer idoc = apprualstatues.getIdOtheritisCat();
+                        int idOc = AuthUser.getIdOc();
+                        if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
+                            Integer statues = apprualstatues.getStatues();
+                            if (statues == 0) {// approv karala nethi application
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                            }
+                        }
+
+                    }
+                }
+
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<modle.AppTbl> getAppListToTableForOtho_Approve() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+
+                if (application.getApproveToPaymant() == 0) { // Paymant Walata Approv karapu nethi
+
+                    Set<Apprualstatues> app = application.getApprualstatueses();
+                    for (Apprualstatues apprualstatues : app) {
+                        Integer idoc = apprualstatues.getIdOtheritisCat();
+                        int idOc = AuthUser.getIdOc();
+                        if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
+                            Integer statues = apprualstatues.getStatues();
+                            if (statues == 1) {// approv karala nethi application
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                            }
+                        }
+
+                    }
+                }
+
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    
+    
+    public List<modle.AppTbl> getAppListToTableForOtho_None() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+
+                if (application.getApproveToPaymant() == 0) { // Paymant Walata Approv karapu nethi
+
+                    Set<Apprualstatues> app = application.getApprualstatueses();
+                    for (Apprualstatues apprualstatues : app) {
+                        Integer idoc = apprualstatues.getIdOtheritisCat();
+                        int idOc = AuthUser.getIdOc();
+                        if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
+                            Integer statues = apprualstatues.getStatues();
+                            if (statues == 2) {// approv karala nethi application
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                            }
+                        }
+
+                    }
+                }
+
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
         }
     }
 
@@ -171,6 +279,24 @@ public class Aplication implements DAO<pojo.Application> {
             e.printStackTrace();
             bt.rollback();
             return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public pojo.Apprualstatues getApproveStatus(int no) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            Criteria c = session.createCriteria(pojo.Apprualstatues.class);
+            pojo.Apprualstatues uniqueResult = (pojo.Apprualstatues) c.add(Restrictions.eq("idApprualStatues", no)).uniqueResult();
+            return uniqueResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return null;
+        } finally {
+            session.close();
         }
     }
 

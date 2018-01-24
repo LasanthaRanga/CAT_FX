@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextArea?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="602.0" prefWidth="1158.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.AuthoritistController">
+   <children>
+      <Label layoutX="26.0" layoutY="14.0" text="Authoritist">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label fx:id="lbl_atype" layoutX="204.0" layoutY="14.0" prefHeight="35.0" prefWidth="392.0" text="Authoritist">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <JFXButton fx:id="btn_reload" layoutX="1114.0" layoutY="10.0" prefHeight="39.0" prefWidth="30.0" text="X" textFill="#da0000">
+         <font>
+            <Font size="18.0" />
+         </font></JFXButton>
+      <JFXButton fx:id="btn_approve" layoutX="613.0" layoutY="548.0" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: #388E3C;" text="Approve" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <TableView fx:id="tbl_applicaion" layoutX="26.0" layoutY="95.0" prefHeight="308.0" prefWidth="569.0">
+         <columns>
+            <TableColumn fx:id="c_idApp" prefWidth="50.0" text="ID" />
+            <TableColumn fx:id="c_type" prefWidth="88.00003051757812" text="Type" />
+            <TableColumn fx:id="c_nature" prefWidth="104.99996948242188" text="Nature" />
+            <TableColumn fx:id="c_alocation" prefWidth="92.0" text="Alocaion" />
+            <TableColumn fx:id="c_tax" prefWidth="85.0" text="Tax" />
+            <TableColumn fx:id="c_approve" prefWidth="134.0" text="Approve To Paymant" />
+         </columns>
+      </TableView>
+      <TableView fx:id="tbl_approve" layoutX="613.0" layoutY="95.0" prefHeight="177.0" prefWidth="519.0">
+         <columns>
+            <TableColumn fx:id="col_id" prefWidth="103.0" text="Approve id" />
+            <TableColumn fx:id="col_approve_by" prefWidth="129.0" text="Approve By" />
+            <TableColumn fx:id="col_statues" prefWidth="140.0" text="Statues" />
+            <TableColumn fx:id="col_date" prefWidth="121.0" text="Date" />
+         </columns>
+      </TableView>
+      <JFXTextArea fx:id="txt_myComment" labelFloat="true" layoutX="615.0" layoutY="446.0" prefHeight="75.0" prefWidth="516.0" promptText="My Comment" />
+      <JFXButton fx:id="btn_non" layoutX="754.0" layoutY="548.0" prefHeight="25.0" prefWidth="112.0" style="-fx-background-color: #E64A19;" text="NON Approve" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_send" layoutX="1005.0" layoutY="548.0" prefHeight="25.0" prefWidth="126.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
+      <JFXTextArea fx:id="txt_coment" labelFloat="true" layoutX="615.0" layoutY="332.0" prefHeight="75.0" prefWidth="516.0" promptText="Comment" />
+      <Label layoutX="26.0" layoutY="446.0" text="Application ID :" />
+      <Label fx:id="lbl_idApp" layoutX="129.0" layoutY="446.0" prefHeight="17.0" prefWidth="466.0" />
+      <Label layoutX="49.0" layoutY="472.0" text="Customer :" />
+      <Label fx:id="lbl_cusname" layoutX="129.0" layoutY="472.0" prefHeight="17.0" prefWidth="466.0" />
+      <Label fx:id="lbl_user" layoutX="613.0" layoutY="290.0" prefHeight="17.0" prefWidth="516.0" />
+      <Label layoutX="61.0" layoutY="418.0" text="User ID :" />
+      <Label fx:id="lbl_username" layoutX="128.0" layoutY="418.0" prefHeight="17.0" prefWidth="466.0" />
+      <JFXRadioButton fx:id="radio_panding" layoutX="26.0" layoutY="70.0" selected="true" text="Pending">
+         <toggleGroup>
+            <ToggleGroup fx:id="status" />
+         </toggleGroup>
+      </JFXRadioButton>
+      <JFXRadioButton fx:id="radio_approve" layoutX="129.0" layoutY="70.0" text="Approve" toggleGroup="$status" />
+      <JFXRadioButton fx:id="radio_none" layoutX="238.0" layoutY="70.0" text="None" toggleGroup="$status" />
+   </children>
+</AnchorPane>

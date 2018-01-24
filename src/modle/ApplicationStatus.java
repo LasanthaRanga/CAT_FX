@@ -46,7 +46,21 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
 
     @Override
     public boolean update(Apprualstatues t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.update(t);
+            bt.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+
     }
 
     @Override

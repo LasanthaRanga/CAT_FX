@@ -10,7 +10,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -23,9 +26,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import modle.AuthUser;
 import modle.Log_User;
+import modle.UserCat;
 import org.controlsfx.control.Notifications;
 import org.hibernate.Session;
+import pojo.UserHasOtheritiscat;
 
 /**
  * FXML Controller class
@@ -52,6 +58,10 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+        Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+        openSession.beginTransaction().commit();
+        openSession.close();
+
         btn_singin.setOnAction((event) -> {
             login();
         });
@@ -70,7 +80,7 @@ public class LoginController implements Initializable {
             btn_singin.getParent().getScene();
             Scene scene = new Scene(paymant);
             Stage stage = new Stage();
-            //stage.initStyle(StageStyle.TRANSPARENT);
+            stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();
         } catch (IOException ex) {
@@ -97,7 +107,7 @@ public class LoginController implements Initializable {
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
                 Stage stage = new Stage();
-                //stage.initStyle(StageStyle.TRANSPARENT);
+                stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
@@ -112,20 +122,68 @@ public class LoginController implements Initializable {
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_RIGHT).showWarning();
         } else if (b > 1) {
-            System.out.println("simple USET LOGIN");
-            try {
-                btn_singin.getParent().getScene().getWindow().hide();
-                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
-                btn_singin.getParent().getScene();
-                Scene scene = new Scene(paymant);
-                Stage stage = new Stage();
-                //stage.initStyle(StageStyle.TRANSPARENT);
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+
+            List<UserCat> userCats = AuthUser.getUserCats();
+            if (userCats.size() == 0) {
+                try {
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/main.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else if (userCats.size() == 1) {
+                try {
+
+                    UserCat oCat = userCats.get(0);
+                    AuthUser.setIdOc(oCat.getOthoid());
+
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/authoritist.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            } else {
+                try {
+                    Set<UserHasOtheritiscat> userHasOtheritiscats = AuthUser.getUser().getUserHasOtheritiscats();
+                    ArrayList<UserCat> ucs = new ArrayList<UserCat>();
+                    if (userHasOtheritiscats != null) {
+                        for (UserHasOtheritiscat uho : userHasOtheritiscats) {
+                            ucs.add(new UserCat(uho.getOtheritiscat().getIdOtheritisCat(), uho.getOtheritiscat().getCatname()));
+                        }
+                    }
+                    AuthUser.setUserCats(ucs);
+
+                  
+                    btn_singin.getParent().getScene().getWindow().hide();
+                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/SelectLoginType.fxml"));
+                    btn_singin.getParent().getScene();
+                    Scene scene = new Scene(paymant);
+                    Stage stage = new Stage();
+                    stage.initStyle(StageStyle.TRANSPARENT);
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                    Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
+
         }
 
     }

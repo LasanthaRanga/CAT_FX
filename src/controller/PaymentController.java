@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -62,8 +64,6 @@ public class PaymentController implements Initializable {
     private JFXTextField txt_year;
     @FXML
     private JFXTextField txt_month;
-    @FXML
-    private JFXTextField txt_day;
     @FXML
     private JFXTextField txt_trade_licen_no;
     @FXML
@@ -119,29 +119,93 @@ public class PaymentController implements Initializable {
         tbl_clmn_application_date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         this.setTable();
 
-//        btn_paynow.setOnAction((event) -> {
-//            System.out.println("PAY");
-//            try {
-//                AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/pay.fxml"));
-//                btn_paynow.getParent().getScene();
-//                Scene scene = new Scene(paymant);
-//                Stage stage = new Stage();
-//                stage.initStyle(StageStyle.TRANSPARENT);
-//                stage.setScene(scene);
-//                stage.show();
-//
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//        });
-
+        txt_tax_amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    double total = 0.0;
+                    total += Double.parseDouble(txt_tax_amount.getText());
+                    total += Double.parseDouble(txt_vat_amount.getText());
+                    total += Double.parseDouble(txt_nbt_amount.getText());
+                    total += Double.parseDouble(txt_stamp_amount.getText());
+                    txt_total_amount.setText(total + "");
+                } catch (NumberFormatException numberFormatException) {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Please Enter Valid Number.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            }
+        });
+        
+        txt_vat_amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    double total = 0.0;
+                    total += Double.parseDouble(txt_tax_amount.getText());
+                    total += Double.parseDouble(txt_vat_amount.getText());
+                    total += Double.parseDouble(txt_nbt_amount.getText());
+                    total += Double.parseDouble(txt_stamp_amount.getText());
+                    txt_total_amount.setText(total + "");
+                } catch (NumberFormatException numberFormatException) {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Please Enter Valid Number.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            }
+        });
+        
+        txt_nbt_amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    double total = 0.0;
+                    total += Double.parseDouble(txt_tax_amount.getText());
+                    total += Double.parseDouble(txt_vat_amount.getText());
+                    total += Double.parseDouble(txt_nbt_amount.getText());
+                    total += Double.parseDouble(txt_stamp_amount.getText());
+                    txt_total_amount.setText(total + "");
+                } catch (NumberFormatException numberFormatException) {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Please Enter Valid Number.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            }
+        });
+        
+        txt_stamp_amount.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                try {
+                    double total = 0.0;
+                    total += Double.parseDouble(txt_tax_amount.getText());
+                    total += Double.parseDouble(txt_vat_amount.getText());
+                    total += Double.parseDouble(txt_nbt_amount.getText());
+                    total += Double.parseDouble(txt_stamp_amount.getText());
+                    txt_total_amount.setText(total + "");
+                } catch (NumberFormatException numberFormatException) {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Please Enter Valid Number.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            }
+        });
     }
 
     private void setTable() {
-        ObservableList<Application> list = FXCollections.observableArrayList(new modle.Aplication().getUnpaiedApprovedApplications());
-        tbl_approved_list.setItems(list);
+        List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications();
+        if (unpaiedApprovedApplications != null) {
+            ObservableList<Application> list = FXCollections.observableArrayList(unpaiedApprovedApplications);
+            tbl_approved_list.setItems(list);
+        }
     }
 
     @FXML
@@ -254,7 +318,7 @@ public class PaymentController implements Initializable {
                             vort.getCashFlows().add(cashFlow);
                             cashFlow.setVort(vort);
                             vort.getPayments().add(payment);
-                            
+
                             // setup payment
                             payment.setPaymentDate(new Date());
                             payment.setApplicationNo(application.getIdApplication());
@@ -284,7 +348,7 @@ public class PaymentController implements Initializable {
                             payment.setSyn(1);
                             payment.setUserLog(modle.Log_User.getLogUser());
                             payment.setReceiptNo(nextReceiptNo + "");
-                            
+
                             // setup trade licen
                             tradeLicense.setTradeLicenseDate(new Date());
                             tradeLicense.setLicenNo(nextTradeLicenNo + "");
@@ -423,7 +487,7 @@ public class PaymentController implements Initializable {
     }
 
     @FXML
-    private void chequeClicked(ContextMenuEvent event) {
+    private void chequeClicked(MouseEvent event) {
         if (chb_check.isSelected()) {
             txt_cheque_no.setDisable(false);
             txt_cheque_date.setDisable(false);

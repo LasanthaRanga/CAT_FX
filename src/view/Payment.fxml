@@ -33,32 +33,65 @@
             <Font size="16.0" />
          </font>
       </Label>
-      <VBox layoutX="481.0" layoutY="77.0" prefHeight="461.0" prefWidth="242.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="77.0">
+      <VBox layoutX="481.0" layoutY="77.0" prefHeight="434.0" prefWidth="263.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="114.0" AnchorPane.leftAnchor="481.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label text="Application Details" />
-            <JFXTextField fx:id="txt_application_no" editable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="204.0" promptText="Application No" />
+            <JFXTextField fx:id="txt_application_no" editable="false" layoutX="10.0" layoutY="10.0" prefHeight="25.0" prefWidth="204.0" promptText="Application No">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="60.0" prefHeight="15.0" prefWidth="242.0" />
             <HBox prefHeight="35.0" prefWidth="242.0">
                <children>
-                  <JFXTextField fx:id="txt_year" prefHeight="25.0" prefWidth="79.0" promptText="Year" />
-                  <JFXTextField fx:id="txt_month" prefHeight="25.0" prefWidth="49.0" promptText="Month" />
+                  <JFXTextField fx:id="txt_year" prefHeight="25.0" prefWidth="79.0" promptText="Year">
+                     <font>
+                        <Font size="16.0" />
+                     </font></JFXTextField>
+                  <JFXTextField fx:id="txt_month" prefHeight="25.0" prefWidth="49.0" promptText="Month">
+                     <font>
+                        <Font size="16.0" />
+                     </font></JFXTextField>
                </children>
             </HBox>
             <Region prefHeight="15.0" prefWidth="242.0" />
             <Label layoutX="10.0" layoutY="10.0" text="Customer Details" />
-            <JFXTextField fx:id="txt_customer_name" editable="false" prefHeight="25.0" prefWidth="314.0" promptText="Customer Name" />
-            <JFXTextField fx:id="txt_customer_nic" editable="false" layoutX="15.0" layoutY="194.0" prefHeight="25.0" prefWidth="314.0" promptText="Customer NIC" />
+            <JFXTextField fx:id="txt_customer_name" editable="false" prefHeight="25.0" prefWidth="314.0" promptText="Customer Name">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+            <JFXTextField fx:id="txt_customer_nic" editable="false" layoutX="15.0" layoutY="194.0" prefHeight="25.0" prefWidth="314.0" promptText="Customer NIC">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="242.0" />
             <Label layoutX="10.0" layoutY="172.0" text="Trade Details" />
-            <JFXTextField fx:id="txt_trade_name" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Name" />
+            <JFXTextField fx:id="txt_trade_name" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Name">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="225.0" prefHeight="15.0" prefWidth="242.0" />
-            <JFXTextField fx:id="txt_trade_address1" editable="false" layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
-            <JFXTextField fx:id="txt_trade_address2" editable="false" layoutX="10.0" layoutY="290.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
-            <JFXTextField fx:id="txt_trade_address3" editable="false" layoutX="10.0" layoutY="315.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address" />
+            <JFXTextField fx:id="txt_trade_address1" editable="false" layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+            <JFXTextField fx:id="txt_trade_address2" editable="false" layoutX="10.0" layoutY="290.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
+            <JFXTextField fx:id="txt_trade_address3" editable="false" layoutX="10.0" layoutY="315.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="250.0" prefHeight="15.0" prefWidth="242.0" />
-            <JFXTextField fx:id="txt_allocation" editable="false" layoutX="10.0" layoutY="155.0" prefHeight="25.0" prefWidth="314.0" promptText="Allocation" />
+            <JFXTextField fx:id="txt_allocation" editable="false" layoutX="10.0" layoutY="155.0" prefHeight="25.0" prefWidth="314.0" promptText="Allocation">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="180.0" prefHeight="15.0" prefWidth="242.0" />
-            <JFXTextField fx:id="txt_tax" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Tax" />
+            <JFXTextField fx:id="txt_tax" editable="false" layoutX="10.0" layoutY="200.0" prefHeight="25.0" prefWidth="314.0" promptText="Tax">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
          </children>
          <opaqueInsets>
             <Insets />
@@ -70,19 +103,34 @@
       <VBox layoutX="757.0" layoutY="77.0" prefHeight="289.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
             <Label layoutX="10.0" layoutY="50.0" text="TAX" />
-            <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount" />
+            <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region prefHeight="15.0" prefWidth="287.0" />
             <Label text="VAT" />
-            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#vatAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00" />
+            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#vatAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="55.0" text="NBT" />
-            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#nbtAmountChange" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00" />
+            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#nbtAmountChange" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="117.0" text="Stamp" />
-            <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#stampAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00" />
+            <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#stampAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
             <Region layoutX="10.0" layoutY="125.0" prefHeight="20.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="181.0" text="Total" />
-            <JFXTextField fx:id="txt_total_amount" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount" />
+            <JFXTextField fx:id="txt_total_amount" alignment="CENTER_RIGHT" editable="false" prefHeight="25.0" prefWidth="153.0" promptText="Total Amount">
+               <font>
+                  <Font size="16.0" />
+               </font></JFXTextField>
          </children>
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
@@ -100,7 +148,7 @@
             <Insets top="5.0" />
          </padding>
       </HBox>
-      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="422.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
+      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="451.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
          <children>
             <HBox prefHeight="26.0" prefWidth="422.0" spacing="10.0">
                <children>
@@ -112,7 +160,7 @@
                   <Insets left="7.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <HBox prefHeight="128.0" prefWidth="439.0" spacing="10.0">
                <children>
                   <VBox prefHeight="90.0" prefWidth="190.0">
                      <children>
@@ -124,6 +172,9 @@
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
                               </JFXTextField>
                            </children>
                            <padding>
@@ -135,7 +186,10 @@
                   <VBox prefHeight="90.0" prefWidth="198.0">
                      <children>
                         <Label text="Cheque :" />
-                        <JFXTextField fx:id="txt_cheque_no" disable="true" promptText="Cheque Number" />
+                        <JFXTextField fx:id="txt_cheque_no" disable="true" promptText="Cheque Number">
+                           <font>
+                              <Font size="16.0" />
+                           </font></JFXTextField>
                         <HBox prefHeight="39.0" prefWidth="198.0" spacing="5.0">
                            <children>
                               <Label text="Rs." />
@@ -143,6 +197,9 @@
                                  <opaqueInsets>
                                     <Insets />
                                  </opaqueInsets>
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
                               </JFXTextField>
                            </children>
                            <padding>

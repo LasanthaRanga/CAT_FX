@@ -7,6 +7,7 @@ package modle;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.geometry.Pos;
@@ -35,11 +36,13 @@ public class Report {
         }
     }
 
-    public void paymentReceipt(int applicationId) throws JRException {
+    public void paymentReceipt(int paymentId) {
         try {
-            String path = "C:\\Program Files\\Common Files\\LibrarySystem\\BookList.jrxml";
+            String path = "C:\\cat\\report\\paymentReceipt.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(path);
-            JasperPrint jp = JasperFillManager.fillReport(jr, null, this.getConnection());
+            HashMap param=new HashMap<String, Integer>();
+            param.put("paymentId", paymentId);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
             JasperViewer.viewReport(jp);
         } catch (JRException jRException) {
             Notifications.create()

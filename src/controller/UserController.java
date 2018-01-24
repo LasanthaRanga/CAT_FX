@@ -87,6 +87,9 @@ public class UserController implements Initializable {
         txt_nic.setText(null);
         txt_pword.setText(null);
         txt_pword.setText(null);
+        txt_uname.setText(null);
+        com_sq.getSelectionModel().clearSelection();
+        loadSQ();
     }
 
 //    public void saveUsers() {
@@ -140,6 +143,7 @@ public class UserController implements Initializable {
                                 // init to database
                                 Users modle_user = new modle.Users();
                                 if (modle_user.saveOrUpdate(user)) {
+                                    clear();
                                     Notifications.create()
                                             .title("Success")
                                             .text("User added success.")

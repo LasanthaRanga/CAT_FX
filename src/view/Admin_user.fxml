@@ -15,13 +15,34 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="218.0" layoutY="163.0" prefHeight="25.0" prefWidth="263.0" promptText="Full Name" />
-      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="559.0" layoutY="163.0" prefHeight="25.0" prefWidth="180.0" promptText="NIC" />
-      <JFXTextField fx:id="txt_mobile" labelFloat="true" layoutX="834.0" layoutY="163.0" prefHeight="25.0" prefWidth="180.0" promptText="Mobile" />
-      <JFXTextField fx:id="txt_uname" labelFloat="true" layoutX="561.0" layoutY="324.0" prefHeight="25.0" prefWidth="180.0" promptText="User Name" />
-      <JFXPasswordField fx:id="txt_pword" labelFloat="true" layoutX="560.0" layoutY="416.0" prefHeight="25.0" prefWidth="180.0" promptText="Password" />
-      <JFXComboBox fx:id="com_sq" labelFloat="true" layoutX="436.0" layoutY="232.0" prefHeight="25.0" prefWidth="180.0" promptText="Security Questions" />
-      <JFXTextField fx:id="txt_answer" labelFloat="true" layoutX="690.0" layoutY="232.0" prefHeight="25.0" prefWidth="180.0" promptText="Answer" />
-      <JFXButton fx:id="btn_saveuser" layoutX="550.0" layoutY="494.0" onMouseClicked="#saveUser" prefHeight="38.0" prefWidth="194.0" text="Sing Up" AnchorPane.leftAnchor="550.0" AnchorPane.rightAnchor="556.0" />
+      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="462.0" layoutY="93.0" prefHeight="28.0" prefWidth="360.0" promptText="Full Name">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="462.0" layoutY="158.0" prefHeight="28.0" prefWidth="360.0" promptText="NIC">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_mobile" labelFloat="true" layoutX="461.0" layoutY="223.0" prefHeight="28.0" prefWidth="360.0" promptText="Mobile">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_uname" labelFloat="true" layoutX="458.0" layoutY="420.0" prefHeight="25.0" prefWidth="360.0" promptText="User Name">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXPasswordField fx:id="txt_pword" labelFloat="true" layoutX="459.0" layoutY="490.0" prefHeight="25.0" prefWidth="360.0" promptText="Password">
+         <font>
+            <Font size="14.0" />
+         </font></JFXPasswordField>
+      <JFXComboBox fx:id="com_sq" labelFloat="true" layoutX="462.0" layoutY="288.0" prefHeight="28.0" prefWidth="360.0" promptText="Security Questions" />
+      <JFXTextField fx:id="txt_answer" labelFloat="true" layoutX="458.0" layoutY="356.0" prefHeight="25.0" prefWidth="360.0" promptText="Answer">
+         <font>
+            <Font size="14.0" />
+         </font></JFXTextField>
+      <JFXButton fx:id="btn_saveuser" layoutX="460.0" layoutY="564.0" onMouseClicked="#saveUser" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #388E3C;" text="Sing Up" textFill="WHITE" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="480.0">
+         <font>
+            <Font size="14.0" />
+         </font></JFXButton>
    </children>
 </AnchorPane>

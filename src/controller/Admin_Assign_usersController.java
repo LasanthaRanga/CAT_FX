@@ -17,14 +17,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.SingleSelectionModel;
+
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
-import modle.Users;
-import org.hibernate.Session;
-import pojo.Department;
+
 import pojo.User;
 import pojo.UserHasCatagory;
 import pojo.UserHasDepartment;
@@ -98,13 +96,13 @@ public class Admin_Assign_usersController implements Initializable {
     private TableColumn<TblCat, String> col_c_cat;
 
     @FXML
-    private TableView<?> tbl_author;
+    private TableView<TblAuther> tbl_author;
 
     @FXML
-    private TableColumn<?, ?> col_a_id;
+    private TableColumn<TblAuther, String> col_a_id;
 
     @FXML
-    private TableColumn<?, ?> col_a_name;
+    private TableColumn<TblAuther, String> col_a_name;
 
     modle.Users usersmod;
 
@@ -285,6 +283,7 @@ public class Admin_Assign_usersController implements Initializable {
             user = usersmod.getByIdUser(idUser);
             loadDepartmentByUser(usersmod);
             loadCatByUser(usersmod);
+            loadAutherByUser(usersmod);
         });
     }
 
@@ -332,8 +331,8 @@ public class Admin_Assign_usersController implements Initializable {
                 UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1);
                 //    UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1, 1);
                 if (new modle.UserHas_Dip().save(uhd)) {
-                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());                    
-                    loadDepartmentByUser(usersmod);                     
+                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                    loadDepartmentByUser(usersmod);
                 } else {
                     modle.Allert.notificationError("Error", "");
                 }
@@ -362,10 +361,11 @@ public class Admin_Assign_usersController implements Initializable {
         btn_outh_assign.setOnAction((event) -> {
             if (user != null && other != null) {
                 UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1);
-                //  UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);             
                 
+
                 if (new modle.UserHas_Authorities().save(uha)) {
                     modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                    loadAutherByUser(usersmod);
                 } else {
                     modle.Allert.notificationError("Error", "");
                 }
@@ -453,6 +453,50 @@ public class Admin_Assign_usersController implements Initializable {
         private SimpleStringProperty dip;
 
         public TblCat(int id, String dip) {
+            this.id = id;
+            this.dip = new SimpleStringProperty(dip);
+        }
+
+    }
+
+    ObservableList aList = FXCollections.observableArrayList();
+
+    public void loadAutherByUser(modle.Users usermod) {
+
+        col_a_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_a_name.setCellValueFactory(new PropertyValueFactory<>("dip"));
+
+        HashMap<Integer, String> departments = usermod.getAuthoriti(user.getIdUser());
+        Set keySet = departments.keySet();
+        aList.clear();
+        for (Integer key : departments.keySet()) {
+            aList.add(new TblAuther(key, departments.get(key)));
+        }
+       
+        tbl_author.setItems(aList);
+
+    }
+
+    public class TblAuther {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the dip
+         */
+        public String getDip() {
+            return dip.get();
+        }
+
+        private int id;
+        private SimpleStringProperty dip;
+
+        public TblAuther(int id, String dip) {
             this.id = id;
             this.dip = new SimpleStringProperty(dip);
         }

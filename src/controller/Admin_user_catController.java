@@ -88,6 +88,7 @@ public class Admin_user_catController implements Initializable {
             if (cat.save(txt_catagory.getText())) {
                 modle.Allert.notificationGood("Saved", txt_catagory.getText());
                 loadCatTbl();
+                txt_catagory.setText("");
             } else {
                 modle.Allert.notificationError("Fail", txt_catagory.getText());
             }
@@ -100,6 +101,7 @@ public class Admin_user_catController implements Initializable {
             if (new modle.Department().save(department)) {
                 modle.Allert.notificationGood("Added", department.getDepartment());
                 loadDepTbl();
+                txt_department.setText("");
             } else {
                 modle.Allert.notificationError("Error", txt_department.getText());
             }
@@ -112,6 +114,7 @@ public class Admin_user_catController implements Initializable {
             Otheritiscat otheritiscat = new pojo.Otheritiscat(txt_authorities.getText(), "", 1, 1, null);
             if (new modle.Authority().save(otheritiscat)) {
                 modle.Allert.notificationGood("Added", otheritiscat.getCatname());
+                txt_authorities.setText("");
                 loadOtherTable();
             } else {
                 modle.Allert.notificationError("Error", txt_authorities.getText());

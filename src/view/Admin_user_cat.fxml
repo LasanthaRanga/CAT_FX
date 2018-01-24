@@ -11,14 +11,14 @@
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_user_catController">
    <children>
       <JFXTextField fx:id="txt_catagory" layoutX="1008.0" layoutY="199.0" prefHeight="25.0" prefWidth="251.0" promptText="User Catagory" />
-      <JFXButton fx:id="btn_add_cat" layoutX="1206.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
+      <JFXButton fx:id="btn_add_cat" layoutX="1206.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #388E3C;" text="Add" textFill="WHITE" />
       <TableView fx:id="tbl_catagory" layoutX="1008.0" layoutY="289.0" prefHeight="159.0" prefWidth="251.0">
         <columns>
           <TableColumn fx:id="col_id_cat" prefWidth="75.0" text="#" />
           <TableColumn fx:id="col_cat" prefWidth="161.0" text="Catagory" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btn_add_department" layoutX="435.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
+      <JFXButton fx:id="btn_add_department" layoutX="435.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #388E3C;" text="Add" textFill="WHITE" />
       <TableView fx:id="tbl_department" layoutX="237.0" layoutY="289.0" prefHeight="159.0" prefWidth="251.0">
          <columns>
             <TableColumn fx:id="col_id_dep" prefWidth="75.0" text="#" />
@@ -27,7 +27,7 @@
       </TableView>
       <JFXTextField fx:id="txt_department" layoutX="237.0" layoutY="199.0" prefHeight="25.0" prefWidth="251.0" promptText="Department" />
       <JFXTextField fx:id="txt_authorities" layoutX="624.0" layoutY="199.0" prefHeight="25.0" prefWidth="251.0" promptText="Authorities" />
-      <JFXButton fx:id="btn_add_authorities" layoutX="822.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" text="Add" />
+      <JFXButton fx:id="btn_add_authorities" layoutX="822.0" layoutY="244.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #388E3C;" text="Add" textFill="WHITE" />
       <TableView fx:id="tbl_authorities" layoutX="624.0" layoutY="289.0" prefHeight="159.0" prefWidth="251.0">
          <columns>
             <TableColumn fx:id="col_id_authorities" prefWidth="75.0" text="#" />

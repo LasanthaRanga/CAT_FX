@@ -42,11 +42,8 @@
                <children>
                   <JFXTextField fx:id="txt_year" prefHeight="25.0" prefWidth="79.0" promptText="Year" />
                   <JFXTextField fx:id="txt_month" prefHeight="25.0" prefWidth="49.0" promptText="Month" />
-                  <JFXTextField fx:id="txt_day" prefHeight="25.0" prefWidth="49.0" promptText="Day" />
                </children>
             </HBox>
-            <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="242.0" />
-            <JFXTextField fx:id="txt_trade_licen_no" prefHeight="25.0" prefWidth="204.0" promptText="Trade Licen NO." />
             <Region prefHeight="15.0" prefWidth="242.0" />
             <Label layoutX="10.0" layoutY="10.0" text="Customer Details" />
             <JFXTextField fx:id="txt_customer_name" editable="false" prefHeight="25.0" prefWidth="314.0" promptText="Customer Name" />
@@ -109,7 +106,7 @@
                <children>
                   <CheckBox fx:id="chb_cash" mnemonicParsing="false" onMouseClicked="#cashClicked" selected="true" text="Cash" />
                   <Region prefHeight="19.0" prefWidth="136.0" />
-                  <CheckBox fx:id="chb_check" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onContextMenuRequested="#chequeClicked" text="Cheque" />
+                  <CheckBox fx:id="chb_check" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onMouseClicked="#chequeClicked" text="Cheque" />
                </children>
                <padding>
                   <Insets left="7.0" right="5.0" top="5.0" />

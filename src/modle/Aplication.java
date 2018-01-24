@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
 import pojo.Application;
@@ -132,7 +133,9 @@ public class Aplication implements DAO<pojo.Application> {
                     .setFetchMode("aplicationPayments", FetchMode.JOIN)
                     .setFetchMode("tradeType", FetchMode.JOIN)
                     .setFetchMode("customer", FetchMode.JOIN)
-                    .setFetchMode("apprualstatueses", FetchMode.JOIN).list();
+                    .setFetchMode("apprualstatueses", FetchMode.JOIN)
+                    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                    .list();
             ArrayList<Application> ap_list = new ArrayList<pojo.Application>();
             for (Application application : list) {
                 if (application.getAplicationPayments().size() == 0) {

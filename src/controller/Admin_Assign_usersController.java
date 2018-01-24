@@ -85,23 +85,63 @@ public class Admin_Assign_usersController implements Initializable {
     @FXML
     private TableColumn<TableCat, String> col_dip_dipartment;
 
+    @FXML
+    private JFXButton btn_reload;
+
+    @FXML
+    private TableView<TblCat> tbl_cat;
+
+    @FXML
+    private TableColumn<TblCat, Integer> col_c_id;
+
+    @FXML
+    private TableColumn<TblCat, String> col_c_cat;
+
+    @FXML
+    private TableView<?> tbl_author;
+
+    @FXML
+    private TableColumn<?, ?> col_a_id;
+
+    @FXML
+    private TableColumn<?, ?> col_a_name;
+
+    modle.Users usersmod;
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        usersmod = new modle.Users();
         loadUserTbl();
         loadDepartmentCombo();
         loadCatagoryCombo();
         loadOutherCombo();
+
         selectUserFromTable();
         selectDepartmentFromCombo();
         assignDipartment();
+
         selectCatagoryFromCombo();
         selectOutherFromCombo();
+
         assignCatagory();
         assignAuthority();
+
+        btn_reload.setOnAction((event) -> {
+
+            loadUserTbl();
+            loadDepartmentCombo();
+            loadCatagoryCombo();
+            loadOutherCombo();
+
+            com_authorities.getSelectionModel().clearSelection();
+            com_catagory.getSelectionModel().clearSelection();
+            com_department.getSelectionModel().clearSelection();
+
+        });
     }
 
     public class UserTbl {
@@ -242,9 +282,9 @@ public class Admin_Assign_usersController implements Initializable {
     public void selectUserFromTable() {
         tbl_user.setOnMouseReleased((MouseEvent event) -> {
             int idUser = tbl_user.getSelectionModel().getSelectedItem().getIdUser();
-            Users usersmod = new modle.Users();
             user = usersmod.getByIdUser(idUser);
             loadDepartmentByUser(usersmod);
+            loadCatByUser(usersmod);
         });
     }
 
@@ -292,7 +332,8 @@ public class Admin_Assign_usersController implements Initializable {
                 UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1);
                 //    UserHasDepartment uhd = new pojo.UserHasDepartment(dip, user, 1, 1);
                 if (new modle.UserHas_Dip().save(uhd)) {
-                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                    modle.Allert.notificationGood("Assign Compleet", user.getFullName());                    
+                    loadDepartmentByUser(usersmod);                     
                 } else {
                     modle.Allert.notificationError("Error", "");
                 }
@@ -308,6 +349,7 @@ public class Admin_Assign_usersController implements Initializable {
 
                 if (new modle.UserHas_Catagory().save(uhc)) {
                     modle.Allert.notificationGood("Assign Compleet", user.getFullName());
+                    loadCatByUser(usersmod);
                 } else {
                     modle.Allert.notificationError("Error", "");
                 }
@@ -320,7 +362,8 @@ public class Admin_Assign_usersController implements Initializable {
         btn_outh_assign.setOnAction((event) -> {
             if (user != null && other != null) {
                 UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1);
-                //  UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);
+                //  UserHasOtheritiscat uha = new pojo.UserHasOtheritiscat(other, user, 1, 1);             
+                
                 if (new modle.UserHas_Authorities().save(uha)) {
                     modle.Allert.notificationGood("Assign Compleet", user.getFullName());
                 } else {
@@ -367,6 +410,49 @@ public class Admin_Assign_usersController implements Initializable {
         private SimpleStringProperty dip;
 
         public TableCat(int id, String dip) {
+            this.id = id;
+            this.dip = new SimpleStringProperty(dip);
+        }
+
+    }
+
+    ObservableList cList = FXCollections.observableArrayList();
+
+    public void loadCatByUser(modle.Users usermod) {
+
+        col_c_id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        col_c_cat.setCellValueFactory(new PropertyValueFactory<>("dip"));
+
+        HashMap<Integer, String> departments = usermod.getCatagory(user.getIdUser());
+        Set keySet = departments.keySet();
+        cList.clear();
+        for (Integer key : departments.keySet()) {
+            cList.add(new TblCat(key, departments.get(key)));
+        }
+        tbl_cat.setItems(cList);
+
+    }
+
+    public class TblCat {
+
+        /**
+         * @return the id
+         */
+        public int getId() {
+            return id;
+        }
+
+        /**
+         * @return the dip
+         */
+        public String getDip() {
+            return dip.get();
+        }
+
+        private int id;
+        private SimpleStringProperty dip;
+
+        public TblCat(int id, String dip) {
             this.id = id;
             this.dip = new SimpleStringProperty(dip);
         }

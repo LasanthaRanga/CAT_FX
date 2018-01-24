@@ -193,6 +193,28 @@ public class Users implements DAO<pojo.User> {
         }
     }
     
+    
+    
+    public HashMap getCatagory(int user) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        HashMap<Integer, String> dip = new HashMap<>();
+
+        try {
+            pojo.User User = (pojo.User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", user)).uniqueResult();
+            Set<UserHasCatagory> userHasDepartments = User.getUserHasCatagories();
+            for (UserHasCatagory userHasCatagory : userHasDepartments) {
+                dip.put(userHasCatagory.getCatagory().getIdCatagory(), userHasCatagory.getCatagory().getCatagoryName());
+            }
+            return dip;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return dip;
+        } finally {
+            session.close();
+        }
+    }
+    
+    
     public List<pojo.UserHasDepartment> getUserDepartments(int userId){
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {

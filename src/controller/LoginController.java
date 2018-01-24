@@ -81,6 +81,7 @@ public class LoginController implements Initializable {
             btn_singin.getParent().getScene();
             Scene scene = new Scene(paymant);
             Stage stage = new Stage();
+            stage.resizableProperty().setValue(Boolean.FALSE);
             stage.initStyle(StageStyle.TRANSPARENT);
             stage.setScene(scene);
             stage.show();

@@ -116,9 +116,12 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private JFXButton btn_send_approve;
-    
+
     @FXML
     public static Label lbl_idCus;
+
+    @FXML
+    private JFXButton btn_approve;
 
     pojo.Ward pward = null;
 
@@ -140,6 +143,12 @@ public class ApplicationController implements Initializable {
         Customer cus = new modle.Customer();
         ArrayList list = cus.getCustomerFnameList();
         TextFields.bindAutoCompletion(txt_cus_fname, list);
+
+        btn_approve.setOnAction((event) -> {
+
+            ApproveToPay();
+
+        });
 
     }
 
@@ -456,6 +465,7 @@ public class ApplicationController implements Initializable {
 
                 app.setTaxAmount(Double.parseDouble(txtAmount));
                 app.setDiscription(discription);
+                app.setApproveToPaymant(0);
                 app.setStatues(1);
                 app.setSyn(1);
 
@@ -489,6 +499,18 @@ public class ApplicationController implements Initializable {
             }
 
         });
+    }
+
+    public void ApproveToPay() {
+
+        pojo.Application app = modle.StaticBadu.getApp();
+
+        if (app != null) {
+
+            app.setApproveToPaymant(1);
+            new modle.Aplication().update(app);
+        }
+
     }
 
 }

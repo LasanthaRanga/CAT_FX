@@ -82,6 +82,7 @@ public class SendToApproveController implements Initializable {
         btn_done.setOnAction((event) -> {
             btn_done.getParent().getScene().getWindow().hide();
         });
+        
 
     }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 22, 2018 1:40:56 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 24, 2018 4:16:20 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Application" table="application" catalog="cat" optimistic-lock="version">
         <id name="idApplication" type="java.lang.Integer">
@@ -12,7 +12,7 @@
             <column name="Customer_idCustomer" not-null="true" />
         </many-to-one>
         <many-to-one name="subNature" class="pojo.SubNature" fetch="select">
-            <column name="Sub_Nature_idSub_Nature" not-null="true" />
+            <column name="Sub_Nature_idSub_Nature" />
         </many-to-one>
         <many-to-one name="tradeNature" class="pojo.TradeNature" fetch="select">
             <column name="Trade_Nature_idTrade_Nature" not-null="true" />

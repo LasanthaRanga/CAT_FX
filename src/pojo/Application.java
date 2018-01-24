@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 22, 2018 1:40:54 PM by Hibernate Tools 4.3.1
+// Generated Jan 24, 2018 4:16:18 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -42,9 +42,8 @@ public class Application  implements java.io.Serializable {
     }
 
 	
-    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog) {
+    public Application(Customer customer, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog) {
         this.customer = customer;
-        this.subNature = subNature;
         this.tradeNature = tradeNature;
         this.tradeType = tradeType;
         this.user = user;

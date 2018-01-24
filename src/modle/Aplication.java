@@ -66,6 +66,8 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
+            session.update(t);
+            bt.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -74,7 +76,6 @@ public class Aplication implements DAO<pojo.Application> {
         } finally {
             session.close();
         }
-
     }
 
     @Override
@@ -235,9 +236,7 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
-    
-    
-    
+
     public List<modle.AppTbl> getAppListToTableForOtho_None() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {

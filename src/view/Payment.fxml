@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -100,25 +101,57 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="757.0" layoutY="77.0" prefHeight="289.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
+      <VBox layoutX="757.0" layoutY="77.0" prefHeight="318.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
+            <HBox prefHeight="42.0" prefWidth="275.0" spacing="10.0">
+               <children>
+                  <JFXTextField fx:id="txt_year_pay" promptText="Year">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txt_month_pay" promptText="Month">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
+                  <JFXTextField fx:id="txt_day_pay" prefHeight="25.0" prefWidth="104.0" promptText="Day">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <Region layoutX="16.0" layoutY="66.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="50.0" text="TAX" />
             <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount">
                <font>
                   <Font size="16.0" />
                </font></JFXTextField>
             <Region prefHeight="15.0" prefWidth="287.0" />
-            <Label text="VAT" />
-            <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#vatAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="VAT" text="00.00">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
+            <Label onMouseClicked="#allowVAT" text="VAT" />
+            <HBox prefHeight="41.0" prefWidth="275.0">
+               <children>
+                  <JFXCheckBox fx:id="chb_vat_allow" text=" " />
+                  <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#vatAmountChange" prefHeight="33.0" prefWidth="231.0" promptText="VAT" text="00.00">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </HBox>
             <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="55.0" text="NBT" />
-            <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#nbtAmountChange" prefHeight="25.0" prefWidth="99.0" promptText="NBT" text="00.00">
-               <font>
-                  <Font size="16.0" />
-               </font></JFXTextField>
+            <HBox prefHeight="46.0" prefWidth="275.0">
+               <children>
+                  <JFXCheckBox fx:id="chb_nbt_allow" onMouseClicked="#allowNBT" text=" " />
+                  <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#nbtAmountChange" prefHeight="33.0" prefWidth="233.0" promptText="NBT" text="00.00">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
+               </children>
+            </HBox>
             <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="117.0" text="Stamp" />
             <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#stampAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00">
@@ -148,7 +181,7 @@
             <Insets top="5.0" />
          </padding>
       </HBox>
-      <VBox layoutX="757.0" layoutY="378.0" prefHeight="228.0" prefWidth="451.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="378.0">
+      <VBox layoutX="757.0" layoutY="398.0" prefHeight="208.0" prefWidth="451.0" style="-fx-border-color: #e0e0e0;" AnchorPane.bottomAnchor="19.0" AnchorPane.topAnchor="398.0">
          <children>
             <HBox prefHeight="26.0" prefWidth="422.0" spacing="10.0">
                <children>

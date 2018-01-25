@@ -9,17 +9,17 @@
 
 <AnchorPane id="AnchorPane" prefHeight="345.0" prefWidth="410.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
-      <Label layoutX="23.0" layoutY="18.0" text="Login..." textFill="#2c2cff">
+      <Label layoutX="16.0" layoutY="16.0" text="Login..." textFill="#2c2cff">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_uname" labelFloat="true" layoutX="91.0" layoutY="103.0" prefHeight="25.0" prefWidth="227.0" promptText="User Name">
+      <JFXTextField fx:id="txt_uname" labelFloat="true" layoutX="75.0" layoutY="103.0" prefHeight="33.0" prefWidth="243.0" promptText="User Name">
          <font>
             <Font size="16.0" />
          </font>
       </JFXTextField>
-      <JFXPasswordField fx:id="txt_pass" labelFloat="true" layoutX="91.0" layoutY="180.0" onKeyReleased="#enterLog" prefHeight="25.0" prefWidth="227.0" promptText="Password">
+      <JFXPasswordField fx:id="txt_pass" labelFloat="true" layoutX="75.0" layoutY="180.0" onKeyReleased="#enterLog" prefHeight="33.0" prefWidth="243.0" promptText="Password">
          <font>
             <Font size="16.0" />
          </font>

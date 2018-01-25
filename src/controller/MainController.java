@@ -12,26 +12,23 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.application.Platform;
 
-import javafx.event.ActionEvent;
+
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 
 import javafx.scene.Node;
-import javafx.scene.Scene;
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import javafx.scene.layout.VBox;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
-import pojo.UserLog;
-import sun.security.x509.URIName;
+
 
 /**
  * FXML Controller class

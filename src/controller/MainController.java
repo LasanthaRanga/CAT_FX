@@ -96,7 +96,7 @@ public class MainController implements Initializable {
                             AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
 
                             container.getChildren().removeAll(ward);
-                         
+                            container.getChildren().clear();
 
                             switch (accessibleText) {
 

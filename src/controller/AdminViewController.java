@@ -60,7 +60,7 @@ public class AdminViewController implements Initializable {
             VBox box = FXMLLoader.load(getClass().getResource("/view/AdminNavicationPanel.fxml"));
             drawer.setSidePane(box);
             for (Node node : box.getChildren()) {
-                
+
                 String accessibleText = node.getAccessibleText();
 
                 if (accessibleText != null) {
@@ -75,21 +75,24 @@ public class AdminViewController implements Initializable {
                             switch (accessibleText) {
                                 case "btn_users":
                                     container.getChildren().removeAll();
-                                    
+                                    container.getChildren().clear();
                                     container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user.fxml")));
                                     break;
 
                                 case "user_types":
                                     container.getChildren().removeAll();
+                                    container.getChildren().clear();
                                     container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user_cat.fxml")));
                                     break;
 
                                 case "assignusers":
                                     container.getChildren().removeAll();
+                                    container.getChildren().clear();
                                     container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_Assign_users.fxml")));
                                     break;
                                 case "userupdate":
                                     container.getChildren().removeAll();
+                                    container.getChildren().clear();
                                     container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user_update.fxml")));
                                     break;
 
@@ -100,7 +103,6 @@ public class AdminViewController implements Initializable {
 
                                     break;
 
-                                                                
                             }
                         } catch (Exception ee) {
                             ee.printStackTrace();

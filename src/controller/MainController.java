@@ -88,45 +88,38 @@ public class MainController implements Initializable {
                     node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
                         try {
 
-                            AnchorPane ward = FXMLLoader.load(getClass().getResource("/view/ward.fxml"));
-                            AnchorPane nature = FXMLLoader.load(getClass().getResource("/view/nature.fxml"));
-                            AnchorPane customer = FXMLLoader.load(getClass().getResource("/view/customer.fxml"));
-                            AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
-                            AnchorPane applist = FXMLLoader.load(getClass().getResource("/view/ApplicationList.fxml"));
-                            AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
-
-                            container.getChildren().removeAll(ward);
+                            container.getChildren().removeAll();
                             container.getChildren().clear();
 
                             switch (accessibleText) {
 
                                 case "btn_test1":
-
+                                    AnchorPane ward = FXMLLoader.load(getClass().getResource("/view/ward.fxml"));
                                     container.getChildren().add(ward);
                                     break;
 
                                 case "btn_test2":
-
+                                    AnchorPane nature = FXMLLoader.load(getClass().getResource("/view/nature.fxml"));
                                     container.getChildren().add(nature);
                                     break;
 
                                 case "customer":
-
+                                    AnchorPane customer = FXMLLoader.load(getClass().getResource("/view/customer.fxml"));
                                     container.getChildren().add(customer);
                                     break;
 
                                 case "Aplication":
-
+                                    AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
                                     container.getChildren().add(aplication);
                                     break;
 
                                 case "applist":
-
+                                    AnchorPane applist = FXMLLoader.load(getClass().getResource("/view/ApplicationList.fxml"));
                                     container.getChildren().add(applist);
                                     break;
 
                                 case "payment":
-
+                                    AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
                                     container.getChildren().add(paymant);
                                     break;
 

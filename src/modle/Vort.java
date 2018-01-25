@@ -6,6 +6,7 @@
 package modle;
 
 import java.util.List;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -121,7 +122,11 @@ public class Vort implements DAO<pojo.Vort>{
     public pojo.Vort getById(int id){
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            return (pojo.Vort) session.createCriteria(pojo.Vort.class).add(Restrictions.eq("idVort", id)).uniqueResult();
+            return (pojo.Vort) session.createCriteria(pojo.Vort.class)
+                    .add(Restrictions.eq("idVort", id))
+                    .setFetchMode("cashFlows", FetchMode.JOIN)
+                    .setFetchMode("payments", FetchMode.JOIN)
+                    .uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;

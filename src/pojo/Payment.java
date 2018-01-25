@@ -186,6 +186,15 @@ public class Payment  implements java.io.Serializable {
         this.aplicationPayments = aplicationPayments;
     }
 
+    @Override
+    public String toString() {
+        return "Payment{" + "idPayment=" + idPayment + ", userLog=" + userLog.getIdUserLog() + ", vort=" + vort 
+                + ", applicationNo=" + applicationNo + ", year=" + year + ", month=" + month 
+                + ", paymentDate=" + paymentDate + ", receiptNo=" + receiptNo + ", taxAmount=" 
+                + taxAmount + ", vat=" + vat + ", nbt=" + nbt + ", spamp=" + spamp + ", totaleAmount=" 
+                + totaleAmount + ", cashCheack=" + cashCheack + ", status=" + status + ", syn=" + syn + '}';
+    }
+
 
 
 

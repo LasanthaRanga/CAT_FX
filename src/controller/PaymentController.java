@@ -111,12 +111,6 @@ public class PaymentController implements Initializable {
     @FXML
     private JFXTextField txt_pay_amount_cheque;
     @FXML
-    private JFXTextField txt_year_pay;
-    @FXML
-    private JFXTextField txt_month_pay;
-    @FXML
-    private JFXTextField txt_day_pay;
-    @FXML
     private JFXCheckBox chb_vat_allow;
     @FXML
     private JFXCheckBox chb_nbt_allow;
@@ -192,17 +186,8 @@ public class PaymentController implements Initializable {
                 }
             }
         });
-    }
-
-    public void SetDate() {
-        Date date = new Date();
-        SimpleDateFormat yeare = new SimpleDateFormat("yyyy");
-        SimpleDateFormat month = new SimpleDateFormat("MM");
-        SimpleDateFormat day = new SimpleDateFormat("dd");
-
-        txt_year_pay.setText(yeare.format(date));
-        txt_month_pay.setText(month.format(date));
-        txt_day_pay.setText(day.format(date));
+        
+        txt_payment_date.setValue(LocalDate.now());
     }
 
     private void setTable() {
@@ -249,7 +234,7 @@ public class PaymentController implements Initializable {
 
     @FXML
     private void paynow(MouseEvent event) {
-        this.payNow(true);
+        this.payNow(false);
     }
 
     @FXML
@@ -257,7 +242,7 @@ public class PaymentController implements Initializable {
         this.reset();
     }
 
-    public void reset(){
+    public void reset() {
         this.setTable();
         txt_application_no.setText("");
         txt_allocation.setText("");
@@ -277,7 +262,7 @@ public class PaymentController implements Initializable {
         txt_total_amount.setText("");
         txt_payment_date.setValue(LocalDate.now());
     }
-    
+
     private void setTotal() {
         try {
             Interest interest = new modle.Interest();
@@ -285,23 +270,48 @@ public class PaymentController implements Initializable {
 
             double tax_amount = Double.parseDouble(txt_tax_amount.getText());
             total += tax_amount;
-
+            
+            // set nbt
             if (chb_nbt_allow.isSelected()) {
                 pojo.Interest intres = interest.getByName("NBT");
-                double nbt_amount = (tax_amount * intres.getRate()) / 100;
-                txt_nbt_amount.setText(nbt_amount + "");
-                total += nbt_amount;
+                if (intres != null) {
+                    double nbt_amount = (tax_amount * intres.getRate()) / 100;
+                    txt_nbt_amount.setText(Math.round(nbt_amount*100.00)/100.00+ "");
+                    total += nbt_amount;
+                } else {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Not Found NBT Details.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            } else {
+                txt_nbt_amount.setText("00.00");
             }
-
+            // set vat
             if (chb_vat_allow.isSelected()) {
                 pojo.Interest intres = interest.getByName("VAT");
-                double vat_amount = (tax_amount * intres.getRate()) / 100;
-                txt_vat_amount.setText(vat_amount + "");
-                total += vat_amount;
+                if (intres != null) {
+                    double vat_amount = (tax_amount * intres.getRate()) / 100;
+                    txt_vat_amount.setText(Math.round(vat_amount*100.00)/100.00+ "");
+                    total += vat_amount;
+                } else {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Not Found VAT Details.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            } else {
+                txt_vat_amount.setText("00.00");
             }
+            
+            // set stamp
             total += Double.parseDouble(txt_stamp_amount.getText());
-            txt_total_amount.setText(total + "");
-            txt_pay_amount_cash.setText(total + "");
+            
+            // set fields
+            txt_total_amount.setText(Math.round(total*100.00)/100.00 + "");
+            txt_pay_amount_cash.setText(Math.round(total*100.00)/100.00+ "");
 
         } catch (NumberFormatException numberFormatException) {
             Notifications.create()
@@ -356,16 +366,6 @@ public class PaymentController implements Initializable {
 
     @FXML
     private void allowVAT(MouseEvent event) {
-        if (chb_nbt_allow.isSelected()) {
-            txt_nbt_amount.setDisable(false);
-        } else {
-            txt_nbt_amount.setDisable(true);
-        }
-        this.setTotal();
-    }
-
-    @FXML
-    private void allowNBT(MouseEvent event) {
         if (chb_vat_allow.isSelected()) {
             txt_vat_amount.setDisable(false);
         } else {
@@ -374,9 +374,19 @@ public class PaymentController implements Initializable {
         this.setTotal();
     }
 
-    public boolean payNow(boolean print){
+    @FXML
+    private void allowNBT(MouseEvent event) {
+        if (chb_nbt_allow.isSelected()) {
+            txt_nbt_amount.setDisable(false);
+        } else {
+            txt_nbt_amount.setDisable(true);
+        }
+        this.setTotal();
+    }
+
+    public boolean payNow(boolean print) {
         Application application = tbl_approved_list.getSelectionModel().getSelectedItem();
-        application=new modle.Aplication().getByIdFull(application.getIdApplication());
+        application = new modle.Aplication().getByIdFull(application.getIdApplication());
         if (application != null) {
             boolean cash = chb_cash.isSelected();
             boolean cheque = chb_check.isSelected();
@@ -392,6 +402,7 @@ public class PaymentController implements Initializable {
                     AplicationPayment aplicationPayment = new pojo.AplicationPayment();
                     aplicationPayment.setApplication(application);
                     aplicationPayment.setPayment(payment);
+                    payment.getAplicationPayments().add(aplicationPayment);
 
                     int nextReceiptNo = new modle.Payment().getNextReceiptNo();
                     int nextTradeLicenNo = new modle.TradeLicen().getNextTradeLicenNo();
@@ -452,10 +463,10 @@ public class PaymentController implements Initializable {
                             vort.getPayments().add(payment);
 
                             // setup payment
-                            payment.setPaymentDate(new Date(txt_payment_date.getValue().getYear(),txt_payment_date.getValue().getMonthValue(),txt_payment_date.getValue().getDayOfMonth()));
+                            payment.setPaymentDate(new Date(txt_payment_date.getValue().getYear(), txt_payment_date.getValue().getMonthValue(), txt_payment_date.getValue().getDayOfMonth()));
                             payment.setApplicationNo(application.getIdApplication());
-                            payment.setYear(Integer.parseInt(txt_year_pay.getText()));
-                            payment.setMonth(Integer.parseInt(txt_month_pay.getText()));
+                            payment.setYear(txt_payment_date.getValue().getYear());
+                            payment.setMonth(txt_payment_date.getValue().getMonthValue());
                             payment.setTaxAmount(Double.parseDouble(txt_tax_amount.getText()));
                             // vat
                             if (!txt_vat_amount.getText().isEmpty()) {
@@ -504,6 +515,10 @@ public class PaymentController implements Initializable {
                             cashFlow.setCfDate(new Date());
 
                             aplicationPayment.setSyn(1);
+                            
+//                            System.out.println(payment);
+//                            
+//                            return true;
 
                             if (new modle.Payment().saveOrUpdate(payment)) {
                                 Notifications.create()
@@ -514,10 +529,10 @@ public class PaymentController implements Initializable {
                                 application.setApproveToPaymant(2);
                                 new modle.Aplication().update(application);
                                 Report report = new modle.Report();
-                                if(print){
-                                    //report.paymentReceipt(payment.getIdPayment(), false);
-                                }else{
-                                    //report.paymentReceipt(payment.getIdPayment(), false);
+                                if (print) {
+                                    report.paymentReceipt(payment.getIdPayment(), false);
+                                } else {
+                                    report.paymentReceipt(payment.getIdPayment(), false);
                                 }
                                 this.reset();
                                 return true;
@@ -538,7 +553,7 @@ public class PaymentController implements Initializable {
                                     .position(Pos.BOTTOM_RIGHT).showWarning();
                             return false;
                         }
-                    }else{
+                    } else {
                         return false;
                     }
 
@@ -567,5 +582,5 @@ public class PaymentController implements Initializable {
             return false;
         }
     }
-    
+
 }

@@ -104,25 +104,6 @@
       <VBox layoutX="757.0" layoutY="77.0" prefHeight="318.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
             <JFXDatePicker fx:id="txt_payment_date" />
-            <HBox prefHeight="42.0" prefWidth="275.0" spacing="10.0">
-               <children>
-                  <JFXTextField fx:id="txt_year_pay" promptText="Year">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="txt_month_pay" promptText="Month">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-                  <JFXTextField fx:id="txt_day_pay" prefHeight="25.0" prefWidth="104.0" promptText="Day">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXTextField>
-               </children>
-            </HBox>
             <Region layoutX="16.0" layoutY="66.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="50.0" text="TAX" />
             <JFXTextField fx:id="txt_tax_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#taxAmountChange" promptText="Tax Amount">
@@ -132,7 +113,7 @@
             <Label onMouseClicked="#allowVAT" text="VAT" />
             <HBox prefHeight="41.0" prefWidth="275.0">
                <children>
-                  <JFXCheckBox fx:id="chb_vat_allow" text=" " />
+                  <JFXCheckBox fx:id="chb_vat_allow" onMouseClicked="#allowVAT" text=" " />
                   <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" disable="true" editable="false" onInputMethodTextChanged="#vatAmountChange" prefHeight="33.0" prefWidth="231.0" promptText="VAT" text="00.00">
                      <font>
                         <Font size="16.0" />

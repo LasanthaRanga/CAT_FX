@@ -32,7 +32,7 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
-        <set name="cashFlows" table="cash_flow" inverse="true" lazy="true" fetch="select">
+        <set name="cashFlows" table="cash_flow" inverse="true" lazy="true" fetch="select"  cascade="all">
             <key>
                 <column name="Vort_idVort" not-null="true" />
             </key>

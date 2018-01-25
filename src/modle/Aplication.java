@@ -312,6 +312,7 @@ public class Aplication implements DAO<pojo.Application> {
                     .setFetchMode("aplicationPayments", FetchMode.JOIN)
                     .setFetchMode("customer", FetchMode.JOIN)
                     .setFetchMode("apprualstatueses", FetchMode.JOIN)
+                    .setFetchMode("tradeLicenses", FetchMode.JOIN)
                     .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
                     .uniqueResult();
             return uniqueResult;

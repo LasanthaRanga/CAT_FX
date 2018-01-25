@@ -131,6 +131,14 @@ public class Vort  implements java.io.Serializable {
         this.tradeTypes = tradeTypes;
     }
 
+    @Override
+    public String toString() {
+        return "Vort{" + "idVort=" + idVort + ", bankInfo=" + bankInfo.getIdBankInfo() 
+                + ", programSubtitle=" + programSubtitle.getIdProgramSubTitle() + ", voteNo=" + voteNo 
+                + ", voteName=" + voteName + ", voteCurrentBalance=" + voteCurrentBalance + ", voteAlocation=" 
+                + voteAlocation + ", status=" + status + ", syn=" + syn + '}';
+    }
+
 
 
 

@@ -96,5 +96,10 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="btn_save_app1" layoutX="108.0" layoutY="558.0" prefHeight="25.0" prefWidth="116.0" style="-fx-background-color: #E64A19;" text="Clear" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

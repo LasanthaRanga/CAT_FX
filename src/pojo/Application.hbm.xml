@@ -21,7 +21,7 @@
             <column name="Trade_Type_idTrade_Type" not-null="true" />
         </many-to-one>
         <many-to-one name="user" class="pojo.User" fetch="select">
-            <column name="User_idUser" not-null="true">
+            <column name="User_idUser">
                 <comment>RO Catagary Eke User Application Eka aragena awa kena</comment>
             </column>
         </many-to-one>

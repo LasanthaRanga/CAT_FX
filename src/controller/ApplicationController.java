@@ -492,6 +492,7 @@ public class ApplicationController implements Initializable {
                 stage.initStyle(StageStyle.TRANSPARENT);
                 stage.setScene(scene);
                 stage.show();
+                clearApplication();
 
             } catch (IOException ex) {
                 ex.printStackTrace();
@@ -508,8 +509,42 @@ public class ApplicationController implements Initializable {
         if (app != null) {
 
             app.setApproveToPaymant(1);
-            new modle.Aplication().update(app);
+            boolean update = new modle.Aplication().update(app);
+
+            if (update) {
+                modle.Allert.notificationGood("Approve TO Paymant", app.getIdApplication() + "");
+                clearApplication();
+            } else {
+                modle.Allert.notificationError("Error", "Cannot Approve To Paymant");
+
+            }
+
         }
+
+    }
+
+    public void clearApplication() {
+        txt_allocaton.setText(null);
+        txt_taxt_amount.setText(null);
+        txt_trade_name.setText(null);
+        txt_adl1.setText(null);
+        txt_adl2.setText(null);
+        txt_adl3.setText(null);
+        txt_discription.setText(null);
+//        txt_year.setText(null);
+//        txt_month.setText(null);
+//        txt_day.setText(null);
+
+        //  txt_ro.setText(null);
+        txt_assesmantNO.setText(null);
+        txt_cus_fname.setText(null);
+        txt_cus_nic.setText(null);
+
+        com_ward.getSelectionModel().clearSelection();
+        com_street.getSelectionModel().clearSelection();
+        com_trade_type.getSelectionModel().clearSelection();
+        com_nature.getSelectionModel().clearSelection();
+        com_subnature.getSelectionModel().clearSelection();
 
     }
 

@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -57,44 +58,52 @@ public class AdminViewController implements Initializable {
         try {
 
             VBox box = FXMLLoader.load(getClass().getResource("/view/AdminNavicationPanel.fxml"));
-            AnchorPane user = FXMLLoader.load(getClass().getResource("/view/Admin_user.fxml"));
-            AnchorPane usercat = FXMLLoader.load(getClass().getResource("/view/Admin_user_cat.fxml"));
-            AnchorPane assignusers = FXMLLoader.load(getClass().getResource("/view/Admin_Assign_users.fxml"));
-            AnchorPane userUpdate = FXMLLoader.load(getClass().getResource("/view/Admin_user_update.fxml"));
-
             drawer.setSidePane(box);
-
             for (Node node : box.getChildren()) {
+                
                 String accessibleText = node.getAccessibleText();
 
                 if (accessibleText != null) {
 
                     node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-                        container.getChildren().removeAll(user);
-                        container.getChildren().removeAll(usercat);
-                        container.getChildren().removeAll(assignusers);
-                        container.getChildren().removeAll(userUpdate);
+                        try {
 
-                        switch (accessibleText) {
-                            case "btn_users":
-                                container.getChildren().add(user);
-                                break;
+//                            container.getChildren().removeAll();
+//                            container.getChildren().removeAll(usercat);
+//                            container.getChildren().removeAll(assignusers);
+//                            container.getChildren().removeAll(userUpdate);
+                            switch (accessibleText) {
+                                case "btn_users":
+                                    container.getChildren().removeAll();
+                                    
+                                    container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user.fxml")));
+                                    break;
 
-                            case "user_types":
-                                container.getChildren().add(usercat);
-                                break;
+                                case "user_types":
+                                    container.getChildren().removeAll();
+                                    container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user_cat.fxml")));
+                                    break;
 
-                            case "assignusers":
-                                container.getChildren().add(assignusers);
-                                break;
-                            case "userupdate":
-                                container.getChildren().add(userUpdate);
-                                break;
+                                case "assignusers":
+                                    container.getChildren().removeAll();
+                                    container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_Assign_users.fxml")));
+                                    break;
+                                case "userupdate":
+                                    container.getChildren().removeAll();
+                                    container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/Admin_user_update.fxml")));
+                                    break;
 
-                            case "btn_exit":
-                                System.out.println("EXIT");
-                                ((Node) (e.getSource())).getScene().getWindow().hide();
-                                break;
+                                case "btn_exit":
+                                    System.out.println("EXIT");
+                                    ((Node) (e.getSource())).getScene().getWindow().hide();
+                                    Platform.exit();
+
+                                    break;
+
+                                                                
+                            }
+                        } catch (Exception ee) {
+                            ee.printStackTrace();
                         }
 
                     });

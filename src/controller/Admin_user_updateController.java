@@ -93,8 +93,11 @@ public class Admin_user_updateController implements Initializable {
             txt_mobile.setText(byIdUser.getMobile());
             txt_nic.setText(byIdUser.getNic());
             txt_regisdate.setText(new SimpleDateFormat("yyyy-MM-dd").format(byIdUser.getRegDate()));
-            ObservableList<Catagory> list_cate = FXCollections.observableArrayList(user.getUserCategories(byIdUser));
-            lv_category.setItems(list_cate);
+            List<Catagory> userCategories = user.getUserCategories(byIdUser);
+            if(userCategories!=null){
+                ObservableList<Catagory> list_cate = FXCollections.observableArrayList();
+                lv_category.setItems(list_cate);
+            }
         } else {
             Notifications.create()
                     .title("Warning")

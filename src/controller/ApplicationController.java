@@ -567,12 +567,9 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private void calTaxAmount(KeyEvent event) {
-
         if (KeyCode.ENTER == event.getCode()) {
-
             CalTaxAmmount();
         }
-
     }
 
     @FXML

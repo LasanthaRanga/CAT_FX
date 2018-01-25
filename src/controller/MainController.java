@@ -27,6 +27,7 @@ import javafx.scene.layout.StackPane;
 
 import javafx.scene.layout.VBox;
 import org.hibernate.Session;
+import pojo.User;
 
 /**
  * FXML Controller class
@@ -61,20 +62,11 @@ public class MainController implements Initializable {
         Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
         ses.beginTransaction().commit();
         ses.close();
+        
+        User user = modle.AuthUser.getUser();
+        lbl_logUser.setText(user.getFullName());
 
-        //  Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-//        try {
-//            pojo.UserLog lu = (pojo.UserLog) session.createCriteria(pojo.UserLog.class).add(Restrictions.eq("idUserLog", 1)).uniqueResult();
-//            System.out.println(lu);
-//            String fullName = lu.getUser().getFullName();
-//            System.out.println(fullName);
-//            lbl_logUser.setText(fullName);
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        } finally {
-//            session.close();
-//        }
+
         try {
 
             VBox box = FXMLLoader.load(getClass().getResource("/view/Box.fxml"));

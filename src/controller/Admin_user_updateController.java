@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,12 +72,15 @@ public class Admin_user_updateController implements Initializable {
     }
 
     private void loadTable() {
-        ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(user.getActiveUsers());
+        List<User> activeUsers = user.getActiveUsers();
+        if(activeUsers!=null){
+            ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(activeUsers);
+            tbl_user.setItems(list_active_users);
+        }
         tbl_clmn_id.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         tbl_clmn_name.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
-        tbl_user.setItems(list_active_users);
 
     }
 

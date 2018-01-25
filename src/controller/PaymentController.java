@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -33,6 +34,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import modle.Interest;
+import modle.Report;
 import org.controlsfx.control.Notifications;
 import pojo.AplicationPayment;
 import pojo.Application;
@@ -117,6 +120,8 @@ public class PaymentController implements Initializable {
     private JFXCheckBox chb_vat_allow;
     @FXML
     private JFXCheckBox chb_nbt_allow;
+    @FXML
+    private JFXDatePicker txt_payment_date;
 
     /**
      * Initializes the controller class.
@@ -134,12 +139,30 @@ public class PaymentController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 try {
+
+                    Interest interest = new modle.Interest();
                     double total = 0.0;
-                    total += Double.parseDouble(txt_tax_amount.getText());
-                    total += Double.parseDouble(txt_vat_amount.getText());
-                    total += Double.parseDouble(txt_nbt_amount.getText());
+
+                    double tax_amount = Double.parseDouble(txt_tax_amount.getText());
+                    total += tax_amount;
+
+                    if (chb_nbt_allow.isSelected()) {
+                        pojo.Interest intres = interest.getByName("NBT");
+                        double nbt_amount = (tax_amount * intres.getRate()) / 100;
+                        txt_nbt_amount.setText(nbt_amount + "");
+                        total += nbt_amount;
+                    }
+
+                    if (chb_vat_allow.isSelected()) {
+                        pojo.Interest intres = interest.getByName("VAT");
+                        double vat_amount = (tax_amount * intres.getRate()) / 100;
+                        txt_vat_amount.setText(vat_amount + "");
+                        total += vat_amount;
+                    }
                     total += Double.parseDouble(txt_stamp_amount.getText());
                     txt_total_amount.setText(total + "");
+                    txt_pay_amount_cash.setText(total + "");
+
                 } catch (NumberFormatException numberFormatException) {
                     Notifications.create()
                             .title("Warning")
@@ -149,47 +172,7 @@ public class PaymentController implements Initializable {
                 }
             }
         });
-        
-        txt_vat_amount.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try {
-                    double total = 0.0;
-                    total += Double.parseDouble(txt_tax_amount.getText());
-                    total += Double.parseDouble(txt_vat_amount.getText());
-                    total += Double.parseDouble(txt_nbt_amount.getText());
-                    total += Double.parseDouble(txt_stamp_amount.getText());
-                    txt_total_amount.setText(total + "");
-                } catch (NumberFormatException numberFormatException) {
-                    Notifications.create()
-                            .title("Warning")
-                            .text("Please Enter Valid Number.")
-                            .hideAfter(Duration.seconds(3))
-                            .position(Pos.BOTTOM_RIGHT).showWarning();
-                }
-            }
-        });
-        
-        txt_nbt_amount.textProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                try {
-                    double total = 0.0;
-                    total += Double.parseDouble(txt_tax_amount.getText());
-                    total += Double.parseDouble(txt_vat_amount.getText());
-                    total += Double.parseDouble(txt_nbt_amount.getText());
-                    total += Double.parseDouble(txt_stamp_amount.getText());
-                    txt_total_amount.setText(total + "");
-                } catch (NumberFormatException numberFormatException) {
-                    Notifications.create()
-                            .title("Warning")
-                            .text("Please Enter Valid Number.")
-                            .hideAfter(Duration.seconds(3))
-                            .position(Pos.BOTTOM_RIGHT).showWarning();
-                }
-            }
-        });
-        
+
         txt_stamp_amount.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
@@ -221,7 +204,7 @@ public class PaymentController implements Initializable {
         txt_month_pay.setText(month.format(date));
         txt_day_pay.setText(day.format(date));
     }
-    
+
     private void setTable() {
         List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications();
         if (unpaiedApprovedApplications != null) {
@@ -266,7 +249,134 @@ public class PaymentController implements Initializable {
 
     @FXML
     private void paynow(MouseEvent event) {
+        this.payNow(true);
+    }
+
+    @FXML
+    private void reset(MouseEvent event) {
+        this.reset();
+    }
+
+    public void reset(){
+        this.setTable();
+        txt_application_no.setText("");
+        txt_allocation.setText("");
+        txt_tax.setText("");
+        txt_year.setText("");
+        txt_month.setText("");
+        txt_trade_address1.setText("");
+        txt_trade_address2.setText("");
+        txt_trade_address3.setText("");
+        txt_trade_name.setText("");
+        txt_customer_name.setText("");
+        txt_customer_nic.setText("");
+        txt_tax_amount.setText("00.00");
+        txt_vat_amount.setText("00.00");
+        txt_nbt_amount.setText("00.00");
+        txt_stamp_amount.setText("00.00");
+        txt_total_amount.setText("");
+        txt_payment_date.setValue(LocalDate.now());
+    }
+    
+    private void setTotal() {
+        try {
+            Interest interest = new modle.Interest();
+            double total = 0.0;
+
+            double tax_amount = Double.parseDouble(txt_tax_amount.getText());
+            total += tax_amount;
+
+            if (chb_nbt_allow.isSelected()) {
+                pojo.Interest intres = interest.getByName("NBT");
+                double nbt_amount = (tax_amount * intres.getRate()) / 100;
+                txt_nbt_amount.setText(nbt_amount + "");
+                total += nbt_amount;
+            }
+
+            if (chb_vat_allow.isSelected()) {
+                pojo.Interest intres = interest.getByName("VAT");
+                double vat_amount = (tax_amount * intres.getRate()) / 100;
+                txt_vat_amount.setText(vat_amount + "");
+                total += vat_amount;
+            }
+            total += Double.parseDouble(txt_stamp_amount.getText());
+            txt_total_amount.setText(total + "");
+            txt_pay_amount_cash.setText(total + "");
+
+        } catch (NumberFormatException numberFormatException) {
+            Notifications.create()
+                    .title("Warning")
+                    .text("Please Enter Valid Number.")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
+        }
+    }
+
+    @FXML
+    private void taxAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void vatAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void nbtAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void stampAmountChange(InputMethodEvent event) {
+        this.setTotal();
+    }
+
+    @FXML
+    private void cashClicked(MouseEvent event) {
+        if (chb_cash.isSelected()) {
+            txt_pay_amount_cash.setDisable(false);
+        } else {
+            txt_pay_amount_cash.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void chequeClicked(MouseEvent event) {
+        if (chb_check.isSelected()) {
+            txt_cheque_no.setDisable(false);
+            txt_cheque_date.setDisable(false);
+            txt_pay_amount_cheque.setDisable(false);
+        } else {
+            txt_pay_amount_cheque.setDisable(true);
+            txt_cheque_no.setDisable(true);
+            txt_cheque_date.setDisable(true);
+        }
+    }
+
+    @FXML
+    private void allowVAT(MouseEvent event) {
+        if (chb_nbt_allow.isSelected()) {
+            txt_nbt_amount.setDisable(false);
+        } else {
+            txt_nbt_amount.setDisable(true);
+        }
+        this.setTotal();
+    }
+
+    @FXML
+    private void allowNBT(MouseEvent event) {
+        if (chb_vat_allow.isSelected()) {
+            txt_vat_amount.setDisable(false);
+        } else {
+            txt_vat_amount.setDisable(true);
+        }
+        this.setTotal();
+    }
+
+    public boolean payNow(boolean print){
         Application application = tbl_approved_list.getSelectionModel().getSelectedItem();
+        application=new modle.Aplication().getByIdFull(application.getIdApplication());
         if (application != null) {
             boolean cash = chb_cash.isSelected();
             boolean cheque = chb_check.isSelected();
@@ -342,10 +452,10 @@ public class PaymentController implements Initializable {
                             vort.getPayments().add(payment);
 
                             // setup payment
-                            payment.setPaymentDate(new Date());
+                            payment.setPaymentDate(new Date(txt_payment_date.getValue().getYear(),txt_payment_date.getValue().getMonthValue(),txt_payment_date.getValue().getDayOfMonth()));
                             payment.setApplicationNo(application.getIdApplication());
-                            payment.setYear(application.getYear());
-                            payment.setMonth(application.getMonth());
+                            payment.setYear(Integer.parseInt(txt_year_pay.getText()));
+                            payment.setMonth(Integer.parseInt(txt_month_pay.getText()));
                             payment.setTaxAmount(Double.parseDouble(txt_tax_amount.getText()));
                             // vat
                             if (!txt_vat_amount.getText().isEmpty()) {
@@ -401,12 +511,23 @@ public class PaymentController implements Initializable {
                                         .text("Payment success.")
                                         .hideAfter(Duration.seconds(3))
                                         .position(Pos.BOTTOM_RIGHT).showInformation();
+                                application.setApproveToPaymant(2);
+                                new modle.Aplication().update(application);
+                                Report report = new modle.Report();
+                                if(print){
+                                    //report.paymentReceipt(payment.getIdPayment(), false);
+                                }else{
+                                    //report.paymentReceipt(payment.getIdPayment(), false);
+                                }
+                                this.reset();
+                                return true;
                             } else {
                                 Notifications.create()
                                         .title("Warning")
                                         .text("Payment failed.")
                                         .hideAfter(Duration.seconds(3))
                                         .position(Pos.BOTTOM_RIGHT).showWarning();
+                                return false;
                             }
 
                         } else {
@@ -415,7 +536,10 @@ public class PaymentController implements Initializable {
                                     .text("Not found total.")
                                     .hideAfter(Duration.seconds(3))
                                     .position(Pos.BOTTOM_RIGHT).showWarning();
+                            return false;
                         }
+                    }else{
+                        return false;
                     }
 
                 } catch (NumberFormatException e) {
@@ -424,6 +548,7 @@ public class PaymentController implements Initializable {
                             .text("Please enter valid number.")
                             .hideAfter(Duration.seconds(3))
                             .position(Pos.BOTTOM_RIGHT).showWarning();
+                    return false;
                 }
             } else {
                 Notifications.create()
@@ -431,6 +556,7 @@ public class PaymentController implements Initializable {
                         .text("Please select payment type.")
                         .hideAfter(Duration.seconds(3))
                         .position(Pos.BOTTOM_RIGHT).showWarning();
+                return false;
             }
         } else {
             Notifications.create()
@@ -438,103 +564,8 @@ public class PaymentController implements Initializable {
                     .text("Not found application.")
                     .hideAfter(Duration.seconds(3))
                     .position(Pos.BOTTOM_RIGHT).showWarning();
+            return false;
         }
     }
-
-    @FXML
-    private void reset(MouseEvent event) {
-        this.setTable();
-        txt_application_no.setText("");
-        txt_allocation.setText("");
-        txt_tax.setText("");
-        txt_year.setText("");
-        txt_month.setText("");
-        txt_trade_address1.setText("");
-        txt_trade_address2.setText("");
-        txt_trade_address3.setText("");
-        txt_trade_name.setText("");
-        txt_customer_name.setText("");
-        txt_customer_nic.setText("");
-        txt_tax_amount.setText("00.00");
-        txt_vat_amount.setText("00.00");
-        txt_nbt_amount.setText("00.00");
-        txt_stamp_amount.setText("00.00");
-        txt_total_amount.setText("");
-    }
-
-    private void setTotal() {
-        try {
-            double total = 0.0;
-            total += Double.parseDouble(txt_tax_amount.getText());
-            total += Double.parseDouble(txt_vat_amount.getText());
-            total += Double.parseDouble(txt_nbt_amount.getText());
-            total += Double.parseDouble(txt_stamp_amount.getText());
-            txt_total_amount.setText(total + "");
-        } catch (NumberFormatException numberFormatException) {
-            Notifications.create()
-                    .title("Warning")
-                    .text("Please Enter Valid Number.")
-                    .hideAfter(Duration.seconds(3))
-                    .position(Pos.BOTTOM_RIGHT).showWarning();
-        }
-    }
-
-    @FXML
-    private void taxAmountChange(InputMethodEvent event) {
-        this.setTotal();
-    }
-
-    @FXML
-    private void vatAmountChange(InputMethodEvent event) {
-        this.setTotal();
-    }
-
-    @FXML
-    private void nbtAmountChange(InputMethodEvent event) {
-        this.setTotal();
-    }
-
-    @FXML
-    private void stampAmountChange(InputMethodEvent event) {
-        this.setTotal();
-    }
-
-    @FXML
-    private void cashClicked(MouseEvent event) {
-        if (chb_cash.isSelected()) {
-            txt_pay_amount_cash.setDisable(false);
-        } else {
-            txt_pay_amount_cash.setDisable(true);
-        }
-    }
-
-    @FXML
-    private void chequeClicked(MouseEvent event) {
-        if (chb_check.isSelected()) {
-            txt_cheque_no.setDisable(false);
-            txt_cheque_date.setDisable(false);
-            txt_pay_amount_cheque.setDisable(false);
-        } else {
-            txt_pay_amount_cheque.setDisable(true);
-            txt_cheque_no.setDisable(true);
-            txt_cheque_date.setDisable(true);
-        }
-    }
-
-    @FXML
-    private void allowVAT(MouseEvent event) {
-        if(chb_nbt_allow.isSelected())
-            txt_nbt_amount.setDisable(false);
-        else
-            txt_nbt_amount.setDisable(true);
-    }
-
-    @FXML
-    private void allowNBT(MouseEvent event) {
-        if(chb_vat_allow.isSelected())
-            txt_vat_amount.setDisable(false);
-        else
-            txt_vat_amount.setDisable(true);
-    }
-
+    
 }

@@ -301,5 +301,27 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
+    
+    public pojo.Application getByIdFull(int id){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            pojo.Application uniqueResult = (pojo.Application) session.createCriteria(pojo.Application.class)
+                    .add(Restrictions.eq("idApplication", id))
+                    .setFetchMode("tradeType", FetchMode.JOIN)
+                    .setFetchMode("aplicationPayments", FetchMode.JOIN)
+                    .setFetchMode("customer", FetchMode.JOIN)
+                    .setFetchMode("apprualstatueses", FetchMode.JOIN)
+                    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                    .uniqueResult();
+            return uniqueResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
 
 }

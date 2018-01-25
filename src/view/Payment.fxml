@@ -103,6 +103,7 @@
       </VBox>
       <VBox layoutX="757.0" layoutY="77.0" prefHeight="318.0" prefWidth="287.0" style="-fx-border-color: #e0e0e0;" AnchorPane.leftAnchor="757.0" AnchorPane.topAnchor="77.0">
          <children>
+            <JFXDatePicker fx:id="txt_payment_date" />
             <HBox prefHeight="42.0" prefWidth="275.0" spacing="10.0">
                <children>
                   <JFXTextField fx:id="txt_year_pay" promptText="Year">
@@ -128,31 +129,28 @@
                <font>
                   <Font size="16.0" />
                </font></JFXTextField>
-            <Region prefHeight="15.0" prefWidth="287.0" />
             <Label onMouseClicked="#allowVAT" text="VAT" />
             <HBox prefHeight="41.0" prefWidth="275.0">
                <children>
                   <JFXCheckBox fx:id="chb_vat_allow" text=" " />
-                  <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#vatAmountChange" prefHeight="33.0" prefWidth="231.0" promptText="VAT" text="00.00">
+                  <JFXTextField fx:id="txt_vat_amount" alignment="CENTER_RIGHT" disable="true" editable="false" onInputMethodTextChanged="#vatAmountChange" prefHeight="33.0" prefWidth="231.0" promptText="VAT" text="00.00">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </JFXTextField>
                </children>
             </HBox>
-            <Region layoutX="10.0" layoutY="35.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="55.0" text="NBT" />
             <HBox prefHeight="46.0" prefWidth="275.0">
                <children>
                   <JFXCheckBox fx:id="chb_nbt_allow" onMouseClicked="#allowNBT" text=" " />
-                  <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" editable="false" onInputMethodTextChanged="#nbtAmountChange" prefHeight="33.0" prefWidth="233.0" promptText="NBT" text="00.00">
+                  <JFXTextField fx:id="txt_nbt_amount" alignment="CENTER_RIGHT" disable="true" editable="false" onInputMethodTextChanged="#nbtAmountChange" prefHeight="33.0" prefWidth="233.0" promptText="NBT" text="00.00">
                      <font>
                         <Font size="16.0" />
                      </font>
                   </JFXTextField>
                </children>
             </HBox>
-            <Region layoutX="10.0" layoutY="80.0" prefHeight="15.0" prefWidth="287.0" />
             <Label layoutX="10.0" layoutY="117.0" text="Stamp" />
             <JFXTextField fx:id="txt_stamp_amount" alignment="CENTER_RIGHT" onInputMethodTextChanged="#stampAmountChange" prefHeight="25.0" prefWidth="106.0" promptText="Stamp" text="00.00">
                <font>

@@ -5,6 +5,20 @@
  */
 package modle;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.HashMap;
+import javafx.geometry.Pos;
+import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.view.JasperViewer;
+import org.controlsfx.control.Notifications;
+import org.hibernate.engine.spi.SessionFactoryImplementor;
+
 
 
 /**
@@ -17,19 +31,22 @@ public class Report {
 //        try {
 //            return ((SessionFactoryImplementor) conn.NewHibernateUtil.getSessionFactory()).getConnectionProvider().getConnection();
 //        } catch (SQLException ex) {
-//            Logger.getLogger(Report.class.getName()).log(Level.SEVERE, null, ex);
+//            ex.printStackTrace();
 //            return null;
 //        }
 //    }
 //
-//    public void paymentReceipt(int paymentId) {
+//    public void paymentReceipt(int paymentId,boolean print) {
 //        try {
 //            String path = "C:\\cat\\report\\paymentReceipt.jrxml";
 //            JasperReport jr = JasperCompileManager.compileReport(path);
 //            HashMap param=new HashMap<String, Integer>();
 //            param.put("paymentId", paymentId);
 //            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
-//            JasperViewer.viewReport(jp);
+//            if(print)
+//                JasperViewer.viewReport(jp);
+//            else
+//                JasperViewer.viewReport(jp);
 //        } catch (JRException jRException) {
 //            Notifications.create()
 //                    .title("Warning")

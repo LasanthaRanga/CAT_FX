@@ -1,10 +1,12 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -64,8 +66,7 @@ public class PaymentController implements Initializable {
     private JFXTextField txt_year;
     @FXML
     private JFXTextField txt_month;
-    @FXML
-    private JFXTextField txt_trade_licen_no;
+    private JFXTextField txt_day;
     @FXML
     private JFXTextField txt_customer_name;
     @FXML
@@ -106,6 +107,16 @@ public class PaymentController implements Initializable {
     private JFXTextField txt_pay_amount_cash;
     @FXML
     private JFXTextField txt_pay_amount_cheque;
+    @FXML
+    private JFXTextField txt_year_pay;
+    @FXML
+    private JFXTextField txt_month_pay;
+    @FXML
+    private JFXTextField txt_day_pay;
+    @FXML
+    private JFXCheckBox chb_vat_allow;
+    @FXML
+    private JFXCheckBox chb_nbt_allow;
 
     /**
      * Initializes the controller class.
@@ -200,6 +211,17 @@ public class PaymentController implements Initializable {
         });
     }
 
+    public void SetDate() {
+        Date date = new Date();
+        SimpleDateFormat yeare = new SimpleDateFormat("yyyy");
+        SimpleDateFormat month = new SimpleDateFormat("MM");
+        SimpleDateFormat day = new SimpleDateFormat("dd");
+
+        txt_year_pay.setText(yeare.format(date));
+        txt_month_pay.setText(month.format(date));
+        txt_day_pay.setText(day.format(date));
+    }
+    
     private void setTable() {
         List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications();
         if (unpaiedApprovedApplications != null) {
@@ -497,6 +519,22 @@ public class PaymentController implements Initializable {
             txt_cheque_no.setDisable(true);
             txt_cheque_date.setDisable(true);
         }
+    }
+
+    @FXML
+    private void allowVAT(MouseEvent event) {
+        if(chb_nbt_allow.isSelected())
+            txt_nbt_amount.setDisable(false);
+        else
+            txt_nbt_amount.setDisable(true);
+    }
+
+    @FXML
+    private void allowNBT(MouseEvent event) {
+        if(chb_vat_allow.isSelected())
+            txt_vat_amount.setDisable(false);
+        else
+            txt_vat_amount.setDisable(true);
     }
 
 }

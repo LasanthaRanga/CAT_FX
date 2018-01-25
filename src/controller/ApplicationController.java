@@ -346,7 +346,6 @@ public class ApplicationController implements Initializable {
         txt_year.setText(yeare.format(date));
         txt_month.setText(month.format(date));
         txt_day.setText(day.format(date));
-
     }
 
     public void setApplicationid() {

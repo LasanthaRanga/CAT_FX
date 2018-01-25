@@ -6,10 +6,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.ApplicationListController">
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationListController">
    <children>
-      <TableView fx:id="tbl_applicaion" layoutX="33.0" layoutY="51.0" prefHeight="547.0" prefWidth="617.0">
+      <TableView fx:id="tbl_applicaion" layoutX="33.0" layoutY="52.0" prefHeight="546.0" prefWidth="617.0">
         <columns>
           <TableColumn fx:id="c_idApp" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="c_type" prefWidth="75.0" text="Type" />

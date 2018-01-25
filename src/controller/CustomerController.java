@@ -86,7 +86,6 @@ public class CustomerController implements Initializable {
 
 //    @FXML
 //    private JFXButton btn_aplication;
-
     modle.Ward ward = null;
     modle.Customer customer = null;
     modle.CustomerHasAssesment cha = null;
@@ -121,25 +120,34 @@ public class CustomerController implements Initializable {
             System.out.println("ENTER GEHUWAA");
             String fname = txt_fname.getText();
             modle.StaticBadu.setCus_fullname(fname);
+            
+            System.out.println(fname);
+            
+//            customer.setFullName(fname);
+//            SearchCustomerAndSetByFullName();
 
             List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
             modle.StaticBadu.setCuslist(searchCustomer);
 
-            if (searchCustomer.size() > 1) {
-                if (searchCustomer != null) {
-                    try {
-                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
-                        txt_fname.getParent().getScene();
-                        Scene scene = new Scene(paymant);
-                        Stage stage = new Stage();
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+            if (modle.StaticBadu.getpCustomer() != null) {
 
+            } else {
+                if (searchCustomer.size() > 1) {
+                    if (searchCustomer != null) {
+                        try {
+                            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                            txt_fname.getParent().getScene();
+                            Scene scene = new Scene(paymant);
+                            Stage stage = new Stage();
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+
+                    }
                 }
             }
 
@@ -269,6 +277,23 @@ public class CustomerController implements Initializable {
         }
     }
 
+    public void SearchCustomerAndSetByFullName() {
+
+        Customer cus = customer.searchCustomerFullName();
+        upcus = cus;
+
+        if (cus != null) {
+            txt_fname.setText(cus.getFullName());
+            txt_phone.setText(cus.getPhone());
+            txt_mobile.setText(cus.getMobile());
+            txt_email.setText(cus.getEmail());
+            txt_adress1.setText(cus.getAddress1());
+            txt_adress2.setText(cus.getAddress2());
+            txt_adress3.setText(cus.getAddress3());
+        }
+
+    }
+
     public void searchCustomerByAssesment() {
         getSelectedWaredStrret();
         String asno = txt_assesment.getText();
@@ -345,7 +370,7 @@ public class CustomerController implements Initializable {
             upcus.setMobile(txt_mobile.getText());
             upcus.setEmail(txt_email.getText());
 
-            upcus.updateCustomer();            
+            upcus.updateCustomer();
             modle.Allert.notificationGood("Updated", "success");
             cleareCus();
             upcus = null;
@@ -370,7 +395,6 @@ public class CustomerController implements Initializable {
 //        });
 //
 //    }
-
     public void deactivCustomer() {
         btn_delete.setOnAction((event) -> {
             if (selectPcus != null) {

@@ -18,7 +18,6 @@ import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
-import pojo.Login;
 
 /**
  * FXML Controller class

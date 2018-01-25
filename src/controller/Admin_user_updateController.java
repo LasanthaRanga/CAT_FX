@@ -12,6 +12,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -21,6 +22,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import javafx.util.Callback;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 import pojo.Catagory;
@@ -72,16 +74,15 @@ public class Admin_user_updateController implements Initializable {
     }
 
     private void loadTable() {
-        List<User> activeUsers = user.getActiveUsers();
-        if(activeUsers!=null){
-            ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(activeUsers);
-            tbl_user.setItems(list_active_users);
-        }
         tbl_clmn_id.setCellValueFactory(new PropertyValueFactory<>("idUser"));
         tbl_clmn_name.setCellValueFactory(new PropertyValueFactory<>("fullName"));
         tbl_clmn_nic.setCellValueFactory(new PropertyValueFactory<>("nic"));
         tbl_clmn_contact.setCellValueFactory(new PropertyValueFactory<>("mobile"));
-
+        List<User> users = user.getList();
+        if(users!=null){
+            ObservableList<pojo.User> list_active_users = FXCollections.observableArrayList(users);
+            tbl_user.setItems(list_active_users);
+        }
     }
 
     @FXML
@@ -97,6 +98,16 @@ public class Admin_user_updateController implements Initializable {
             if(userCategories!=null){
                 ObservableList<Catagory> list_cate = FXCollections.observableArrayList();
                 lv_category.setItems(list_cate);
+            }
+            if(byIdUser.getStatus()==1){
+                btn_deactive.setText("Deactive");
+                btn_deactive.setStyle("-fx-background-color: #f44336;");
+            }else if(byIdUser.getStatus()==0){
+                btn_deactive.setText("Active");
+                btn_deactive.setStyle("-fx-background-color: #4caf50;");
+            }else{
+                btn_deactive.setStyle("-fx-background-color: #e0e0e0;");
+                btn_deactive.setText("Unknown");
             }
         } else {
             Notifications.create()

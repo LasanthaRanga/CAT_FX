@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-<<<<<<< HEAD
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/ApplicationController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Users.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/SendToApproveController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/Admin_Assign_usersController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Aplication.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/LoginController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/RO.java</file>
-=======
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/PaymentController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Report.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Aplication.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/PayController.java</file>
->>>>>>> 90b7d84875d2835bf4decf03570620b08b0ccfc9
-        </group>
-    </open-files>
 </project-private>

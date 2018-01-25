@@ -23,7 +23,7 @@
             </Label>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="container" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
+        <AnchorPane fx:id="container" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#closeDrawer" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
         <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="67.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
     </children>
 </AnchorPane>

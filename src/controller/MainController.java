@@ -21,6 +21,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
@@ -163,6 +164,22 @@ public class MainController implements Initializable {
                 }
         );
 
+    }
+
+    @FXML
+    private void closeDrawer(MouseEvent event) {
+
+       // drawer.open();
+
+    }
+
+    @FXML
+    private void cloaseDrawerEnterd(MouseEvent event) {
+        if (drawer.isShown()) {
+           // drawer.close();
+        } else {
+            drawer.open();
+        }
     }
 
 }

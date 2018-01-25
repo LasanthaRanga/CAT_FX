@@ -31,6 +31,7 @@ import javafx.stage.StageStyle;
 import modle.Customer;
 import modle.CustomerHasAssesment;
 import modle.Nature;
+import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
 import pojo.Application;
 import pojo.Street;
@@ -120,6 +121,8 @@ public class ApplicationController implements Initializable {
     private JFXButton btn_approve;
 
     pojo.Ward pward = null;
+    @FXML
+    private JFXButton btn_clear;
 
     /**
      * Initializes the controller class.
@@ -141,9 +144,7 @@ public class ApplicationController implements Initializable {
         TextFields.bindAutoCompletion(txt_cus_fname, list);
 
         btn_approve.setOnAction((event) -> {
-
             ApproveToPay();
-
         });
 
     }
@@ -244,7 +245,6 @@ public class ApplicationController implements Initializable {
         }
     }
 
-    @FXML
     public void searchCustomerByNIC() {
 
         String text = txt_cus_nic.getText();
@@ -286,6 +286,16 @@ public class ApplicationController implements Initializable {
             }
         });
 
+    }
+
+    public void CalTaxAmmount() {
+
+        double taxValue = modle.TaxCal.getTaxValue(Double.parseDouble(txt_allocaton.getText()), com_trade_type.getSelectionModel().getSelectedItem());
+
+        double name = Math.round(taxValue * 100.00) / 100.00;
+            
+               
+        txt_taxt_amount.setText(name+"");
     }
 
     public void loadNature() {
@@ -356,8 +366,8 @@ public class ApplicationController implements Initializable {
 
     }
 
-    String alocation;
-    String txtAmount;
+    double alocation;
+    double txtAmount;
     String tradeNaem;
     String adl1;
     String adl2;
@@ -390,9 +400,21 @@ public class ApplicationController implements Initializable {
     }
 
     public void collectData() {
-        alocation = txt_allocaton.getText();
-        txtAmount = txt_taxt_amount.getText();
+
+        try {
+            alocation = Double.parseDouble(txt_allocaton.getText());
+        } catch (NumberFormatException e) {
+            modle.Allert.notificationError("Alocation Value Cant Be String", txt_allocaton.getText());
+        }
+
+        try {
+            txtAmount = Double.parseDouble(txt_taxt_amount.getText());
+        } catch (Exception e) {
+            modle.Allert.notificationError("Alocation Value Cant Be String", txt_taxt_amount.getText());
+        }
+
         tradeNaem = txt_trade_name.getText();
+
         adl1 = txt_adl1.getText();
         adl2 = txt_adl2.getText();
         adl3 = txt_adl3.getText();
@@ -451,14 +473,14 @@ public class ApplicationController implements Initializable {
                 app.setApplicationDate(apdat);
                 app.setYear(Integer.parseInt(year));
                 app.setMonth(Integer.parseInt(month));
-                app.setAllocation(Double.parseDouble(alocation));
+                app.setAllocation(alocation);
 
                 app.setTradeName(tradeNaem);
                 app.setTradeAddress1(adl1);
                 app.setTradeAddress2(adl2);
                 app.setTradeAddress3(adl3);
 
-                app.setTaxAmount(Double.parseDouble(txtAmount));
+                app.setTaxAmount(txtAmount);
                 app.setDiscription(discription);
                 app.setApproveToPaymant(0);
                 app.setStatues(1);
@@ -541,6 +563,21 @@ public class ApplicationController implements Initializable {
         com_nature.getSelectionModel().clearSelection();
         com_subnature.getSelectionModel().clearSelection();
 
+    }
+
+    @FXML
+    private void calTaxAmount(KeyEvent event) {
+
+        if (KeyCode.ENTER == event.getCode()) {
+
+            CalTaxAmmount();
+        }
+
+    }
+
+    @FXML
+    private void clearApp(ActionEvent event) {
+        clearApplication();
     }
 
 }

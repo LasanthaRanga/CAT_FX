@@ -23,6 +23,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -108,7 +110,7 @@ public class LoginController implements Initializable {
                 AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/AdminView.fxml"));
                 btn_singin.getParent().getScene();
                 Scene scene = new Scene(paymant);
-                
+
                 Stage stage = new Stage();
                 stage.getIcons().add(new Image("/info.png"));
                 stage.initStyle(StageStyle.TRANSPARENT);
@@ -173,7 +175,6 @@ public class LoginController implements Initializable {
                     }
                     AuthUser.setUserCats(ucs);
 
-                  
                     btn_singin.getParent().getScene().getWindow().hide();
                     AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/SelectLoginType.fxml"));
                     btn_singin.getParent().getScene();
@@ -190,6 +191,13 @@ public class LoginController implements Initializable {
 
         }
 
+    }
+
+    @FXML
+    private void enterLog(KeyEvent event) {
+        if (event.getCode() == KeyCode.ENTER) {
+            login();
+        }
     }
 
 }

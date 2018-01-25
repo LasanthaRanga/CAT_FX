@@ -84,13 +84,8 @@ public class CustomerController implements Initializable {
     @FXML
     private JFXButton btn_delete;
 
-    @FXML
-    private StackPane stakpain;
-
-    @FXML
-    private JFXButton btn_aplication;
-
-    
+//    @FXML
+//    private JFXButton btn_aplication;
 
     modle.Ward ward = null;
     modle.Customer customer = null;
@@ -256,9 +251,11 @@ public class CustomerController implements Initializable {
         Customer cus = customer.searchCustomerByNic();
         upcus = cus;
         if (cus.getFullName() == null) {
-            modle.Allert.messagInfo(stakpain, "Not Found", "404");
+
+            modle.Allert.notificationInfo("Not Found", text);
         } else {
-            modle.Allert.messagSuccsess(stakpain, "Found Customer", text);
+
+            modle.Allert.notificationGood("Found Customer", text);
         }
         if (cus != null) {
             txt_fname.setText(cus.getFullName());
@@ -348,8 +345,8 @@ public class CustomerController implements Initializable {
             upcus.setMobile(txt_mobile.getText());
             upcus.setEmail(txt_email.getText());
 
-            upcus.updateCustomer();
-            modle.Allert.messagSuccsess(stakpain, "Updated", "success");
+            upcus.updateCustomer();            
+            modle.Allert.notificationGood("Updated", "success");
             cleareCus();
             upcus = null;
 
@@ -357,22 +354,22 @@ public class CustomerController implements Initializable {
 
     }
 
-    public void addApplication() {
-        btn_aplication.setOnAction((ActionEvent event) -> {
-//            System.out.println("APPLICATION");
-
-//            try {
-//                AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
-//                 MainController.container.getChildren().add(aplication);
-//                
-//               
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//            System.out.println("end");
-        });
-
-    }
+//    public void addApplication() {
+//        btn_aplication.setOnAction((ActionEvent event) -> {
+////            System.out.println("APPLICATION");
+//
+////            try {
+////                AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
+////                 MainController.container.getChildren().add(aplication);
+////                
+////               
+////            } catch (IOException ex) {
+////                ex.printStackTrace();
+////            }
+////            System.out.println("end");
+//        });
+//
+//    }
 
     public void deactivCustomer() {
         btn_delete.setOnAction((event) -> {

@@ -6,7 +6,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -110,9 +109,6 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private JFXButton btn_save_app;
-
-    @FXML
-    private StackPane stackPain;
 
     @FXML
     private JFXButton btn_send_approve;

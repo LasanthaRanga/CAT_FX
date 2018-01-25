@@ -7,6 +7,7 @@ package modle;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import org.hibernate.Session;
@@ -115,20 +116,14 @@ public class Users implements DAO<pojo.User> {
     @Override
     public List<User> getList() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        List<pojo.User> list = null;
         try {
-            List<pojo.User> list1 = session.createCriteria(pojo.User.class).list();
-            list1.remove(0);
-//            for (pojo.User object : list1) {
-//                if (object.getIdUser() == 1) {
-//                    
-//                } else {
-//                    list.add(object);
-//                }
-//
-//            }
-            return list1;
-
+            List<pojo.User> list = session.createCriteria(pojo.User.class).list();
+            for (Iterator<User> iterator = list.iterator(); iterator.hasNext();) {
+                User user = iterator.next();
+                if(user.getIdUser()==1)
+                    iterator.remove();
+            }
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -154,7 +149,29 @@ public class Users implements DAO<pojo.User> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             List list = session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 1)).list();
-            list.remove(0);
+            for (Iterator<User> iterator = list.iterator(); iterator.hasNext();) {
+                User user = iterator.next();
+                if(user.getIdUser()==1)
+                    iterator.remove();
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<pojo.User> getDeactiveUsers(){
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.User> list = session.createCriteria(pojo.User.class).add(Restrictions.eq("status", 0)).list();
+            for (Iterator<User> iterator = list.iterator(); iterator.hasNext();) {
+                User user = iterator.next();
+                if(user.getIdUser()==1)
+                    iterator.remove();
+            }
             return list;
         } catch (Exception e) {
             e.printStackTrace();

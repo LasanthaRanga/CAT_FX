@@ -90,6 +90,8 @@ public class CustomerController implements Initializable {
     modle.Customer customer = null;
     modle.CustomerHasAssesment cha = null;
     static pojo.Customer selectPcus = null;
+    @FXML
+    private Label lbl_idCustomer;
 
     /**
      * Initializes the controller class.
@@ -111,6 +113,7 @@ public class CustomerController implements Initializable {
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
         deactivCustomer();
+        btn_update.setDisable(true);
 
     }
 
@@ -120,21 +123,27 @@ public class CustomerController implements Initializable {
             System.out.println("ENTER GEHUWAA");
             String fname = txt_fname.getText();
             modle.StaticBadu.setCus_fullname(fname);
-            
+
             System.out.println(fname);
-            
+
 //            customer.setFullName(fname);
 //            SearchCustomerAndSetByFullName();
-
             List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
             modle.StaticBadu.setCuslist(searchCustomer);
 
             if (modle.StaticBadu.getpCustomer() != null) {
 
+                upcus.setIdCustomer(modle.StaticBadu.getpCustomer().getIdCustomer());
+                if (upcus.getIdCustomer() == modle.StaticBadu.getpCustomer().getIdCustomer()) {
+                    btn_update.setDisable(false);
+                    btn_delete.setDisable(false);
+                    lbl_idCustomer.setEllipsisString(modle.StaticBadu.getpCustomer().getIdCustomer()+"");
+
+                }
+               
             } else {
-                
+
                 if (searchCustomer.size() > 1) {
-                    
                     if (searchCustomer != null) {
                         try {
                             AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
@@ -144,16 +153,19 @@ public class CustomerController implements Initializable {
                             stage.initStyle(StageStyle.TRANSPARENT);
                             stage.setScene(scene);
                             stage.show();
+
                         } catch (IOException ex) {
                             ex.printStackTrace();
                             Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
                     }
+
                 }
+
             }
 
         }
+
     }
 
     public void loadWard() {
@@ -251,7 +263,6 @@ public class CustomerController implements Initializable {
         }
     }
 
-    @FXML
     public void searchCustomerByNIC() {
 
         String text = txt_nic.getText();

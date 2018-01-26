@@ -153,8 +153,8 @@ public class SearchCusController implements Initializable {
 
         modle.StaticBadu.setpCustomer(customer.getById(idCus));
         
-        System.out.println(modle.StaticBadu.getpCustomer().getIdCustomer());
-        System.out.println(modle.StaticBadu.getpCustomer().getFullName());
+//        System.out.println(modle.StaticBadu.getpCustomer().getIdCustomer());
+//        System.out.println(modle.StaticBadu.getpCustomer().getFullName());
         
       //  controller.CustomerController.selectPcus = customer.getById(idCus); 
       

@@ -133,6 +133,7 @@ public class WardController implements Initializable {
     public void addWard() {
         btn_ward_add.setOnAction((ActionEvent event) -> {
             String text = txt_wardname.getText();
+
             if (text.length() > 2) {
                 Ward ward = new modle.Ward();
                 ward.setWardname(text);
@@ -204,13 +205,19 @@ public class WardController implements Initializable {
     public void saveStreet() {
         btn_street_add.setOnAction((ActionEvent event) -> {
             if (idWard != 0) {
-                Strret strret = new modle.Strret();
-                strret.setIdWard(idWard);
-                strret.setStreetName(txt_strret.getText());
-                strret.saveStreet();
-                loadStrrt();
-                idStrret = 0;
-                txt_strret.setText(null);
+                if (txt_strret.getText()!=null) {
+                    Strret strret = new modle.Strret();
+                    strret.setIdWard(idWard);
+                    strret.setStreetName(txt_strret.getText());
+                    strret.saveStreet();
+                    loadStrrt();
+                    idStrret = 0;
+                    txt_strret.setText(null);
+                } else {
+                    modle.Allert.notificationInfo("Enter Street Name", "");
+                }
+            } else {
+                modle.Allert.notificationInfo("Did not select Ward", "Select Ward And Save Street");
             }
         });
 

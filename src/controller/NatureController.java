@@ -43,6 +43,7 @@ import modle.Nature;
 import modle.SubNature;
 import modle.TradeType;
 import pojo.TradeNature;
+import sun.text.resources.cldr.naq.FormatData_naq;
 
 /**
  * FXML Controller class
@@ -177,14 +178,18 @@ public class NatureController implements Initializable {
             pojo.TradeType loadTreadType = tradeType.loadTreadType(tt);
 
             if (loadTreadType != null) {
-                //  System.out.println("not null");
-                Nature nature = new modle.Nature();
-                nature.setTradeType(loadTreadType);
-                nature.setNatureNo(txt_nno.getText());
-                nature.setNature(txt_nature.getText());
-                nature.saveNature();
-                messagSuccsess();
-                loadNature();
+                if (txt_nature.getText().length()>2) {
+                    //  System.out.println("not null");
+                    Nature nature = new modle.Nature();
+                    nature.setTradeType(loadTreadType);
+                    nature.setNatureNo(txt_nno.getText());
+                    nature.setNature(txt_nature.getText());
+                    nature.saveNature();
+                    modle.Allert.notificationGood("Save", txt_nature.getText());
+                    loadNature();
+                } else {
+                     modle.Allert.notificationInfo("Empty Value", "");
+                }
             }
 
         });

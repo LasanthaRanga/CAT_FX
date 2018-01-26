@@ -486,6 +486,8 @@ public class Customer {
 
     }
 
+   
+
     public List<Customer> searchCustomer(String fname) {
         List<Customer> clist = new ArrayList<Customer>();
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();

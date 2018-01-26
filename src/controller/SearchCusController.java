@@ -58,7 +58,6 @@ public class SearchCusController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         loadTable();
         selectCustomer();
-
         btn_get.setOnAction((event) -> {
             setCustomerID();
         });
@@ -148,11 +147,17 @@ public class SearchCusController implements Initializable {
     }
 
     public void setCustomerID() {
+        
         Customer customer = new modle.Customer();
         customer.setIdCustomer(idCus);
 
         modle.StaticBadu.setpCustomer(customer.getById(idCus));
-        controller.CustomerController.selectPcus = customer.getById(idCus);        
+        
+//        System.out.println(modle.StaticBadu.getpCustomer().getIdCustomer());
+//        System.out.println(modle.StaticBadu.getpCustomer().getFullName());
+        
+      //  controller.CustomerController.selectPcus = customer.getById(idCus); 
+      
         btn_get.getScene().getWindow().hide();
 
     }

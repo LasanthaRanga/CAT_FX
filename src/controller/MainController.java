@@ -62,10 +62,9 @@ public class MainController implements Initializable {
         Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
         ses.beginTransaction().commit();
         ses.close();
-        
+
         User user = modle.AuthUser.getUser();
         lbl_logUser.setText(user.getFullName());
-
 
         try {
 
@@ -116,6 +115,11 @@ public class MainController implements Initializable {
                                     container.getChildren().add(paymant);
                                     break;
 
+                                case "paymantView":
+                                    AnchorPane paymantView = FXMLLoader.load(getClass().getResource("/view/PaymantView.fxml"));
+                                    container.getChildren().add(paymantView);
+                                    break;
+
                                 case "btn_exit":
                                     System.out.println("EXIT");
                                     Platform.exit();
@@ -161,14 +165,13 @@ public class MainController implements Initializable {
     @FXML
     private void closeDrawer(MouseEvent event) {
 
-       // drawer.open();
-
+        // drawer.open();
     }
 
     @FXML
     private void cloaseDrawerEnterd(MouseEvent event) {
         if (drawer.isShown()) {
-           // drawer.close();
+            // drawer.close();
         } else {
             drawer.open();
         }

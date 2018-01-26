@@ -132,7 +132,9 @@ public class CustomerController implements Initializable {
             if (modle.StaticBadu.getpCustomer() != null) {
 
             } else {
+                
                 if (searchCustomer.size() > 1) {
+                    
                     if (searchCustomer != null) {
                         try {
                             AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));

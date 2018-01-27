@@ -22,20 +22,25 @@
       </Label>
       <TableView fx:id="tbl_user" layoutX="14.0" layoutY="49.0" onMouseClicked="#loadUser" prefHeight="511.0" prefWidth="382.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="14.0" AnchorPane.topAnchor="49.0">
         <columns>
-            <TableColumn fx:id="tbl_clmn_id" prefWidth="60.0" text="#" />
-          <TableColumn fx:id="tbl_clmn_nic" editable="false" prefWidth="96.0" text="NIC" />
-          <TableColumn fx:id="tbl_clmn_name" editable="false" prefWidth="132.0" text="Name" />
-            <TableColumn fx:id="tbl_clmn_contact" editable="false" prefWidth="93.0" text="Contact" />
+            <TableColumn fx:id="tbl_clmn_id" prefWidth="40.0" text="#" />
+          <TableColumn fx:id="tbl_clmn_nic" editable="false" prefWidth="83.0" text="NIC" />
+          <TableColumn fx:id="tbl_clmn_name" editable="false" prefWidth="104.0" text="Name" />
+            <TableColumn fx:id="tbl_clmn_contact" editable="false" prefWidth="96.0" text="Contact" />
+            <TableColumn fx:id="tbl_clmn_status" prefWidth="56.0" text="Status" />
         </columns>
       </TableView>
       <VBox layoutX="412.0" layoutY="55.0" prefHeight="353.0" prefWidth="277.0" AnchorPane.bottomAnchor="172.0" AnchorPane.leftAnchor="412.0" AnchorPane.topAnchor="55.0">
          <children>
+            <Label text="Full Name" />
             <JFXTextField fx:id="txt_fname" prefHeight="35.0" prefWidth="288.0" promptText="Full Name" />
             <Region prefHeight="15.0" prefWidth="288.0" />
+            <Label text="NIC" />
             <JFXTextField fx:id="txt_nic" prefHeight="35.0" promptText="NIC" />
             <Region prefHeight="15.0" prefWidth="288.0" />
+            <Label text="Contact" />
             <JFXTextField fx:id="txt_mobile" layoutX="10.0" layoutY="60.0" prefHeight="35.0" promptText="Mobile" />
             <Region layoutX="10.0" layoutY="95.0" prefHeight="15.0" prefWidth="288.0" />
+            <Label text="Register Date" />
             <JFXTextField fx:id="txt_regisdate" editable="false" layoutX="10.0" layoutY="110.0" prefHeight="35.0" promptText="Register Date" />
          </children>
       </VBox>
@@ -63,5 +68,7 @@
       </HBox>
       <JFXListView fx:id="lv_category" layoutX="712.0" layoutY="97.0" prefHeight="110.0" prefWidth="224.0" AnchorPane.bottomAnchor="373.0" AnchorPane.leftAnchor="712.0" AnchorPane.topAnchor="97.0" />
       <Label layoutX="712.0" layoutY="72.0" prefHeight="17.0" prefWidth="168.0" text="Category" AnchorPane.bottomAnchor="491.0" AnchorPane.leftAnchor="712.0" AnchorPane.topAnchor="72.0" />
+      <Label layoutX="712.0" layoutY="223.0" prefHeight="17.0" prefWidth="168.0" text="Departments" />
+      <JFXListView fx:id="lv_departments" layoutX="712.0" layoutY="250.0" prefHeight="110.0" prefWidth="224.0" />
    </children>
 </AnchorPane>

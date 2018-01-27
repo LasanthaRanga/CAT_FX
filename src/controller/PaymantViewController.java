@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -100,6 +101,8 @@ public class PaymantViewController implements Initializable {
     private Label lbl_stamp;
     @FXML
     private Label lbl_payment_method;
+    @FXML
+    private JFXButton btn_reset;
 
     /**
      * Initializes the controller class.
@@ -169,9 +172,7 @@ public class PaymantViewController implements Initializable {
             }
         });
         
-        List<Payment> list = new modle.Payment().getByDate(new Date(), 1);
-        if (list != null) 
-                setToTable(FXCollections.observableArrayList(list));
+        this.loadTable();
         
     }
 
@@ -228,8 +229,49 @@ public class PaymantViewController implements Initializable {
     private void byReceiptNumber(ActionEvent event) {
         
     }
+    
+    public void loadTable(){
+        List<Payment> list = new modle.Payment().getByDate(new Date(), 1);
+        if (list != null) 
+                setToTable(FXCollections.observableArrayList(list));
+    }
+    
+    public void reset(){
+        loadTable();
+        //reset application
+        lbl_customername.setText("");
+        lbl_tradename.setText("");
+        lbl_tradenature.setText("");
+        lbl_tradesubnature.setText("");
+        lbl_tradetype.setText("");
+        lbl_application_year.setText("");
+        lbl_application_date.setText("");
+        lbl_allocation.setText("");
+        lbl_application_taxamount.setText("");
+        lbl_roname.setText("");
 
+        // reset payment details
+        lbl_receipt_no.setText("");
+        lbl_vort.setText("");
+        lbl_payment_year.setText("");
+        lbl_payment_date.setText("");
+        lbl_payment_taxamount.setText("");
+        lbl_vat.setText("");
+        lbl_nbt.setText("");
+        lbl_stamp.setText("");
+        lbl_payment_total.setText("");
+        lbl_payment_method.setText("");
+        
+        txt_by_receiptno.setText("");
+        txt_by_year.setText("");
+    }
+    
     public void setToTable(ObservableList list) {
         tbl_payment.setItems(list);
+    }
+
+    @FXML
+    private void resetAll(MouseEvent event) {
+        this.reset();
     }
 }

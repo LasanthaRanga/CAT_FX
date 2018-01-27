@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -184,7 +185,9 @@ public class Users implements DAO<pojo.User> {
     public pojo.User getByIdUser(int idUser) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            return (User) session.createCriteria(pojo.User.class).add(Restrictions.eq("idUser", idUser)).uniqueResult();
+            return (User) session.createCriteria(pojo.User.class)
+                    .add(Restrictions.eq("idUser", idUser))
+                    .uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -192,6 +195,24 @@ public class Users implements DAO<pojo.User> {
             session.close();
         }
     }
+    
+    public pojo.User getByIdUserFull(int idUser) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (User) session.createCriteria(pojo.User.class)
+                    .add(Restrictions.eq("idUser", idUser))
+                    .setFetchMode("userHasDepartments", FetchMode.JOIN)
+                    .setFetchMode("userHasCatagories", FetchMode.JOIN)
+                    .setFetchMode("logins", FetchMode.JOIN)
+                    .uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
     public HashMap getDepartments(int user) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         HashMap<Integer, String> dip = new HashMap<>();
@@ -285,22 +306,4 @@ public class Users implements DAO<pojo.User> {
         }
     }
     
-    public List<pojo.Catagory> getUserCategories(pojo.User u){
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {
-            pojo.User user=((pojo.User)session.createCriteria(pojo.User.class)
-                    .add(Restrictions.eq("idUser", u.getIdUser()))
-                    .uniqueResult());
-            ArrayList<pojo.Catagory> list=new ArrayList();
-            for (UserHasCatagory userHasCatagory : user.getUserHasCatagories()) {
-                list.add(userHasCatagory.getCatagory());
-            }
-            return list;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        } finally {
-            session.close();
-        }
-    }  
 }

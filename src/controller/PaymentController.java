@@ -4,35 +4,25 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
-import java.io.IOException;
 import java.net.URL;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import modle.Interest;
 import modle.Report;
@@ -463,7 +453,7 @@ public class PaymentController implements Initializable {
                             vort.getPayments().add(payment);
 
                             // setup payment
-                            payment.setPaymentDate(new Date(txt_payment_date.getValue().getYear(), txt_payment_date.getValue().getMonthValue(), txt_payment_date.getValue().getDayOfMonth()));
+                            payment.setPaymentDate(Date.from(txt_payment_date.getValue().atStartOfDay().atZone(ZoneId.of("Asia/Colombo")).toInstant()));
                             payment.setApplicationNo(application.getIdApplication());
                             payment.setYear(txt_payment_date.getValue().getYear());
                             payment.setMonth(txt_payment_date.getValue().getMonthValue());
@@ -486,6 +476,16 @@ public class PaymentController implements Initializable {
                             } else {
                                 payment.setSpamp(0.0);
                             }
+                            
+                            // pay method
+                            if(chb_cash.isSelected()&&chb_check.isSelected()){
+                                payment.setCashCheack("cc");
+                            }else if(chb_cash.isSelected()){
+                                payment.setCashCheack("ca");
+                            }else if(chb_cash.isSelected()){
+                                payment.setCashCheack("ch");
+                            }
+                            
                             payment.setTotaleAmount(Double.parseDouble(txt_total_amount.getText()));
                             payment.setStatus(1);
                             payment.setSyn(1);

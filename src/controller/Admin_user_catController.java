@@ -85,25 +85,34 @@ public class Admin_user_catController implements Initializable {
         cat = new modle.Catagory();
 
         btn_add_cat.setOnAction((event) -> {
-            if (cat.save(txt_catagory.getText())) {
-                modle.Allert.notificationGood("Saved", txt_catagory.getText());
-                loadCatTbl();
-                txt_catagory.setText("");
+            if (txt_catagory.getText().length() > 1) {
+                if (cat.save(txt_catagory.getText())) {
+                    modle.Allert.notificationGood("Saved", txt_catagory.getText());
+                    loadCatTbl();
+                    txt_catagory.setText("");
+                } else {
+                    modle.Allert.notificationError("Fail", txt_catagory.getText());
+                }
             } else {
-                modle.Allert.notificationError("Fail", txt_catagory.getText());
+                modle.Allert.notificationInfo("Empty Catagory", "Fil The Catagory Name");
             }
         });
         loadCatTbl();
 
         btn_add_department.setOnAction((event) -> {
 
-            pojo.Department department = new pojo.Department(txt_department.getText(), null, 1, 1, null);
-            if (new modle.Department().save(department)) {
-                modle.Allert.notificationGood("Added", department.getDepartment());
-                loadDepTbl();
-                txt_department.setText("");
+            if (txt_department.getText().length() > 1) {
+
+                pojo.Department department = new pojo.Department(txt_department.getText(), null, 1, 1, null);
+                if (new modle.Department().save(department)) {
+                    modle.Allert.notificationGood("Added", department.getDepartment());
+                    loadDepTbl();
+                    txt_department.setText("");
+                } else {
+                    modle.Allert.notificationError("Error", txt_department.getText());
+                }
             } else {
-                modle.Allert.notificationError("Error", txt_department.getText());
+                modle.Allert.notificationInfo("Empty Departmant", "Fil The Dipartmant Name");
             }
 
         });
@@ -111,15 +120,18 @@ public class Admin_user_catController implements Initializable {
 
         btn_add_authorities.setOnAction((event) -> {
 
-            Otheritiscat otheritiscat = new pojo.Otheritiscat(txt_authorities.getText(), "", 1, 1, null);
-            if (new modle.Authority().save(otheritiscat)) {
-                modle.Allert.notificationGood("Added", otheritiscat.getCatname());
-                txt_authorities.setText("");
-                loadOtherTable();
-            } else {
-                modle.Allert.notificationError("Error", txt_authorities.getText());
+            if (txt_authorities.getText().length() > 1) {
+                Otheritiscat otheritiscat = new pojo.Otheritiscat(txt_authorities.getText(), "", 1, 1, null);
+                if (new modle.Authority().save(otheritiscat)) {
+                    modle.Allert.notificationGood("Added", otheritiscat.getCatname());
+                    txt_authorities.setText("");
+                    loadOtherTable();
+                } else {
+                    modle.Allert.notificationError("Error", txt_authorities.getText());
+                }
+            }else{
+                 modle.Allert.notificationInfo("Empty Autorities", "Fil TheAutorities Name");
             }
-
         });
         loadOtherTable();
 

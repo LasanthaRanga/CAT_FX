@@ -21,19 +21,43 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="399.0" layoutY="204.0" onKeyReleased="#nicCheack" prefHeight="25.0" prefWidth="147.0" promptText="NIC">
+      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="374.0" layoutY="204.0" onKeyReleased="#nicCheack" prefHeight="35.0" prefWidth="172.0" promptText="NIC">
          <font>
-            <Font size="14.0" />
+            <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="580.0" layoutY="204.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="324.0" promptText="Full Name" />
-      <JFXTextField fx:id="txt_phone" labelFloat="true" layoutX="400.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Phone No." />
-      <JFXTextField fx:id="txt_mobile" labelFloat="true" layoutX="581.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Mobile No." />
-      <JFXTextField fx:id="txt_email" labelFloat="true" layoutX="757.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Email " />
-      <JFXTextField fx:id="txt_adress1" labelFloat="true" layoutX="397.0" layoutY="387.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 1" />
-      <JFXTextField fx:id="txt_adress2" labelFloat="true" layoutX="663.0" layoutY="387.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 2" />
-      <JFXTextField fx:id="txt_adress3" labelFloat="true" layoutX="397.0" layoutY="472.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 3" />
-      <JFXTextField fx:id="txt_city" labelFloat="true" layoutX="663.0" layoutY="472.0" prefHeight="25.0" prefWidth="238.0" promptText="City" text="Kurunegala" />
+      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="580.0" layoutY="204.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="324.0" promptText="Full Name">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_phone" labelFloat="true" layoutX="375.0" layoutY="302.0" prefHeight="35.0" prefWidth="172.0" promptText="Phone No.">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_mobile" labelFloat="true" layoutX="569.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Mobile No.">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_email" labelFloat="true" layoutX="757.0" layoutY="302.0" prefHeight="25.0" prefWidth="147.0" promptText="Email ">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_adress1" labelFloat="true" layoutX="372.0" layoutY="387.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 1">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_adress2" labelFloat="true" layoutX="663.0" layoutY="387.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 2">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_adress3" labelFloat="true" layoutX="372.0" layoutY="472.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 3">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
+      <JFXTextField fx:id="txt_city" labelFloat="true" layoutX="663.0" layoutY="472.0" prefHeight="25.0" prefWidth="238.0" promptText="City" text="Kurunegala">
+         <font>
+            <Font size="18.0" />
+         </font></JFXTextField>
       <JFXButton fx:id="btn_add" layoutX="400.0" layoutY="554.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -49,7 +73,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Label fx:id="lbl_idCustomer" layoutX="922.0" layoutY="207.0" prefHeight="17.0" prefWidth="85.0" text="000000">
+      <Label fx:id="lbl_idCustomer" layoutX="922.0" layoutY="207.0" prefHeight="17.0" prefWidth="85.0">
          <font>
             <Font size="14.0" />
          </font>

@@ -486,8 +486,6 @@ public class Customer {
 
     }
 
-   
-
     public List<Customer> searchCustomer(String fname) {
         List<Customer> clist = new ArrayList<Customer>();
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -520,6 +518,44 @@ public class Customer {
                 clist.add(cus);
             }
             return clist;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public modle.Customer searchCustomerByID(int idCus) {
+       
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.Customer c = (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.and(Restrictions.eq("idCustomer", idCus), Restrictions.eq("statues", 1))).uniqueResult();
+
+            modle.Customer cus = new modle.Customer();
+
+            if (c != null) {
+
+                cus.setFullName(c.getFullName());
+                cus.setNic(c.getNic());
+                cus.setIdCustomer(c.getIdCustomer());
+
+                Set<Contact> contacts = c.getContacts();
+                for (Contact contact : contacts) {
+                    if (contact.getStatues() == 1) {
+                        cus.setAddress1(contact.getAddress1());
+                        cus.setAddress2(contact.getAddress2());
+                        cus.setAddress3(contact.getAddress3());
+                        cus.setCity(contact.getCity());
+                        cus.setEmail(contact.getEmail());
+                        cus.setPhone(contact.getPhone());
+                        cus.setMobile(contact.getMobile());
+                        cus.setIdContact(contact.getIdContact());
+                    }
+                }
+            }
+
+            return cus;
         } catch (Exception e) {
             e.printStackTrace();
             return null;

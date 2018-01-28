@@ -11,10 +11,13 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +26,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -30,7 +37,9 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modle.Customer;
+import modle.WSA;
 import org.controlsfx.control.textfield.TextFields;
+import pojo.CustomerHasAssessment;
 
 /**
  * FXML Controller class
@@ -92,6 +101,14 @@ public class CustomerController implements Initializable {
     static pojo.Customer selectPcus = null;
     @FXML
     private Label lbl_idCustomer;
+    @FXML
+    private TableView<WSA> tbl_asess;
+    @FXML
+    private TableColumn<WSA, String> col_ward;
+    @FXML
+    private TableColumn<WSA, String> col_street;
+    @FXML
+    private TableColumn<WSA, String> col_ases;
 
     /**
      * Initializes the controller class.
@@ -164,6 +181,10 @@ public class CustomerController implements Initializable {
                         txt_adress3.setText(upcus.getAddress3());
                         txt_nic.setText(upcus.getNic());
                         x = 0;
+                        btn_add.setDisable(true);
+                        btn_update.setDisable(false);
+                        btn_delete.setDisable(false);
+                        setWardStrretAssesmant();
                     }
 
                 }
@@ -171,10 +192,10 @@ public class CustomerController implements Initializable {
             }//x = 0
             else if (x == 2) {
                 System.out.println(x);
-                System.out.println(modle.StaticBadu.getpCustomer().getFullName()+"=== Static Badu");
+                System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
                 if (modle.StaticBadu.getpCustomer() != null) {
                     upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
-                    System.out.println(upcus.getFullName()+"=== up cus");
+                    System.out.println(upcus.getFullName() + "=== up cus");
 
                     txt_fname.setText(upcus.getFullName());
                     txt_phone.setText(upcus.getPhone());
@@ -185,9 +206,27 @@ public class CustomerController implements Initializable {
                     txt_adress3.setText(upcus.getAddress3());
                     txt_nic.setText(upcus.getNic());
                     x = 0;
+                    btn_add.setDisable(true);
+                    btn_update.setDisable(false);
+                    btn_delete.setDisable(false);
+
+                    setWardStrretAssesmant();
 
                 }
             }// x==2
+
+        }
+    }
+
+    public void setWardStrretAssesmant() {
+        ObservableList WASlist = modle.Customer.getWASlist();
+        if (WASlist != null) {
+
+            col_ward.setCellValueFactory(new PropertyValueFactory<>("Ward"));
+            col_street.setCellValueFactory(new PropertyValueFactory<>("Street"));
+            col_ases.setCellValueFactory(new PropertyValueFactory<>("Assesmant"));
+
+            tbl_asess.setItems(WASlist);
 
         }
     }
@@ -206,14 +245,16 @@ public class CustomerController implements Initializable {
         loadStrret();
     }
 
+    ObservableList slist;
+
     public void loadStrret() {
         com_ward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String selectedItem = com_ward.getSelectionModel().getSelectedItem();
                 ward.setWardname(selectedItem);
-                ObservableList list = ward.getStreetBySelectedWard();
-                com_street.setItems(list);
+                slist = ward.getStreetBySelectedWard();
+                com_street.setItems(slist);
             }
         });
     }
@@ -311,7 +352,10 @@ public class CustomerController implements Initializable {
             txt_adress2.setText(cus.getAddress2());
             txt_adress3.setText(cus.getAddress3());
 
+            setWardStrretAssesmant();
+
         }
+
     }
 
     public void SearchCustomerAndSetByFullName() {
@@ -330,7 +374,9 @@ public class CustomerController implements Initializable {
         }
 
     }
-
+    
+    
+    
     public void searchCustomerByAssesment() {
         getSelectedWaredStrret();
         String asno = txt_assesment.getText();
@@ -338,6 +384,7 @@ public class CustomerController implements Initializable {
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
         customer = cha.searchCustometByAssesmentAndWardStrret();
+       
         setCustometData();
 
     }
@@ -353,9 +400,9 @@ public class CustomerController implements Initializable {
             txt_mobile.setText(customer.getMobile());
             txt_phone.setText(customer.getPhone());
             txt_email.setText(customer.getEmail());
-
+            
         } else {
-
+            
             txt_nic.setText(null);
             txt_fname.setText(null);
             txt_phone.setText(null);
@@ -364,6 +411,8 @@ public class CustomerController implements Initializable {
             txt_adress1.setText(null);
             txt_adress2.setText(null);
             txt_adress3.setText(null);
+            ObservableList WASlist = FXCollections.observableArrayList();
+            tbl_asess.setItems(WASlist);
 
         }
     }

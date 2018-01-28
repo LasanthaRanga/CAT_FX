@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -30,6 +31,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -97,19 +99,10 @@ public class AuthoritistController implements Initializable {
     private JFXTextArea txt_coment;
 
     @FXML
-    private Label lbl_idApp;
-
-    @FXML
-    private Label lbl_cusname;
-
-    @FXML
     private JFXButton btn_approve;
 
     @FXML
     private Label lbl_user;
-
-    @FXML
-    private Label lbl_username;
 
     @FXML
     private JFXButton btn_reload;
@@ -134,6 +127,8 @@ public class AuthoritistController implements Initializable {
     pojo.Apprualstatues apprualstatues;
     modle.Aplication modApp;
     modle.ApplicationStatus modState;
+    @FXML
+    private JFXButton btn_more;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -249,6 +244,28 @@ public class AuthoritistController implements Initializable {
             //  txt_idApp.setText(app.getIdApplication()+"");
         });
 
+    }
+
+   
+
+    @FXML
+    private void moreDetaisl(ActionEvent event) {
+
+        System.out.println("MORE");
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/Ditails.fxml"));
+            btn_more.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public class AppTbl {
@@ -492,9 +509,8 @@ public class AuthoritistController implements Initializable {
         if (apprualstatues != null) {
             User user = new modle.Users().getByIdUser(apprualstatues.getUser().getIdUser());
 
-            lbl_username.setText(user.getFullName());
-
-            lbl_idApp.setText(app.getIdApplication() + "");
+            //  lbl_username.setText(user.getFullName());
+            //   lbl_idApp.setText(app.getIdApplication() + "");
         }
     }
 

@@ -43,6 +43,24 @@ public class Aplication implements DAO<pojo.Application> {
         }
 
     }
+    
+    
+    public boolean update(Application t) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.update(t);
+            bt.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+        }
+
+    }
 
     @Override
     public boolean save(List<Application> list) {
@@ -60,8 +78,8 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
-    @Override
-    public boolean update(Application t) {
+  
+    public boolean updateApp(Application t) {
 
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();

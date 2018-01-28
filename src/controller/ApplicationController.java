@@ -33,6 +33,7 @@ import modle.CustomerHasAssesment;
 import modle.Nature;
 import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
+import org.hibernate.Session;
 import pojo.Application;
 import pojo.Assessment;
 import pojo.Street;
@@ -188,22 +189,19 @@ public class ApplicationController implements Initializable {
         // System.out.println(length);
 
         if (event.getCode() == KeyCode.ENTER) {
-            
+
             modle.Customer customer = null;
             getSelectedWaredStrret();
             String asno = txt_assesmantNO.getText();
-            CustomerHasAssesment cha = new modle.CustomerHasAssesment();
-            cha.setAssesment(asno);
-            cha.setStreet(selectedStreet);
-            cha.setWard(selectedWard);
 
-            customer = cha.searchAsesmant();
-            txt_cus_nic.setText(customer.getNic());
-            txt_cus_fname.setText(customer.getFullName());
+            customer = modle.AssesmantNo.searchByAssesmantNO(selectedWard, selectedStreet, asno);
 
             if (customer == null) {
                 txt_cus_nic.setText(null);
                 txt_cus_fname.setText(null);
+            } else {
+                txt_cus_nic.setText(customer.getNic());
+                txt_cus_fname.setText(customer.getFullName());
             }
         }
 
@@ -216,8 +214,6 @@ public class ApplicationController implements Initializable {
         selectedWard = com_ward.getSelectionModel().getSelectedItem();
         selectedStreet = com_street.getSelectionModel().getSelectedItem();
     }
-
-  
 
     @FXML
     public void nicCheack(KeyEvent event) {
@@ -439,48 +435,101 @@ public class ApplicationController implements Initializable {
         btn_save_app.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                collectData();
-                //  System.out.println(pCustomer.getFullName());
-                Application app = new pojo.Application();
-                app.setApproveToPaymant(0);
-                app.setCustomer(pCustomer);
-                app.setSubNature(pSubNature);
-                app.setTradeNature(pNature);
 
-                Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
-                System.out.println(assesmantPojo.getAssessmentNo());
-                app.setAssessment(assesmantPojo);
-                app.setTradeType(pTradeType);
-                app.setUser(pro);
-                //log wela inna user
-                app.setUserLog(modle.Log_User.getLogUser());
+                String btntxt = btn_save_app.getText();
 
-                app.setApplicationDate(apdat);
-                app.setYear(Integer.parseInt(year));
-                app.setMonth(Integer.parseInt(month));
-                app.setAllocation(alocation);
+                if (btntxt.equals("Save")) {
 
-                app.setTradeName(tradeNaem);
-                app.setTradeAddress1(adl1);
-                app.setTradeAddress2(adl2);
-                app.setTradeAddress3(adl3);
+                    collectData();
+                    //  System.out.println(pCustomer.getFullName());
+                    Application app = new pojo.Application();
+                    app.setApproveToPaymant(0);
+                    app.setCustomer(pCustomer);
+                    app.setSubNature(pSubNature);
+                    app.setTradeNature(pNature);
 
-                app.setTaxAmount(txtAmount);
-                app.setDiscription(discription);
-                app.setApproveToPaymant(0);
-                app.setStatues(1);
-                app.setSyn(1);
+                    Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+                    System.out.println(assesmantPojo.getAssessmentNo());
+                    app.setAssessment(assesmantPojo);
+                    app.setTradeType(pTradeType);
+                    app.setUser(pro);
+                    //log wela inna user
+                    app.setUserLog(modle.Log_User.getLogUser());
 
-                boolean save = new modle.Aplication().save(app);
+                    app.setApplicationDate(apdat);
+                    app.setYear(Integer.parseInt(year));
+                    app.setMonth(Integer.parseInt(month));
+                    app.setAllocation(alocation);
 
-                if (save) {
-                    modle.StaticBadu.setApp(app);
-                    modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
+                    app.setTradeName(tradeNaem);
+                    app.setTradeAddress1(adl1);
+                    app.setTradeAddress2(adl2);
+                    app.setTradeAddress3(adl3);
+
+                    app.setTaxAmount(txtAmount);
+                    app.setDiscription(discription);
+                    app.setApproveToPaymant(0);
+                    app.setStatues(1);
+                    app.setSyn(1);
+
+                    boolean save = new modle.Aplication().save(app);
+
+                    if (save) {
+                        modle.StaticBadu.setApp(app);
+                        modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
+                    } else {
+                        modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+                    }
                 } else {
-                    modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+                    saveUpdate();
                 }
             }
         });
+    }
+
+    public void saveUpdate() {
+
+        collectData();
+        //  System.out.println(pCustomer.getFullName());
+        Application app = a;
+        app.setApproveToPaymant(0);
+        app.setCustomer(pCustomer);
+        app.setSubNature(pSubNature);
+        app.setTradeNature(pNature);
+
+        Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+        System.out.println(assesmantPojo.getAssessmentNo());
+        app.setAssessment(assesmantPojo);
+        app.setTradeType(pTradeType);
+        app.setUser(pro);
+        //log wela inna user
+        app.setUserLog(modle.Log_User.getLogUser());
+
+        app.setApplicationDate(apdat);
+        app.setYear(Integer.parseInt(year));
+        app.setMonth(Integer.parseInt(month));
+        app.setAllocation(alocation);
+
+        app.setTradeName(tradeNaem);
+        app.setTradeAddress1(adl1);
+        app.setTradeAddress2(adl2);
+        app.setTradeAddress3(adl3);
+
+        app.setTaxAmount(txtAmount);
+        app.setDiscription(discription);
+        app.setApproveToPaymant(0);
+        app.setStatues(1);
+        app.setSyn(1);
+
+        boolean save = new modle.Aplication().updateApp(app);
+
+        if (save) {
+            modle.StaticBadu.setApp(app);
+            modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());
+        } else {
+            modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+        }
+
     }
 
     public void sendToApprove() {
@@ -547,6 +596,8 @@ public class ApplicationController implements Initializable {
         com_trade_type.getSelectionModel().clearSelection();
         com_nature.getSelectionModel().clearSelection();
         com_subnature.getSelectionModel().clearSelection();
+        btn_save_app.setText("Save");
+        setApplicationid();
 
     }
 
@@ -560,6 +611,68 @@ public class ApplicationController implements Initializable {
     @FXML
     private void clearApp(ActionEvent event) {
         clearApplication();
+    }
+
+    pojo.Application a;
+
+    @FXML
+    private void searchApp(KeyEvent event) {
+
+        String an = txt_aplicaton_No.getText();
+
+        if (event.getCode() == KeyCode.ENTER) {
+
+            Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+
+            try {
+                a = (pojo.Application) session.load(pojo.Application.class, Integer.parseInt(an));
+
+                if (a != null) {
+                    try {
+
+                        txt_allocaton.setText(a.getAllocation() + "");
+                        txt_taxt_amount.setText(a.getTaxAmount() + "");
+                        txt_trade_name.setText(a.getTradeName());
+                        txt_adl1.setText(a.getTradeAddress1());
+                        txt_adl2.setText(a.getTradeAddress2());
+                        txt_adl3.setText(a.getTradeAddress3());
+                        txt_discription.setText(a.getDiscription());
+
+                        txt_assesmantNO.setText(a.getAssessment().getAssessmentNo());
+                        txt_cus_fname.setText(a.getCustomer().getFullName());
+                        txt_cus_nic.setText(a.getCustomer().getNic());
+
+                        com_ward.getSelectionModel().select(a.getAssessment().getStreet().getWard().getWardName());
+                        com_street.getSelectionModel().select(a.getAssessment().getStreet().getStreetName());
+                        com_trade_type.getSelectionModel().select(a.getTradeType().getTypeName());
+                        com_nature.getSelectionModel().select(a.getTradeNature().getNature());
+
+                        txt_year.setText(a.getYear() + "");
+
+                        txt_month.setText(a.getMonth() + "");
+
+                        txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
+
+                        btn_save_app.setText("UPDATE");
+
+                        if (a.getUser() != null) {
+                            txt_ro.setText(a.getUser().getFullName());
+                        }
+
+                        com_subnature.getSelectionModel().select(a.getSubNature().getSubNature());
+                    } catch (Exception e) {
+                        clearApplication();
+                    }
+                } else {
+                    clearApplication();
+                }
+                //  txt_ro.setText(null);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+        }
     }
 
 }

@@ -43,8 +43,7 @@ public class Aplication implements DAO<pojo.Application> {
         }
 
     }
-    
-    
+
     public boolean update(Application t) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -78,7 +77,6 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
-  
     public boolean updateApp(Application t) {
 
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -170,14 +168,20 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
-    public List<modle.AppTbl> getAppListToTable() {
+    public List<modle.AppTbl> getAppListToTable(int approve, int paid) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
-            List<pojo.Application> list = session.createCriteria(pojo.Application.class).list();
+            Criteria c = session.createCriteria(pojo.Application.class);
+
+            c.add(Restrictions.eq("statues", approve));
+            c.add(Restrictions.eq("approveToPaymant", paid));
+
+            List<pojo.Application> list = c.list();
+
             ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
 
             for (Application application : list) {
-                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
 
             }
             return ap_list;
@@ -205,7 +209,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 0) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -238,7 +242,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 1) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -271,7 +275,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 2) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -319,8 +323,8 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
-    
-    public pojo.Application getByIdFull(int id){
+
+    public pojo.Application getByIdFull(int id) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {

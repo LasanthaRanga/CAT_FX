@@ -469,7 +469,7 @@ public class ApplicationController implements Initializable {
                     app.setTaxAmount(txtAmount);
                     app.setDiscription(discription);
                     app.setApproveToPaymant(0);
-                    app.setStatues(1);
+                    app.setStatues(0);
                     app.setSyn(1);
 
                     boolean save = new modle.Aplication().save(app);
@@ -518,7 +518,7 @@ public class ApplicationController implements Initializable {
         app.setTaxAmount(txtAmount);
         app.setDiscription(discription);
         app.setApproveToPaymant(0);
-        app.setStatues(1);
+        app.setStatues(0);
         app.setSyn(1);
 
         boolean save = new modle.Aplication().updateApp(app);

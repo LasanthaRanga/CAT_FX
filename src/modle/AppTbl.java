@@ -17,13 +17,14 @@ import pojo.UserLog;
  */
 public class AppTbl {
 
-    public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp) {
+    public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp,String Tname) {
         this.appno = appno;
         this.Type = new SimpleStringProperty(Type);
         this.nature = new SimpleStringProperty(nature);
         this.alocation = alocation;
         this.txt = txt;
         this.payapp = payapp;
+        this.Tname = new SimpleStringProperty(Tname);
     }
 
     /**
@@ -116,5 +117,20 @@ public class AppTbl {
     private Double alocation;
     private Double txt;
     private int payapp;
+    private SimpleStringProperty Tname;
+
+    /**
+     * @return the Tname
+     */
+    public String getTname() {
+        return Tname.get();
+    }
+
+    /**
+     * @param Tname the Tname to set
+     */
+    public void setTname(SimpleStringProperty Tname) {
+        this.Tname = Tname;
+    }
 
 }

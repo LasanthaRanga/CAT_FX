@@ -16,6 +16,8 @@ import javafx.collections.ObservableList;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
 import pojo.Contact;
@@ -413,6 +415,30 @@ public class Customer {
             contact.setStatues(1);
             contact.setSyn(1);
 
+            Assessment assessment = new pojo.Assessment();
+           // System.out.println(getSelectedStreet());
+
+            pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getSelectedWard())).uniqueResult();
+            System.out.println(ward.getWardName());
+            Criteria cr = session.createCriteria(pojo.Street.class);
+            cr.add(Restrictions.eq("street", getSelectedStreet()));
+            pojo.Street street = (pojo.Street) cr.add(Restrictions.eq("ward", ward)).uniqueResult();
+
+            System.out.println(street.getStreetName());
+
+            assessment.setStreet(street);
+            assessment.setAssessmentNo(getAssesmentNO());
+            assessment.setStatus(1);
+            assessment.setSyn(1);
+
+            session.save(assessment);
+
+            CustomerHasAssessment cha = new pojo.CustomerHasAssessment();
+            cha.setAssessment(assessment);
+            cha.setCustomer(customer);
+            cha.setSyn(1);
+            session.save(cha);
+
             session.save(contact);
             bt.commit();
             return true;
@@ -720,4 +746,18 @@ public class Customer {
             session.close();
         }
     }
+
+    public String genarateAssesmant() {
+        String asno = null;
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return asno;
+    }
+
 }

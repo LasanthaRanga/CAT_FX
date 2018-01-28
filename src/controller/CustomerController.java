@@ -109,6 +109,8 @@ public class CustomerController implements Initializable {
     private TableColumn<WSA, String> col_street;
     @FXML
     private TableColumn<WSA, String> col_ases;
+    @FXML
+    private JFXButton btn_genarate;
 
     /**
      * Initializes the controller class.
@@ -278,6 +280,8 @@ public class CustomerController implements Initializable {
                 Customer searchCustomerByNic = customer.searchCustomerByNic();
                 if (searchCustomerByNic.getFullName() == null) {
 
+                    getSelectedWaredStrret();
+
                     customer.setSelectedWard(selectedWard);
                     customer.setSelectedStreet(selectedStreet);
                     customer.setAssesmentNO(txt_assesment.getText());
@@ -374,9 +378,7 @@ public class CustomerController implements Initializable {
         }
 
     }
-    
-    
-    
+
     public void searchCustomerByAssesment() {
         getSelectedWaredStrret();
         String asno = txt_assesment.getText();
@@ -384,7 +386,7 @@ public class CustomerController implements Initializable {
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
         customer = cha.searchCustometByAssesmentAndWardStrret();
-       
+
         setCustometData();
 
     }
@@ -400,9 +402,9 @@ public class CustomerController implements Initializable {
             txt_mobile.setText(customer.getMobile());
             txt_phone.setText(customer.getPhone());
             txt_email.setText(customer.getEmail());
-            
+
         } else {
-            
+
             txt_nic.setText(null);
             txt_fname.setText(null);
             txt_phone.setText(null);
@@ -491,6 +493,13 @@ public class CustomerController implements Initializable {
             cleareCus();
 
         });
+
+    }
+
+    @FXML
+    private void genarateAsessmantNO(ActionEvent event) {
+
+        customer.genarateAssesmant();
 
     }
 

@@ -87,7 +87,7 @@
             <TableColumn fx:id="col_ases" prefWidth="146.0" text="Assesmant" />
         </columns>
       </TableView>
-      <JFXButton layoutX="770.0" layoutY="97.0" prefHeight="30.0" prefWidth="208.0" text="Genarate Assesmant Number">
+      <JFXButton fx:id="btn_genarate" layoutX="828.0" layoutY="96.0" onAction="#genarateAsessmantNO" prefHeight="30.0" prefWidth="208.0" text="Genarate Assesmant Number">
          <font>
             <Font size="14.0" />
          </font>

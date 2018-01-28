@@ -21,10 +21,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import modle.ApplicationStatus;
 import modle.Authority;
+import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Apprualstatues;
 import pojo.Otheritiscat;
 import pojo.User;
+import pojo.UserHasOtheritiscat;
 
 /**
  * FXML Controller class
@@ -64,6 +68,10 @@ public class SendToApproveController implements Initializable {
     pojo.Otheritiscat outo;
     String au;
     pojo.Application app;
+    pojo.User outhoUser;
+
+    @FXML
+    private JFXComboBox<String> com_autho_name;
 
     /**
      * Initializes the controller class.
@@ -77,12 +85,15 @@ public class SendToApproveController implements Initializable {
         lbl_idApplication.setText(app.getIdApplication().toString());
         loadApprovCombo();
         save();
-        loadTable();
+        // loadTable();
 
         btn_done.setOnAction((event) -> {
             btn_done.getParent().getScene().getWindow().hide();
         });
-        
+
+        com_autho.setOnAction((event) -> {
+            loadNamesCombo();
+        });
 
     }
 
@@ -98,9 +109,35 @@ public class SendToApproveController implements Initializable {
 
     }
 
+    public void loadNamesCombo() {
+
+        getSelected();
+
+        ObservableList ulist = FXCollections.observableArrayList();
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.Otheritiscat oc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritisCat", outo.getIdOtheritisCat())).uniqueResult();
+
+            List<pojo.UserHasOtheritiscat> list = session.createCriteria(pojo.UserHasOtheritiscat.class).add(Restrictions.eq("otheritiscat", oc)).list();
+
+            for (UserHasOtheritiscat userHasOtheritiscat : list) {
+                User user = userHasOtheritiscat.getUser();
+                ulist.add(user.getFullName());
+            }
+
+            com_autho_name.setItems(ulist);
+
+        } catch (Exception e) {
+        }
+
+    }
+
     public void getSelected() {
         au = com_autho.getSelectionModel().getSelectedItem();
         outo = authority.getAuthorityByAuthorityName(au);
+        outhoUser = new modle.Users().getByFullname(com_autho_name.getSelectionModel().getSelectedItem());
+
     }
 
     public void save() {
@@ -108,16 +145,18 @@ public class SendToApproveController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 getSelected();
-                
-                Apprualstatues apprualstatues = new pojo.Apprualstatues();
-                apprualstatues.setApplication(app);
-                apprualstatues.setDate(new Date());
-                apprualstatues.setIdOtheritisCat(outo.getIdOtheritisCat());
-                apprualstatues.setStatues(0);
-                apprualstatues.setSyn(1);
-                apprualstatues.setUser(modle.AuthUser.getUser());
 
-                boolean save = new modle.ApplicationStatus().save(apprualstatues);
+                Apprualstatues apps = new pojo.Apprualstatues();
+                
+                apps.setResiveUser(outhoUser.getIdUser());
+                apps.setApplication(app);
+                apps.setSendDate(new Date());                
+                apps.setIdOtheritisCat(outo.getIdOtheritisCat());
+                apps.setStatues(0);
+                apps.setSyn(1);
+                apps.setUser(modle.AuthUser.getUser());
+
+                boolean save = new modle.ApplicationStatus().save(apps);
 
                 if (save) {
                     modle.Allert.notificationGood("Send To", au);

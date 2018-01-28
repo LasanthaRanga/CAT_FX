@@ -522,7 +522,7 @@ public class ApplicationController implements Initializable {
         app.setSyn(1);
 
         boolean save = new modle.Aplication().updateApp(app);
-
+        
         if (save) {
             modle.StaticBadu.setApp(app);
             modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());

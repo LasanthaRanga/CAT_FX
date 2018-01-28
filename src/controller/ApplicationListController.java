@@ -10,24 +10,32 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.sun.management.jmx.Trace;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.Aplication;
 import modle.ApplicationStatus;
+import org.hibernate.Session;
 import pojo.Application;
 
 /**
@@ -96,6 +104,12 @@ public class ApplicationListController implements Initializable {
     private JFXRadioButton ra_pendig_pay;
     @FXML
     private JFXRadioButton ra_paid;
+    @FXML
+    private JFXButton btn_sendtoApprove;
+    @FXML
+    private JFXButton btn_approve_toPay;
+    @FXML
+    private JFXButton btn_All;
 
     /**
      * Initializes the controller class.
@@ -104,6 +118,7 @@ public class ApplicationListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadTable();
+        // clickTable();
 
         tbl_applicaion.setOnMouseReleased((event) -> {
 
@@ -123,6 +138,55 @@ public class ApplicationListController implements Initializable {
     private void reload(ActionEvent event) {
 
         loadTable();
+
+    }
+
+    @FXML
+    private void sendToApprove(ActionEvent event) {
+
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SendToApprove.fxml"));
+            btn_sendtoApprove.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void sendToPay(ActionEvent event) {
+
+        Integer approveToPaymant = app.getApproveToPaymant();
+
+        if (approveToPaymant == 0) {
+            app.setApproveToPaymant(1);
+            Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+            try {
+                session.update(app);
+                session.beginTransaction().commit();
+                modle.Allert.notificationGood("Approve To Paymant", app.getIdApplication() + "");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+        } else if (approveToPaymant == 1) {
+            modle.Allert.notificationInfo("Allrady Approve", app.getIdApplication() + "");
+        } else {
+            modle.Allert.notificationInfo("Paymant Done", app.getIdApplication() + "");
+        }
+    }
+
+    @FXML
+    private void getAllDetails(ActionEvent event) {
 
     }
 
@@ -362,5 +426,13 @@ public class ApplicationListController implements Initializable {
         tbl_approve.setItems(natureList);
     }
 
+//    public void clickTable(){
+//    tbl_applicaion.setOnMouseReleased((event) -> {
+//        
+//        int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
+//        loadTableApprove();
+//    });
+//    
+//    }
 }
 //asdfasfadfasf asf

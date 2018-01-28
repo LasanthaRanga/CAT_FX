@@ -187,7 +187,7 @@ public class AuthoritistController implements Initializable {
                 int idOc = modle.AuthUser.getIdOc();
                 if (idOc == idOtheritisCat) {
                     String mycoment = txt_myComment.getText();
-                    apprualstatues.setDate(new Date());
+                    apprualstatues.setApproveDate(new Date());
                     apprualstatues.setDescription(mycoment);
                     apprualstatues.setUser(modle.AuthUser.getUser());
                     apprualstatues.setStatues(1);
@@ -215,7 +215,7 @@ public class AuthoritistController implements Initializable {
                 int idOc = modle.AuthUser.getIdOc();
                 if (idOc == idOtheritisCat) {
                     String mycoment = txt_myComment.getText();
-                    apprualstatues.setDate(new Date());
+                    apprualstatues.setApproveDate(new Date());
                     apprualstatues.setDescription(mycoment);
                     apprualstatues.setUser(modle.AuthUser.getUser());
                     apprualstatues.setStatues(2);

@@ -102,7 +102,7 @@ public class ApplicationStatus implements DAO<pojo.Apprualstatues> {
             for (pojo.Apprualstatues aps : list) {
                 // Otheritiscat otc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritiscat", aps.getIdOtheritisCat())).uniqueResult();
                 Otheritiscat otc = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritisCat", aps.getIdOtheritisCat())).uniqueResult();
-                appl.add(new Approve(aps.getIdApprualStatues(), aps.getStatues(), aps.getUser(), aps.getUser().getIdUser(), app, app.getIdApplication(), otc, otc.getCatname(), aps.getIdOtheritisCat(), aps.getDescription(), aps.getDate()));
+                appl.add(new Approve(aps.getIdApprualStatues(), aps.getStatues(), aps.getUser(), aps.getUser().getIdUser(), app, app.getIdApplication(), otc, otc.getCatname(), aps.getIdOtheritisCat(), aps.getDescription(), aps.getSendDate()));
             }
 
             return appl;

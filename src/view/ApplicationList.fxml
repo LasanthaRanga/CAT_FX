@@ -32,12 +32,12 @@
             <TableColumn fx:id="col_date" prefWidth="136.0" text="Date" />
          </columns>
       </TableView>
-      <JFXButton layoutX="725.0" layoutY="491.0" prefHeight="29.0" prefWidth="152.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
+      <JFXButton fx:id="btn_sendtoApprove" layoutX="725.0" layoutY="491.0" onAction="#sendToApprove" prefHeight="29.0" prefWidth="152.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton layoutX="725.0" layoutY="567.0" style="-fx-background-color: #1976D2;" text="Approve For Paymant" textFill="WHITE">
+      <JFXButton fx:id="btn_approve_toPay" layoutX="725.0" layoutY="567.0" onAction="#sendToPay" style="-fx-background-color: #1976D2;" text="Approve For Paymant" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -48,7 +48,7 @@
          </font>
       </Label>
       <JFXTextField fx:id="txt_idApp1" editable="false" layoutX="33.0" layoutY="69.0" prefHeight="25.0" prefWidth="187.0" promptText="Application Number Search" />
-      <JFXButton layoutX="718.0" layoutY="129.0" prefHeight="29.0" prefWidth="152.0" style="-fx-background-color: #1976D2;" text="All Details" textFill="WHITE">
+      <JFXButton fx:id="btn_All" layoutX="718.0" layoutY="129.0" onAction="#getAllDetails" prefHeight="29.0" prefWidth="152.0" style="-fx-background-color: #1976D2;" text="All Details" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>

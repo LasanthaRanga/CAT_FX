@@ -188,6 +188,21 @@ public class ApplicationListController implements Initializable {
     @FXML
     private void getAllDetails(ActionEvent event) {
 
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/Ditails.fxml"));
+            btn_sendtoApprove.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     public class AppTbl {

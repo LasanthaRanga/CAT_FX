@@ -383,18 +383,16 @@ public class Customer {
         Transaction bt = session.beginTransaction();
         try {
 
+            Criteria criteria = session
+                    .createCriteria(pojo.Customer.class)
+                    .setProjection(Projections.max("idCustomer"));
+            Integer maxAge = (Integer) criteria.uniqueResult();
+
+            System.out.println(maxAge);
+
             pojo.Customer cus = new pojo.Customer();
             cus.setUserLog(modle.AuthUser.getUserLog());
             String nic1 = getNic();
-
-            if (nic1 == null || nic1.length() < 5) {
-                double random = Math.random();
-                String ss = random + "R";
-                System.out.println(ss);
-                cus.setNic(ss);
-            } else {
-                cus.setNic(getNic());
-            }
 
             cus.setFullName(getFullName());
             cus.setStatues(1);
@@ -416,12 +414,11 @@ public class Customer {
             contact.setSyn(1);
 
             Assessment assessment = new pojo.Assessment();
-           // System.out.println(getSelectedStreet());
 
             pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getSelectedWard())).uniqueResult();
             System.out.println(ward.getWardName());
             Criteria cr = session.createCriteria(pojo.Street.class);
-            cr.add(Restrictions.eq("street", getSelectedStreet()));
+            cr.add(Restrictions.eq("streetName", getSelectedStreet()));
             pojo.Street street = (pojo.Street) cr.add(Restrictions.eq("ward", ward)).uniqueResult();
 
             System.out.println(street.getStreetName());
@@ -435,11 +432,18 @@ public class Customer {
 
             CustomerHasAssessment cha = new pojo.CustomerHasAssessment();
             cha.setAssessment(assessment);
-            cha.setCustomer(customer);
+            cha.setCustomer(cus);
             cha.setSyn(1);
             session.save(cha);
-
             session.save(contact);
+
+            if (getNic().length() < 9) {
+                cus.setNic("NIC " + cus.getIdCustomer());
+            } else {
+                cus.setNic(getNic());
+            }
+
+            session.update(cus);
             bt.commit();
             return true;
 
@@ -455,6 +459,7 @@ public class Customer {
 
     public void updateCustomer() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
         try {
 
             pojo.Customer upcus = (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.eq("idCustomer", getIdCustomer())).uniqueResult();
@@ -463,17 +468,14 @@ public class Customer {
 
             String nic1 = getNic();
 
-            if (nic1 == null || nic1.length() < 5) {
-                double random = Math.random();
-                String ss = random + "R";
-                System.out.println(ss);
-                upcus.setNic(ss);
-            } else {
-                upcus.setNic(getNic());
-            }
-
             upcus.setStatues(1);
             upcus.setSyn(1);
+
+            if (upcus.getNic().length() < 9) {
+                upcus.setNic("NIC " + upcus.getIdCustomer());
+            } else {
+                upcus.setNic(upcus.getNic());
+            }
 
             session.update(upcus);
 
@@ -487,12 +489,24 @@ public class Customer {
             upcon.setEmail(getEmail());
             upcon.setStatues(1);
             upcon.setSyn(1);
+
+//            Set<CustomerHasAssessment> chas = upcus.getCustomerHasAssessments();
+//            for (CustomerHasAssessment cha : chas) {
+//                Assessment assessment = cha.getAssessment();
+//                String asno = getAssesmentNO();
+//                if (assessment.getAssessmentNo().equals(asno)) {
+//                    assessment.setAssessmentNo(asno);
+//                    session.update(assessment);
+//                }
+//
+//            }
             session.update(upcon);
 
-            session.beginTransaction().commit();
+            bt.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
+            bt.rollback();
         } finally {
             session.close();
         }
@@ -748,16 +762,22 @@ public class Customer {
     }
 
     public String genarateAssesmant() {
-        String asno = null;
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
 
+            Criteria c = session.createCriteria(pojo.Assessment.class);
+            c.setProjection(Projections.max("idAssessment"));
+            Integer maxAge = (Integer) c.uniqueResult();
+            System.out.println(maxAge);
+            return "none " + maxAge;
+
         } catch (Exception e) {
             e.printStackTrace();
+            return "none";
         } finally {
             session.close();
         }
-        return asno;
+
     }
 
 }

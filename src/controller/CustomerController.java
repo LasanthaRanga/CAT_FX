@@ -24,6 +24,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
@@ -90,9 +91,7 @@ public class CustomerController implements Initializable {
     @FXML
     private JFXButton btn_update;
 
-    @FXML
-    private JFXButton btn_delete;
-
+    // private JFXButton btn_delete;
 //    @FXML
 //    private JFXButton btn_aplication;
     modle.Ward ward = null;
@@ -111,12 +110,19 @@ public class CustomerController implements Initializable {
     private TableColumn<WSA, String> col_ases;
     @FXML
     private JFXButton btn_genarate;
+    @FXML
+    private JFXButton btn_clear;
+
+    Scene scene;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+       
+
+        
         ward = new modle.Ward();
         customer = new Customer();
         cha = new modle.CustomerHasAssesment();
@@ -131,7 +137,7 @@ public class CustomerController implements Initializable {
 
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
-        deactivCustomer();
+
         btn_update.setDisable(true);
 
     }
@@ -185,7 +191,7 @@ public class CustomerController implements Initializable {
                         x = 0;
                         btn_add.setDisable(true);
                         btn_update.setDisable(false);
-                        btn_delete.setDisable(false);
+
                         setWardStrretAssesmant();
                     }
 
@@ -210,7 +216,6 @@ public class CustomerController implements Initializable {
                     x = 0;
                     btn_add.setDisable(true);
                     btn_update.setDisable(false);
-                    btn_delete.setDisable(false);
 
                     setWardStrretAssesmant();
 
@@ -380,6 +385,7 @@ public class CustomerController implements Initializable {
     }
 
     public void searchCustomerByAssesment() {
+
         getSelectedWaredStrret();
         String asno = txt_assesment.getText();
         cha.setAssesment(asno);
@@ -388,6 +394,7 @@ public class CustomerController implements Initializable {
         customer = cha.searchCustometByAssesmentAndWardStrret();
 
         setCustometData();
+        setWardStrretAssesmant();
 
     }
 
@@ -402,7 +409,7 @@ public class CustomerController implements Initializable {
             txt_mobile.setText(customer.getMobile());
             txt_phone.setText(customer.getPhone());
             txt_email.setText(customer.getEmail());
-
+            btn_update.setDisable(false);
         } else {
 
             txt_nic.setText(null);
@@ -457,6 +464,9 @@ public class CustomerController implements Initializable {
             upcus.setPhone(txt_phone.getText());
             upcus.setMobile(txt_mobile.getText());
             upcus.setEmail(txt_email.getText());
+            upcus.setAssesmentNO(txt_assesment.getText());
+            upcus.setSelectedWard(com_ward.getSelectionModel().getSelectedItem());
+            upcus.setSelectedStreet(com_street.getSelectionModel().getSelectedItem());
 
             upcus.updateCustomer();
             modle.Allert.notificationGood("Updated", "success");
@@ -483,23 +493,51 @@ public class CustomerController implements Initializable {
 //        });
 //
 //    }
-    public void deactivCustomer() {
-        btn_delete.setOnAction((event) -> {
-            if (selectPcus != null) {
-                upcus.setIdCustomer(selectPcus.getIdCustomer());
-            }
-            upcus.deactiveCustomer();
-            upcus = null;
-            cleareCus();
-
-        });
+//    public void deactivCustomer() {
+//        btn_delete.setOnAction((event) -> {
+//            if (selectPcus != null) {
+//                upcus.setIdCustomer(selectPcus.getIdCustomer());
+//            }
+//            upcus.deactiveCustomer();
+//            upcus = null;
+//            cleareCus();
+//
+//        });
+//    }
+    @FXML
+    private void genarateAsessmantNO(ActionEvent event) {
+        String ass;
+        if (customer != null) {
+            ass = customer.genarateAssesmant();
+        } else {
+            customer = new modle.Customer();
+            ass = customer.genarateAssesmant();
+        }
+        txt_assesment.setText(ass);
 
     }
 
     @FXML
-    private void genarateAsessmantNO(ActionEvent event) {
+    private void clearAll(ActionEvent event) {
 
-        customer.genarateAssesmant();
+        txt_nic.setText(null);
+        txt_fname.setText(null);
+        txt_phone.setText(null);
+        txt_mobile.setText(null);
+        txt_email.setText(null);
+        txt_adress1.setText(null);
+        txt_adress2.setText(null);
+        txt_adress3.setText(null);
+        ObservableList WASlist = FXCollections.observableArrayList();
+        WASlist = null;
+        tbl_asess.setItems(WASlist);
+        com_ward.getSelectionModel().clearSelection();
+        com_street.getSelectionModel().clearSelection();
+        loadWard();
+        txt_assesment.setText(null);
+        upcus = null;
+        btn_update.setDisable(true);
+        btn_add.setDisable(false);
 
     }
 

@@ -41,7 +41,6 @@ import modle.Customer;
 import modle.WSA;
 import org.controlsfx.control.textfield.TextFields;
 
-
 /**
  * FXML Controller class
  *
@@ -120,9 +119,7 @@ public class CustomerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
 
-        
         ward = new modle.Ward();
         customer = new Customer();
         cha = new modle.CustomerHasAssesment();
@@ -391,8 +388,10 @@ public class CustomerController implements Initializable {
         cha.setAssesment(asno);
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
-     //   customer = cha.searchCustometByAssesmentAndWardStrret();
 
+        customer = modle.AssesmantNo.searchByAssesmantNO(selectedWard, selectedStreet, asno);
+
+        //   customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
         setWardStrretAssesmant();
 

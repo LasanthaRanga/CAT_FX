@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 25, 2018 9:52:50 AM by Hibernate Tools 4.3.1
+// Generated Jan 28, 2018 6:35:57 PM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -12,25 +12,28 @@ public class Assessment  implements java.io.Serializable {
 
 
      private Integer idAssessment;
+     private Customer customer;
      private Street street;
      private String assessmentNo;
      private Integer status;
      private Integer syn;
-     private Set<CustomerHasAssessment> customerHasAssessments = new HashSet<CustomerHasAssessment>(0);
+     private Set<Application> applications = new HashSet<Application>(0);
 
     public Assessment() {
     }
 
 	
-    public Assessment(Street street) {
+    public Assessment(Customer customer, Street street) {
+        this.customer = customer;
         this.street = street;
     }
-    public Assessment(Street street, String assessmentNo, Integer status, Integer syn, Set<CustomerHasAssessment> customerHasAssessments) {
+    public Assessment(Customer customer, Street street, String assessmentNo, Integer status, Integer syn, Set<Application> applications) {
+       this.customer = customer;
        this.street = street;
        this.assessmentNo = assessmentNo;
        this.status = status;
        this.syn = syn;
-       this.customerHasAssessments = customerHasAssessments;
+       this.applications = applications;
     }
    
     public Integer getIdAssessment() {
@@ -39,6 +42,13 @@ public class Assessment  implements java.io.Serializable {
     
     public void setIdAssessment(Integer idAssessment) {
         this.idAssessment = idAssessment;
+    }
+    public Customer getCustomer() {
+        return this.customer;
+    }
+    
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
     public Street getStreet() {
         return this.street;
@@ -68,12 +78,12 @@ public class Assessment  implements java.io.Serializable {
     public void setSyn(Integer syn) {
         this.syn = syn;
     }
-    public Set<CustomerHasAssessment> getCustomerHasAssessments() {
-        return this.customerHasAssessments;
+    public Set<Application> getApplications() {
+        return this.applications;
     }
     
-    public void setCustomerHasAssessments(Set<CustomerHasAssessment> customerHasAssessments) {
-        this.customerHasAssessments = customerHasAssessments;
+    public void setApplications(Set<Application> applications) {
+        this.applications = applications;
     }
 
 

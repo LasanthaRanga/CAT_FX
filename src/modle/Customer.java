@@ -427,14 +427,10 @@ public class Customer {
             assessment.setAssessmentNo(getAssesmentNO());
             assessment.setStatus(1);
             assessment.setSyn(1);
+            assessment.setCustomer(cus);
 
             session.save(assessment);
 
-           // CustomerHasAssessment cha = new pojo.CustomerHasAssessment();
-          //  cha.setAssessment(assessment);
-          //  cha.setCustomer(cus);
-         //   cha.setSyn(1);
-         //   session.save(cha);
             session.save(contact);
 
             if (getNic().length() < 9) {
@@ -578,19 +574,14 @@ public class Customer {
                         }
 
                     }
-           //         Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+                    //asesmant table
+                    List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
                     WASlist.clear();
-            //        for (CustomerHasAssessment cha : chasa) {
-               //         CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-                //        Assessment assessment = cushas.getAssessment();
-                //        Street street = assessment.getStreet();
-               //         pojo.Ward ward = street.getWard();
-
-               //         WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
-           //             getWASlist().add(wsa);
-
-          //          }
-
+                    for (Assessment assessment : list1) {
+                        WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+                        getWASlist().add(wsa);
+                    }
+                    //asesmant table
                 }
                 clist.add(cus);
             }
@@ -630,6 +621,14 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
+                //asesmant table
+                List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
+                WASlist.clear();
+                for (Assessment assessment : list1) {
+                    WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+                    getWASlist().add(wsa);
+                }
+                //asesmant table
 
             }
 
@@ -668,9 +667,9 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-         //       Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+                //       Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
                 WASlist.clear();
-         //       for (CustomerHasAssessment cha : chasa) {
+                //       for (CustomerHasAssessment cha : chasa) {
 //                    CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
 //                    Assessment assessment = cushas.getAssessment();
 //                    Street street = assessment.getStreet();
@@ -679,7 +678,7 @@ public class Customer {
 //                    WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
 //                    getWASlist().add(wsa);
 
-         //       }
+                //       }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -769,7 +768,7 @@ public class Customer {
             c.setProjection(Projections.max("idAssessment"));
             Integer maxAge = (Integer) c.uniqueResult();
             System.out.println(maxAge);
-            return "none " + maxAge;
+            return "none " + (maxAge + 1);
 
         } catch (Exception e) {
             e.printStackTrace();

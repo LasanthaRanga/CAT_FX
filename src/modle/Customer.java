@@ -21,7 +21,7 @@ import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
 import pojo.Contact;
-import pojo.CustomerHasAssessment;
+
 import pojo.Street;
 import pojo.UserLog;
 
@@ -430,11 +430,11 @@ public class Customer {
 
             session.save(assessment);
 
-            CustomerHasAssessment cha = new pojo.CustomerHasAssessment();
-            cha.setAssessment(assessment);
-            cha.setCustomer(cus);
-            cha.setSyn(1);
-            session.save(cha);
+           // CustomerHasAssessment cha = new pojo.CustomerHasAssessment();
+          //  cha.setAssessment(assessment);
+          //  cha.setCustomer(cus);
+         //   cha.setSyn(1);
+         //   session.save(cha);
             session.save(contact);
 
             if (getNic().length() < 9) {
@@ -578,18 +578,18 @@ public class Customer {
                         }
 
                     }
-                    Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+           //         Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
                     WASlist.clear();
-                    for (CustomerHasAssessment cha : chasa) {
-                        CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-                        Assessment assessment = cushas.getAssessment();
-                        Street street = assessment.getStreet();
-                        pojo.Ward ward = street.getWard();
+            //        for (CustomerHasAssessment cha : chasa) {
+               //         CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
+                //        Assessment assessment = cushas.getAssessment();
+                //        Street street = assessment.getStreet();
+               //         pojo.Ward ward = street.getWard();
 
-                        WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
-                        getWASlist().add(wsa);
+               //         WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+           //             getWASlist().add(wsa);
 
-                    }
+          //          }
 
                 }
                 clist.add(cus);
@@ -668,18 +668,18 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-                Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+         //       Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
                 WASlist.clear();
-                for (CustomerHasAssessment cha : chasa) {
-                    CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-                    Assessment assessment = cushas.getAssessment();
-                    Street street = assessment.getStreet();
-                    pojo.Ward ward = street.getWard();
+         //       for (CustomerHasAssessment cha : chasa) {
+//                    CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
+//                    Assessment assessment = cushas.getAssessment();
+//                    Street street = assessment.getStreet();
+//                    pojo.Ward ward = street.getWard();
+//
+//                    WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+//                    getWASlist().add(wsa);
 
-                    WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
-                    getWASlist().add(wsa);
-
-                }
+         //       }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -774,6 +774,37 @@ public class Customer {
         } catch (Exception e) {
             e.printStackTrace();
             return "none";
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public pojo.Assessment getAssesmantPojo(String ward, String strreet, String assesmantNo) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        pojo.Assessment ass = null;
+        try {
+
+            pojo.Ward pward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
+
+            Set<Street> streets = pward.getStreets();
+
+            for (Street street : streets) {
+                if (street.getStreetName().equals(strreet)) {
+                    Set<Assessment> assessments = street.getAssessments();
+                    for (Assessment assessment : assessments) {
+                        String assessmentNo = assessment.getAssessmentNo();
+                        if (assesmantNo.equals(assesmantNo)) {
+                            ass = assessment;
+                            break;
+                        }
+                    }
+                }
+            }
+            return ass;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         } finally {
             session.close();
         }

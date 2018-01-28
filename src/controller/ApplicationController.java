@@ -34,6 +34,7 @@ import modle.Nature;
 import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
 import pojo.Application;
+import pojo.Assessment;
 import pojo.Street;
 import pojo.SubNature;
 import pojo.TradeNature;
@@ -134,7 +135,9 @@ public class ApplicationController implements Initializable {
         loadTreadTypeCombo();
         getTradyType();
         getSelectedNature();
+
         loadRo();
+
         SetDate();
         setApplicationid();
         saveApplication();
@@ -151,33 +154,7 @@ public class ApplicationController implements Initializable {
 
     @FXML
     public void loadCusByFullname(KeyEvent event) {
-        if (event.getCode() == KeyCode.ENTER) {
-            System.out.println("ENTER GEHUWAA");
-            String fname = txt_cus_fname.getText();
-            modle.StaticBadu.setCus_fullname(fname);
 
-            List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
-            modle.StaticBadu.setCuslist(searchCustomer);
-
-            if (searchCustomer.size() > 1) {
-                if (searchCustomer != null) {
-                    try {
-                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
-                        txt_cus_fname.getParent().getScene();
-                        Scene scene = new Scene(paymant);
-                        Stage stage = new Stage();
-                        stage.initStyle(StageStyle.TRANSPARENT);
-                        stage.setScene(scene);
-                        stage.show();
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-                        Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                }
-            }
-
-        }
     }
 
     public void loadWardCombo() {
@@ -211,8 +188,23 @@ public class ApplicationController implements Initializable {
         // System.out.println(length);
 
         if (event.getCode() == KeyCode.ENTER) {
-            System.out.println("ENTER GEHUWAA");
-            searchCustomerByAssesment();
+            
+            modle.Customer customer = null;
+            getSelectedWaredStrret();
+            String asno = txt_assesmantNO.getText();
+            CustomerHasAssesment cha = new modle.CustomerHasAssesment();
+            cha.setAssesment(asno);
+            cha.setStreet(selectedStreet);
+            cha.setWard(selectedWard);
+
+            customer = cha.searchAsesmant();
+            txt_cus_nic.setText(customer.getNic());
+            txt_cus_fname.setText(customer.getFullName());
+
+            if (customer == null) {
+                txt_cus_nic.setText(null);
+                txt_cus_fname.setText(null);
+            }
         }
 
     }
@@ -225,17 +217,7 @@ public class ApplicationController implements Initializable {
         selectedStreet = com_street.getSelectionModel().getSelectedItem();
     }
 
-    public void searchCustomerByAssesment() {
-        getSelectedWaredStrret();
-        String asno = txt_assesmantNO.getText();
-        CustomerHasAssesment cha = new modle.CustomerHasAssesment();
-        cha.setAssesment(asno);
-        cha.setStreet(selectedStreet);
-        cha.setWard(selectedWard);
-
-        modle.Customer customer = cha.searchCustometByAssesmentAndWardStrret();
-
-    }
+  
 
     @FXML
     public void nicCheack(KeyEvent event) {
@@ -262,6 +244,7 @@ public class ApplicationController implements Initializable {
             txt_cus_fname.setText(cus.getFullName());
 
         }
+
     }
 
     public void loadTreadTypeCombo() {
@@ -293,9 +276,8 @@ public class ApplicationController implements Initializable {
         double taxValue = modle.TaxCal.getTaxValue(Double.parseDouble(txt_allocaton.getText()), com_trade_type.getSelectionModel().getSelectedItem());
 
         double name = Math.round(taxValue * 100.00) / 100.00;
-            
-               
-        txt_taxt_amount.setText(name+"");
+
+        txt_taxt_amount.setText(name + "");
     }
 
     public void loadNature() {
@@ -465,6 +447,9 @@ public class ApplicationController implements Initializable {
                 app.setSubNature(pSubNature);
                 app.setTradeNature(pNature);
 
+                Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+                System.out.println(assesmantPojo.getAssessmentNo());
+                app.setAssessment(assesmantPojo);
                 app.setTradeType(pTradeType);
                 app.setUser(pro);
                 //log wela inna user

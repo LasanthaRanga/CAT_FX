@@ -40,7 +40,7 @@ import javafx.stage.StageStyle;
 import modle.Customer;
 import modle.WSA;
 import org.controlsfx.control.textfield.TextFields;
-import pojo.CustomerHasAssessment;
+
 
 /**
  * FXML Controller class
@@ -391,7 +391,7 @@ public class CustomerController implements Initializable {
         cha.setAssesment(asno);
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
-        customer = cha.searchCustometByAssesmentAndWardStrret();
+     //   customer = cha.searchCustometByAssesmentAndWardStrret();
 
         setCustometData();
         setWardStrretAssesmant();

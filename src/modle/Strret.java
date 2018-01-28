@@ -9,7 +9,6 @@ import java.util.List;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
-import pojo.CustomerHasAssessment;
 import pojo.Street;
 import pojo.Ward;
 
@@ -239,26 +238,26 @@ public class Strret implements DAO<pojo.Street> {
 
     }
 
-    public void getSWbyAssesmant(pojo.CustomerHasAssessment cha) {
-
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-
-        try {
-            CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-            Assessment assessment = cushas.getAssessment();
-            Street street = assessment.getStreet();
-            Ward ward = street.getWard();
-
-            StaticBadu.setAssessment(assessment);
-            StaticBadu.setStreet(street);
-            StaticBadu.setWard(ward);
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
-
-    }
+//    public void getSWbyAssesmant(pojo.CustomerHasAssessment cha) {
+//
+//        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+//
+//        try {
+//            CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
+//            Assessment assessment = cushas.getAssessment();
+//            Street street = assessment.getStreet();
+//            Ward ward = street.getWard();
+//
+//            StaticBadu.setAssessment(assessment);
+//            StaticBadu.setStreet(street);
+//            StaticBadu.setWard(ward);
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        } finally {
+//            session.close();
+//        }
+//
+//    }
 
 }

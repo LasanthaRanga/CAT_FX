@@ -7,7 +7,7 @@ package modle;
 
 import java.util.List;
 import java.util.Set;
-import pojo.CustomerHasAssessment;
+
 
 /**
  *
@@ -19,7 +19,7 @@ public class StaticBadu {
     private static String cus_fullname;
     private static List<modle.Customer> cuslist;
     private static pojo.Customer pCustomer;
-    private static Set<CustomerHasAssessment> cusHasAssesmantList;
+
     private static pojo.Ward ward;
     private static pojo.Street street;
     private static pojo.Assessment assessment;
@@ -66,20 +66,7 @@ public class StaticBadu {
         assessment = aAssessment;
     }
 
-    /**
-     * @return the cusHasAssesmantList
-     */
-    public static Set<CustomerHasAssessment> getCusHasAssesmantList() {
-        return cusHasAssesmantList;
-    }
-
-    /**
-     * @param cusHasAssesmantList the cusHasAssesmantList to set
-     */
-    public static void setCusHasAssesmantList(Set<CustomerHasAssessment> cusHasAssesmantList) {
-        cusHasAssesmantList = cusHasAssesmantList;
-        System.out.println("Static Set Una");
-    }
+   
 
     /**
      * @return the app

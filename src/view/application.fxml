@@ -15,20 +15,20 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="116.0" layoutY="141.0" prefHeight="25.0" prefWidth="210.0" promptText="Ward" />
-      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="116.0" layoutY="200.0" prefHeight="25.0" prefWidth="210.0" promptText="Strret" />
-      <JFXTextField fx:id="txt_assesmantNO" labelFloat="true" layoutX="116.0" layoutY="264.0" onKeyReleased="#keyListener" prefHeight="25.0" prefWidth="210.0" promptText="Assesment NO.">
+      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="108.0" layoutY="67.0" prefHeight="25.0" prefWidth="210.0" promptText="Ward" />
+      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="108.0" layoutY="129.0" prefHeight="25.0" prefWidth="210.0" promptText="Strret" />
+      <JFXTextField fx:id="txt_assesmantNO" labelFloat="true" layoutX="108.0" layoutY="195.0" onKeyReleased="#keyListener" prefHeight="25.0" prefWidth="210.0" promptText="Assesment NO.">
          <font>
             <Font size="14.0" />
          </font></JFXTextField>
-      <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="435.0" layoutY="141.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Type" />
-      <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="435.0" layoutY="200.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Nature" />
-      <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="435.0" layoutY="264.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Sub Nature" />
-      <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="116.0" layoutY="353.0" onKeyReleased="#nicCheack" prefHeight="25.0" prefWidth="210.0" promptText="Customer NIC">
+      <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="431.0" layoutY="67.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Type" />
+      <JFXComboBox fx:id="com_nature" labelFloat="true" layoutX="431.0" layoutY="129.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Nature" />
+      <JFXComboBox fx:id="com_subnature" labelFloat="true" layoutX="431.0" layoutY="197.0" prefHeight="25.0" prefWidth="210.0" promptText="Trade Sub Nature" />
+      <JFXTextField fx:id="txt_cus_nic" labelFloat="true" layoutX="108.0" layoutY="263.0" onKeyReleased="#nicCheack" prefHeight="25.0" prefWidth="210.0" promptText="Customer NIC">
          <font>
             <Font size="14.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="116.0" layoutY="412.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="210.0" promptText="Customer Name">
+      <JFXTextField fx:id="txt_cus_fname" labelFloat="true" layoutX="108.0" layoutY="332.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="210.0" promptText="Customer Name">
          <font>
             <Font size="14.0" />
          </font></JFXTextField>
@@ -76,7 +76,7 @@
          <font>
             <Font size="14.0" />
          </font></JFXTextField>
-      <JFXTextArea fx:id="txt_discription" labelFloat="true" layoutX="435.0" layoutY="318.0" prefHeight="128.0" prefWidth="202.0" promptText="Discription">
+      <JFXTextArea fx:id="txt_discription" labelFloat="true" layoutX="431.0" layoutY="249.0" prefHeight="128.0" prefWidth="210.0" promptText="Discription">
          <font>
             <Font size="14.0" />
          </font></JFXTextArea>

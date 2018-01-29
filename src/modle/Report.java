@@ -44,7 +44,7 @@ public class Report {
             param.put("paymentId", paymentId);
             JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
             if(print)
-                JasperViewer.viewReport(jp);
+                JasperViewer.viewReport(jp,false);
             else
                 JasperViewer.viewReport(jp);
         } catch (JRException jRException) {

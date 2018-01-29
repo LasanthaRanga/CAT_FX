@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import javafx.collections.FXCollections;
@@ -69,6 +70,7 @@ public class Customer {
     private String selectedStreet;
     private String selectedWard;
     private String assesmentNO;
+    private Set<Assessment> assessments = new HashSet<Assessment>(0);
 
     /**
      * @return the selectedStreet
@@ -559,6 +561,8 @@ public class Customer {
                     cus.setNic(c.getNic());
                     cus.setIdCustomer(c.getIdCustomer());
 
+                    cus.setAssessments(c.getAssessments());
+
                     Set<Contact> contacts = c.getContacts();
                     for (Contact contact : contacts) {
                         if (contact.getStatues() == 1) {
@@ -701,6 +705,7 @@ public class Customer {
                 cus.setFullName(c.getFullName());
                 cus.setNic(c.getNic());
                 cus.setIdCustomer(c.getIdCustomer());
+                cus.setAssessments(c.getAssessments());
 
                 Set<Contact> contacts = c.getContacts();
                 for (Contact contact : contacts) {
@@ -808,6 +813,20 @@ public class Customer {
             session.close();
         }
 
+    }
+
+    /**
+     * @return the assessments
+     */
+    public Set<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    /**
+     * @param assessments the assessments to set
+     */
+    public void setAssessments(Set<Assessment> assessments) {
+        this.assessments = assessments;
     }
 
 }

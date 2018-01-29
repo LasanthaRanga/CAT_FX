@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -34,6 +35,7 @@ import modle.Nature;
 import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Assessment;
 import pojo.Street;
@@ -153,8 +155,134 @@ public class ApplicationController implements Initializable {
 
     }
 
+    int x = 0;
+    modle.Customer upcus;
+
     @FXML
     public void loadCusByFullname(KeyEvent event) {
+
+        if (event.getCode() == KeyCode.ENTER) {
+            System.out.println("ENTER GEHUWAA");
+            String fname = txt_cus_fname.getText();
+
+            if (x == 0) {
+                modle.StaticBadu.setCus_fullname(fname);
+                List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
+                modle.StaticBadu.setCuslist(searchCustomer);
+                x = 1;
+
+                {
+
+                    if (searchCustomer.size() > 1) {
+                        if (searchCustomer != null) {
+                            try {
+                                AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                                txt_cus_fname.getParent().getScene();
+                                Scene scene = new Scene(paymant);
+                                Stage stage = new Stage();
+                                stage.initStyle(StageStyle.TRANSPARENT);
+                                stage.setScene(scene);
+                                stage.show();
+
+                                x = 2;
+
+                            } catch (IOException ex) {
+                                ex.printStackTrace();
+                                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
+                    } else {
+                        upcus = searchCustomer.get(0);
+                        txt_cus_nic.setText(upcus.getNic());
+                        // Set<Assessment> assessments = upcus.getAssessments();
+                        //  Set<Assessment> assessments = customer.getAssessments();
+                        Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+                        try {
+                            Set<Assessment> assessments = upcus.getAssessments();
+                            //   List<pojo.Assessment> assessments = openSession.createCriteria(pojo.Customer.class).add(Restrictions.eq("assessments", upcus.getAssessments())).list();
+
+                            for (Assessment assessment : assessments) {
+                                String assessmentNo = assessment.getAssessmentNo();
+                                String streetName = assessment.getStreet().getStreetName();
+                                String wardName = assessment.getStreet().getWard().getWardName();
+
+                                txt_assesmantNO.setText(assessmentNo);
+                                com_street.getSelectionModel().select(streetName);
+                                com_ward.getSelectionModel().select(wardName);
+
+                            }
+                        } catch (Exception e) {
+
+                        } finally {
+                            openSession.close();
+                        }
+
+//                        txt_fname.setText(upcus.getFullName());
+//                        txt_phone.setText(upcus.getPhone());
+//                        txt_mobile.setText(upcus.getMobile());
+//                        txt_email.setText(upcus.getEmail());
+//                        txt_adress1.setText(upcus.getAddress1());
+//                        txt_adress2.setText(upcus.getAddress2());
+//                        txt_adress3.setText(upcus.getAddress3());
+//                        txt_nic.setText(upcus.getNic());
+                        x = 0;
+//                        btn_add.setDisable(true);
+//                        btn_update.setDisable(false);
+//
+//                        setWardStrretAssesmant();
+                    }
+
+                }
+
+            }//x = 0
+            else if (x == 2) {
+                System.out.println(x);
+                System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
+                if (modle.StaticBadu.getpCustomer() != null) {
+                    upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
+
+                    txt_cus_nic.setText(upcus.getNic());
+                    Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+                    try {
+                        Set<Assessment> assessments = upcus.getAssessments();
+                        //   List<pojo.Assessment> assessments = openSession.createCriteria(pojo.Customer.class).add(Restrictions.eq("assessments", upcus.getAssessments())).list();
+
+                        for (Assessment assessment : assessments) {
+                            String assessmentNo = assessment.getAssessmentNo();
+                            String streetName = assessment.getStreet().getStreetName();
+                            String wardName = assessment.getStreet().getWard().getWardName();
+
+                            txt_assesmantNO.setText(assessmentNo);
+                            com_street.getSelectionModel().select(streetName);
+                            com_ward.getSelectionModel().select(wardName);
+
+                        }
+                    } catch (Exception e) {
+
+                    } finally {
+                        openSession.close();
+                    }
+
+//                    System.out.println(upcus.getFullName() + "=== up cus");
+//
+//                    txt_fname.setText(upcus.getFullName());
+//                    txt_phone.setText(upcus.getPhone());
+//                    txt_mobile.setText(upcus.getMobile());
+//                    txt_email.setText(upcus.getEmail());
+//                    txt_adress1.setText(upcus.getAddress1());
+//                    txt_adress2.setText(upcus.getAddress2());
+//                    txt_adress3.setText(upcus.getAddress3());
+//                    txt_nic.setText(upcus.getNic());
+                    x = 0;
+//                    btn_add.setDisable(true);
+//                    btn_update.setDisable(false);
+//
+//                    setWardStrretAssesmant();
+                }
+            }// x==2
+
+        }
 
     }
 
@@ -522,7 +650,7 @@ public class ApplicationController implements Initializable {
         app.setSyn(1);
 
         boolean save = new modle.Aplication().updateApp(app);
-        
+
         if (save) {
             modle.StaticBadu.setApp(app);
             modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());

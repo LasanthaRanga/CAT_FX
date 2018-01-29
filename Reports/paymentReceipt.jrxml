@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.3.1.final using JasperReports Library version 6.3.1  -->
-<!-- 2018-01-24T19:21:27 -->
+<!-- 2018-01-29T08:11:45 -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="paymentReceipt" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1fb9c046-d68e-4b84-9937-2ac1d61d5d72">
-	<property name="com.jaspersoft.studio.data.sql.tables" value="Y2F0LmFwcGxpY2F0aW9uICwyODksMzEsYWRlYWFmZWUtZTI5Yy00ZDUzLTliNDktYzFiYTJkYjIz&#xA;Yzg5O2NhdC5wYXltZW50ICw1NDQsODEsMzRkMWE4OGEtNjA5ZC00NDI5LWE1ZTAtNjIzMjQ1NDU5&#xA;ZTRlO2NhdC52b3J0ICw3MzUsMTg2LDYxYzNiYTg0LTQ2MjMtNGUzZi05MDYyLTQ5OTBhYjFjNjFjMzs="/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value="Y2F0LnRyYWRlX25hdHVyZSBBUyAsMTA2LDU0NixkOTI5MWUyZS0zNzU1LTRjYTUtOTdiNi03YmZi&#xA;NTkzYjRkMDg7Y2F0LnN1Yl9uYXR1cmUgQVMgLDEwMyw3NjUsZDliYjJlNzgtM2M1Ni00MDkwLWEw&#xA;OGQtNzE2M2NlN2UyNDM5O2NhdC50cmFkZV9saWNlbnNlIEFTICw4MzksNTYxLGYwM2VmYTcwLWM2&#xA;YWQtNGFhNi04NzJlLTFlM2M5YmRlMTg5NztjYXQudm9ydCAsODMzLDIzNSwyZGNhMWIzZC1jMjg3&#xA;LTRmMzUtODA2NS1jNmFkZjhkOWQzNWU7Y2F0LmFwcGxpY2F0aW9uICwzMzcsMjMwLDhkZmRkYjk2&#xA;LWQ0ZmItNDQ0NC05OWMyLTQwOWQwYzE5NGIwOTtjYXQuY3VzdG9tZXIgLDEwMCwyODUsMWI3MGU3&#xA;NmEtNjRmMy00NDVjLThhZGYtZjJiM2ZjNjFkYzc0O2NhdC5wYXltZW50IEFTICw2MDYsMjE4LDAz&#xA;YzgwYTFhLWU0MjItNDc2OC05OWExLWIzODk2ZTczODYwZTtjYXQudHJhZGVfdHlwZSBBUyAsNjI2&#xA;LDcwOCw1ODkyZWE5OC1iNmY5LTQ0Y2YtOTI0YS1hZWY5ZmUyMjUzMTA7"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="cat"/>
-	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="776"/>
-	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="210"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="727"/>
+	<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="259"/>
 	<parameter name="paymentId" class="java.lang.Integer"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT cat.payment.`year`,
@@ -22,14 +22,27 @@
 	cat.application.allocation,
 	cat.application.application_date,
 	cat.customer.full_name,
-	cat.application.trade_name
-FROM cat.payment
+	cat.application.trade_name,
+	cat.trade_type.type_name,
+	cat.trade_license.licen_no,
+	cat.trade_nature.nature,
+	cat.sub_nature.sub_nature
+FROM cat.trade_license
+	INNER JOIN cat.payment ON 
+	 cat.trade_license.`Payment_idPayment` = cat.payment.`idPayment` 
 	INNER JOIN cat.vort ON 
 	 cat.payment.`Vort_idVort` = cat.vort.`idVort` 
 	INNER JOIN cat.application ON 
 	 cat.application.`idApplication` = cat.payment.application_no 
+	 AND cat.trade_license.`Application_idApplication` = cat.application.`idApplication` 
 	INNER JOIN cat.customer ON 
 	 cat.application.`Customer_idCustomer` = cat.customer.`idCustomer` 
+	INNER JOIN cat.trade_type ON 
+	 cat.application.`Trade_Type_idTrade_Type` = cat.trade_type.`idTrade_Type` 
+	INNER JOIN cat.trade_nature ON 
+	 cat.application.`Trade_Nature_idTrade_Nature` = cat.trade_nature.`idTrade_Nature` 
+	INNER JOIN cat.sub_nature ON 
+	 cat.application.`Sub_Nature_idSub_Nature` = cat.sub_nature.`idSub_Nature` 
 WHERE 
 	 cat.payment.`idPayment` = $P{paymentId}]]>
 	</queryString>
@@ -48,27 +61,31 @@ WHERE
 	<field name="application_date" class="java.sql.Date"/>
 	<field name="full_name" class="java.lang.String"/>
 	<field name="trade_name" class="java.lang.String"/>
+	<field name="type_name" class="java.lang.String"/>
+	<field name="licen_no" class="java.lang.String"/>
+	<field name="nature" class="java.lang.String"/>
+	<field name="sub_nature" class="java.lang.String"/>
 	<background>
 		<band/>
 	</background>
 	<title>
-		<band height="72">
+		<band height="63">
 			<frame>
-				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="73bbc4b2-080b-4d56-8840-6e250917b8ff"/>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="80" backcolor="#006699" uuid="73bbc4b2-080b-4d56-8840-6e250917b8ff"/>
 				<staticText>
-					<reportElement x="20" y="20" width="300" height="43" forecolor="#FFFFFF" uuid="9b4ddb2d-83c6-4518-ae63-9c3b2accd111"/>
+					<reportElement x="20" y="7" width="300" height="43" forecolor="#FFFFFF" uuid="9b4ddb2d-83c6-4518-ae63-9c3b2accd111"/>
 					<textElement>
 						<font size="34" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Payment Receipt]]></text>
 				</staticText>
-				<textField isStretchWithOverflow="true">
-					<reportElement x="380" y="54" width="200" height="22" forecolor="#FFFFFF" uuid="fa613bf9-d7e4-474e-9a15-e32634a38eeb"/>
+				<staticText>
+					<reportElement x="190" y="53" width="388" height="22" forecolor="#FFFFFF" uuid="0f7860d0-a0c6-4233-a0cd-3ccb4c888d45"/>
 					<textElement textAlignment="Right">
-						<font fontName="DejaVu Sans" isBold="true"/>
+						<font size="12" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{vote_name}]]></textFieldExpression>
-				</textField>
+					<text><![CDATA[Kurenegala Municipal Council Trade Licen]]></text>
+				</staticText>
 			</frame>
 		</band>
 	</title>
@@ -79,35 +96,35 @@ WHERE
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{full_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Customer Name :"+ $F{full_name}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement x="0" y="39" width="270" height="24" uuid="b3b409fb-af80-462e-9025-d8489abd5bb8"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{trade_name}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Trade Name :"+ $F{trade_name}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="0" y="69" width="80" height="20" uuid="16397434-e1cd-4a40-8d20-b03d564f1353"/>
+				<reportElement x="0" y="69" width="120" height="20" uuid="16397434-e1cd-4a40-8d20-b03d564f1353"/>
 				<textElement>
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{year}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Year :"+ $F{year}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="80" y="69" width="120" height="20" uuid="6939a070-afcc-4979-af69-c2d9086da001"/>
-				<textElement>
-					<font size="11"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{month}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="390" y="13" width="162" height="18" uuid="1f71b167-6f26-4a48-8cf2-bb2d57e3868a"/>
+				<reportElement x="350" y="13" width="202" height="18" uuid="1f71b167-6f26-4a48-8cf2-bb2d57e3868a"/>
 				<textElement textAlignment="Right">
 					<font size="11"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{payment_date}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Payment Date :"+ $F{payment_date}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="351" y="35" width="200" height="22" forecolor="#000000" uuid="a2a01772-dd83-4c56-9ba6-e5f15a021523"/>
+				<textElement textAlignment="Right">
+					<font fontName="DejaVu Sans" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Receipt No. "+$F{vote_name}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageHeader>
@@ -119,16 +136,16 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="232">
+		<band height="302">
 			<textField>
 				<reportElement x="350" y="52" width="180" height="30" uuid="125fa203-c4b7-4e75-903a-cb199955631e"/>
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{tax_amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{tax_amount}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="52" width="190" height="30" uuid="05e1fee0-95be-471d-97c8-04ec461658cb"/>
+				<reportElement x="217" y="52" width="124" height="30" uuid="05e1fee0-95be-471d-97c8-04ec461658cb"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -139,10 +156,10 @@ WHERE
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{vat}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{vat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="84" width="190" height="30" uuid="aa7fe0a6-ac19-472c-8979-8341e1a70006"/>
+				<reportElement x="217" y="84" width="124" height="30" uuid="aa7fe0a6-ac19-472c-8979-8341e1a70006"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -153,10 +170,10 @@ WHERE
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{nbt}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{nbt}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="116" width="190" height="30" uuid="f5a5a3ea-9645-4df0-b406-1a2d3cc80e5a"/>
+				<reportElement x="217" y="116" width="124" height="30" uuid="f5a5a3ea-9645-4df0-b406-1a2d3cc80e5a"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -167,10 +184,10 @@ WHERE
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{spamp}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{spamp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="149" width="190" height="30" uuid="b7effa1c-01e6-4bbc-9d96-8e7638aadd62"/>
+				<reportElement x="217" y="149" width="124" height="30" uuid="b7effa1c-01e6-4bbc-9d96-8e7638aadd62"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -181,10 +198,10 @@ WHERE
 				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{totale_amount}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{totale_amount}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="194" width="190" height="30" uuid="ee68b600-062e-4d35-9bd9-f3715fc5f10b"/>
+				<reportElement x="217" y="194" width="124" height="30" uuid="ee68b600-062e-4d35-9bd9-f3715fc5f10b"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
@@ -194,34 +211,54 @@ WHERE
 				<reportElement x="350" y="192" width="179" height="1" forecolor="#666666" uuid="0355d3e1-82e1-4e21-a47d-1083ea331b06"/>
 			</line>
 			<textField>
-				<reportElement x="350" y="0" width="178" height="30" uuid="56f54f2e-5b5e-491e-8b90-0cbf5d7591d7"/>
-				<textElement>
+				<reportElement x="350" y="16" width="178" height="30" uuid="56f54f2e-5b5e-491e-8b90-0cbf5d7591d7"/>
+				<textElement textAlignment="Right">
 					<font size="12"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{allocation}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["Rs."+ $F{allocation}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="30" y="0" width="190" height="30" uuid="32b85a7d-5c58-4dce-9b04-0eb9f6887959"/>
+				<reportElement x="217" y="16" width="124" height="30" uuid="32b85a7d-5c58-4dce-9b04-0eb9f6887959"/>
 				<textElement>
 					<font size="12"/>
 				</textElement>
-				<text><![CDATA[Allocation]]></text>
+				<text><![CDATA[Allocation        :]]></text>
 			</staticText>
+			<textField pattern="MMMM d, yyyy">
+				<reportElement x="0" y="286" width="154" height="16" uuid="3f1445e4-e931-44f7-91bd-e939dc57c18f"/>
+				<textElement textAlignment="Left">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="30" width="130" height="22" uuid="cddc7c07-8348-4cf5-bef3-87df24467a14"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{type_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="60" width="130" height="24" uuid="95d9a39e-d187-4e56-8d2c-dabcc60e4f4d"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nature}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="90" width="130" height="24" uuid="254a35d7-fa90-439f-a541-3f84ca8a2272"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{sub_nature}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
 		<band/>
 	</columnFooter>
 	<pageFooter>
-		<band height="21">
-			<textField pattern="MMMM d, yyyy">
-				<reportElement x="1" y="1" width="154" height="16" uuid="3f1445e4-e931-44f7-91bd-e939dc57c18f"/>
-				<textElement textAlignment="Left">
-					<font size="10"/>
-				</textElement>
-				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-			</textField>
-		</band>
+		<band height="21"/>
 	</pageFooter>
 	<summary>
 		<band/>

@@ -46,7 +46,7 @@ public class Report {
             if(print)
                 JasperViewer.viewReport(jp,false);
             else
-                JasperViewer.viewReport(jp);
+                JasperViewer.viewReport(jp,false);
         } catch (JRException jRException) {
             jRException.printStackTrace();
             Notifications.create()

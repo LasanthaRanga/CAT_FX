@@ -224,6 +224,7 @@ public class CustomerController implements Initializable {
 
     public void setWardStrretAssesmant() {
         ObservableList WASlist = modle.Customer.getWASlist();
+        WASlist.clear();
         if (WASlist != null) {
 
             col_ward.setCellValueFactory(new PropertyValueFactory<>("Ward"));
@@ -359,7 +360,8 @@ public class CustomerController implements Initializable {
             txt_adress3.setText(cus.getAddress3());
 
             setWardStrretAssesmant();
-
+            btn_add.setDisable(true);
+            btn_update.setDisable(false);
         }
 
     }
@@ -394,6 +396,8 @@ public class CustomerController implements Initializable {
         //   customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
         setWardStrretAssesmant();
+        btn_add.setDisable(true);
+        btn_update.setDisable(false);
 
     }
 

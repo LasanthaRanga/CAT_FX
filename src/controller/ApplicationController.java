@@ -367,6 +367,35 @@ public class ApplicationController implements Initializable {
         if (cus != null) {
             txt_cus_fname.setText(cus.getFullName());
 
+            Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+            try {
+
+                Integer idCustomer = cus.getIdCustomer();
+                pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+
+                Set<Assessment> assessments = load.getAssessments();
+
+                for (Assessment assessment : assessments) {
+
+                    String assessmentNo = assessment.getAssessmentNo();
+                    String streetName = assessment.getStreet().getStreetName();
+                    String wardName = assessment.getStreet().getWard().getWardName();
+
+                    System.out.println(assessmentNo + "  Ases");
+
+                    txt_assesmantNO.setText(assessmentNo);
+                    com_ward.getSelectionModel().select(wardName);
+                    com_street.getSelectionModel().select(streetName);
+
+                }
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                openSession.close();
+            }
+
         }
 
     }
@@ -604,7 +633,7 @@ public class ApplicationController implements Initializable {
 
                     if (save) {
                         modle.StaticBadu.setApp(app);
-                        modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
+                        modle.Allert.notificationGood("Saved Application", app.getIdApplication()+"");
                     } else {
                         modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
                     }

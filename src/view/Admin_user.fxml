@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
    <children>
-      <Label layoutX="518.0" layoutY="14.0" text="User Registraion" textFill="#0c9400">
+      <Label layoutX="514.0" layoutY="14.0" text="User Registration" textFill="#0c9400">
          <font>
             <Font size="36.0" />
          </font>
@@ -40,7 +40,7 @@
          <font>
             <Font size="14.0" />
          </font></JFXTextField>
-      <JFXButton fx:id="btn_saveuser" layoutX="460.0" layoutY="564.0" onMouseClicked="#saveUser" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #388E3C;" text="Sing Up" textFill="WHITE" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="480.0">
+      <JFXButton fx:id="btn_saveuser" layoutX="460.0" layoutY="564.0" onMouseClicked="#saveUser" prefHeight="30.0" prefWidth="360.0" style="-fx-background-color: #388E3C;" text="Sign Up" textFill="WHITE" AnchorPane.leftAnchor="460.0" AnchorPane.rightAnchor="480.0">
          <font>
             <Font size="14.0" />
          </font></JFXButton>

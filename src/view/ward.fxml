@@ -15,7 +15,7 @@
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <JFXButton fx:id="btn_ward_add" layoutX="290.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="SAVE" textFill="WHITE">
+      <JFXButton fx:id="btn_ward_add" layoutX="290.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -25,29 +25,29 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_ward_delete" layoutX="515.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+      <JFXButton fx:id="btn_ward_delete" layoutX="515.0" layoutY="179.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactivate" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <TableView fx:id="table_ward" layoutX="664.0" layoutY="109.0" prefHeight="170.0" prefWidth="379.0">
+      <TableView fx:id="table_ward" layoutX="664.0" layoutY="94.0" prefHeight="170.0" prefWidth="379.0">
          <columns>
             <TableColumn fx:id="idward" editable="false" prefWidth="79.0" text="Ward ID" />
             <TableColumn fx:id="wardname" editable="false" prefWidth="283.0" text="Ward Name" />
          </columns>
       </TableView>
-      <JFXTextField fx:id="txt_strret" labelFloat="true" layoutX="287.0" layoutY="435.0" prefHeight="25.0" prefWidth="317.0" promptText="Strret Name">
+      <JFXTextField fx:id="txt_strret" labelFloat="true" layoutX="287.0" layoutY="435.0" prefHeight="25.0" prefWidth="317.0" promptText="Street Name">
          <font>
             <Font size="14.0" />
          </font>
       </JFXTextField>
-      <TableView fx:id="tbl_strret" layoutX="663.0" layoutY="385.0" prefHeight="170.0" prefWidth="379.0">
+      <TableView fx:id="tbl_strret" layoutX="664.0" layoutY="392.0" prefHeight="170.0" prefWidth="379.0">
          <columns>
-            <TableColumn fx:id="col_idStreet" prefWidth="86.0" text="Strret ID" />
+            <TableColumn fx:id="col_idStreet" prefWidth="86.0" text="Street ID" />
             <TableColumn fx:id="col_streetName" editable="false" prefWidth="280.0" text="Street Name" />
          </columns>
       </TableView>
-      <JFXButton fx:id="btn_street_add" layoutX="287.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="SAVE" textFill="WHITE">
+      <JFXButton fx:id="btn_street_add" layoutX="287.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#19f821" style="-fx-background-color: #43A047;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -57,14 +57,14 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_street_delete" layoutX="513.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactive" textFill="WHITE">
+      <JFXButton fx:id="btn_street_delete" layoutX="513.0" layoutY="477.0" prefHeight="25.0" prefWidth="91.0" ripplerFill="#fff176" style="-fx-background-color: #F4511E;" text="Deactivate" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <Label layoutX="492.0" layoutY="14.0" prefHeight="53.0" prefWidth="353.0" text="Add Ward And Street " textAlignment="CENTER" textFill="#009708">
+      <Label layoutX="475.0" layoutY="14.0" prefHeight="53.0" prefWidth="379.0" text="Add Ward and Street " textAlignment="CENTER" textFill="#009708">
          <font>
-            <Font size="36.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
    </children>

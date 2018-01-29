@@ -671,16 +671,9 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-                //       Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+               
                 WASlist.clear();
-                //       for (CustomerHasAssessment cha : chasa) {
-//                    CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-//                    Assessment assessment = cushas.getAssessment();
-//                    Street street = assessment.getStreet();
-//                    pojo.Ward ward = street.getWard();
-//
-//                    WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
-//                    getWASlist().add(wsa);
+              
 
                 //       }
             }

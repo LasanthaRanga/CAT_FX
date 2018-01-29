@@ -16,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -138,6 +139,15 @@ public class AdminViewController implements Initializable {
         );
 
         // TODO
+    }
+    
+    @FXML
+    private void cloaseDrawerEnterd(MouseEvent event) {
+        if (drawer.isShown()) {
+            // drawer.close();
+        } else {
+            drawer.open();
+        }
     }
 
 }

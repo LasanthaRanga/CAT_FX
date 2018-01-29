@@ -7,7 +7,7 @@
 <VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #01579B;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXButton prefHeight="159.0" prefWidth="200.0" text="KURUNEGALA" textFill="WHITE" />
-      <JFXButton accessibleText="user_types" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #424242;" text="Uset Types" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton accessibleText="user_types" prefHeight="25.0" prefWidth="205.0" style="-fx-background-color: #424242;" text="User Types" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

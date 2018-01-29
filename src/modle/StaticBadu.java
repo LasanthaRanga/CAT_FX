@@ -6,6 +6,8 @@
 package modle;
 
 import java.util.List;
+import java.util.Set;
+
 
 /**
  *
@@ -17,6 +19,54 @@ public class StaticBadu {
     private static String cus_fullname;
     private static List<modle.Customer> cuslist;
     private static pojo.Customer pCustomer;
+
+    private static pojo.Ward ward;
+    private static pojo.Street street;
+    private static pojo.Assessment assessment;
+
+    /**
+     * @return the ward
+     */
+    public static pojo.Ward getWard() {
+        return ward;
+    }
+
+    /**
+     * @param aWard the ward to set
+     */
+    public static void setWard(pojo.Ward aWard) {
+        ward = aWard;
+    }
+
+    /**
+     * @return the street
+     */
+    public static pojo.Street getStreet() {
+        return street;
+    }
+
+    /**
+     * @param aStreet the street to set
+     */
+    public static void setStreet(pojo.Street aStreet) {
+        street = aStreet;
+    }
+
+    /**
+     * @return the assessment
+     */
+    public static pojo.Assessment getAssessment() {
+        return assessment;
+    }
+
+    /**
+     * @param aAssessment the assessment to set
+     */
+    public static void setAssessment(pojo.Assessment aAssessment) {
+        assessment = aAssessment;
+    }
+
+   
 
     /**
      * @return the app

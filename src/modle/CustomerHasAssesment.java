@@ -12,8 +12,9 @@ import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
 import pojo.Contact;
 import pojo.Customer;
-import pojo.CustomerHasAssessment;
+
 import pojo.Street;
+import pojo.Ward;
 
 /**
  *
@@ -67,54 +68,58 @@ public class CustomerHasAssesment {
         this.assesment = assesment;
     }
 
-    public modle.Customer searchCustometByAssesmentAndWardStrret() {
+    public modle.Customer searchAsesmant() {
+        modle.Customer cus = new modle.Customer();
+
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        modle.Customer cus = null;
+
         try {
-            pojo.Ward wp = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getWard())).uniqueResult();
-            pojo.Street sp = (pojo.Street) session.createCriteria(pojo.Street.class).add(Restrictions.and(Restrictions.eq("ward", wp), Restrictions.eq("streetName", getStreet()))).uniqueResult();
 
-            if (wp != null && sp != null) {
-                List<pojo.CustomerHasAssessment> list = session.createCriteria(pojo.CustomerHasAssessment.class).list();
-                if (list != null) {
-                    for (CustomerHasAssessment customerHasAssessment : list) {
-                        Assessment assessment = customerHasAssessment.getAssessment();
-                        Street street1 = assessment.getStreet();
-                        if (sp == street1) {
-                            Customer customer = customerHasAssessment.getCustomer();
-                            cus = new modle.Customer();
-                            cus.setNic(customer.getNic());
-                            cus.setFullName(customer.getFullName());
-                            cus.setIdCustomer(customer.getIdCustomer());
-
-                            Set<Contact> contacts = customer.getContacts();
-                            for (Contact contact : contacts) {
-                                if (contact.getStatues() == 1) {
-
-                                    cus.setAddress1(contact.getAddress1());
-                                    cus.setAddress2(contact.getAddress2());
-                                    cus.setAddress3(contact.getAddress3());
-                                    cus.setPhone(contact.getPhone());
-                                    cus.setMobile(contact.getMobile());
-                                    cus.setEmail(contact.getEmail());
-                                    cus.setIdContact(contact.getIdContact());
-                                }
-                            }
-
-                            return cus;
-                        }
-
-                    }
-                }
-
-            }
+//            List<pojo.Assessment> list = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("assessmentNo", getAssesment())).list();
+//            for (Assessment assessment : list) {
+//                if (assessment.getStreet().equals(getStreet())) {
+//                    Ward ward1 = assessment.getStreet().getWard();
+//                    if (ward1.getWardName().equals(getWard())) {
+//                        Set<CustomerHasAssessment> customerHasAssessments = assessment.getCustomerHasAssessments();
+//                        for (CustomerHasAssessment cha : customerHasAssessments) {
+//                            if (cha.getAssessment().getIdAssessment() == assessment.getIdAssessment()) {
+//                                
+//                                Customer customer = cha.getCustomer();
+//
+//                                cus = new modle.Customer();
+//                                cus.setNic(customer.getNic());
+//                                cus.setFullName(customer.getFullName());
+//                                cus.setIdCustomer(customer.getIdCustomer());
+//
+//                                Set<Contact> contacts = customer.getContacts();
+//                                for (Contact contact : contacts) {
+//                                    if (contact.getStatues() == 1) {
+//
+//                                        cus.setAddress1(contact.getAddress1());
+//                                        cus.setAddress2(contact.getAddress2());
+//                                        cus.setAddress3(contact.getAddress3());
+//                                        cus.setPhone(contact.getPhone());
+//                                        cus.setMobile(contact.getMobile());
+//                                        cus.setEmail(contact.getEmail());
+//                                        cus.setIdContact(contact.getIdContact());
+//                                    }
+//                                }
+//
+//                            }
+//                        }
+//
+//                    }
+//                }
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             session.close();
         }
+
         return cus;
     }
 
+    
 }

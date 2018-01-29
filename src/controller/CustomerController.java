@@ -11,18 +11,26 @@ import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.SingleSelectionModel;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
@@ -30,6 +38,7 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modle.Customer;
+import modle.WSA;
 import org.controlsfx.control.textfield.TextFields;
 
 /**
@@ -81,9 +90,7 @@ public class CustomerController implements Initializable {
     @FXML
     private JFXButton btn_update;
 
-    @FXML
-    private JFXButton btn_delete;
-
+    // private JFXButton btn_delete;
 //    @FXML
 //    private JFXButton btn_aplication;
     modle.Ward ward = null;
@@ -92,12 +99,27 @@ public class CustomerController implements Initializable {
     static pojo.Customer selectPcus = null;
     @FXML
     private Label lbl_idCustomer;
+    @FXML
+    private TableView<WSA> tbl_asess;
+    @FXML
+    private TableColumn<WSA, String> col_ward;
+    @FXML
+    private TableColumn<WSA, String> col_street;
+    @FXML
+    private TableColumn<WSA, String> col_ases;
+    @FXML
+    private JFXButton btn_genarate;
+    @FXML
+    private JFXButton btn_clear;
+
+    Scene scene;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         ward = new modle.Ward();
         customer = new Customer();
         cha = new modle.CustomerHasAssesment();
@@ -112,7 +134,7 @@ public class CustomerController implements Initializable {
 
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
-        deactivCustomer();
+
         btn_update.setDisable(true);
 
     }
@@ -164,6 +186,10 @@ public class CustomerController implements Initializable {
                         txt_adress3.setText(upcus.getAddress3());
                         txt_nic.setText(upcus.getNic());
                         x = 0;
+                        btn_add.setDisable(true);
+                        btn_update.setDisable(false);
+
+                        setWardStrretAssesmant();
                     }
 
                 }
@@ -171,10 +197,10 @@ public class CustomerController implements Initializable {
             }//x = 0
             else if (x == 2) {
                 System.out.println(x);
-                System.out.println(modle.StaticBadu.getpCustomer().getFullName()+"=== Static Badu");
+                System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
                 if (modle.StaticBadu.getpCustomer() != null) {
                     upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
-                    System.out.println(upcus.getFullName()+"=== up cus");
+                    System.out.println(upcus.getFullName() + "=== up cus");
 
                     txt_fname.setText(upcus.getFullName());
                     txt_phone.setText(upcus.getPhone());
@@ -185,9 +211,26 @@ public class CustomerController implements Initializable {
                     txt_adress3.setText(upcus.getAddress3());
                     txt_nic.setText(upcus.getNic());
                     x = 0;
+                    btn_add.setDisable(true);
+                    btn_update.setDisable(false);
+
+                    setWardStrretAssesmant();
 
                 }
             }// x==2
+
+        }
+    }
+
+    public void setWardStrretAssesmant() {
+        ObservableList WASlist = modle.Customer.getWASlist();
+        if (WASlist != null) {
+
+            col_ward.setCellValueFactory(new PropertyValueFactory<>("Ward"));
+            col_street.setCellValueFactory(new PropertyValueFactory<>("Street"));
+            col_ases.setCellValueFactory(new PropertyValueFactory<>("Assesmant"));
+
+            tbl_asess.setItems(WASlist);
 
         }
     }
@@ -206,14 +249,16 @@ public class CustomerController implements Initializable {
         loadStrret();
     }
 
+    ObservableList slist;
+
     public void loadStrret() {
         com_ward.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 String selectedItem = com_ward.getSelectionModel().getSelectedItem();
                 ward.setWardname(selectedItem);
-                ObservableList list = ward.getStreetBySelectedWard();
-                com_street.setItems(list);
+                slist = ward.getStreetBySelectedWard();
+                com_street.setItems(slist);
             }
         });
     }
@@ -236,6 +281,8 @@ public class CustomerController implements Initializable {
 
                 Customer searchCustomerByNic = customer.searchCustomerByNic();
                 if (searchCustomerByNic.getFullName() == null) {
+
+                    getSelectedWaredStrret();
 
                     customer.setSelectedWard(selectedWard);
                     customer.setSelectedStreet(selectedStreet);
@@ -311,7 +358,10 @@ public class CustomerController implements Initializable {
             txt_adress2.setText(cus.getAddress2());
             txt_adress3.setText(cus.getAddress3());
 
+            setWardStrretAssesmant();
+
         }
+
     }
 
     public void SearchCustomerAndSetByFullName() {
@@ -332,13 +382,18 @@ public class CustomerController implements Initializable {
     }
 
     public void searchCustomerByAssesment() {
+
         getSelectedWaredStrret();
         String asno = txt_assesment.getText();
         cha.setAssesment(asno);
         cha.setStreet(selectedStreet);
         cha.setWard(selectedWard);
-        customer = cha.searchCustometByAssesmentAndWardStrret();
+
+        customer = modle.AssesmantNo.searchByAssesmantNO(selectedWard, selectedStreet, asno);
+
+        //   customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
+        setWardStrretAssesmant();
 
     }
 
@@ -353,7 +408,7 @@ public class CustomerController implements Initializable {
             txt_mobile.setText(customer.getMobile());
             txt_phone.setText(customer.getPhone());
             txt_email.setText(customer.getEmail());
-
+            btn_update.setDisable(false);
         } else {
 
             txt_nic.setText(null);
@@ -364,6 +419,8 @@ public class CustomerController implements Initializable {
             txt_adress1.setText(null);
             txt_adress2.setText(null);
             txt_adress3.setText(null);
+            ObservableList WASlist = FXCollections.observableArrayList();
+            tbl_asess.setItems(WASlist);
 
         }
     }
@@ -406,6 +463,9 @@ public class CustomerController implements Initializable {
             upcus.setPhone(txt_phone.getText());
             upcus.setMobile(txt_mobile.getText());
             upcus.setEmail(txt_email.getText());
+            upcus.setAssesmentNO(txt_assesment.getText());
+            upcus.setSelectedWard(com_ward.getSelectionModel().getSelectedItem());
+            upcus.setSelectedStreet(com_street.getSelectionModel().getSelectedItem());
 
             upcus.updateCustomer();
             modle.Allert.notificationGood("Updated", "success");
@@ -432,16 +492,51 @@ public class CustomerController implements Initializable {
 //        });
 //
 //    }
-    public void deactivCustomer() {
-        btn_delete.setOnAction((event) -> {
-            if (selectPcus != null) {
-                upcus.setIdCustomer(selectPcus.getIdCustomer());
-            }
-            upcus.deactiveCustomer();
-            upcus = null;
-            cleareCus();
+//    public void deactivCustomer() {
+//        btn_delete.setOnAction((event) -> {
+//            if (selectPcus != null) {
+//                upcus.setIdCustomer(selectPcus.getIdCustomer());
+//            }
+//            upcus.deactiveCustomer();
+//            upcus = null;
+//            cleareCus();
+//
+//        });
+//    }
+    @FXML
+    private void genarateAsessmantNO(ActionEvent event) {
+        String ass;
+        if (customer != null) {
+            ass = customer.genarateAssesmant();
+        } else {
+            customer = new modle.Customer();
+            ass = customer.genarateAssesmant();
+        }
+        txt_assesment.setText(ass);
 
-        });
+    }
+
+    @FXML
+    private void clearAll(ActionEvent event) {
+
+        txt_nic.setText(null);
+        txt_fname.setText(null);
+        txt_phone.setText(null);
+        txt_mobile.setText(null);
+        txt_email.setText(null);
+        txt_adress1.setText(null);
+        txt_adress2.setText(null);
+        txt_adress3.setText(null);
+        ObservableList WASlist = FXCollections.observableArrayList();
+        WASlist = null;
+        tbl_asess.setItems(WASlist);
+        com_ward.getSelectionModel().clearSelection();
+        com_street.getSelectionModel().clearSelection();
+        loadWard();
+        txt_assesment.setText(null);
+        upcus = null;
+        btn_update.setDisable(true);
+        btn_add.setDisable(false);
 
     }
 

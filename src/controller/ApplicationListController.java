@@ -6,23 +6,36 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import com.sun.management.jmx.Trace;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.Aplication;
 import modle.ApplicationStatus;
+import org.hibernate.Session;
 import pojo.Application;
 
 /**
@@ -69,10 +82,34 @@ public class ApplicationListController implements Initializable {
     private TableColumn<approve, String> col_date;
 
     @FXML
-    private JFXButton btn_load;
+    private JFXTextField txt_idApp;
+    @FXML
+    private JFXTextField txt_idApp1;
+    @FXML
+    private TableColumn<AppTbl, String> c_tname;
+    @FXML
+    private ToggleGroup statues;
+    @FXML
+    private JFXRadioButton ra_pending;
+    @FXML
+    private JFXRadioButton ra_approve;
+    @FXML
+    private JFXRadioButton ra_nonaprove;
+    @FXML
+    private ToggleGroup paid;
 
     @FXML
-    private JFXTextField txt_idApp;
+    private JFXRadioButton ra_approve_pay;
+    @FXML
+    private JFXRadioButton ra_pendig_pay;
+    @FXML
+    private JFXRadioButton ra_paid;
+    @FXML
+    private JFXButton btn_sendtoApprove;
+    @FXML
+    private JFXButton btn_approve_toPay;
+    @FXML
+    private JFXButton btn_All;
 
     /**
      * Initializes the controller class.
@@ -81,6 +118,7 @@ public class ApplicationListController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         loadTable();
+        // clickTable();
 
         tbl_applicaion.setOnMouseReleased((event) -> {
 
@@ -89,22 +127,94 @@ public class ApplicationListController implements Initializable {
             app = new modle.Aplication().getApllicationPojoByID(appno);
 
             loadTableApprove();
-            
-            txt_idApp.setText(app.getIdApplication()+"");
+
+            txt_idApp.setText(app.getIdApplication() + "");
 
         });
 
     }
 
+    @FXML
+    private void reload(ActionEvent event) {
+
+        loadTable();
+
+    }
+
+    @FXML
+    private void sendToApprove(ActionEvent event) {
+
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SendToApprove.fxml"));
+            btn_sendtoApprove.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    @FXML
+    private void sendToPay(ActionEvent event) {
+
+        Integer approveToPaymant = app.getApproveToPaymant();
+
+        if (approveToPaymant == 0) {
+            app.setApproveToPaymant(1);
+            Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+            try {
+                session.update(app);
+                session.beginTransaction().commit();
+                modle.Allert.notificationGood("Approve To Paymant", app.getIdApplication() + "");
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
+            }
+        } else if (approveToPaymant == 1) {
+            modle.Allert.notificationInfo("Allrady Approve", app.getIdApplication() + "");
+        } else {
+            modle.Allert.notificationInfo("Paymant Done", app.getIdApplication() + "");
+        }
+    }
+
+    @FXML
+    private void getAllDetails(ActionEvent event) {
+
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/Ditails.fxml"));
+            btn_sendtoApprove.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
     public class AppTbl {
 
-        public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp) {
+        public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp, String Tname) {
             this.appno = appno;
             this.Type = new SimpleStringProperty(Type);
             this.nature = new SimpleStringProperty(nature);
             this.alocation = alocation;
             this.txt = txt;
             this.payapp = payapp;
+            this.Tname = new SimpleStringProperty(Tname);
         }
 
         /**
@@ -183,8 +293,10 @@ public class ApplicationListController implements Initializable {
         public String getPayapp() {
             if (payapp == 1) {
                 return "Approve";
+            } else if (payapp == 0) {
+                return "Pending";
             } else {
-                return "Non Approve";
+                return "Paied";
             }
         }
 
@@ -198,9 +310,17 @@ public class ApplicationListController implements Initializable {
         private int appno;
         private SimpleStringProperty Type;
         private SimpleStringProperty nature;
+        private SimpleStringProperty Tname;
         private Double alocation;
         private Double txt;
         private int payapp;
+
+        /**
+         * @return the Tname
+         */
+        public String getTname() {
+            return Tname.get();
+        }
 
     }
 
@@ -213,12 +333,37 @@ public class ApplicationListController implements Initializable {
         c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
         c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
         c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
+        c_tname.setCellValueFactory(new PropertyValueFactory<>("Tname"));
 
         Aplication aplication = new modle.Aplication();
-        List<modle.AppTbl> appTbls = aplication.getAppListToTable();
 
+        int approve = 0;
+        int paid = 0;
+
+        if (ra_approve.isSelected()) {
+            approve = 1;
+        }
+        if (ra_pending.isSelected()) {
+            approve = 0;
+        }
+        if (ra_nonaprove.isSelected()) {
+            approve = 2;
+        }
+////////////////////
+        if (ra_pendig_pay.isSelected()) {
+            paid = 0;
+        }
+        if (ra_approve_pay.isSelected()) {
+            paid = 1;
+        }
+        if (ra_paid.isSelected()) {
+            paid = 2;
+        }
+
+        List<modle.AppTbl> appTbls = aplication.getAppListToTable(approve, paid);
+        appList.clear();
         for (modle.AppTbl a : appTbls) {
-            appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+            appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp(), a.getTname()));
         }
         tbl_applicaion.setItems(appList);
 
@@ -296,5 +441,13 @@ public class ApplicationListController implements Initializable {
         tbl_approve.setItems(natureList);
     }
 
+//    public void clickTable(){
+//    tbl_applicaion.setOnMouseReleased((event) -> {
+//        
+//        int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
+//        loadTableApprove();
+//    });
+//    
+//    }
 }
 //asdfasfadfasf asf

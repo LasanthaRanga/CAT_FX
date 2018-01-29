@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 25, 2018 9:52:50 AM by Hibernate Tools 4.3.1
+// Generated Jan 28, 2018 6:35:57 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,11 +13,13 @@ public class Apprualstatues  implements java.io.Serializable {
      private Integer idApprualStatues;
      private Application application;
      private User user;
-     private Integer statues;
      private String description;
-     private Date date;
-     private Integer syn;
+     private Date sendDate;
+     private Date approveDate;
      private Integer idOtheritisCat;
+     private Integer statues;
+     private Integer resiveUser;
+     private Integer syn;
 
     public Apprualstatues() {
     }
@@ -27,14 +29,16 @@ public class Apprualstatues  implements java.io.Serializable {
         this.application = application;
         this.user = user;
     }
-    public Apprualstatues(Application application, User user, Integer statues, String description, Date date, Integer syn, Integer idOtheritisCat) {
+    public Apprualstatues(Application application, User user, String description, Date sendDate, Date approveDate, Integer idOtheritisCat, Integer statues, Integer resiveUser, Integer syn) {
        this.application = application;
        this.user = user;
-       this.statues = statues;
        this.description = description;
-       this.date = date;
-       this.syn = syn;
+       this.sendDate = sendDate;
+       this.approveDate = approveDate;
        this.idOtheritisCat = idOtheritisCat;
+       this.statues = statues;
+       this.resiveUser = resiveUser;
+       this.syn = syn;
     }
    
     public Integer getIdApprualStatues() {
@@ -58,13 +62,6 @@ public class Apprualstatues  implements java.io.Serializable {
     public void setUser(User user) {
         this.user = user;
     }
-    public Integer getStatues() {
-        return this.statues;
-    }
-    
-    public void setStatues(Integer statues) {
-        this.statues = statues;
-    }
     public String getDescription() {
         return this.description;
     }
@@ -72,19 +69,19 @@ public class Apprualstatues  implements java.io.Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
-    public Date getDate() {
-        return this.date;
+    public Date getSendDate() {
+        return this.sendDate;
     }
     
-    public void setDate(Date date) {
-        this.date = date;
+    public void setSendDate(Date sendDate) {
+        this.sendDate = sendDate;
     }
-    public Integer getSyn() {
-        return this.syn;
+    public Date getApproveDate() {
+        return this.approveDate;
     }
     
-    public void setSyn(Integer syn) {
-        this.syn = syn;
+    public void setApproveDate(Date approveDate) {
+        this.approveDate = approveDate;
     }
     public Integer getIdOtheritisCat() {
         return this.idOtheritisCat;
@@ -92,6 +89,27 @@ public class Apprualstatues  implements java.io.Serializable {
     
     public void setIdOtheritisCat(Integer idOtheritisCat) {
         this.idOtheritisCat = idOtheritisCat;
+    }
+    public Integer getStatues() {
+        return this.statues;
+    }
+    
+    public void setStatues(Integer statues) {
+        this.statues = statues;
+    }
+    public Integer getResiveUser() {
+        return this.resiveUser;
+    }
+    
+    public void setResiveUser(Integer resiveUser) {
+        this.resiveUser = resiveUser;
+    }
+    public Integer getSyn() {
+        return this.syn;
+    }
+    
+    public void setSyn(Integer syn) {
+        this.syn = syn;
     }
 
 

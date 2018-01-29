@@ -9,13 +9,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import pojo.Assessment;
 import pojo.Contact;
+
+import pojo.Street;
 import pojo.UserLog;
 
 /**
@@ -23,6 +31,20 @@ import pojo.UserLog;
  * @author RM.LasanthaRanga@gmail.com
  */
 public class Customer {
+
+    /**
+     * @return the WASlist
+     */
+    public static ObservableList getWASlist() {
+        return WASlist;
+    }
+
+    /**
+     * @param aWASlist the WASlist to set
+     */
+    public static void setWASlist(ObservableList aWASlist) {
+        WASlist = aWASlist;
+    }
 
     private Integer idCustomer;
     private UserLog userLog;
@@ -48,6 +70,7 @@ public class Customer {
     private String selectedStreet;
     private String selectedWard;
     private String assesmentNO;
+    private Set<Assessment> assessments = new HashSet<Assessment>(0);
 
     /**
      * @return the selectedStreet
@@ -362,18 +385,16 @@ public class Customer {
         Transaction bt = session.beginTransaction();
         try {
 
+            Criteria criteria = session
+                    .createCriteria(pojo.Customer.class)
+                    .setProjection(Projections.max("idCustomer"));
+            Integer maxAge = (Integer) criteria.uniqueResult();
+
+            System.out.println(maxAge);
+
             pojo.Customer cus = new pojo.Customer();
             cus.setUserLog(modle.AuthUser.getUserLog());
             String nic1 = getNic();
-
-            if (nic1 == null || nic1.length() < 5) {
-                double random = Math.random();
-                String ss = random + "R";
-                System.out.println(ss);
-                cus.setNic(ss);
-            } else {
-                cus.setNic(getNic());
-            }
 
             cus.setFullName(getFullName());
             cus.setStatues(1);
@@ -394,7 +415,33 @@ public class Customer {
             contact.setStatues(1);
             contact.setSyn(1);
 
+            Assessment assessment = new pojo.Assessment();
+
+            pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getSelectedWard())).uniqueResult();
+            System.out.println(ward.getWardName());
+            Criteria cr = session.createCriteria(pojo.Street.class);
+            cr.add(Restrictions.eq("streetName", getSelectedStreet()));
+            pojo.Street street = (pojo.Street) cr.add(Restrictions.eq("ward", ward)).uniqueResult();
+
+            System.out.println(street.getStreetName());
+
+            assessment.setStreet(street);
+            assessment.setAssessmentNo(getAssesmentNO());
+            assessment.setStatus(1);
+            assessment.setSyn(1);
+            assessment.setCustomer(cus);
+
+            session.save(assessment);
+
             session.save(contact);
+
+            if (getNic().length() < 9) {
+                cus.setNic("NIC " + cus.getIdCustomer());
+            } else {
+                cus.setNic(getNic());
+            }
+
+            session.update(cus);
             bt.commit();
             return true;
 
@@ -410,6 +457,7 @@ public class Customer {
 
     public void updateCustomer() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
         try {
 
             pojo.Customer upcus = (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.eq("idCustomer", getIdCustomer())).uniqueResult();
@@ -418,17 +466,14 @@ public class Customer {
 
             String nic1 = getNic();
 
-            if (nic1 == null || nic1.length() < 5) {
-                double random = Math.random();
-                String ss = random + "R";
-                System.out.println(ss);
-                upcus.setNic(ss);
-            } else {
-                upcus.setNic(getNic());
-            }
-
             upcus.setStatues(1);
             upcus.setSyn(1);
+
+            if (upcus.getNic().length() < 9) {
+                upcus.setNic("NIC " + upcus.getIdCustomer());
+            } else {
+                upcus.setNic(upcus.getNic());
+            }
 
             session.update(upcus);
 
@@ -442,12 +487,24 @@ public class Customer {
             upcon.setEmail(getEmail());
             upcon.setStatues(1);
             upcon.setSyn(1);
+
+//            Set<CustomerHasAssessment> chas = upcus.getCustomerHasAssessments();
+//            for (CustomerHasAssessment cha : chas) {
+//                Assessment assessment = cha.getAssessment();
+//                String asno = getAssesmentNO();
+//                if (assessment.getAssessmentNo().equals(asno)) {
+//                    assessment.setAssessmentNo(asno);
+//                    session.update(assessment);
+//                }
+//
+//            }
             session.update(upcon);
 
-            session.beginTransaction().commit();
+            bt.commit();
 
         } catch (Exception e) {
             e.printStackTrace();
+            bt.rollback();
         } finally {
             session.close();
         }
@@ -486,6 +543,8 @@ public class Customer {
 
     }
 
+    private static ObservableList WASlist = FXCollections.observableArrayList();
+
     public List<Customer> searchCustomer(String fname) {
         List<Customer> clist = new ArrayList<Customer>();
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -496,10 +555,13 @@ public class Customer {
                 modle.Customer cus = new modle.Customer();
 
                 if (c != null) {
+                    System.out.println("FULNAME TIBBA");
 
                     cus.setFullName(c.getFullName());
                     cus.setNic(c.getNic());
                     cus.setIdCustomer(c.getIdCustomer());
+
+                    cus.setAssessments(c.getAssessments());
 
                     Set<Contact> contacts = c.getContacts();
                     for (Contact contact : contacts) {
@@ -512,8 +574,18 @@ public class Customer {
                             cus.setPhone(contact.getPhone());
                             cus.setMobile(contact.getMobile());
                             cus.setIdContact(contact.getIdContact());
+                            System.out.println("");
                         }
+
                     }
+                    //asesmant table
+                    List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
+                    WASlist.clear();
+                    for (Assessment assessment : list1) {
+                        WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+                        getWASlist().add(wsa);
+                    }
+                    //asesmant table
                 }
                 clist.add(cus);
             }
@@ -527,7 +599,7 @@ public class Customer {
     }
 
     public modle.Customer searchCustomerByID(int idCus) {
-       
+
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             pojo.Customer c = (pojo.Customer) session.createCriteria(pojo.Customer.class).add(Restrictions.and(Restrictions.eq("idCustomer", idCus), Restrictions.eq("statues", 1))).uniqueResult();
@@ -553,6 +625,15 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
+                //asesmant table
+                List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
+                WASlist.clear();
+                for (Assessment assessment : list1) {
+                    WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+                    getWASlist().add(wsa);
+                }
+                //asesmant table
+
             }
 
             return cus;
@@ -590,6 +671,18 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
+                //       Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
+                WASlist.clear();
+                //       for (CustomerHasAssessment cha : chasa) {
+//                    CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
+//                    Assessment assessment = cushas.getAssessment();
+//                    Street street = assessment.getStreet();
+//                    pojo.Ward ward = street.getWard();
+//
+//                    WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
+//                    getWASlist().add(wsa);
+
+                //       }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -612,6 +705,7 @@ public class Customer {
                 cus.setFullName(c.getFullName());
                 cus.setNic(c.getNic());
                 cus.setIdCustomer(c.getIdCustomer());
+                cus.setAssessments(c.getAssessments());
 
                 Set<Contact> contacts = c.getContacts();
                 for (Contact contact : contacts) {
@@ -670,4 +764,69 @@ public class Customer {
             session.close();
         }
     }
+
+    public String genarateAssesmant() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+            Criteria c = session.createCriteria(pojo.Assessment.class);
+            c.setProjection(Projections.max("idAssessment"));
+            Integer maxAge = (Integer) c.uniqueResult();
+            System.out.println(maxAge);
+            return "none " + (maxAge + 1);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "none";
+        } finally {
+            session.close();
+        }
+
+    }
+
+    public pojo.Assessment getAssesmantPojo(String ward, String strreet, String assesmantNo) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        pojo.Assessment ass = null;
+        try {
+
+            pojo.Ward pward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
+
+            Set<Street> streets = pward.getStreets();
+
+            for (Street street : streets) {
+                if (street.getStreetName().equals(strreet)) {
+                    Set<Assessment> assessments = street.getAssessments();
+                    for (Assessment assessment : assessments) {
+                        String assessmentNo = assessment.getAssessmentNo();
+                        if (assesmantNo.equals(assesmantNo)) {
+                            ass = assessment;
+                            break;
+                        }
+                    }
+                }
+            }
+            return ass;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+
+    }
+
+    /**
+     * @return the assessments
+     */
+    public Set<Assessment> getAssessments() {
+        return assessments;
+    }
+
+    /**
+     * @param assessments the assessments to set
+     */
+    public void setAssessments(Set<Assessment> assessments) {
+        this.assessments = assessments;
+    }
+
 }

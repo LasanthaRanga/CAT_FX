@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 25, 2018 9:52:50 AM by Hibernate Tools 4.3.1
+// Generated Jan 28, 2018 8:40:19 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -13,6 +13,7 @@ public class Application  implements java.io.Serializable {
 
 
      private Integer idApplication;
+     private Assessment assessment;
      private Customer customer;
      private SubNature subNature;
      private TradeNature tradeNature;
@@ -48,7 +49,8 @@ public class Application  implements java.io.Serializable {
         this.tradeType = tradeType;
         this.userLog = userLog;
     }
-    public Application(Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
+    public Application(Assessment assessment, Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
+       this.assessment = assessment;
        this.customer = customer;
        this.subNature = subNature;
        this.tradeNature = tradeNature;
@@ -81,6 +83,13 @@ public class Application  implements java.io.Serializable {
     
     public void setIdApplication(Integer idApplication) {
         this.idApplication = idApplication;
+    }
+    public Assessment getAssessment() {
+        return this.assessment;
+    }
+    
+    public void setAssessment(Assessment assessment) {
+        this.assessment = assessment;
     }
     public Customer getCustomer() {
         return this.customer;

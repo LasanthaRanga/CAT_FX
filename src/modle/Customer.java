@@ -70,6 +70,7 @@ public class Customer {
     private String selectedStreet;
     private String selectedWard;
     private String assesmentNO;
+    private pojo.Assessment asses;
     private Set<Assessment> assessments = new HashSet<Assessment>(0);
 
     /**
@@ -578,14 +579,13 @@ public class Customer {
                         }
 
                     }
-                    //asesmant table
-                    List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
-                    WASlist.clear();
-                    for (Assessment assessment : list1) {
+                    Set<Assessment> assessments1 = c.getAssessments();
+                    for (Assessment assessment : assessments1) {
+                        setAsses(assessment);
                         WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
                         getWASlist().add(wsa);
                     }
-                    //asesmant table
+                   
                 }
                 clist.add(cus);
             }
@@ -625,15 +625,15 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-                //asesmant table
-                List<pojo.Assessment> list1 = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("customer", c)).list();
-                WASlist.clear();
-                for (Assessment assessment : list1) {
+                Set<Assessment> assessments1 = c.getAssessments();
+                for (Assessment assessment : assessments1) {
+                    setAsses(assessment);
                     WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
                     getWASlist().add(wsa);
                 }
                 //asesmant table
 
+                //asesmant table
             }
 
             return cus;
@@ -827,6 +827,20 @@ public class Customer {
      */
     public void setAssessments(Set<Assessment> assessments) {
         this.assessments = assessments;
+    }
+
+    /**
+     * @return the asses
+     */
+    public pojo.Assessment getAsses() {
+        return asses;
+    }
+
+    /**
+     * @param asses the asses to set
+     */
+    public void setAsses(pojo.Assessment asses) {
+        this.asses = asses;
     }
 
 }

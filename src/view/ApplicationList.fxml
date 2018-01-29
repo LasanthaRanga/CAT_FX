@@ -26,9 +26,9 @@
       <JFXTextField fx:id="txt_idApp" editable="false" layoutX="718.0" layoutY="69.0" prefHeight="25.0" prefWidth="152.0" />
       <TableView fx:id="tbl_approve" layoutX="718.0" layoutY="186.0" prefHeight="244.0" prefWidth="519.0">
          <columns>
-            <TableColumn fx:id="col_id" prefWidth="79.0" text="Approve id" />
-            <TableColumn fx:id="col_approve_by" prefWidth="177.0" text="Approve By" />
-            <TableColumn fx:id="col_statues" prefWidth="107.0" text="Statues" />
+            <TableColumn fx:id="col_id" prefWidth="101.0" text="Approve id" />
+            <TableColumn fx:id="col_approve_by" prefWidth="155.0" text="Approve By" />
+            <TableColumn fx:id="col_statues" prefWidth="107.0" text="Status" />
             <TableColumn fx:id="col_date" prefWidth="136.0" text="Date" />
          </columns>
       </TableView>
@@ -58,8 +58,8 @@
             <ToggleGroup fx:id="statues" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="ra_approve" layoutX="33.0" layoutY="137.0" onAction="#reload" text="Aprove" toggleGroup="$statues" />
-      <JFXRadioButton fx:id="ra_nonaprove" layoutX="33.0" layoutY="167.0" onAction="#reload" text="None Aprove" toggleGroup="$statues" />
+      <JFXRadioButton fx:id="ra_approve" layoutX="33.0" layoutY="137.0" onAction="#reload" text="Approve" toggleGroup="$statues" />
+      <JFXRadioButton fx:id="ra_nonaprove" layoutX="33.0" layoutY="167.0" onAction="#reload" text="None Approve" toggleGroup="$statues" />
       <JFXRadioButton fx:id="ra_approve_pay" layoutX="528.0" layoutY="137.0" onAction="#reload" prefHeight="17.0" prefWidth="122.0" text="Approve To Pay">
          <toggleGroup>
             <ToggleGroup fx:id="paid" />

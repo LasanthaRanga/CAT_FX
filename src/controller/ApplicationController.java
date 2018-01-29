@@ -195,42 +195,37 @@ public class ApplicationController implements Initializable {
                     } else {
                         upcus = searchCustomer.get(0);
                         txt_cus_nic.setText(upcus.getNic());
-                        // Set<Assessment> assessments = upcus.getAssessments();
-                        //  Set<Assessment> assessments = customer.getAssessments();
+
                         Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
                         try {
-                            Set<Assessment> assessments = upcus.getAssessments();
-                            //   List<pojo.Assessment> assessments = openSession.createCriteria(pojo.Customer.class).add(Restrictions.eq("assessments", upcus.getAssessments())).list();
+
+                            Integer idCustomer = upcus.getIdCustomer();
+                            pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+
+                            Set<Assessment> assessments = load.getAssessments();
 
                             for (Assessment assessment : assessments) {
+
                                 String assessmentNo = assessment.getAssessmentNo();
                                 String streetName = assessment.getStreet().getStreetName();
                                 String wardName = assessment.getStreet().getWard().getWardName();
 
+                                System.out.println(assessmentNo + "  Ases");
+
                                 txt_assesmantNO.setText(assessmentNo);
-                                com_street.getSelectionModel().select(streetName);
                                 com_ward.getSelectionModel().select(wardName);
+                                com_street.getSelectionModel().select(streetName);
 
                             }
-                        } catch (Exception e) {
 
+                        } catch (Exception e) {
+                            e.printStackTrace();
                         } finally {
                             openSession.close();
                         }
 
-//                        txt_fname.setText(upcus.getFullName());
-//                        txt_phone.setText(upcus.getPhone());
-//                        txt_mobile.setText(upcus.getMobile());
-//                        txt_email.setText(upcus.getEmail());
-//                        txt_adress1.setText(upcus.getAddress1());
-//                        txt_adress2.setText(upcus.getAddress2());
-//                        txt_adress3.setText(upcus.getAddress3());
-//                        txt_nic.setText(upcus.getNic());
                         x = 0;
-//                        btn_add.setDisable(true);
-//                        btn_update.setDisable(false);
-//
-//                        setWardStrretAssesmant();
+
                     }
 
                 }
@@ -245,40 +240,45 @@ public class ApplicationController implements Initializable {
                     txt_cus_nic.setText(upcus.getNic());
                     Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
                     try {
-                        Set<Assessment> assessments = upcus.getAssessments();
-                        //   List<pojo.Assessment> assessments = openSession.createCriteria(pojo.Customer.class).add(Restrictions.eq("assessments", upcus.getAssessments())).list();
+
+                        Integer idCustomer = upcus.getIdCustomer();
+                        pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+
+                        Set<Assessment> assessments = load.getAssessments();
 
                         for (Assessment assessment : assessments) {
+
                             String assessmentNo = assessment.getAssessmentNo();
                             String streetName = assessment.getStreet().getStreetName();
                             String wardName = assessment.getStreet().getWard().getWardName();
 
+                            System.out.println(assessmentNo + "  Ases");
+
                             txt_assesmantNO.setText(assessmentNo);
-                            com_street.getSelectionModel().select(streetName);
                             com_ward.getSelectionModel().select(wardName);
+                            com_street.getSelectionModel().select(streetName);
 
                         }
-                    } catch (Exception e) {
 
+//                        Assessment assessment = (pojo.Assessment) openSession.createCriteria(pojo.Assessment.class).add(Restrictions.eq("idAssessment", upcus.getAsses().getIdAssessment())).uniqueResult();
+//
+//                        String assessmentNo = assessment.getAssessmentNo();
+//                        String streetName = assessment.getStreet().getStreetName();
+//                        String wardName = assessment.getStreet().getWard().getWardName();
+//
+//                        System.out.println(assessmentNo + "  Ases");
+//
+//                        txt_assesmantNO.setText(assessmentNo);
+//                        com_street.getSelectionModel().select(streetName);
+//                        com_ward.getSelectionModel().select(wardName);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     } finally {
                         openSession.close();
                     }
 
-//                    System.out.println(upcus.getFullName() + "=== up cus");
-//
-//                    txt_fname.setText(upcus.getFullName());
-//                    txt_phone.setText(upcus.getPhone());
-//                    txt_mobile.setText(upcus.getMobile());
-//                    txt_email.setText(upcus.getEmail());
-//                    txt_adress1.setText(upcus.getAddress1());
-//                    txt_adress2.setText(upcus.getAddress2());
-//                    txt_adress3.setText(upcus.getAddress3());
-//                    txt_nic.setText(upcus.getNic());
                     x = 0;
-//                    btn_add.setDisable(true);
-//                    btn_update.setDisable(false);
-//
-//                    setWardStrretAssesmant();
+
                 }
             }// x==2
 

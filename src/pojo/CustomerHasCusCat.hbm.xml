@@ -3,16 +3,16 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated Jan 30, 2018 11:20:09 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="pojo.CustomerHasTradeLicense" table="customer_has_trade_license" catalog="cat" optimistic-lock="version">
-        <id name="idCustomerHasTradeLicensecol" type="java.lang.Integer">
-            <column name="idCustomer_has_Trade_Licensecol" />
+    <class name="pojo.CustomerHasCusCat" table="customer_has_cus_cat" catalog="cat" optimistic-lock="version">
+        <id name="idCustomerHasCusCat" type="java.lang.Integer">
+            <column name="idCustomer_has_Cus_cat" />
             <generator class="identity" />
         </id>
+        <many-to-one name="cusCat" class="pojo.CusCat" fetch="select">
+            <column name="Cus_cat_idCus_cat" not-null="true" />
+        </many-to-one>
         <many-to-one name="customer" class="pojo.Customer" fetch="select">
             <column name="Customer_idCustomer" not-null="true" />
-        </many-to-one>
-        <many-to-one name="tradeLicense" class="pojo.TradeLicense" fetch="select">
-            <column name="Trade_License_idTrade_License" not-null="true" />
         </many-to-one>
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />

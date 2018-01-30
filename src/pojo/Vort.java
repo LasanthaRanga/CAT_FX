@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 25, 2018 9:52:50 AM by Hibernate Tools 4.3.1
+// Generated Jan 30, 2018 11:20:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.HashSet;
@@ -129,14 +129,6 @@ public class Vort  implements java.io.Serializable {
     
     public void setTradeTypes(Set<TradeType> tradeTypes) {
         this.tradeTypes = tradeTypes;
-    }
-
-    @Override
-    public String toString() {
-        return "Vort{" + "idVort=" + idVort + ", bankInfo=" + bankInfo.getIdBankInfo() 
-                + ", programSubtitle=" + programSubtitle.getIdProgramSubTitle() + ", voteNo=" + voteNo 
-                + ", voteName=" + voteName + ", voteCurrentBalance=" + voteCurrentBalance + ", voteAlocation=" 
-                + voteAlocation + ", status=" + status + ", syn=" + syn + '}';
     }
 
 

@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 28, 2018 8:40:21 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 30, 2018 11:20:09 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Application" table="application" catalog="cat" optimistic-lock="version">
         <id name="idApplication" type="java.lang.Integer">
@@ -31,6 +31,9 @@
         <many-to-one name="userLog" class="pojo.UserLog" fetch="select">
             <column name="User_Log_idUser_Log" not-null="true" />
         </many-to-one>
+        <property name="appNoInPaper" type="string">
+            <column name="app_no_in_paper" length="45" />
+        </property>
         <property name="applicationDate" type="date">
             <column name="application_date" length="10" />
         </property>
@@ -42,9 +45,6 @@
         </property>
         <property name="allocation" type="java.lang.Double">
             <column name="allocation" precision="22" scale="0" />
-        </property>
-        <property name="type" type="string">
-            <column name="type" length="45" />
         </property>
         <property name="tradeName" type="string">
             <column name="trade_name" length="45" />

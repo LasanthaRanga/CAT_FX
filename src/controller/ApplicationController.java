@@ -127,6 +127,8 @@ public class ApplicationController implements Initializable {
     pojo.Ward pward = null;
     @FXML
     private JFXButton btn_clear;
+    @FXML
+    private JFXTextField txt_appno_inPaper;
 
     /**
      * Initializes the controller class.
@@ -503,6 +505,7 @@ public class ApplicationController implements Initializable {
 
     double alocation;
     double txtAmount;
+    String noInpaper;
     String tradeNaem;
     String adl1;
     String adl2;

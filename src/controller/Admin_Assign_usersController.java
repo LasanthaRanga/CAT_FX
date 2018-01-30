@@ -127,18 +127,7 @@ public class Admin_Assign_usersController implements Initializable {
         assignCatagory();
         assignAuthority();
 
-//        btn_reload.setOnAction((event) -> {
-//
-//            loadUserTbl();
-//            loadDepartmentCombo();
-//            loadCatagoryCombo();
-//            loadOutherCombo();
-//
-//            com_authorities.getSelectionModel().clearSelection();
-//            com_catagory.getSelectionModel().clearSelection();
-//            com_department.getSelectionModel().clearSelection();
-//
-//        });
+      
     }
 
     public class UserTbl {

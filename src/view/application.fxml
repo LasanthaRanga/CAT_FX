@@ -37,7 +37,7 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_aplicaton_No" editable="false" labelFloat="true" layoutX="14.0" layoutY="591.0" onKeyReleased="#searchApp" prefHeight="20.0" prefWidth="40.0" promptText="Auto No">
+      <JFXTextField fx:id="txt_aplicaton_No" editable="false" focusColor="#a4a4a4" labelFloat="true" layoutX="14.0" layoutY="591.0" onKeyReleased="#searchApp" prefHeight="20.0" prefWidth="40.0" unFocusColor="#a4a4a4">
          <font>
             <Font size="8.0" />
          </font></JFXTextField>
@@ -101,7 +101,7 @@
          </font>
       </JFXButton>
       <Line cache="true" endX="200.0" fill="#00f518" layoutX="330.0" layoutY="220.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" startX="-100.0" stroke="#00ff09" strokeLineCap="ROUND" />
-      <JFXTextField fx:id="txt_appno_inPaper" focusColor="#f24c8e" layoutX="1101.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Application NO.">
+      <JFXTextField fx:id="txt_appno" focusColor="#f24c8e" layoutX="1101.0" layoutY="128.0" prefHeight="25.0" prefWidth="150.0" promptText="Application NO.">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

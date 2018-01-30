@@ -125,10 +125,13 @@ public class ApplicationController implements Initializable {
     private JFXButton btn_approve;
 
     pojo.Ward pward = null;
+    
     @FXML
     private JFXButton btn_clear;
+    
+    
     @FXML
-    private JFXTextField txt_appno_inPaper;
+    private JFXTextField txt_appno;
 
     /**
      * Initializes the controller class.
@@ -656,6 +659,7 @@ public class ApplicationController implements Initializable {
         app.setCustomer(pCustomer);
         app.setSubNature(pSubNature);
         app.setTradeNature(pNature);
+      //  app.setAp
 
         Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
         System.out.println(assesmantPojo.getAssessmentNo());

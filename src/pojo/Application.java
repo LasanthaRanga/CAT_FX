@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 30, 2018 11:20:06 AM by Hibernate Tools 4.3.1
+// Generated Jan 30, 2018 12:46:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -20,7 +20,7 @@ public class Application  implements java.io.Serializable {
      private TradeType tradeType;
      private User user;
      private UserLog userLog;
-     private String appNoInPaper;
+     private String applicationNo;
      private Date applicationDate;
      private Integer year;
      private Integer month;
@@ -49,7 +49,7 @@ public class Application  implements java.io.Serializable {
         this.tradeType = tradeType;
         this.userLog = userLog;
     }
-    public Application(Assessment assessment, Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, String appNoInPaper, Date applicationDate, Integer year, Integer month, Double allocation, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
+    public Application(Assessment assessment, Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, String applicationNo, Date applicationDate, Integer year, Integer month, Double allocation, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
        this.assessment = assessment;
        this.customer = customer;
        this.subNature = subNature;
@@ -57,7 +57,7 @@ public class Application  implements java.io.Serializable {
        this.tradeType = tradeType;
        this.user = user;
        this.userLog = userLog;
-       this.appNoInPaper = appNoInPaper;
+       this.applicationNo = applicationNo;
        this.applicationDate = applicationDate;
        this.year = year;
        this.month = month;
@@ -133,12 +133,12 @@ public class Application  implements java.io.Serializable {
     public void setUserLog(UserLog userLog) {
         this.userLog = userLog;
     }
-    public String getAppNoInPaper() {
-        return this.appNoInPaper;
+    public String getApplicationNo() {
+        return this.applicationNo;
     }
     
-    public void setAppNoInPaper(String appNoInPaper) {
-        this.appNoInPaper = appNoInPaper;
+    public void setApplicationNo(String applicationNo) {
+        this.applicationNo = applicationNo;
     }
     public Date getApplicationDate() {
         return this.applicationDate;

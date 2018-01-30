@@ -508,7 +508,7 @@ public class ApplicationController implements Initializable {
 
     double alocation;
     double txtAmount;
-    String noInpaper;
+    String appno;
     String tradeNaem;
     String adl1;
     String adl2;
@@ -574,6 +574,7 @@ public class ApplicationController implements Initializable {
         assesno = txt_assesmantNO.getText();
         cus_name = txt_cus_fname.getText();
         cus_nic = txt_cus_nic.getText();
+        appno = txt_appno.getText();
 
         wardname = com_ward.getSelectionModel().getSelectedItem();
         streetname = com_street.getSelectionModel().getSelectedItem();
@@ -610,6 +611,7 @@ public class ApplicationController implements Initializable {
                     app.setCustomer(pCustomer);
                     app.setSubNature(pSubNature);
                     app.setTradeNature(pNature);
+                    app.setApplicationNo(appno);
 
                     Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
                     System.out.println(assesmantPojo.getAssessmentNo());

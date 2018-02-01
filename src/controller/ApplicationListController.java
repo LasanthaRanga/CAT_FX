@@ -30,6 +30,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -110,6 +111,8 @@ public class ApplicationListController implements Initializable {
     private JFXButton btn_approve_toPay;
     @FXML
     private JFXButton btn_All;
+    @FXML
+    private AnchorPane txt_appno;
 
     /**
      * Initializes the controller class.
@@ -117,7 +120,7 @@ public class ApplicationListController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        loadTable();
+        loadTable(null);
         // clickTable();
 
         tbl_applicaion.setOnMouseReleased((event) -> {
@@ -136,8 +139,12 @@ public class ApplicationListController implements Initializable {
 
     @FXML
     private void reload(ActionEvent event) {
-
-        loadTable();
+        String text = txt_idApp1.getText();
+        if (text.length() > 0) {
+            loadTable(text);
+        } else {
+            loadTable(null);
+        }
 
     }
 
@@ -202,6 +209,13 @@ public class ApplicationListController implements Initializable {
             ex.printStackTrace();
             Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    @FXML
+    private void searchAppno(KeyEvent event) {
+        String text = txt_idApp1.getText();
+        loadTable(text);
 
     }
 
@@ -326,7 +340,7 @@ public class ApplicationListController implements Initializable {
 
     ObservableList appList = FXCollections.observableArrayList();
 
-    public void loadTable() {
+    public void loadTable(String aapno) {
         c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
         c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
         c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
@@ -360,7 +374,7 @@ public class ApplicationListController implements Initializable {
             paid = 2;
         }
 
-        List<modle.AppTbl> appTbls = aplication.getAppListToTable(approve, paid);
+        List<modle.AppTbl> appTbls = aplication.getAppListToTable(approve, paid, aapno);
         appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getType(), a.getNature(), a.getAlocation(), a.getTxt(), a.getPayapp(), a.getTname()));

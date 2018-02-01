@@ -168,10 +168,14 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
-    public List<modle.AppTbl> getAppListToTable(int approve, int paid) {
+    public List<modle.AppTbl> getAppListToTable(int approve, int paid, String appno) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             Criteria c = session.createCriteria(pojo.Application.class);
+            
+            if (appno!=null) {
+                c.add(Restrictions.eq("applicationNo", appno));
+            }
 
             c.add(Restrictions.eq("statues", approve));
             c.add(Restrictions.eq("approveToPaymant", paid));
@@ -308,7 +312,6 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
- 
     public pojo.Application getApllicationPojoByApplicationNo(String no) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -366,7 +369,5 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
-
-    
 
 }

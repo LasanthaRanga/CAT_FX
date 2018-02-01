@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationListController">
+<AnchorPane id="AnchorPane" fx:id="txt_appno" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationListController">
    <children>
       <TableView fx:id="tbl_applicaion" layoutX="33.0" layoutY="186.0" prefHeight="412.0" prefWidth="617.0">
         <columns>
@@ -47,25 +47,25 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_idApp1" editable="false" layoutX="33.0" layoutY="69.0" prefHeight="25.0" prefWidth="187.0" promptText="Application Number Search" />
+      <JFXTextField fx:id="txt_idApp1" layoutX="33.0" layoutY="41.0" onKeyReleased="#searchAppno" prefHeight="25.0" prefWidth="122.0" promptText="Application Number" />
       <JFXButton fx:id="btn_All" layoutX="718.0" layoutY="129.0" onAction="#getAllDetails" prefHeight="29.0" prefWidth="152.0" style="-fx-background-color: #1976D2;" text="All Details" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXRadioButton fx:id="ra_pending" layoutX="33.0" layoutY="107.0" onAction="#reload" selected="true" text="Pending">
+      <JFXRadioButton fx:id="ra_pending" layoutX="34.0" layoutY="86.0" onAction="#reload" selected="true" text="Pending">
          <toggleGroup>
             <ToggleGroup fx:id="statues" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="ra_approve" layoutX="33.0" layoutY="137.0" onAction="#reload" text="Approve" toggleGroup="$statues" />
-      <JFXRadioButton fx:id="ra_nonaprove" layoutX="33.0" layoutY="167.0" onAction="#reload" text="None Approve" toggleGroup="$statues" />
-      <JFXRadioButton fx:id="ra_approve_pay" layoutX="528.0" layoutY="137.0" onAction="#reload" prefHeight="17.0" prefWidth="122.0" text="Approve To Pay">
+      <JFXRadioButton fx:id="ra_approve" layoutX="33.0" layoutY="122.0" onAction="#reload" text="Approve" toggleGroup="$statues" />
+      <JFXRadioButton fx:id="ra_nonaprove" layoutX="33.0" layoutY="157.0" onAction="#reload" text="None Approve" toggleGroup="$statues" />
+      <JFXRadioButton fx:id="ra_approve_pay" layoutX="253.0" layoutY="122.0" onAction="#reload" prefHeight="17.0" prefWidth="122.0" text="Approve To Pay">
          <toggleGroup>
             <ToggleGroup fx:id="paid" />
          </toggleGroup>
       </JFXRadioButton>
-      <JFXRadioButton fx:id="ra_pendig_pay" layoutX="528.0" layoutY="107.0" onAction="#reload" selected="true" text="Pending To Pay" toggleGroup="$paid" />
-      <JFXRadioButton fx:id="ra_paid" layoutX="528.0" layoutY="167.0" onAction="#reload" prefHeight="17.0" prefWidth="122.0" text="Paid" toggleGroup="$paid" />
+      <JFXRadioButton fx:id="ra_pendig_pay" layoutX="253.0" layoutY="86.0" onAction="#reload" selected="true" text="Pending To Pay" toggleGroup="$paid" />
+      <JFXRadioButton fx:id="ra_paid" layoutX="254.0" layoutY="157.0" onAction="#reload" prefHeight="17.0" prefWidth="122.0" text="Paid" toggleGroup="$paid" />
    </children>
 </AnchorPane>

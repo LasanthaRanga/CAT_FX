@@ -188,18 +188,28 @@ public class PaymantViewController implements Initializable {
         // set application details
         lbl_customername.setText(application.getCustomer().getFullName());
         lbl_tradename.setText(application.getTradeName());
+        if(application.getTradeNature()!=null)
         lbl_tradenature.setText(application.getTradeNature().getNature());
+        if(application.getSubNature()!=null)
         lbl_tradesubnature.setText(application.getSubNature().getSubNature());
+        if(application.getTradeType()!=null)
         lbl_tradetype.setText(application.getTradeType().getTypeName());
         lbl_application_year.setText(application.getYear() + "");
         lbl_application_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(application.getApplicationDate()));
         lbl_allocation.setText("Rs. "+application.getAllocation() + "");
         lbl_application_taxamount.setText("Rs. "+Math.round(application.getTaxAmount() * 100.00) / 100.00 + "");
+        if(application.getUser()!=null)
         lbl_roname.setText(application.getUser().getFullName());
 
         // set payment details
         lbl_receipt_no.setText(payment.getReceiptNo());
+        if(payment.getVort()!=null)
         lbl_vort.setText(payment.getVort().getVoteName());
+        else Notifications.create()
+                        .title("Warning")
+                        .text("Not Found Vort.")
+                        .hideAfter(Duration.seconds(3))
+                        .position(Pos.BOTTOM_RIGHT).showWarning();
         lbl_payment_year.setText(payment.getYear() + "");
         lbl_payment_date.setText(new SimpleDateFormat("yyyy-MM-dd").format(payment.getPaymentDate()));
         lbl_payment_taxamount.setText(Math.round(payment.getTaxAmount() * 100.00) / 100.00 + "");

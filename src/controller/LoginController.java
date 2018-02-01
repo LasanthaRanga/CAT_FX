@@ -8,6 +8,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import java.awt.SystemTray;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,7 +29,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.stage.Window;
 import javafx.util.Duration;
+import javax.imageio.ImageIO;
 import modle.AuthUser;
 import modle.Log_User;
 import modle.UserCat;
@@ -53,6 +57,8 @@ public class LoginController implements Initializable {
 
     @FXML
     private JFXButton btn_foget;
+    @FXML
+    private JFXButton btn_min;
 
     /**
      * Initializes the controller class.
@@ -136,6 +142,7 @@ public class LoginController implements Initializable {
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image("/Cat.png"));
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
@@ -155,6 +162,7 @@ public class LoginController implements Initializable {
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image("/Cat.png"));
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
@@ -179,6 +187,7 @@ public class LoginController implements Initializable {
                     btn_singin.getParent().getScene();
                     Scene scene = new Scene(paymant);
                     Stage stage = new Stage();
+                    stage.getIcons().add(new Image("/Cat.png"));
                     stage.initStyle(StageStyle.TRANSPARENT);
                     stage.setScene(scene);
                     stage.show();
@@ -199,4 +208,12 @@ public class LoginController implements Initializable {
         }
     }
 
+    @FXML
+    private void btnMin(ActionEvent event) {
+        Stage window = (Stage) btn_min.getParent().getScene().getWindow();
+        //window.setMaximized(true);
+
+        window.setIconified(true);
+        // window.hide();
+    }
 }

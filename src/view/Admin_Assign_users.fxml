@@ -14,14 +14,14 @@
         <columns>
           <TableColumn fx:id="col_idUser" prefWidth="53.0" text="User Id" />
           <TableColumn fx:id="col_fullname" prefWidth="237.0" text="Full Name" />
-            <TableColumn fx:id="col_nic" minWidth="0.0" prefWidth="79.0" text="Nic" />
+            <TableColumn fx:id="col_nic" minWidth="0.0" prefWidth="79.0" text="NIC" />
             <TableColumn fx:id="col_mobile" prefWidth="105.0" text="Mobile" />
             <TableColumn fx:id="col_date" prefWidth="88.0" text="Reg Date" />
-            <TableColumn fx:id="col_statues" prefWidth="64.0" text="Statues" />
+            <TableColumn fx:id="col_statues" prefWidth="64.0" text="Status" />
         </columns>
       </TableView>
-      <Label layoutX="820.0" layoutY="86.0" prefHeight="17.0" prefWidth="80.0" text="Depatment" />
-      <Label layoutX="820.0" layoutY="268.0" prefHeight="17.0" prefWidth="80.0" text="Catagory" />
+      <Label layoutX="820.0" layoutY="86.0" prefHeight="17.0" prefWidth="80.0" text="Department" />
+      <Label layoutX="820.0" layoutY="268.0" prefHeight="17.0" prefWidth="80.0" text="Category" />
       <Label layoutX="820.0" layoutY="444.0" prefHeight="17.0" prefWidth="80.0" text="Authorities" />
       <JFXComboBox fx:id="com_department" layoutX="905.0" layoutY="82.0" prefHeight="25.0" prefWidth="256.0" />
       <JFXComboBox fx:id="com_catagory" layoutX="905.0" layoutY="264.0" prefHeight="25.0" prefWidth="256.0" />
@@ -40,8 +40,8 @@
       </TableView>
       <TableView fx:id="tbl_author" layoutX="820.0" layoutY="476.0" prefHeight="99.0" prefWidth="425.0">
          <columns>
-            <TableColumn fx:id="col_a_id" prefWidth="75.0" text="C1" />
-            <TableColumn fx:id="col_a_name" prefWidth="335.0" text="C2" />
+            <TableColumn fx:id="col_a_id" prefWidth="75.0" text="ID" />
+            <TableColumn fx:id="col_a_name" prefWidth="335.0" text="Authorities" />
          </columns>
       </TableView>
       <JFXButton fx:id="btn_dip_assign" layoutX="1191.0" layoutY="82.0" style="-fx-background-color: #1976D2;" text="Assign" textFill="WHITE">
@@ -61,6 +61,5 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btn_reload" layoutX="58.0" layoutY="47.0" style="-fx-background-color: #BDBDBD;" text="Reload" textFill="WHITE" />
    </children>
 </AnchorPane>

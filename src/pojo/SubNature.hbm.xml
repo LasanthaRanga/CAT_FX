@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 25, 2018 9:52:52 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Jan 30, 2018 11:20:09 AM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.SubNature" table="sub_nature" catalog="cat" optimistic-lock="version">
         <id name="idSubNature" type="java.lang.Integer">
@@ -15,7 +15,7 @@
             <column name="sub_nature_no" length="45" />
         </property>
         <property name="subNature" type="string">
-            <column name="sub_nature" length="45" />
+            <column name="sub_nature" />
         </property>
         <property name="status" type="java.lang.Integer">
             <column name="status" />

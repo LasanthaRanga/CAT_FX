@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 28, 2018 8:40:19 AM by Hibernate Tools 4.3.1
+// Generated Jan 30, 2018 12:46:38 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -20,11 +20,11 @@ public class Application  implements java.io.Serializable {
      private TradeType tradeType;
      private User user;
      private UserLog userLog;
+     private String applicationNo;
      private Date applicationDate;
      private Integer year;
      private Integer month;
      private Double allocation;
-     private String type;
      private String tradeName;
      private String tradeAddress1;
      private String tradeAddress2;
@@ -49,7 +49,7 @@ public class Application  implements java.io.Serializable {
         this.tradeType = tradeType;
         this.userLog = userLog;
     }
-    public Application(Assessment assessment, Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, Date applicationDate, Integer year, Integer month, Double allocation, String type, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
+    public Application(Assessment assessment, Customer customer, SubNature subNature, TradeNature tradeNature, TradeType tradeType, User user, UserLog userLog, String applicationNo, Date applicationDate, Integer year, Integer month, Double allocation, String tradeName, String tradeAddress1, String tradeAddress2, String tradeAddress3, String tradeNature_1, Double taxAmount, String discription, Integer statues, Integer syn, Integer approveToPaymant, Set<AplicationPayment> aplicationPayments, Set<Apprualstatues> apprualstatueses, Set<TradeLicense> tradeLicenses) {
        this.assessment = assessment;
        this.customer = customer;
        this.subNature = subNature;
@@ -57,11 +57,11 @@ public class Application  implements java.io.Serializable {
        this.tradeType = tradeType;
        this.user = user;
        this.userLog = userLog;
+       this.applicationNo = applicationNo;
        this.applicationDate = applicationDate;
        this.year = year;
        this.month = month;
        this.allocation = allocation;
-       this.type = type;
        this.tradeName = tradeName;
        this.tradeAddress1 = tradeAddress1;
        this.tradeAddress2 = tradeAddress2;
@@ -133,6 +133,13 @@ public class Application  implements java.io.Serializable {
     public void setUserLog(UserLog userLog) {
         this.userLog = userLog;
     }
+    public String getApplicationNo() {
+        return this.applicationNo;
+    }
+    
+    public void setApplicationNo(String applicationNo) {
+        this.applicationNo = applicationNo;
+    }
     public Date getApplicationDate() {
         return this.applicationDate;
     }
@@ -160,13 +167,6 @@ public class Application  implements java.io.Serializable {
     
     public void setAllocation(Double allocation) {
         this.allocation = allocation;
-    }
-    public String getType() {
-        return this.type;
-    }
-    
-    public void setType(String type) {
-        this.type = type;
     }
     public String getTradeName() {
         return this.tradeName;

@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Admin_user_catController">
    <children>
-      <JFXTextField fx:id="txt_catagory" layoutX="910.0" layoutY="204.0" prefHeight="25.0" prefWidth="251.0" promptText="User Catagory">
+      <JFXTextField fx:id="txt_catagory" layoutX="910.0" layoutY="204.0" prefHeight="25.0" prefWidth="251.0" promptText="User Category">
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
@@ -18,7 +18,7 @@
       <TableView fx:id="tbl_catagory" layoutX="910.0" layoutY="294.0" prefHeight="159.0" prefWidth="251.0">
         <columns>
           <TableColumn fx:id="col_id_cat" prefWidth="75.0" text="#" />
-          <TableColumn fx:id="col_cat" prefWidth="161.0" text="Catagory" />
+          <TableColumn fx:id="col_cat" prefWidth="161.0" text="Category" />
         </columns>
       </TableView>
       <JFXButton fx:id="btn_add_department" layoutX="337.0" layoutY="249.0" prefHeight="25.0" prefWidth="53.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE" />
@@ -43,7 +43,7 @@
             <TableColumn fx:id="col_authorities" prefWidth="161.0" text="Authorities" />
          </columns>
       </TableView>
-      <Label layoutX="538.0" layoutY="14.0" text="User Catagory" textFill="#388e3c">
+      <Label layoutX="538.0" layoutY="14.0" text="User Category" textFill="#388e3c">
          <font>
             <Font size="36.0" />
          </font>

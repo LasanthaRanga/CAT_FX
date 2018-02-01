@@ -13,7 +13,7 @@
    <children>
       <Label layoutX="560.0" text="Application" textFill="#029400">
          <font>
-            <Font size="36.0" />
+            <Font name="System Bold" size="36.0" />
          </font>
       </Label>
       <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="108.0" layoutY="67.0" prefHeight="25.0" prefWidth="210.0" promptText="Ward" unFocusColor="#00bf16" />
@@ -37,19 +37,19 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_aplicaton_No" labelFloat="true" layoutX="1082.0" layoutY="128.0" onKeyReleased="#searchApp" prefHeight="25.0" prefWidth="150.0" promptText="Application NO.">
+      <JFXTextField fx:id="txt_aplicaton_No" editable="false" focusColor="#a4a4a4" labelFloat="true" layoutX="14.0" layoutY="591.0" onKeyReleased="#searchApp" prefHeight="20.0" prefWidth="40.0" unFocusColor="#a4a4a4">
          <font>
-            <Font name="System Bold" size="18.0" />
+            <Font size="8.0" />
          </font></JFXTextField>
       <JFXTextField fx:id="txt_year" labelFloat="true" layoutX="1082.0" layoutY="66.0" prefHeight="28.0" prefWidth="60.0" promptText="Year">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_month" labelFloat="true" layoutX="1143.0" layoutY="66.0" prefHeight="28.0" prefWidth="52.0" promptText="Month">
+      <JFXTextField fx:id="txt_month" labelFloat="true" layoutX="1150.0" layoutY="66.0" prefHeight="28.0" prefWidth="52.0" promptText="Month">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_day" labelFloat="true" layoutX="1196.0" layoutY="66.0" prefHeight="25.0" prefWidth="40.0" promptText="Day">
+      <JFXTextField fx:id="txt_day" labelFloat="true" layoutX="1207.0" layoutY="66.0" prefHeight="25.0" prefWidth="40.0" promptText="Day">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXTextField>
@@ -81,9 +81,9 @@
          <font>
             <Font size="14.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="btn_save_app" layoutX="1089.0" layoutY="427.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btn_save_app" layoutX="1089.0" layoutY="405.0" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
          <font>
-            <Font name="System Bold" size="12.0" />
+            <Font name="System Bold" size="18.0" />
          </font></JFXButton>
       <JFXButton fx:id="btn_send_approve" layoutX="1089.0" layoutY="493.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
          <font>
@@ -95,11 +95,16 @@
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_clear" layoutX="127.0" layoutY="476.0" onAction="#clearApp" prefHeight="35.0" prefWidth="173.0" style="-fx-background-color: #E64A19;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btn_clear" layoutX="293.0" layoutY="476.0" onAction="#clearApp" prefHeight="35.0" prefWidth="173.0" style="-fx-background-color: #E64A19;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
       <Line cache="true" endX="200.0" fill="#00f518" layoutX="330.0" layoutY="220.0" nodeOrientation="RIGHT_TO_LEFT" rotate="90.0" startX="-100.0" stroke="#00ff09" strokeLineCap="ROUND" />
+      <JFXTextField fx:id="txt_appno" focusColor="#f24c8e" layoutX="1101.0" layoutY="128.0" onKeyReleased="#searchAppNo" prefHeight="25.0" prefWidth="150.0" promptText="Application NO.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXTextField>
    </children>
 </AnchorPane>

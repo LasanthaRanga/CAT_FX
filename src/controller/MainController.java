@@ -5,6 +5,7 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -12,8 +13,10 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -26,6 +29,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.hibernate.Session;
 import pojo.User;
 
@@ -55,6 +60,8 @@ public class MainController implements Initializable {
 
     @FXML
     private Label lbl_logUser;
+    @FXML
+    private JFXButton btn_min;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -123,6 +130,7 @@ public class MainController implements Initializable {
                                 case "btn_exit":
                                     System.out.println("EXIT");
                                     Platform.exit();
+                                    System.exit(0);
                                     //((Node) (e.getSource())).getScene().getWindow().hide();
                                     break;
 
@@ -142,7 +150,8 @@ public class MainController implements Initializable {
         }
         drawer.open();
 
-        HamburgerBackArrowBasicTransition hamt = new HamburgerBackArrowBasicTransition(hambuger);
+//        HamburgerBackArrowBasicTransition hamt = new HamburgerBackArrowBasicTransition(hambuger);
+        HamburgerNextArrowBasicTransition hamt = new HamburgerNextArrowBasicTransition(hambuger);
 
         hamt.setRate(1);
         hambuger.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,
@@ -175,6 +184,14 @@ public class MainController implements Initializable {
         } else {
             drawer.open();
         }
+    }
+
+    @FXML
+    private void minimize(ActionEvent event) {
+
+        Stage  st= (Stage) btn_min.getParent().getScene().getWindow();
+        st.setIconified(true);
+
     }
 
 }

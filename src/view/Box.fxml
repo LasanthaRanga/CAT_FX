@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
 <VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <JFXButton prefHeight="159.0" prefWidth="200.0" />
+      <ImageView fitHeight="177.0" fitWidth="209.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../Cat.png" />
+         </image>
+      </ImageView>
+      <JFXButton prefHeight="25.0" prefWidth="228.0" text="KURUNEGALA" textFill="#ebebeb">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
         <JFXButton fx:id="btn_test" accessibleText="btn_test1" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Ward &amp; Strret" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -37,8 +48,8 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton prefHeight="301.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" />
-      <JFXButton accessibleText="btn_exit" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton prefHeight="142.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" />
+      <JFXButton accessibleText="btn_exit" prefHeight="57.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>

@@ -308,6 +308,23 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
+ 
+    public pojo.Application getApllicationPojoByApplicationNo(String no) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            Criteria c = session.createCriteria(pojo.Application.class);
+            pojo.Application uniqueResult = (pojo.Application) c.add(Restrictions.eq("applicationNo", no)).uniqueResult();
+            return uniqueResult;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
     public pojo.Apprualstatues getApproveStatus(int no) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -349,5 +366,7 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
+
+    
 
 }

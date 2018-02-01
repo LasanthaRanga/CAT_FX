@@ -1,5 +1,5 @@
 package pojo;
-// Generated Jan 28, 2018 6:35:57 PM by Hibernate Tools 4.3.1
+// Generated Jan 30, 2018 11:20:06 AM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Customer  implements java.io.Serializable {
      private Integer statues;
      private Integer syn;
      private Set<CustomerHasTradeLicense> customerHasTradeLicenses = new HashSet<CustomerHasTradeLicense>(0);
+     private Set<CustomerHasCusCat> customerHasCusCats = new HashSet<CustomerHasCusCat>(0);
      private Set<Assessment> assessments = new HashSet<Assessment>(0);
      private Set<Application> applications = new HashSet<Application>(0);
      private Set<Contact> contacts = new HashSet<Contact>(0);
@@ -32,7 +33,7 @@ public class Customer  implements java.io.Serializable {
     public Customer(UserLog userLog) {
         this.userLog = userLog;
     }
-    public Customer(UserLog userLog, String nic, String fullName, String customercol, Date regDate, Integer statues, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses, Set<Assessment> assessments, Set<Application> applications, Set<Contact> contacts) {
+    public Customer(UserLog userLog, String nic, String fullName, String customercol, Date regDate, Integer statues, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses, Set<CustomerHasCusCat> customerHasCusCats, Set<Assessment> assessments, Set<Application> applications, Set<Contact> contacts) {
        this.userLog = userLog;
        this.nic = nic;
        this.fullName = fullName;
@@ -41,6 +42,7 @@ public class Customer  implements java.io.Serializable {
        this.statues = statues;
        this.syn = syn;
        this.customerHasTradeLicenses = customerHasTradeLicenses;
+       this.customerHasCusCats = customerHasCusCats;
        this.assessments = assessments;
        this.applications = applications;
        this.contacts = contacts;
@@ -108,6 +110,13 @@ public class Customer  implements java.io.Serializable {
     
     public void setCustomerHasTradeLicenses(Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
         this.customerHasTradeLicenses = customerHasTradeLicenses;
+    }
+    public Set<CustomerHasCusCat> getCustomerHasCusCats() {
+        return this.customerHasCusCats;
+    }
+    
+    public void setCustomerHasCusCats(Set<CustomerHasCusCat> customerHasCusCats) {
+        this.customerHasCusCats = customerHasCusCats;
     }
     public Set<Assessment> getAssessments() {
         return this.assessments;

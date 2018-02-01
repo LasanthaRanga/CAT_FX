@@ -154,44 +154,40 @@ public class CustomerController implements Initializable {
                 modle.StaticBadu.setCuslist(searchCustomer);
                 x = 1;
 
-                {
+                if (searchCustomer.size() > 1) {
+                    if (searchCustomer != null) {
+                        try {
+                            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                            txt_fname.getParent().getScene();
+                            Scene scene = new Scene(paymant);
+                            Stage stage = new Stage();
+                            stage.initStyle(StageStyle.TRANSPARENT);
+                            stage.setScene(scene);
+                            stage.show();
 
-                    if (searchCustomer.size() > 1) {
-                        if (searchCustomer != null) {
-                            try {
-                                AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
-                                txt_fname.getParent().getScene();
-                                Scene scene = new Scene(paymant);
-                                Stage stage = new Stage();
-                                stage.initStyle(StageStyle.TRANSPARENT);
-                                stage.setScene(scene);
-                                stage.show();
+                            x = 2;
 
-                                x = 2;
-
-                            } catch (IOException ex) {
-                                ex.printStackTrace();
-                                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
                         }
-
-                    } else {
-                        upcus = searchCustomer.get(0);
-                        txt_fname.setText(upcus.getFullName());
-                        txt_phone.setText(upcus.getPhone());
-                        txt_mobile.setText(upcus.getMobile());
-                        txt_email.setText(upcus.getEmail());
-                        txt_adress1.setText(upcus.getAddress1());
-                        txt_adress2.setText(upcus.getAddress2());
-                        txt_adress3.setText(upcus.getAddress3());
-                        txt_nic.setText(upcus.getNic());
-                        x = 0;
-                        btn_add.setDisable(true);
-                        btn_update.setDisable(false);
-
-                        setWardStrretAssesmant();
                     }
 
+                } else {
+                    upcus = searchCustomer.get(0);
+                    txt_fname.setText(upcus.getFullName());
+                    txt_phone.setText(upcus.getPhone());
+                    txt_mobile.setText(upcus.getMobile());
+                    txt_email.setText(upcus.getEmail());
+                    txt_adress1.setText(upcus.getAddress1());
+                    txt_adress2.setText(upcus.getAddress2());
+                    txt_adress3.setText(upcus.getAddress3());
+                    txt_nic.setText(upcus.getNic());
+                    x = 0;
+                    btn_add.setDisable(true);
+                    btn_update.setDisable(false);
+
+                    setWardStrretAssesmant();
                 }
 
             }//x = 0
@@ -224,6 +220,7 @@ public class CustomerController implements Initializable {
 
     public void setWardStrretAssesmant() {
         ObservableList WASlist = modle.Customer.getWASlist();
+        WASlist.clear();
         if (WASlist != null) {
 
             col_ward.setCellValueFactory(new PropertyValueFactory<>("Ward"));
@@ -359,7 +356,8 @@ public class CustomerController implements Initializable {
             txt_adress3.setText(cus.getAddress3());
 
             setWardStrretAssesmant();
-
+            btn_add.setDisable(true);
+            btn_update.setDisable(false);
         }
 
     }
@@ -394,6 +392,8 @@ public class CustomerController implements Initializable {
         //   customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
         setWardStrretAssesmant();
+        btn_add.setDisable(true);
+        btn_update.setDisable(false);
 
     }
 

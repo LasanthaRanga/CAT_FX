@@ -26,23 +26,16 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modle.Customer;
-import modle.CustomerHasAssesment;
 import modle.Nature;
-import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Assessment;
-import pojo.Street;
 import pojo.SubNature;
 import pojo.TradeNature;
-import pojo.TradeType;
-import pojo.User;
 import pojo.Ward;
 
 /**
@@ -125,8 +118,12 @@ public class ApplicationController implements Initializable {
     private JFXButton btn_approve;
 
     pojo.Ward pward = null;
+
     @FXML
     private JFXButton btn_clear;
+
+    @FXML
+    private JFXTextField txt_appno;
 
     /**
      * Initializes the controller class.
@@ -153,6 +150,77 @@ public class ApplicationController implements Initializable {
             ApproveToPay();
         });
 
+    }
+
+    @FXML
+    private void searchAppNo(KeyEvent event) {
+
+        event.consume();
+
+//        String character = event.getCharacter();
+//       
+//
+//        if (event.getCode() == KeyCode.ENTER) {
+//            searchApplicationNO();
+//        }
+    }
+
+    public boolean searchApplicationNO() {
+        boolean b = false;
+        String text = txt_appno.getText();
+        a = new modle.Aplication().getApllicationPojoByApplicationNo(text);
+
+        if (a != null) {
+            b = true;
+            Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+
+            try {
+                a = (pojo.Application) session.load(pojo.Application.class, a.getIdApplication());
+
+                modle.Allert.notificationInfo("Find Applicaiton", text);
+
+                txt_allocaton.setText(a.getAllocation() + "");
+                txt_taxt_amount.setText(a.getTaxAmount() + "");
+                txt_trade_name.setText(a.getTradeName());
+                txt_adl1.setText(a.getTradeAddress1());
+                txt_adl2.setText(a.getTradeAddress2());
+                txt_adl3.setText(a.getTradeAddress3());
+                txt_discription.setText(a.getDiscription());
+
+                txt_assesmantNO.setText(a.getAssessment().getAssessmentNo());
+                txt_cus_fname.setText(a.getCustomer().getFullName());
+                txt_cus_nic.setText(a.getCustomer().getNic());
+
+                com_ward.getSelectionModel().select(a.getAssessment().getStreet().getWard().getWardName());
+                com_street.getSelectionModel().select(a.getAssessment().getStreet().getStreetName());
+                com_trade_type.getSelectionModel().select(a.getTradeType().getTypeName());
+                com_nature.getSelectionModel().select(a.getTradeNature().getNature());
+
+                txt_year.setText(a.getYear() + "");
+
+                txt_month.setText(a.getMonth() + "");
+
+                txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
+
+                btn_save_app.setText("UPDATE");
+
+                if (a.getUser() != null) {
+                    txt_ro.setText(a.getUser().getFullName());
+                }
+                SubNature subNature = a.getSubNature();
+                if (subNature != null) {
+                    com_subnature.getSelectionModel().select(subNature.getSubNature());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.close();
+            }
+
+        } else {
+            modle.Allert.notificationInfo("No Application no", text);
+            clearApplication();
+        }
+        return b;
     }
 
     int x = 0;
@@ -367,6 +435,34 @@ public class ApplicationController implements Initializable {
         if (cus != null) {
             txt_cus_fname.setText(cus.getFullName());
 
+            Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+            try {
+
+                Integer idCustomer = cus.getIdCustomer();
+                pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+
+                Set<Assessment> assessments = load.getAssessments();
+
+                for (Assessment assessment : assessments) {
+
+                    String assessmentNo = assessment.getAssessmentNo();
+                    String streetName = assessment.getStreet().getStreetName();
+                    String wardName = assessment.getStreet().getWard().getWardName();
+
+                    System.out.println(assessmentNo + "  Ases");
+
+                    txt_assesmantNO.setText(assessmentNo);
+                    com_ward.getSelectionModel().select(wardName);
+                    com_street.getSelectionModel().select(streetName);
+
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                openSession.close();
+            }
+
         }
 
     }
@@ -474,6 +570,7 @@ public class ApplicationController implements Initializable {
 
     double alocation;
     double txtAmount;
+    String appno;
     String tradeNaem;
     String adl1;
     String adl2;
@@ -539,6 +636,7 @@ public class ApplicationController implements Initializable {
         assesno = txt_assesmantNO.getText();
         cus_name = txt_cus_fname.getText();
         cus_nic = txt_cus_nic.getText();
+        appno = txt_appno.getText();
 
         wardname = com_ward.getSelectionModel().getSelectedItem();
         streetname = com_street.getSelectionModel().getSelectedItem();
@@ -567,6 +665,10 @@ public class ApplicationController implements Initializable {
                 String btntxt = btn_save_app.getText();
 
                 if (btntxt.equals("Save")) {
+                    
+//                    boolean thiyanawa = searchApplicationNO();
+//                    
+//                    if(!thiyanawa){}
 
                     collectData();
                     //  System.out.println(pCustomer.getFullName());
@@ -575,6 +677,7 @@ public class ApplicationController implements Initializable {
                     app.setCustomer(pCustomer);
                     app.setSubNature(pSubNature);
                     app.setTradeNature(pNature);
+                    app.setApplicationNo(appno);
 
                     Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
                     System.out.println(assesmantPojo.getAssessmentNo());
@@ -604,7 +707,7 @@ public class ApplicationController implements Initializable {
 
                     if (save) {
                         modle.StaticBadu.setApp(app);
-                        modle.Allert.notificationGood("Saved Application", txt_aplicaton_No.getText());
+                        modle.Allert.notificationGood("Saved Application", app.getIdApplication() + "");
                     } else {
                         modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
                     }
@@ -624,6 +727,7 @@ public class ApplicationController implements Initializable {
         app.setCustomer(pCustomer);
         app.setSubNature(pSubNature);
         app.setTradeNature(pNature);
+        //  app.setAp
 
         Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
         System.out.println(assesmantPojo.getAssessmentNo());

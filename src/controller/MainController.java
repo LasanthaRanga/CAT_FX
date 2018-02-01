@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerNextArrowBasicTransition;
 
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -149,7 +150,8 @@ public class MainController implements Initializable {
         }
         drawer.open();
 
-        HamburgerBackArrowBasicTransition hamt = new HamburgerBackArrowBasicTransition(hambuger);
+//        HamburgerBackArrowBasicTransition hamt = new HamburgerBackArrowBasicTransition(hambuger);
+        HamburgerNextArrowBasicTransition hamt = new HamburgerNextArrowBasicTransition(hambuger);
 
         hamt.setRate(1);
         hambuger.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,

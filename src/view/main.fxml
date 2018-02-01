@@ -19,9 +19,9 @@
                     </font>
                 </Label>
                 <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" />
-            <Label fx:id="lbl_logUser" layoutX="855.0" layoutY="44.0" prefHeight="17.0" prefWidth="445.0" text="Label" textFill="WHITE">
+            <Label fx:id="lbl_logUser" alignment="CENTER_RIGHT" layoutX="850.0" layoutY="44.0" prefHeight="17.0" prefWidth="445.0" text="Label" textAlignment="RIGHT" textFill="WHITE">
                <font>
-                  <Font size="13.0" />
+                  <Font name="System Bold" size="13.0" />
                </font>
             </Label>
             <JFXButton fx:id="btn_min" alignment="CENTER" contentDisplay="CENTER" layoutX="1274.0" layoutY="1.0" minHeight="25.0" minWidth="25.0" onAction="#minimize" prefHeight="25.0" prefWidth="25.0" text=" " textAlignment="CENTER">

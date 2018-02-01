@@ -172,23 +172,55 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             Criteria c = session.createCriteria(pojo.Application.class);
-            
-            if (appno!=null) {
+
+            if (appno != null) {
                 c.add(Restrictions.eq("applicationNo", appno));
             }
 
-            c.add(Restrictions.eq("statues", approve));
+            c.add(Restrictions.eq("statues", 1));
             c.add(Restrictions.eq("approveToPaymant", paid));
 
             List<pojo.Application> list = c.list();
 
-            ArrayList<AppTbl> ap_list = new ArrayList<modle.AppTbl>();
+            ArrayList<AppTbl> ap_list_pending = new ArrayList<modle.AppTbl>();
+            ArrayList<AppTbl> ap_list_approve = new ArrayList<modle.AppTbl>();
+            ArrayList<AppTbl> ap_list_reject = new ArrayList<modle.AppTbl>();
+            ArrayList<AppTbl> normal = new ArrayList<modle.AppTbl>();
 
             for (Application application : list) {
-                ap_list.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+
+                Set<Apprualstatues> aps = application.getApprualstatueses();
+
+                for (Apprualstatues ap : aps) {
+                    Integer status = ap.getStatues();
+
+                    if (status == 0) {
+                        ap_list_pending.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                        //pendint
+                    } else if (status == 1) {
+                        ap_list_approve.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                        //approve
+                    } else if (status == 2) {
+                        ap_list_reject.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                        //non approve
+                    }
+                }
+                if (aps.size() < 1) {
+                    normal.add(new AppTbl(application.getIdApplication(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                }
 
             }
-            return ap_list;
+
+            if (approve == 0) {
+                return ap_list_approve;
+            } else if (approve == 1) {
+                return ap_list_approve;
+            } else if (approve == 2) {
+                return ap_list_reject;
+            } else {
+                return normal;
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             return null;

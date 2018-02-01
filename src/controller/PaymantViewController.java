@@ -16,7 +16,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -32,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import javafx.util.Duration;
+import modle.Report;
 import org.controlsfx.control.Notifications;
 import pojo.Application;
 import pojo.Payment;
@@ -103,6 +103,8 @@ public class PaymantViewController implements Initializable {
     private Label lbl_payment_method;
     @FXML
     private JFXButton btn_reset;
+    @FXML
+    private JFXButton btn_printview;
 
     /**
      * Initializes the controller class.
@@ -273,5 +275,21 @@ public class PaymantViewController implements Initializable {
     @FXML
     private void resetAll(MouseEvent event) {
         this.reset();
+    }
+    Report report;
+    @FXML
+    private void showPrintView(MouseEvent event) {
+        Payment selectedItem = tbl_payment.getSelectionModel().getSelectedItem();
+        if(selectedItem!=null){
+            if(report==null)report=new Report();
+            report.paymentReceipt(selectedItem.getIdPayment(), true);
+        }else{
+            Notifications.create()
+                    .title("Warning")
+                    .position(Pos.BOTTOM_LEFT)
+                    .hideAfter(Duration.seconds(6))
+                    .text("Please select payment")
+                    .showWarning();
+        }
     }
 }

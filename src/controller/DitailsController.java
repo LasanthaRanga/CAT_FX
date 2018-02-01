@@ -20,6 +20,7 @@ import pojo.Application;
 import pojo.Assessment;
 import pojo.Contact;
 import pojo.Customer;
+import pojo.SubNature;
 
 /**
  * FXML Controller class
@@ -103,33 +104,40 @@ public class DitailsController implements Initializable {
             for (Contact contact : contacts) {
                 con = contact;
             }
-            
+
             t_pone.setText(con.getPhone());
             t_mobile.setText(con.getMobile());
             t_adl1.setText(con.getAddress1());
             t_adl2.setText(con.getAddress2());
             t_adl3.setText(con.getAddress3());
             t_city.setText(con.getCity());
-            
+
             Assessment ases = app.getAssessment();
             t_assesmant.setText(ases.getAssessmentNo());
             t_street.setText(ases.getStreet().getStreetName());
             t_ward.setText(ases.getStreet().getWard().getWardName());
-            
+
             t_dis.setText(app.getDiscription());
             t_tradeName.setText(app.getTradeName());
             t_tradeType.setText(app.getTradeType().getTypeName());
-            
+
             t_natureType.setText(app.getTradeNature().getNature());
-            t_tradeSubNature.setText(app.getSubNature().getSubNature());
-            t_ro.setText(app.getUser().getFullName());
-            t_allocation.setText(app.getAllocation()+"");
-            t_tax.setText(app.getTaxAmount()+"");
-           
-            
-            
-            
-            
+            t_allocation.setText(app.getAllocation() + "");
+            t_tax.setText(app.getTaxAmount() + "");
+
+            SubNature subNature = app.getSubNature();
+            if (subNature != null) {
+                t_tradeSubNature.setText(app.getSubNature().getSubNature());
+            } else {
+                t_tradeSubNature.setText("none");
+            }
+
+            if (app.getUser() != null) {
+                t_ro.setText(app.getUser().getFullName());
+            } else {
+                t_ro.setText("none");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -140,9 +148,9 @@ public class DitailsController implements Initializable {
 
     @FXML
     private void closeDetails(ActionEvent event) {
-        
+
         btn_close.getScene().getWindow().hide();
-        
+
     }
 
 }

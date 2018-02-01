@@ -154,24 +154,24 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private void searchAppNo(KeyEvent event) {
-        
+
         event.consume();
-        
+
 //        String character = event.getCharacter();
 //       
 //
 //        if (event.getCode() == KeyCode.ENTER) {
 //            searchApplicationNO();
 //        }
-
     }
 
-    public void searchApplicationNO() {
+    public boolean searchApplicationNO() {
+        boolean b = false;
         String text = txt_appno.getText();
         a = new modle.Aplication().getApllicationPojoByApplicationNo(text);
 
         if (a != null) {
-
+            b = true;
             Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
 
             try {
@@ -220,7 +220,7 @@ public class ApplicationController implements Initializable {
             modle.Allert.notificationInfo("No Application no", text);
             clearApplication();
         }
-
+        return b;
     }
 
     int x = 0;
@@ -665,6 +665,10 @@ public class ApplicationController implements Initializable {
                 String btntxt = btn_save_app.getText();
 
                 if (btntxt.equals("Save")) {
+                    
+//                    boolean thiyanawa = searchApplicationNO();
+//                    
+//                    if(!thiyanawa){}
 
                     collectData();
                     //  System.out.println(pCustomer.getFullName());

@@ -125,11 +125,10 @@ public class ApplicationController implements Initializable {
     private JFXButton btn_approve;
 
     pojo.Ward pward = null;
-    
+
     @FXML
     private JFXButton btn_clear;
-    
-    
+
     @FXML
     private JFXTextField txt_appno;
 
@@ -157,6 +156,72 @@ public class ApplicationController implements Initializable {
         btn_approve.setOnAction((event) -> {
             ApproveToPay();
         });
+
+    }
+
+    @FXML
+    private void searchAppNo(KeyEvent event) {
+
+        if (event.getCode() == KeyCode.ENTER) {
+            searchApplicationNO();
+        }
+
+    }
+
+    public void searchApplicationNO() {
+        String text = txt_appno.getText();
+        a = new modle.Aplication().getApllicationPojoByApplicationNo(text);
+
+        if (a != null) {
+
+            Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+
+            try {
+                a = (pojo.Application) session.load(pojo.Application.class, a.getIdApplication());
+
+                modle.Allert.notificationInfo("Find Applicaiton", text);
+
+                txt_allocaton.setText(a.getAllocation() + "");
+                txt_taxt_amount.setText(a.getTaxAmount() + "");
+                txt_trade_name.setText(a.getTradeName());
+                txt_adl1.setText(a.getTradeAddress1());
+                txt_adl2.setText(a.getTradeAddress2());
+                txt_adl3.setText(a.getTradeAddress3());
+                txt_discription.setText(a.getDiscription());
+
+                txt_assesmantNO.setText(a.getAssessment().getAssessmentNo());
+                txt_cus_fname.setText(a.getCustomer().getFullName());
+                txt_cus_nic.setText(a.getCustomer().getNic());
+
+                com_ward.getSelectionModel().select(a.getAssessment().getStreet().getWard().getWardName());
+                com_street.getSelectionModel().select(a.getAssessment().getStreet().getStreetName());
+                com_trade_type.getSelectionModel().select(a.getTradeType().getTypeName());
+                com_nature.getSelectionModel().select(a.getTradeNature().getNature());
+
+                txt_year.setText(a.getYear() + "");
+
+                txt_month.setText(a.getMonth() + "");
+
+                txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
+
+                btn_save_app.setText("UPDATE");
+
+                if (a.getUser() != null) {
+                    txt_ro.setText(a.getUser().getFullName());
+                }
+                SubNature subNature = a.getSubNature();
+                if (subNature != null) {
+                    com_subnature.getSelectionModel().select(subNature.getSubNature());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+                session.close();
+            }
+
+        } else {
+            modle.Allert.notificationInfo("No Application no", text);
+            clearApplication();
+        }
 
     }
 
@@ -393,7 +458,6 @@ public class ApplicationController implements Initializable {
                     com_street.getSelectionModel().select(streetName);
 
                 }
-
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -641,7 +705,7 @@ public class ApplicationController implements Initializable {
 
                     if (save) {
                         modle.StaticBadu.setApp(app);
-                        modle.Allert.notificationGood("Saved Application", app.getIdApplication()+"");
+                        modle.Allert.notificationGood("Saved Application", app.getIdApplication() + "");
                     } else {
                         modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
                     }
@@ -661,7 +725,7 @@ public class ApplicationController implements Initializable {
         app.setCustomer(pCustomer);
         app.setSubNature(pSubNature);
         app.setTradeNature(pNature);
-      //  app.setAp
+        //  app.setAp
 
         Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
         System.out.println(assesmantPojo.getAssessmentNo());

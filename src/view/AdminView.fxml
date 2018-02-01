@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -16,6 +19,24 @@
                     </font>
                 </Label>
                 <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" />
+            <JFXButton fx:id="btn_min" alignment="CENTER" contentDisplay="CENTER" layoutX="1236.0" layoutY="5.0" minHeight="25.0" minWidth="25.0" onAction="#minimize" prefHeight="25.0" prefWidth="25.0" text=" " textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../min.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="btn_exit" alignment="CENTER" contentDisplay="CENTER" layoutX="1274.0" layoutY="5.0" minHeight="25.0" minWidth="25.0" onAction="#exit" prefHeight="25.0" prefWidth="25.0" text=" " textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../exit.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </JFXButton>
             </children>
         </AnchorPane>
         <AnchorPane fx:id="container" layoutY="67.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />

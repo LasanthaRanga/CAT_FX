@@ -62,6 +62,8 @@ public class MainController implements Initializable {
     private Label lbl_logUser;
     @FXML
     private JFXButton btn_min;
+    @FXML
+    private JFXButton btn_exit;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -189,9 +191,17 @@ public class MainController implements Initializable {
     @FXML
     private void minimize(ActionEvent event) {
 
-        Stage  st= (Stage) btn_min.getParent().getScene().getWindow();
+        Stage st = (Stage) btn_min.getParent().getScene().getWindow();
         st.setIconified(true);
 
+    }
+
+   
+
+    @FXML
+    private void exit(ActionEvent event) {
+        Platform.exit();
+        System.exit(0);
     }
 
 }

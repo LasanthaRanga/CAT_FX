@@ -26,23 +26,16 @@ import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import modle.Customer;
-import modle.CustomerHasAssesment;
 import modle.Nature;
-import modle.TaxCal;
 import org.controlsfx.control.textfield.TextFields;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Assessment;
-import pojo.Street;
 import pojo.SubNature;
 import pojo.TradeNature;
-import pojo.TradeType;
-import pojo.User;
 import pojo.Ward;
 
 /**
@@ -161,10 +154,15 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private void searchAppNo(KeyEvent event) {
-
-        if (event.getCode() == KeyCode.ENTER) {
-            searchApplicationNO();
-        }
+        
+        event.consume();
+        
+//        String character = event.getCharacter();
+//       
+//
+//        if (event.getCode() == KeyCode.ENTER) {
+//            searchApplicationNO();
+//        }
 
     }
 

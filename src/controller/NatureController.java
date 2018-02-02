@@ -178,7 +178,7 @@ public class NatureController implements Initializable {
             pojo.TradeType loadTreadType = tradeType.loadTreadType(tt);
 
             if (loadTreadType != null) {
-                if (txt_nature.getText().length()>2) {
+                if (txt_nature.getText().length() > 2) {
                     //  System.out.println("not null");
                     Nature nature = new modle.Nature();
                     nature.setTradeType(loadTreadType);
@@ -188,7 +188,7 @@ public class NatureController implements Initializable {
                     modle.Allert.notificationGood("Save", txt_nature.getText());
                     loadNature();
                 } else {
-                     modle.Allert.notificationInfo("Empty Value", "");
+                    modle.Allert.notificationInfo("Empty Value", "");
                 }
             }
 
@@ -197,7 +197,7 @@ public class NatureController implements Initializable {
 
     public void updateNature() {
         btn_update.setOnAction((event) -> {
-            modle.Allert.normalMg();
+            //   modle.Allert.normalMg();
 
         });
     }
@@ -334,7 +334,8 @@ public class NatureController implements Initializable {
             nature.updateNature();
             loadNature();
             clearNature();
-            messagSuccsess();
+            // messagSuccsess();
+            modle.Allert.notificationGood("UPDATE", txt_nature.getText());
         });
     }
 
@@ -347,18 +348,25 @@ public class NatureController implements Initializable {
             nature.deactiveNature();
             loadNature();
             clearNature();
-            messagSuccsess();
+            //  messagSuccsess();
+            modle.Allert.notificationGood("Deactivate", nature.getNature());
 
         });
     }
 
     public void saveSubNature() {
         btn_add_sub.setOnAction((ActionEvent event) -> {
-            SubNature subNature = new modle.SubNature(0, new modle.Nature().getNatureById(idNature), txt_sno.getText(), txt_subnature.getText(), 1, 1);
-            subNature.saveNature();
-            messagSuccsess();
-            cleareSubNatue();
-            loadSubTbl();
+            if (txt_subnature.getText().length() > 1) {
+
+                SubNature subNature = new modle.SubNature(0, new modle.Nature().getNatureById(idNature), txt_sno.getText(), txt_subnature.getText(), 1, 1);
+                subNature.saveNature();
+                //    messagSuccsess();
+                modle.Allert.notificationGood("Save", txt_subnature.getText());
+                cleareSubNatue();
+                loadSubTbl();
+            } else {
+                modle.Allert.notificationInfo("Empty", "Sub Nature");
+            }
         });
 
     }
@@ -437,7 +445,8 @@ public class NatureController implements Initializable {
 
             SubNature subNature = new modle.SubNature(idSubnatue, null, txt_sno.getText(), txt_subnature.getText(), 1, 1);
             subNature.updateNature();
-            modle.Allert.messagSuccsess(stakpain, "Updated", "sub nature");
+            // modle.Allert.messagSuccsess(stakpain, "Updated", "sub nature");
+            modle.Allert.notificationGood("Updated", "sub nature");
             loadSubTbl();
             txt_sno.setText(null);
             txt_subnature.setText(null);
@@ -452,7 +461,8 @@ public class NatureController implements Initializable {
         btn_delete_sub.setOnAction((event) -> {
             SubNature subNature = new modle.SubNature(idSubnatue, null, null, null, 0, 1);
             subNature.deactiveNature();
-            modle.Allert.messagSuccsess(stakpain, "Deactiveted", "sub nature");
+            modle.Allert.notificationGood("Deactiveted", "sub nature");
+            // modle.Allert.messagSuccsess(stakpain, "Deactiveted", "sub nature");
             loadSubTbl();
             txt_sno.setText(null);
             txt_subnature.setText(null);

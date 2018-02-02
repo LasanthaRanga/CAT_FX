@@ -81,8 +81,7 @@ public class MainController implements Initializable {
 
             drawer.setSidePane(box);
 
-            AnchorPane dash = FXMLLoader.load(getClass().getResource("/view/DashBord.fxml"));
-            container.getChildren().add(dash);
+            container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/DashBord.fxml")));
 
             for (Node node : box.getChildren()) {
                 String accessibleText = node.getAccessibleText();
@@ -96,6 +95,11 @@ public class MainController implements Initializable {
                             container.getChildren().clear();
 
                             switch (accessibleText) {
+
+                                case "dashboard":
+                                    AnchorPane dashh = FXMLLoader.load(getClass().getResource("/view/DashBord.fxml"));
+                                    container.getChildren().add(dashh);
+                                    break;
 
                                 case "btn_test1":
                                     AnchorPane ward = FXMLLoader.load(getClass().getResource("/view/ward.fxml"));
@@ -120,6 +124,11 @@ public class MainController implements Initializable {
                                 case "applist":
                                     AnchorPane applist = FXMLLoader.load(getClass().getResource("/view/ApplicationList.fxml"));
                                     container.getChildren().add(applist);
+                                    break;
+
+                                case "searchapp":
+                                    AnchorPane sarch = FXMLLoader.load(getClass().getResource("/view/SarchApp.fxml"));
+                                    container.getChildren().add(sarch);
                                     break;
 
                                 case "payment":

@@ -81,6 +81,9 @@ public class MainController implements Initializable {
 
             drawer.setSidePane(box);
 
+            AnchorPane dash = FXMLLoader.load(getClass().getResource("/view/DashBord.fxml"));
+            container.getChildren().add(dash);
+
             for (Node node : box.getChildren()) {
                 String accessibleText = node.getAccessibleText();
 
@@ -195,8 +198,6 @@ public class MainController implements Initializable {
         st.setIconified(true);
 
     }
-
-   
 
     @FXML
     private void exit(ActionEvent event) {

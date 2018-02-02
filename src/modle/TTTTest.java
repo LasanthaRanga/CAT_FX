@@ -21,11 +21,11 @@ import org.hibernate.engine.spi.SessionFactoryImplementor;
 
 /**
  *
- * @author suhada
+ * @author RM.LasanthaRanga@gmail.com
  */
-public class Report {
-
-    private Connection getConnection() {
+public class TTTTest {
+    
+       private Connection getConnection() {
         try {
             return ((SessionFactoryImplementor) conn.NewHibernateUtil.getSessionFactory()).getConnectionProvider().getConnection();
         } catch (SQLException ex) {
@@ -34,18 +34,17 @@ public class Report {
         }
     }
 
-    public void paymentReceipt(int paymentId, boolean print) {
+    public void daily(String day) {
         try {
-            String path = "C:\\cat\\report\\paymentReceipt.jrxml";
+            String path = "C:\\cat\\report\\daly.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(path);
-            HashMap param = new HashMap<String, Integer>();
-            param.put("paymentId", paymentId);
+            HashMap param = new HashMap<String, String>();
+            param.put("dinaya", "2018-02-02");
             JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
-            if (print) {
-                JasperViewer.viewReport(jp, false);
-            } else {
-                JasperViewer.viewReport(jp, false);
-            }
+
+            JasperViewer.viewReport(jp, false);
+//            else
+//                JasperViewer.viewReport(jp,false);
         } catch (JRException jRException) {
             jRException.printStackTrace();
             Notifications.create()
@@ -56,29 +55,7 @@ public class Report {
         }
     }
 
-//    public void daily(String day) {
-//        try {
-//            String path = "C:\\cat\\report\\daly.jrxml";
-//            JasperReport jr = JasperCompileManager.compileReport(path);
-//            HashMap param = new HashMap<String, String>();
-//            param.put("dinaya", "2018-02-02");
-//            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
-//
-//            JasperViewer.viewReport(jp, false);
-////            else
-////                JasperViewer.viewReport(jp,false);
-//        } catch (JRException jRException) {
-//            jRException.printStackTrace();
-//            Notifications.create()
-//                    .title("Warning")
-//                    .text("Can not generate report. Something went wrong.\n(" + jRException.getMessage() + ")")
-//                    .hideAfter(Duration.seconds(3))
-//                    .position(Pos.BOTTOM_RIGHT).showWarning();
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Report().daily("");
-//    }
-
+    public static void main(String[] args) {
+        new TTTTest().daily("");
+    }
 }

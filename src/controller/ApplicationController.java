@@ -160,9 +160,9 @@ public class ApplicationController implements Initializable {
 //        String character = event.getCharacter();
 //       
 //
-//        if (event.getCode() == KeyCode.ENTER) {
-//            searchApplicationNO();
-//        }
+        if (event.getCode() == KeyCode.ENTER) {
+            searchApplicationNO();
+        }
     }
 
     public boolean searchApplicationNO() {

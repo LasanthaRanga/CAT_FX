@@ -18,6 +18,11 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="btn_test1" accessibleText="dashboard" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Dash Board" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
         <JFXButton fx:id="btn_test" accessibleText="btn_test1" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Ward &amp; Strret" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -35,6 +40,11 @@
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>
       <JFXButton accessibleText="applist" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="Application List" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="searchapp" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="Search Application" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

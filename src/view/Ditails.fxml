@@ -4,181 +4,192 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.DitailsController">
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DitailsController">
    <children>
       <Label layoutX="451.0" layoutY="14.0" text="Application Details" textFill="#00ab00">
          <font>
             <Font size="36.0" />
          </font>
       </Label>
-      <Label layoutX="23.0" layoutY="59.0" text="NO: ">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_no" layoutX="94.0" layoutY="59.0" prefHeight="27.0" prefWidth="105.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="23.0" layoutY="96.0" text="Date: ">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_date" layoutX="94.0" layoutY="96.0" prefHeight="27.0" prefWidth="105.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="22.0" layoutY="158.0" text="Customer Details :">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_name" layoutX="22.0" layoutY="188.0" prefHeight="27.0" prefWidth="476.0" text="name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="23.0" layoutY="466.0" text="Assesmant Details :">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_ward" layoutX="22.0" layoutY="503.0" prefHeight="27.0" prefWidth="476.0" text="Ward">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="623.0" layoutY="175.0" text="Trade Name">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="630.0" layoutY="352.0" prefHeight="27.0" prefWidth="90.0" text="Allocation :">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_nic" layoutX="22.0" layoutY="215.0" prefHeight="27.0" prefWidth="476.0" text="nic">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_pone" layoutX="22.0" layoutY="256.0" prefHeight="27.0" prefWidth="476.0" text="phone">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_mobile" layoutX="22.0" layoutY="283.0" prefHeight="27.0" prefWidth="476.0" text="mobile">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_adl1" layoutX="22.0" layoutY="325.0" prefHeight="27.0" prefWidth="476.0" text="address l1">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_adl2" layoutX="22.0" layoutY="352.0" prefHeight="27.0" prefWidth="476.0" text="address l2">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_adl3" layoutX="22.0" layoutY="379.0" prefHeight="27.0" prefWidth="476.0" text="address l3">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_city" layoutX="22.0" layoutY="406.0" prefHeight="27.0" prefWidth="476.0" text="City">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_street" layoutX="22.0" layoutY="531.0" prefHeight="27.0" prefWidth="476.0" text="Street">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_assesmant" layoutX="23.0" layoutY="561.0" prefHeight="27.0" prefWidth="476.0" text="Assesmant">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="684.0" layoutY="379.0" prefHeight="27.0" prefWidth="36.0" text="Tax :">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="630.0" layoutY="204.0" prefHeight="27.0" prefWidth="90.0" text="Trade Type">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="615.0" layoutY="231.0" prefHeight="27.0" prefWidth="105.0" text="Trade Nature">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="581.0" layoutY="258.0" prefHeight="27.0" prefWidth="145.0" text="Trade Sub Nature">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label layoutX="694.0" layoutY="287.0" prefHeight="27.0" prefWidth="26.0" text="RO">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <JFXTextArea fx:id="t_dis" editable="false" layoutX="570.0" layoutY="474.0" prefHeight="110.0" prefWidth="609.0" />
-      <Label layoutX="627.0" layoutY="444.0" prefHeight="27.0" prefWidth="98.0" text="Discription :">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_tradeName" layoutX="750.0" layoutY="175.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_allocation" layoutX="750.0" layoutY="349.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_tax" layoutX="749.0" layoutY="376.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_tradeType" layoutX="749.0" layoutY="203.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_natureType" layoutX="749.0" layoutY="230.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_tradeSubNature" layoutX="749.0" layoutY="257.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
-      <Label fx:id="t_ro" layoutX="749.0" layoutY="286.0" prefHeight="27.0" prefWidth="438.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
+      <JFXTextArea fx:id="t_dis" editable="false" layoutX="533.0" layoutY="381.0" prefHeight="110.0" prefWidth="639.0" promptText="Discription" />
       <JFXButton fx:id="btn_close" layoutX="1161.0" layoutY="2.0" onAction="#closeDetails" text="X" textFill="RED">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
+      <Pane layoutX="23.0" layoutY="28.0" prefHeight="87.0" prefWidth="314.0" style="-fx-border-color: #bdbdbd;">
+         <children>
+            <Label fx:id="t_no" layoutX="81.0" layoutY="14.0" prefHeight="27.0" prefWidth="105.0" text="00">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_date" layoutX="81.0" layoutY="44.0" prefHeight="27.0" prefWidth="105.0" text="date">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="19.0" layoutY="14.0" text="NO: " textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label layoutX="9.0" layoutY="44.0" text="Date: " textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="23.0" layoutY="122.0" prefHeight="290.0" prefWidth="503.0" style="-fx-border-color: #bdbdbd;">
+         <children>
+            <Label layoutX="7.0" layoutY="1.0" text="Customer Details" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_name" layoutX="32.0" layoutY="38.0" prefHeight="27.0" prefWidth="451.0" text="name">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_nic" layoutX="32.0" layoutY="69.0" prefHeight="27.0" prefWidth="451.0" text="nic">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_pone" layoutX="32.0" layoutY="107.0" prefHeight="27.0" prefWidth="451.0" text="phone">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_mobile" layoutX="32.0" layoutY="135.0" prefHeight="27.0" prefWidth="451.0" text="mobile">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_adl1" layoutX="32.0" layoutY="175.0" prefHeight="27.0" prefWidth="451.0" text="address l1">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_adl2" layoutX="32.0" layoutY="202.0" prefHeight="27.0" prefWidth="451.0" text="address l2">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_adl3" layoutX="32.0" layoutY="229.0" prefHeight="27.0" prefWidth="451.0" text="address l3">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_city" layoutX="32.0" layoutY="256.0" prefHeight="27.0" prefWidth="451.0" text="City">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="23.0" layoutY="417.0" prefHeight="172.0" prefWidth="503.0" style="-fx-border-color: #bdbdbd;">
+         <children>
+            <Label layoutX="14.0" layoutY="14.0" text="Assesmant Details" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_ward" layoutX="33.0" layoutY="57.0" prefHeight="27.0" prefWidth="419.0" text="Ward">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_street" layoutX="33.0" layoutY="89.0" prefHeight="27.0" prefWidth="419.0" text="Street">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_assesmant" layoutX="33.0" layoutY="119.0" prefHeight="27.0" prefWidth="419.0" text="Assesmant">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+      <Pane layoutX="533.0" layoutY="122.0" prefHeight="226.0" prefWidth="639.0" style="-fx-border-color: #bdbdbd;">
+         <children>
+            <Label alignment="CENTER_RIGHT" layoutX="49.0" layoutY="8.0" text="Trade Name" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="50.0" layoutY="38.0" prefHeight="27.0" prefWidth="103.0" text="Trade Type" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="20.0" layoutY="69.0" prefHeight="27.0" prefWidth="133.0" text="Trade Nature" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutY="95.0" prefHeight="27.0" prefWidth="153.0" text="Trade Sub Nature" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="127.0" layoutY="124.0" prefHeight="27.0" prefWidth="26.0" text="RO" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_tradeName" layoutX="171.0" layoutY="8.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_tradeType" layoutX="171.0" layoutY="38.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_natureType" layoutX="171.0" layoutY="69.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_tradeSubNature" layoutX="171.0" layoutY="95.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_ro" layoutX="171.0" layoutY="124.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="27.0" layoutY="159.0" prefHeight="27.0" prefWidth="125.0" text="Allocation :" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="77.0" layoutY="185.0" prefHeight="27.0" prefWidth="75.0" text="Tax :" textFill="#2e00c5">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_allocation" layoutX="171.0" layoutY="159.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <Label fx:id="t_tax" layoutX="171.0" layoutY="185.0" prefHeight="27.0" prefWidth="438.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

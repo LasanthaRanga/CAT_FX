@@ -160,9 +160,9 @@ public class ApplicationController implements Initializable {
 //        String character = event.getCharacter();
 //       
 //
-//        if (event.getCode() == KeyCode.ENTER) {
-//            searchApplicationNO();
-//        }
+        if (event.getCode() == KeyCode.ENTER) {
+            searchApplicationNO();
+        }
     }
 
     public boolean searchApplicationNO() {
@@ -700,7 +700,7 @@ public class ApplicationController implements Initializable {
                     app.setTaxAmount(txtAmount);
                     app.setDiscription(discription);
                     app.setApproveToPaymant(0);
-                    app.setStatues(0);
+                    app.setStatues(1);
                     app.setSyn(1);
 
                     boolean save = new modle.Aplication().save(app);

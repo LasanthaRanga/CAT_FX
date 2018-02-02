@@ -389,6 +389,7 @@ public class PaymentController implements Initializable {
                     CustomerHasTradeLicense customerHasTradeLicense = new pojo.CustomerHasTradeLicense();
                     CashFlow cashFlow = new pojo.CashFlow();
                     Vort vort = new modle.Vort().getById(application.getTradeType().getVort().getIdVort());
+                    
                     AplicationPayment aplicationPayment = new pojo.AplicationPayment();
                     aplicationPayment.setApplication(application);
                     aplicationPayment.setPayment(payment);

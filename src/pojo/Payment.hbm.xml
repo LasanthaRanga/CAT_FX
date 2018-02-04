@@ -11,9 +11,13 @@
         <many-to-one name="userLog" class="pojo.UserLog" fetch="select">
             <column name="User_Log_idUser_Log" not-null="true" />
         </many-to-one>
+<<<<<<< HEAD
         
         <many-to-one name="vort" class="pojo.Vort" fetch="select" cascade="all">
         <!--<many-to-one name="vort" class="pojo.Vort" fetch="select">-->
+=======
+        <many-to-one name="vort" class="pojo.Vort" fetch="select" cascade="all">
+>>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
             <column name="Vort_idVort" not-null="true" />
         </many-to-one>
         <property name="applicationNo" type="java.lang.Integer">
@@ -55,7 +59,10 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
+<<<<<<< HEAD
         <!--<set name="tradeLicenses" table="trade_license" inverse="true" lazy="true" fetch="select">-->
+=======
+>>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
         <set name="tradeLicenses" table="trade_license" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="Payment_idPayment" not-null="true" />
@@ -63,7 +70,10 @@
             <one-to-many class="pojo.TradeLicense" />
         </set>
         <set name="aplicationPayments" table="aplication_payment" inverse="true" lazy="true" fetch="select" cascade="all">
+<<<<<<< HEAD
         <!--<set name="aplicationPayments" table="aplication_payment" inverse="true" lazy="true" fetch="select">-->
+=======
+>>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
             <key>
                 <column name="Payment_idPayment" not-null="true" />
             </key>

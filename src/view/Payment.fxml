@@ -42,7 +42,7 @@
                   <Font size="16.0" />
                </font></JFXTextField>
             <Region layoutX="10.0" layoutY="60.0" prefHeight="15.0" prefWidth="242.0" />
-            <HBox prefHeight="35.0" prefWidth="242.0">
+            <HBox prefHeight="35.0" prefWidth="242.0" spacing="5.0">
                <children>
                   <JFXTextField fx:id="txt_year" prefHeight="25.0" prefWidth="79.0" promptText="Year">
                      <font>
@@ -52,6 +52,11 @@
                      <font>
                         <Font size="16.0" />
                      </font></JFXTextField>
+                  <JFXTextField fx:id="txt_day" layoutX="89.0" layoutY="10.0" prefHeight="25.0" prefWidth="49.0" promptText="Day">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </JFXTextField>
                </children>
             </HBox>
             <Region prefHeight="15.0" prefWidth="242.0" />

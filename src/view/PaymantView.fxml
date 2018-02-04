@@ -72,6 +72,23 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </HBox>
+            <HBox layoutX="16.0" layoutY="39.0" prefHeight="28.0" prefWidth="361.0" spacing="5.0">
+               <children>
+                  <Label prefHeight="18.0" prefWidth="103.0" text="Application No :" textFill="#5b5b5b">
+                     <font>
+                        <Font size="13.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="lbl_applicationno" alignment="CENTER_RIGHT" prefHeight="21.0" prefWidth="204.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
+            </HBox>
             <HBox layoutX="16.0" layoutY="256.0" prefHeight="28.0" prefWidth="361.0" spacing="5.0">
                <children>
                   <Label prefHeight="18.0" prefWidth="103.0" text="Trade name :" textFill="#5b5b5b">

@@ -105,6 +105,8 @@ public class PaymantViewController implements Initializable {
     private JFXButton btn_reset;
     @FXML
     private JFXButton btn_printview;
+    @FXML
+    private Label lbl_applicationno;
 
     /**
      * Initializes the controller class.
@@ -200,6 +202,7 @@ public class PaymantViewController implements Initializable {
         lbl_application_taxamount.setText("Rs. "+Math.round(application.getTaxAmount() * 100.00) / 100.00 + "");
         if(application.getUser()!=null)
         lbl_roname.setText(application.getUser().getFullName());
+        lbl_applicationno.setText(application.getApplicationNo());
 
         // set payment details
         lbl_receipt_no.setText(payment.getReceiptNo());
@@ -257,6 +260,7 @@ public class PaymantViewController implements Initializable {
         lbl_tradesubnature.setText("");
         lbl_tradetype.setText("");
         lbl_application_year.setText("");
+        lbl_applicationno.setText("");
         lbl_application_date.setText("");
         lbl_allocation.setText("");
         lbl_application_taxamount.setText("");

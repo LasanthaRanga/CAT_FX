@@ -5,6 +5,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -59,6 +60,7 @@ public class PaymentController implements Initializable {
     private JFXTextField txt_year;
     @FXML
     private JFXTextField txt_month;
+    @FXML
     private JFXTextField txt_day;
     @FXML
     private JFXTextField txt_customer_name;
@@ -115,7 +117,7 @@ public class PaymentController implements Initializable {
         // TODO
 
         tbl_clmn_allocation.setCellValueFactory(new PropertyValueFactory<>("allocation"));
-        tbl_clmn_application_no.setCellValueFactory(new PropertyValueFactory<>("idApplication"));
+        tbl_clmn_application_no.setCellValueFactory(new PropertyValueFactory<>("applicationNo"));
         tbl_clmn_application_date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
         this.setTable();
 
@@ -200,6 +202,7 @@ public class PaymentController implements Initializable {
                 txt_tax_amount.setText(application.getTaxAmount() + "");
                 txt_year.setText(application.getYear() + "");
                 txt_month.setText(application.getMonth() + "");
+                txt_day.setText(new SimpleDateFormat("dd").format(application.getApplicationDate()));
                 txt_trade_address1.setText(application.getTradeAddress1());
                 txt_trade_address2.setText(application.getTradeAddress2());
                 txt_trade_address3.setText(application.getTradeAddress3());
@@ -239,6 +242,7 @@ public class PaymentController implements Initializable {
         txt_tax.setText("");
         txt_year.setText("");
         txt_month.setText("");
+        txt_day.setText("");
         txt_trade_address1.setText("");
         txt_trade_address2.setText("");
         txt_trade_address3.setText("");

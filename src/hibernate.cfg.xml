@@ -75,8 +75,8 @@ Contributor(s):
     <mapping resource="pojo/Login.hbm.xml"/>
     <mapping resource="pojo/TradeLicense.hbm.xml"/>
     <mapping resource="pojo/Department.hbm.xml"/>
-    <mapping resource="pojo/Interest.hbm.xml"/>
     <mapping resource="pojo/Program.hbm.xml"/>
+    <mapping resource="pojo/Interest.hbm.xml"/>
     <mapping resource="pojo/CashFlow.hbm.xml"/>
     <mapping resource="pojo/TradeNature.hbm.xml"/>
     <mapping resource="pojo/CusCat.hbm.xml"/>

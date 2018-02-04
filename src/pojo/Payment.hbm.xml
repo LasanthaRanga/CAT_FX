@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Jan 30, 2018 11:20:09 AM by Hibernate Tools 4.3.1 -->
+<!-- Generated Feb 4, 2018 3:51:59 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.Payment" table="payment" catalog="cat" optimistic-lock="version">
         <id name="idPayment" type="java.lang.Integer">
@@ -11,13 +11,8 @@
         <many-to-one name="userLog" class="pojo.UserLog" fetch="select">
             <column name="User_Log_idUser_Log" not-null="true" />
         </many-to-one>
-<<<<<<< HEAD
-        
-        <many-to-one name="vort" class="pojo.Vort" fetch="select" cascade="all">
+         <many-to-one name="vort" class="pojo.Vort" fetch="select" cascade="all">
         <!--<many-to-one name="vort" class="pojo.Vort" fetch="select">-->
-=======
-        <many-to-one name="vort" class="pojo.Vort" fetch="select" cascade="all">
->>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
             <column name="Vort_idVort" not-null="true" />
         </many-to-one>
         <property name="applicationNo" type="java.lang.Integer">
@@ -59,21 +54,15 @@
         <property name="syn" type="java.lang.Integer">
             <column name="syn" />
         </property>
-<<<<<<< HEAD
+         <set name="tradeLicenses" table="trade_license" inverse="true" lazy="true" fetch="select" cascade="all">
         <!--<set name="tradeLicenses" table="trade_license" inverse="true" lazy="true" fetch="select">-->
-=======
->>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
-        <set name="tradeLicenses" table="trade_license" inverse="true" lazy="true" fetch="select" cascade="all">
             <key>
                 <column name="Payment_idPayment" not-null="true" />
             </key>
             <one-to-many class="pojo.TradeLicense" />
         </set>
         <set name="aplicationPayments" table="aplication_payment" inverse="true" lazy="true" fetch="select" cascade="all">
-<<<<<<< HEAD
         <!--<set name="aplicationPayments" table="aplication_payment" inverse="true" lazy="true" fetch="select">-->
-=======
->>>>>>> 4589abb9545244ae2871d5a1776c7c814d4a77f0
             <key>
                 <column name="Payment_idPayment" not-null="true" />
             </key>

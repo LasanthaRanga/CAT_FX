@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.DashBordController">
    <children>
       <PieChart fx:id="chart1" layoutX="334.0" layoutY="14.0" prefHeight="599.0" prefWidth="633.0" title="Example Chart" />
+      <JFXButton fx:id="btn_backup" layoutX="1214.0" layoutY="573.0" onAction="#backup" text="Backup" />
    </children>
 </AnchorPane>

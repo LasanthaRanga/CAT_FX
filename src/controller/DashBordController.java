@@ -5,10 +5,15 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
@@ -22,6 +27,8 @@ public class DashBordController implements Initializable {
 
     @FXML
     private PieChart chart1;
+    @FXML
+    private JFXButton btn_backup;
 
     /**
      * Initializes the controller class.
@@ -37,6 +44,17 @@ public class DashBordController implements Initializable {
         );
         chart1.setData(pieData);
     }
-   
+    
+    
+    
+    
+    
+    
+
+    @FXML
+    private void backup(ActionEvent event) {
+        modle.BackUp.Backup();
+       
+    }
 
 }

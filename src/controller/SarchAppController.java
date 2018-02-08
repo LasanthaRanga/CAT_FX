@@ -7,9 +7,15 @@ package controller;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -93,6 +99,12 @@ public class SarchAppController implements Initializable {
     private JFXRadioButton ra_payNoneApprove;
     @FXML
     private JFXRadioButton ra_paid;
+    @FXML
+    private JFXCheckBox ch_date;
+    @FXML
+    private JFXDatePicker date_form;
+    @FXML
+    private JFXDatePicker date_to;
 
     /**
      * Initializes the controller class.
@@ -119,7 +131,19 @@ public class SarchAppController implements Initializable {
     boolean hasPay;
     Integer payStatus;
 
+    boolean hasDate;
+    Date fromDate;
+    Date toDate;
+
     public SarchAppController() {
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     public void getData() {
@@ -193,6 +217,45 @@ public class SarchAppController implements Initializable {
             }
         } else {
             hasRO = false;
+        }
+
+        if (ch_pay.isSelected()) {
+            //  ra_payNoneApprove.setSelected(true);
+            hasPay = true;
+            if (ra_payNoneApprove.isSelected()) {
+                payStatus = 0;
+            } else if (ra_payApprove.isSelected()) {
+                payStatus = 1;
+            } else if (ra_paid.isSelected()) {
+                payStatus = 2;
+            }
+
+        } else {
+            hasPay = false;
+        }
+
+        if (ch_date.isSelected()) {
+            hasDate = true;
+            LocalDate localDate = date_form.getValue();
+            if (localDate != null) {
+                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                fromDate = Date.from(instant);
+                //  System.out.println(localDate + "\n" + instant + "\n" + date);
+                hasDate = true;
+            } else {
+                modle.Allert.notificationInfo("Cheack Date", "From");
+                hasDate = false;
+            }
+            LocalDate localDateTo = date_to.getValue();
+            if (localDateTo != null) {
+                Instant instant = Instant.from(localDateTo.atStartOfDay(ZoneId.systemDefault()));
+                toDate = Date.from(instant);
+                //  System.out.println(localDateTo + "\n" + instant + "\n" + date);
+                hasDate = true;
+            } else {
+                hasDate = false;
+                modle.Allert.notificationInfo("Cheack Date", "To");
+            }
         }
 
     }
@@ -488,7 +551,7 @@ public class SarchAppController implements Initializable {
     @FXML
     private void loadPay(ActionEvent event) {
         if (ch_pay.isSelected()) {
-          //  ra_payNoneApprove.setSelected(true);
+            //  ra_payNoneApprove.setSelected(true);
             hasPay = true;
             if (ra_payNoneApprove.isSelected()) {
                 payStatus = 0;
@@ -505,11 +568,25 @@ public class SarchAppController implements Initializable {
         }
 
     }
-    
+
     //Date ===============================================
-    
-    
-    
-    
+    @FXML
+    private void loadDate(ActionEvent event) {
+        if (ch_date.isSelected()) {
+            LocalDate localDate = date_form.getValue();
+            if (localDate != null) {
+                Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+                Date date = Date.from(instant);
+                System.out.println(localDate + "\n" + instant + "\n" + date);
+            }
+            LocalDate localDateTo = date_to.getValue();
+            if (localDateTo != null) {
+                Instant instant = Instant.from(localDateTo.atStartOfDay(ZoneId.systemDefault()));
+                Date date = Date.from(instant);
+                System.out.println(localDateTo + "\n" + instant + "\n" + date);
+            }
+        }
+
+    }
 
 }

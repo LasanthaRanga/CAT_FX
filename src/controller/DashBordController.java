@@ -8,6 +8,7 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +18,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.PieChart;
+import modle.Vort;
 
 /**
  * FXML Controller class
@@ -36,25 +38,26 @@ public class DashBordController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList(
-                new PieChart.Data("Ela Kiri", 300),
-                new PieChart.Data("MEE Kiri", 200),
-                new PieChart.Data("Rambutan", 400),
-                new PieChart.Data("ithuru", 100)
-        );
+        getVoteDetails();
+
+    }
+
+    ObservableList<PieChart.Data> pieData = FXCollections.observableArrayList();
+
+    public void getVoteDetails() {
+        pieData.clear();
+        Vort vort = new modle.Vort();
+        List<pojo.Vort> list = vort.getList();
+        for (pojo.Vort vort1 : list) {
+            pieData.add(new PieChart.Data(vort1.getVoteName(), vort1.getVoteCurrentBalance()));
+        }
         chart1.setData(pieData);
     }
-    
-    
-    
-    
-    
-    
 
     @FXML
     private void backup(ActionEvent event) {
         modle.BackUp.Backup();
-       
+
     }
 
 }

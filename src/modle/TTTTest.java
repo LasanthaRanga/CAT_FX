@@ -56,6 +56,12 @@ public class TTTTest {
     }
 
     public static void main(String[] args) {
-        new TTTTest().daily("");
+        System.out.println("String");
     }
+    
+    
+    
+    
+    
+    
 }

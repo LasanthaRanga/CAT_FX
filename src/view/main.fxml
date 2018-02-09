@@ -13,9 +13,9 @@
     <children>
         <AnchorPane prefHeight="69.0" prefWidth="1300.0" style="-fx-background-color: #9E9E9E;">
             <children>
-                <Label layoutX="616.0" layoutY="4.0" text="CAT" textFill="#eeeeee">
+                <Label layoutX="409.0" layoutY="10.0" text="Kurunegala Municipal Council" textFill="WHITE">
                     <font>
-                        <Font name="System Bold" size="36.0" />
+                        <Font name="Calibri" size="40.0" />
                     </font>
                 </Label>
                 <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" />
@@ -45,6 +45,6 @@
             </children>
         </AnchorPane>
         <AnchorPane fx:id="container" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#closeDrawer" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
-        <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="67.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
+        <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="71.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
     </children>
 </AnchorPane>

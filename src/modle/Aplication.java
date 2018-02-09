@@ -305,7 +305,8 @@ public class Aplication implements DAO<pojo.Application> {
         Transaction bt = session.beginTransaction();
         try {
             Criteria c = session.createCriteria(pojo.Application.class);
-            pojo.Application uniqueResult = (pojo.Application) c.add(Restrictions.eq("applicationNo", no)).uniqueResult();
+            List<pojo.Application> list = c.add(Restrictions.eq("applicationNo", no)).list();
+            pojo.Application uniqueResult = list.get(0);
             return uniqueResult;
         } catch (Exception e) {
             e.printStackTrace();

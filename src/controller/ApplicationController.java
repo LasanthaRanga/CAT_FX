@@ -168,6 +168,7 @@ public class ApplicationController implements Initializable {
     public boolean searchApplicationNO() {
         boolean b = false;
         String text = txt_appno.getText();
+        a = null;
         a = new modle.Aplication().getApllicationPojoByApplicationNo(text);
 
         if (a != null) {
@@ -202,7 +203,11 @@ public class ApplicationController implements Initializable {
 
                 txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
 
-                btn_save_app.setText("UPDATE");
+                if (a.getApproveToPaymant() == 2) {
+                    btn_save_app.setDisable(true);
+                } else {
+                    btn_save_app.setText("UPDATE");
+                }
 
                 if (a.getUser() != null) {
                     txt_ro.setText(a.getUser().getFullName());
@@ -213,6 +218,8 @@ public class ApplicationController implements Initializable {
                 }
             } catch (Exception e) {
                 e.printStackTrace();
+                session.close();
+            } finally {
                 session.close();
             }
 
@@ -484,8 +491,10 @@ public class ApplicationController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
                 String selectedItem = com_trade_type.getSelectionModel().getSelectedItem();
-                tt = new modle.TradeType().loadTreadType(selectedItem).getIdTradeType();
-                loadNature();
+                if (selectedItem != null) {
+                    tt = new modle.TradeType().loadTreadType(selectedItem).getIdTradeType();
+                    loadNature();
+                }
             }
         });
 
@@ -665,11 +674,10 @@ public class ApplicationController implements Initializable {
                 String btntxt = btn_save_app.getText();
 
                 if (btntxt.equals("Save")) {
-                    
+
 //                    boolean thiyanawa = searchApplicationNO();
 //                    
 //                    if(!thiyanawa){}
-
                     collectData();
                     //  System.out.println(pCustomer.getFullName());
                     Application app = new pojo.Application();
@@ -709,7 +717,7 @@ public class ApplicationController implements Initializable {
                         modle.StaticBadu.setApp(app);
                         modle.Allert.notificationGood("Saved Application", app.getIdApplication() + "");
                     } else {
-                        modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+                        modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
                     }
                 } else {
                     saveUpdate();
@@ -753,13 +761,13 @@ public class ApplicationController implements Initializable {
         app.setStatues(0);
         app.setSyn(1);
 
-        boolean save = new modle.Aplication().updateApp(app);
+        boolean update = new modle.Aplication().updateApp(app);
 
-        if (save) {
+        if (update) {
             modle.StaticBadu.setApp(app);
             modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());
         } else {
-            modle.Allert.notificationGood("Error", txt_aplicaton_No.getText());
+            modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
         }
 
     }
@@ -828,8 +836,10 @@ public class ApplicationController implements Initializable {
         com_trade_type.getSelectionModel().clearSelection();
         com_nature.getSelectionModel().clearSelection();
         com_subnature.getSelectionModel().clearSelection();
+        btn_save_app.setDisable(false);
         btn_save_app.setText("Save");
         setApplicationid();
+        a = null;
 
     }
 

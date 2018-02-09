@@ -119,17 +119,19 @@ public class Ward implements DAO<pojo.Ward> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         ObservableList List = null;
         Set<pojo.Street> streets = null;
-        try {
-            pojo.Ward upWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getWardname())).uniqueResult();
-            streets = upWard.getStreets();
-            List = FXCollections.observableArrayList();
-            for (Street street : streets) {
-                List.add(street.getStreetName());
+        if (getWardname() != null) {
+            try {
+                pojo.Ward upWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getWardname())).uniqueResult();
+                streets = upWard.getStreets();
+                List = FXCollections.observableArrayList();
+                for (Street street : streets) {
+                    List.add(street.getStreetName());
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                session.close();
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
         }
         return List;
     }

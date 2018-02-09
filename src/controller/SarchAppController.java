@@ -25,6 +25,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleGroup;
 import modle.Nature;
+import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
+import pojo.Application;
 import pojo.TradeNature;
 import pojo.Ward;
 
@@ -122,6 +127,7 @@ public class SarchAppController implements Initializable {
     String ward;
     String street;
     String authoritist;
+
     boolean hassCat;
     Integer outhorityStatus;
 
@@ -135,15 +141,68 @@ public class SarchAppController implements Initializable {
     Date fromDate;
     Date toDate;
 
-    public SarchAppController() {
-        
-        
-        
-        
-        
-        
-        
-        
+    public void searchAppList() {
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+            Criteria cry = session.createCriteria(pojo.Application.class);
+
+            if (appNO != null) {
+                cry.add(Restrictions.eq("applicationNo", appNO));
+            }
+
+            if (ward != null) {
+                pojo.Ward cryWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
+
+            }
+
+            if (street != null) {
+                
+            }
+
+            if (assessNo != null) {
+                List<pojo.Assessment> asslist = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("assessmentNo", assessNo)).list();
+                
+                
+                
+               // cry.add(Restrictions.eq("assessment", Acat));
+            }
+
+            if (tradeType != null) {
+            }
+
+            if (tradeNature != null) {
+            }
+
+            if (authoritist != null) {
+            }
+
+            if (hassCat) {
+            }
+
+            if (hasRO) {
+            }
+
+            if (hasPay) {
+            }
+
+            if (hasDate) {
+            }
+
+            List<pojo.Application> list = cry.list();
+
+            for (Application app : list) {
+                String tradeName = app.getTradeName();
+                System.out.println(tradeName);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+
     }
 
     public void getData() {
@@ -257,7 +316,7 @@ public class SarchAppController implements Initializable {
                 modle.Allert.notificationInfo("Cheack Date", "To");
             }
         }
-
+        searchAppList();
     }
     //==========================================================
 
@@ -266,10 +325,9 @@ public class SarchAppController implements Initializable {
         getData();
         // System.out.println(appNO);
 
-        System.out.println(authoritist);
-        System.out.println(outhorityStatus);
-        System.out.println(hassCat);
-
+        //   System.out.println(authoritist);
+        //   System.out.println(outhorityStatus);
+        //   System.out.println(hassCat);
     }
 
     //=================================================== Trade Type
@@ -577,13 +635,13 @@ public class SarchAppController implements Initializable {
             if (localDate != null) {
                 Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
                 Date date = Date.from(instant);
-                System.out.println(localDate + "\n" + instant + "\n" + date);
+                //   System.out.println(localDate + "\n" + instant + "\n" + date);
             }
             LocalDate localDateTo = date_to.getValue();
             if (localDateTo != null) {
                 Instant instant = Instant.from(localDateTo.atStartOfDay(ZoneId.systemDefault()));
                 Date date = Date.from(instant);
-                System.out.println(localDateTo + "\n" + instant + "\n" + date);
+                //   System.out.println(localDateTo + "\n" + instant + "\n" + date);
             }
         }
 

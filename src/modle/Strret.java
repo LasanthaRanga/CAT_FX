@@ -6,6 +6,7 @@
 package modle;
 
 import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
@@ -238,6 +239,23 @@ public class Strret implements DAO<pojo.Street> {
 
     }
 
+    public pojo.Street getStreetsByStreetNameAndWard(String strret, pojo.Ward ward) {
+        Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+            Criteria cry = ses.createCriteria(pojo.Street.class);
+            cry.add(Restrictions.eq("ward", ward));
+            Street stre = (pojo.Street) cry.add(Restrictions.eq("streetName", strret)).uniqueResult();
+            return stre;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            ses.close();
+        }
+        return null;
+
+    }
+
 //    public void getSWbyAssesmant(pojo.CustomerHasAssessment cha) {
 //
 //        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -259,5 +277,4 @@ public class Strret implements DAO<pojo.Street> {
 //        }
 //
 //    }
-
 }

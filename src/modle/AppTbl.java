@@ -17,8 +17,10 @@ import pojo.UserLog;
  */
 public class AppTbl {
 
-    public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp,String Tname) {
+    public AppTbl(int appno,String appNOString, String Type, String nature, Double alocation, Double txt, int payapp,String Tname) {
+        
         this.appno = appno;
+        this.appNOString = new SimpleStringProperty(appNOString);
         this.Type = new SimpleStringProperty(Type);
         this.nature = new SimpleStringProperty(nature);
         this.alocation = alocation;
@@ -112,6 +114,7 @@ public class AppTbl {
     }
 
     private int appno;
+    private SimpleStringProperty appNOString;
     private SimpleStringProperty Type;
     private SimpleStringProperty nature;
     private Double alocation;
@@ -131,6 +134,20 @@ public class AppTbl {
      */
     public void setTname(SimpleStringProperty Tname) {
         this.Tname = Tname;
+    }
+
+    /**
+     * @return the appNOString
+     */
+    public String getAppNOString() {
+        return appNOString.get();
+    }
+
+    /**
+     * @param appNOString the appNOString to set
+     */
+    public void setAppNOString(SimpleStringProperty appNOString) {
+        this.appNOString = appNOString;
     }
 
 }

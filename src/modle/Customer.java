@@ -470,11 +470,7 @@ public class Customer {
             upcus.setStatues(1);
             upcus.setSyn(1);
 
-            if (upcus.getNic().length() < 9) {
-                upcus.setNic("NIC " + upcus.getIdCustomer());
-            } else {
-                upcus.setNic(upcus.getNic());
-            }
+            upcus.setNic(upcus.getNic());
 
             session.update(upcus);
 
@@ -580,12 +576,14 @@ public class Customer {
 
                     }
                     Set<Assessment> assessments1 = c.getAssessments();
+                    getWASlist().clear();
                     for (Assessment assessment : assessments1) {
+                        System.out.println("Asessmant Set Una");
                         setAsses(assessment);
                         WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
                         getWASlist().add(wsa);
                     }
-                   
+
                 }
                 clist.add(cus);
             }
@@ -671,9 +669,8 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-               
+
                 WASlist.clear();
-              
 
                 //       }
             }

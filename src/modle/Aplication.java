@@ -16,6 +16,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Apprualstatues;
+import pojo.Customer;
 
 /**
  *
@@ -171,15 +172,15 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             Criteria c = session.createCriteria(pojo.Application.class);
-            if(appno!=null){
-            
+            if (appno != null) {
+                c.add(Restrictions.eq("applicationNo", appno));
             }
             c.add(Restrictions.eq("statues", 1));
             c.add(Restrictions.eq("approveToPaymant", paid));
             List<pojo.Application> list = c.list();
             ArrayList<AppTbl> normal = new ArrayList<modle.AppTbl>();
             for (Application application : list) {
-                normal.add(new AppTbl(application.getIdApplication(),application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                normal.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
             }
             return normal;
         } catch (Exception e) {
@@ -189,6 +190,13 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
+    
+    
+    
+    
+    
+    
+    
 
     public List<modle.AppTbl> getAppListToTableForOtho() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -206,7 +214,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 0) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(),application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -239,7 +247,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 1) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(),application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -272,7 +280,7 @@ public class Aplication implements DAO<pojo.Application> {
                         if (idoc == idOc) {// othoriti eka samanada beluwa log wela inna kenara
                             Integer statues = apprualstatues.getStatues();
                             if (statues == 2) {// approv karala nethi application
-                                ap_list.add(new AppTbl(application.getIdApplication(),application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+                                ap_list.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
                             }
                         }
 
@@ -364,4 +372,34 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
+    
+    
+    
+    
+    public List<modle.AppTbl> getAppListByCustomer(int idCustomer) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {            
+            Customer customer = (pojo.Customer)session.load(pojo.Customer.class, idCustomer);            
+            Criteria c = session.createCriteria(pojo.Application.class);           
+            c.add(Restrictions.eq("statues", 1));
+            c.add(Restrictions.eq("customer", customer));
+            List<pojo.Application> list = c.list();
+            ArrayList<AppTbl> normal = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+                normal.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+            }
+            return normal;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    
+    
+    
+    
+    
 }

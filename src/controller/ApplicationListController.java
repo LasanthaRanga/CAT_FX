@@ -360,7 +360,7 @@ public class ApplicationListController implements Initializable {
     }
 
     ObservableList appList = FXCollections.observableArrayList();
-
+    
     public void loadTable(String aapno) {
         c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
         c_idApp.setCellValueFactory(new PropertyValueFactory<>("appNOString"));

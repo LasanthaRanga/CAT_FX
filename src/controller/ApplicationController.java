@@ -14,6 +14,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +24,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import modle.Aplication;
 import modle.Customer;
 import modle.Nature;
 import org.controlsfx.control.textfield.TextFields;
@@ -125,6 +131,30 @@ public class ApplicationController implements Initializable {
     @FXML
     private JFXTextField txt_appno;
 
+    @FXML
+    private TableView<AppTbl> tbl_applicaion;
+
+    @FXML
+    private TableColumn<AppTbl, Integer> c_idApp;
+
+    @FXML
+    private TableColumn<AppTbl, String> c_type;
+
+    @FXML
+    private TableColumn<AppTbl, String> c_nature;
+
+    @FXML
+    private TableColumn<AppTbl, Double> c_alocation;
+
+    @FXML
+    private TableColumn<AppTbl, Double> c_tax;
+
+    @FXML
+    private TableColumn<AppTbl, String> c_approve;
+
+    @FXML
+    private TableColumn<AppTbl, String> c_tname;
+
     /**
      * Initializes the controller class.
      */
@@ -148,6 +178,21 @@ public class ApplicationController implements Initializable {
 
         btn_approve.setOnAction((event) -> {
             ApproveToPay();
+        });
+
+        tbl_applicaion.setOnMouseReleased(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                AppTbl selectedApp = tbl_applicaion.getSelectionModel().getSelectedItem();
+
+                if (selectedApp != null) {
+
+                    String appNOString = selectedApp.getAppNOString();
+                    txt_appno.setText(appNOString);
+                    searchApplicationNO();
+
+                }
+            }
         });
 
     }
@@ -230,6 +275,7 @@ public class ApplicationController implements Initializable {
         } else {
             modle.Allert.notificationInfo("No Application no", text);
             clearApplication();
+            txt_appno.setText(text);
         }
         return b;
     }
@@ -280,7 +326,7 @@ public class ApplicationController implements Initializable {
 
                             Integer idCustomer = upcus.getIdCustomer();
                             pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
-
+                            loadTable();
                             Set<Assessment> assessments = load.getAssessments();
 
                             for (Assessment assessment : assessments) {
@@ -322,7 +368,7 @@ public class ApplicationController implements Initializable {
 
                         Integer idCustomer = upcus.getIdCustomer();
                         pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
-
+                        loadTable();
                         Set<Assessment> assessments = load.getAssessments();
 
                         for (Assessment assessment : assessments) {
@@ -406,7 +452,14 @@ public class ApplicationController implements Initializable {
             if (customer == null) {
                 txt_cus_nic.setText(null);
                 txt_cus_fname.setText(null);
+                upcus = null;
+                appList.clear();
+                tbl_applicaion.setItems(appList);
+                customer = null;
+
             } else {
+                upcus = customer;
+                loadTable();
                 txt_cus_nic.setText(customer.getNic());
                 txt_cus_fname.setText(customer.getFullName());
             }
@@ -445,7 +498,8 @@ public class ApplicationController implements Initializable {
         }
         if (cus != null) {
             txt_cus_fname.setText(cus.getFullName());
-
+            upcus = cus;
+            loadTable();
             Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
             try {
 
@@ -523,6 +577,7 @@ public class ApplicationController implements Initializable {
             natureList.add(tnn.getNature());
         }
         com_nature.setItems(natureList);
+        TextFields.bindAutoCompletion(com_nature.getEditor(), com_nature.getItems());
 
     }
 
@@ -535,6 +590,7 @@ public class ApplicationController implements Initializable {
             System.out.println(natureString);
             loadSubNature();
         });
+
     }
 
     public void loadSubNature() {
@@ -666,7 +722,7 @@ public class ApplicationController implements Initializable {
         pStreet = new modle.Strret().getStreetsByStreetNameAndWard(streetname, pward);
         pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
         pro = new modle.RO().getRobyRoname(ro);
-        
+
         pCustomer = new modle.Customer().searchCustomer(cus_nic, cus_name);
 
     }
@@ -743,7 +799,7 @@ public class ApplicationController implements Initializable {
         //  System.out.println(pCustomer.getFullName());
         Application app = a;
         app.setApproveToPaymant(0);
-       // app.setCustomer(pCustomer);
+        // app.setCustomer(pCustomer);
         app.setSubNature(pSubNature);
         app.setTradeNature(pNature);
         //  app.setAp
@@ -772,7 +828,7 @@ public class ApplicationController implements Initializable {
             app.setTaxAmount(txtAmount);
             app.setDiscription(discription);
             app.setApproveToPaymant(0);
-            app.setStatues(0);
+            app.setStatues(1);
             app.setSyn(1);
 
             boolean update = new modle.Aplication().updateApp(app);
@@ -839,10 +895,17 @@ public class ApplicationController implements Initializable {
         txt_adl2.setText(null);
         txt_adl3.setText(null);
         txt_discription.setText(null);
+
+        SetDate();
+        txt_aplicaton_No.setText(null);
+        txt_appno.setText(null);
+
+        appList.clear();
+        tbl_applicaion.setItems(appList);
+
 //        txt_year.setText(null);
 //        txt_month.setText(null);
 //        txt_day.setText(null);
-
         //  txt_ro.setText(null);
         txt_assesmantNO.setText(null);
         txt_cus_fname.setText(null);
@@ -930,6 +993,173 @@ public class ApplicationController implements Initializable {
                 e.printStackTrace();
             } finally {
                 session.close();
+            }
+        }
+    }
+
+    public class AppTbl {
+
+        public AppTbl(int appno, String appNOString, String Type, String nature, String Tname, Double alocation, Double txt, int payapp) {
+            this.appno = appno;
+            this.appNOString = new SimpleStringProperty(appNOString);
+            this.appno = appno;
+            this.Type = new SimpleStringProperty(Type);
+            this.nature = new SimpleStringProperty(nature);
+            this.alocation = alocation;
+            this.txt = txt;
+            this.payapp = payapp;
+            this.Tname = new SimpleStringProperty(Tname);
+        }
+
+        /**
+         * @return the appno
+         */
+        public int getAppno() {
+            return appno;
+        }
+
+        /**
+         * @param appno the appno to set
+         */
+        public void setAppno(int appno) {
+            this.appno = appno;
+        }
+
+        /**
+         * @return the Type
+         */
+        public String getType() {
+            return Type.get();
+        }
+
+        /**
+         * @param Type the Type to set
+         */
+        public void setType(SimpleStringProperty Type) {
+            this.Type = Type;
+        }
+
+        /**
+         * @return the nature
+         */
+        public String getNature() {
+            return nature.get();
+        }
+
+        /**
+         * @param nature the nature to set
+         */
+        public void setNature(SimpleStringProperty nature) {
+            this.nature = nature;
+        }
+
+        /**
+         * @return the alocation
+         */
+        public Double getAlocation() {
+            return alocation;
+        }
+
+        /**
+         * @param alocation the alocation to set
+         */
+        public void setAlocation(Double alocation) {
+            this.alocation = alocation;
+        }
+
+        /**
+         * @return the txt
+         */
+        public Double getTxt() {
+            return txt;
+        }
+
+        /**
+         * @param txt the txt to set
+         */
+        public void setTxt(Double txt) {
+            this.txt = txt;
+        }
+
+        /**
+         * @return the payapp
+         */
+        public String getPayapp() {
+            if (payapp == 1) {
+                return "Approve";
+            } else if (payapp == 0) {
+                return "Pending";
+            } else {
+                return "Paied";
+            }
+        }
+
+        /**
+         * @param payapp the payapp to set
+         */
+        public void setPayapp(int payapp) {
+            this.payapp = payapp;
+        }
+
+        private int appno;
+        private SimpleStringProperty appNOString;
+        private SimpleStringProperty Type;
+        private SimpleStringProperty nature;
+        private SimpleStringProperty Tname;
+        private Double alocation;
+        private Double txt;
+        private int payapp;
+
+        /**
+         * @return the Tname
+         */
+        public String getTname() {
+            return Tname.get();
+        }
+
+        /**
+         * @return the appNOString
+         */
+        public String getAppNOString() {
+            return appNOString.get();
+        }
+
+        /**
+         * @param appNOString the appNOString to set
+         */
+        public void setAppNOString(SimpleStringProperty appNOString) {
+            this.appNOString = appNOString;
+        }
+
+    }
+
+    ObservableList appList = FXCollections.observableArrayList();
+
+    public void loadTable() {
+
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appNOString"));
+        c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
+        c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
+        c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
+        c_tname.setCellValueFactory(new PropertyValueFactory<>("Tname"));
+
+        Aplication aplication = new modle.Aplication();
+
+        if (upcus != null) {
+            Integer idCustomer = upcus.getIdCustomer();
+
+            List<modle.AppTbl> appTbls = aplication.getAppListByCustomer(idCustomer);
+
+            if (appTbls != null) {
+
+                appList.clear();
+                for (modle.AppTbl a : appTbls) {
+                    appList.add(new AppTbl(a.getAppno(), a.getAppNOString(), a.getType(), a.getNature(), a.getTname(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+                }
+                tbl_applicaion.setItems(appList);
             }
         }
     }

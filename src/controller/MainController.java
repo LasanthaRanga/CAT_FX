@@ -78,6 +78,8 @@ public class MainController implements Initializable {
         try {
 
             VBox box = FXMLLoader.load(getClass().getResource("/view/Box.fxml"));
+            
+            AnchorPane about = FXMLLoader.load(getClass().getResource("/view/About.fxml"));
 
             drawer.setSidePane(box);
 
@@ -139,6 +141,10 @@ public class MainController implements Initializable {
                                 case "paymantView":
                                     AnchorPane paymantView = FXMLLoader.load(getClass().getResource("/view/PaymantView.fxml"));
                                     container.getChildren().add(paymantView);
+                                    break;
+                                    
+                                case "about":                                    
+                                    container.getChildren().add(about);
                                     break;
 
                                 case "btn_exit":

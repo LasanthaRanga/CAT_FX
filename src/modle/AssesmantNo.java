@@ -31,47 +31,39 @@ public class AssesmantNo {
 
                 Set<Street> streets = w.getStreets();
                 for (Street street1 : streets) {
+
                     if (street1.getStreetName().equals(street)) {
+                        System.out.println("Samana Una");
                         Set<Assessment> assessments = street1.getAssessments();
                         for (Assessment assessment : assessments) {
-                            if (assessment.getAssessmentNo().equals(assesmant)) {
-                                Customer c = assessment.getCustomer();
 
-                                cus = new modle.Customer();
+                            if (assessment.getAssessmentNo() != null) {
+                                if (assessment.getAssessmentNo().equals(assesmant)) {
+                                    Customer c = assessment.getCustomer();
 
-                                System.out.println("FULNAME TIBBA");
+                                    cus = new modle.Customer();
 
-                                cus.setFullName(c.getFullName());
-                                cus.setNic(c.getNic());
-                                cus.setIdCustomer(c.getIdCustomer());
+                                    System.out.println("FULNAME TIBBA");
 
-                                Set<Contact> contacts = c.getContacts();
-                                for (Contact contact : contacts) {
-                                    if (contact.getStatues() == 1) {
-                                        cus.setAddress1(contact.getAddress1());
-                                        cus.setAddress2(contact.getAddress2());
-                                        cus.setAddress3(contact.getAddress3());
-                                        cus.setCity(contact.getCity());
-                                        cus.setEmail(contact.getEmail());
-                                        cus.setPhone(contact.getPhone());
-                                        cus.setMobile(contact.getMobile());
-                                        cus.setIdContact(contact.getIdContact());
-                                        System.out.println("");
-                                    }
+                                    cus.setFullName(c.getFullName());
+                                    cus.setNic(c.getNic());
+                                    cus.setIdCustomer(c.getIdCustomer());
 
+                                    Set<Contact> contacts = c.getContacts();
+                                    for (Contact contact : contacts) {
+                                        if (contact.getStatues() == 1) {
+                                            cus.setAddress1(contact.getAddress1());
+                                            cus.setAddress2(contact.getAddress2());
+                                            cus.setAddress3(contact.getAddress3());
+                                            cus.setCity(contact.getCity());
+                                            cus.setEmail(contact.getEmail());
+                                            cus.setPhone(contact.getPhone());
+                                            cus.setMobile(contact.getMobile());
+                                            cus.setIdContact(contact.getIdContact());
+                                            System.out.println("");
+                                        }
+                                    }                                    
                                 }
-                                //         Set<CustomerHasAssessment> chasa = c.getCustomerHasAssessments();
-                                //  WASlist.clear();
-                                //        for (CustomerHasAssessment cha : chasa) {
-                                //         CustomerHasAssessment cushas = (pojo.CustomerHasAssessment) session.createCriteria(pojo.CustomerHasAssessment.class).add(Restrictions.eq("idCustomerHasAssessmentcol", cha.getIdCustomerHasAssessmentcol())).uniqueResult();
-                                //        Assessment assessment = cushas.getAssessment();
-                                //        Street street = assessment.getStreet();
-                                //         pojo.Ward ward = street.getWard();
-
-                                //         WSA wsa = new modle.WSA(ward.getIdWard(), ward.getWardName(), street.getIdStreet(), street.getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());
-                                //             getWASlist().add(wsa);
-                                //          }
-                                //  clist.add(cus);
                             }
                         }
                     }

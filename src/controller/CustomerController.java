@@ -114,6 +114,8 @@ public class CustomerController implements Initializable {
 
     Scene scene;
 
+    Customer cus;
+
     /**
      * Initializes the controller class.
      */
@@ -129,13 +131,22 @@ public class CustomerController implements Initializable {
         saveCustomer();
         searchCustomerByAssesment();
 
-        Customer cus = new modle.Customer();
+        cus = new modle.Customer();
         ArrayList list = cus.getCustomerFnameList();
 
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
 
         btn_update.setDisable(true);
+
+        tbl_asess.setOnMouseReleased((event) -> {
+
+            WSA selectedItem = tbl_asess.getSelectionModel().getSelectedItem();
+            com_ward.getSelectionModel().select(selectedItem.getWard());
+            com_street.getSelectionModel().select(selectedItem.getStreet());
+            txt_assesment.setText(selectedItem.getAssesmant());
+
+        });
 
     }
 
@@ -219,8 +230,9 @@ public class CustomerController implements Initializable {
     }
 
     public void setWardStrretAssesmant() {
+        System.out.println("Asessmant Gannawa");
         ObservableList WASlist = modle.Customer.getWASlist();
-        WASlist.clear();
+
         if (WASlist != null) {
 
             col_ward.setCellValueFactory(new PropertyValueFactory<>("Ward"));
@@ -300,6 +312,8 @@ public class CustomerController implements Initializable {
                     if (saveCustomer) {
                         modle.Allert.notificationGood("Added", customer.getFullName());
                         cleareCus();
+                        ArrayList list = cus.getCustomerFnameList();
+                        TextFields.bindAutoCompletion(txt_fname, list);
                     } else {
                         modle.Allert.notificationError("Error", null);
                     }

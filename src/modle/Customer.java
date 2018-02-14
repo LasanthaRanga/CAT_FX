@@ -465,16 +465,26 @@ public class Customer {
 
             upcus.setFullName(getFullName());
 
-            String nic1 = getNic();
+            String selectedWard1 = getSelectedWard();
+            
+            
+            
+          
+            
 
             upcus.setStatues(1);
             upcus.setSyn(1);
 
-            upcus.setNic(upcus.getNic());
+            upcus.setNic(getNic());
+            
+            
 
             session.update(upcus);
 
             pojo.Contact upcon = (pojo.Contact) session.createCriteria(pojo.Contact.class).add(Restrictions.eq("idContact", getIdContact())).uniqueResult();
+            
+           
+            
             upcon.setAddress1(getAddress1());
             upcon.setAddress2(getAddress2());
             upcon.setAddress3(getAddress3());

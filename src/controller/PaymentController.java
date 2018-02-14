@@ -169,6 +169,7 @@ public class PaymentController implements Initializable {
                     total += Double.parseDouble(txt_nbt_amount.getText());
                     total += Double.parseDouble(txt_stamp_amount.getText());
                     txt_total_amount.setText(total + "");
+                    txt_pay_amount_cash.setText(total + "");
                 } catch (NumberFormatException numberFormatException) {
                     Notifications.create()
                             .title("Warning")
@@ -178,7 +179,7 @@ public class PaymentController implements Initializable {
                 }
             }
         });
-        
+
         txt_payment_date.setValue(LocalDate.now());
     }
 
@@ -264,13 +265,13 @@ public class PaymentController implements Initializable {
 
             double tax_amount = Double.parseDouble(txt_tax_amount.getText());
             total += tax_amount;
-            
+
             // set nbt
             if (chb_nbt_allow.isSelected()) {
                 pojo.Interest intres = interest.getByName("NBT");
                 if (intres != null) {
                     double nbt_amount = (tax_amount * intres.getRate()) / 100;
-                    txt_nbt_amount.setText(Math.round(nbt_amount*100.00)/100.00+ "");
+                    txt_nbt_amount.setText(Math.round(nbt_amount * 100.00) / 100.00 + "");
                     total += nbt_amount;
                 } else {
                     Notifications.create()
@@ -287,7 +288,7 @@ public class PaymentController implements Initializable {
                 pojo.Interest intres = interest.getByName("VAT");
                 if (intres != null) {
                     double vat_amount = (tax_amount * intres.getRate()) / 100;
-                    txt_vat_amount.setText(Math.round(vat_amount*100.00)/100.00+ "");
+                    txt_vat_amount.setText(Math.round(vat_amount * 100.00) / 100.00 + "");
                     total += vat_amount;
                 } else {
                     Notifications.create()
@@ -299,13 +300,13 @@ public class PaymentController implements Initializable {
             } else {
                 txt_vat_amount.setText("00.00");
             }
-            
+
             // set stamp
             total += Double.parseDouble(txt_stamp_amount.getText());
-            
+
             // set fields
-            txt_total_amount.setText(Math.round(total*100.00)/100.00 + "");
-            txt_pay_amount_cash.setText(Math.round(total*100.00)/100.00+ "");
+            txt_total_amount.setText(Math.round(total * 100.00) / 100.00 + "");
+            txt_pay_amount_cash.setText(Math.round(total * 100.00) / 100.00 + "");
 
         } catch (NumberFormatException numberFormatException) {
             Notifications.create()
@@ -393,7 +394,7 @@ public class PaymentController implements Initializable {
                     CustomerHasTradeLicense customerHasTradeLicense = new pojo.CustomerHasTradeLicense();
                     CashFlow cashFlow = new pojo.CashFlow();
                     Vort vort = new modle.Vort().getById(application.getTradeType().getVort().getIdVort());
-                    
+
                     AplicationPayment aplicationPayment = new pojo.AplicationPayment();
                     aplicationPayment.setApplication(application);
                     aplicationPayment.setPayment(payment);
@@ -407,6 +408,11 @@ public class PaymentController implements Initializable {
                         String cash_amount = txt_pay_amount_cash.getText();
                         if (!cash_amount.isEmpty()) {
                             cashFlow.setCash(Double.parseDouble(txt_pay_amount_cash.getText()));
+                            if (cheque) {
+                                cashFlow.setCheque(Double.parseDouble(txt_pay_amount_cheque.getText()));
+                            } else {
+                                cashFlow.setCheque(0.0);
+                            }
                         } else {
                             status = false;
                             Notifications.create()
@@ -424,6 +430,13 @@ public class PaymentController implements Initializable {
                             if (date != null) {
                                 cashFlow.setChequeNo(txt_cheque_no.getText());
                                 cashFlow.setCheque(Double.parseDouble(txt_pay_amount_cheque.getText()));
+
+                                if (cash) {
+                                    cashFlow.setCash(Double.parseDouble(txt_pay_amount_cash.getText()));
+                                } else {
+                                    cashFlow.setCash(0.0);
+                                }
+
                             } else {
                                 status = false;
                                 Notifications.create()
@@ -481,16 +494,16 @@ public class PaymentController implements Initializable {
                             } else {
                                 payment.setSpamp(0.0);
                             }
-                            
+
                             // pay method
-                            if(chb_cash.isSelected()&&chb_check.isSelected()){
+                            if (chb_cash.isSelected() && chb_check.isSelected()) {
                                 payment.setCashCheack("cc");
-                            }else if(chb_cash.isSelected()){
+                            } else if (chb_cash.isSelected()) {
                                 payment.setCashCheack("ca");
-                            }else if(chb_cash.isSelected()){
+                            } else if (chb_check.isSelected()) {
                                 payment.setCashCheack("ch");
                             }
-                            
+
                             payment.setTotaleAmount(Double.parseDouble(txt_total_amount.getText()));
                             payment.setStatus(1);
                             payment.setSyn(1);
@@ -520,11 +533,10 @@ public class PaymentController implements Initializable {
                             cashFlow.setCfDate(new Date());
 
                             aplicationPayment.setSyn(1);
-                            
+
 //                            System.out.println(payment);
 //                            
 //                            return true;
-
                             if (new modle.Payment().saveOrUpdate(payment)) {
                                 Notifications.create()
                                         .title("Success")

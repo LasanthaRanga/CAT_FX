@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -26,6 +27,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
@@ -142,6 +146,7 @@ public class CustomerController implements Initializable {
         tbl_asess.setOnMouseReleased((event) -> {
 
             WSA selectedItem = tbl_asess.getSelectionModel().getSelectedItem();
+            upcus.setIdAssessmant(selectedItem.getIdAssesmant());
             com_ward.getSelectionModel().select(selectedItem.getWard());
             com_street.getSelectionModel().select(selectedItem.getStreet());
             txt_assesment.setText(selectedItem.getAssesmant());
@@ -195,7 +200,7 @@ public class CustomerController implements Initializable {
                     txt_adress3.setText(upcus.getAddress3());
                     txt_nic.setText(upcus.getNic());
                     x = 0;
-                    btn_add.setDisable(true);
+                    // btn_add.setDisable(true);
                     btn_update.setDisable(false);
 
                     setWardStrretAssesmant();
@@ -218,7 +223,7 @@ public class CustomerController implements Initializable {
                     txt_adress3.setText(upcus.getAddress3());
                     txt_nic.setText(upcus.getNic());
                     x = 0;
-                    btn_add.setDisable(true);
+                    //btn_add.setDisable(true);
                     btn_update.setDisable(false);
 
                     setWardStrretAssesmant();
@@ -284,48 +289,99 @@ public class CustomerController implements Initializable {
         btn_add.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                customer = new Customer();
-                String nic1 = txt_nic.getText();
-                customer.setNic(nic1);
 
-                Customer searchCustomerByNic = customer.searchCustomerByNic();
-                if (searchCustomerByNic.getFullName() == null) {
+                if (upcus == null) {
+                    customer = new Customer();
+                    String nic1 = txt_nic.getText();
+                    customer.setNic(nic1);
 
-                    getSelectedWaredStrret();
+                    Customer searchCustomerByNic = customer.searchCustomerByNic();
+                    if (searchCustomerByNic.getFullName() == null) {
 
-                    customer.setSelectedWard(selectedWard);
-                    customer.setSelectedStreet(selectedStreet);
-                    customer.setAssesmentNO(txt_assesment.getText());
+                        getSelectedWaredStrret();
 
-                    customer.setFullName(txt_fname.getText());
-                    customer.setAddress1(txt_adress1.getText());
-                    customer.setAddress2(txt_adress2.getText());
-                    customer.setAddress3(txt_adress3.getText());
-                    customer.setCity(txt_city.getText());
+                        customer.setSelectedWard(selectedWard);
+                        customer.setSelectedStreet(selectedStreet);
+                        customer.setAssesmentNO(txt_assesment.getText());
 
-                    customer.setPhone(txt_phone.getText());
-                    customer.setMobile(txt_mobile.getText());
-                    customer.setEmail(txt_email.getText());
+                        customer.setFullName(txt_fname.getText());
+                        customer.setAddress1(txt_adress1.getText());
+                        customer.setAddress2(txt_adress2.getText());
+                        customer.setAddress3(txt_adress3.getText());
+                        customer.setCity(txt_city.getText());
 
-                    boolean saveCustomer = customer.saveCustomer();
+                        customer.setPhone(txt_phone.getText());
+                        customer.setMobile(txt_mobile.getText());
+                        customer.setEmail(txt_email.getText());
 
-                    if (saveCustomer) {
-                        modle.Allert.notificationGood("Added", customer.getFullName());
-                        cleareCus();
-                        ArrayList list = cus.getCustomerFnameList();
-                        TextFields.bindAutoCompletion(txt_fname, list);
+                        boolean saveCustomer = customer.saveCustomer();
+
+                        if (saveCustomer) {
+                            modle.Allert.notificationGood("Added", customer.getFullName());
+                            cleareCus();
+                            ArrayList list = cus.getCustomerFnameList();
+                            TextFields.bindAutoCompletion(txt_fname, list);
+                        } else {
+                            modle.Allert.notificationError("Error", null);
+                        }
+
                     } else {
-                        modle.Allert.notificationError("Error", null);
-                    }
 
+                    }
                 } else {
+
+                    Alert alert = new Alert(AlertType.CONFIRMATION);
+                    alert.setTitle("Confirmation Dialog");
+                    alert.setHeaderText("Are You Sure To Add New Assessmant For This Customer ?\n  " + txt_fname.getText());
+                    alert.setContentText("Are you ok with this?");
+
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+
+                        customer = upcus;
+                        System.out.println(upcus.getIdCustomer());
+                        String nic1 = txt_nic.getText();
+                        customer.setNic(nic1);
+
+                        getSelectedWaredStrret();
+
+                        customer.setSelectedWard(selectedWard);
+                        customer.setSelectedStreet(selectedStreet);
+                        customer.setAssesmentNO(txt_assesment.getText());
+
+                        customer.setFullName(txt_fname.getText());
+                        customer.setAddress1(txt_adress1.getText());
+                        customer.setAddress2(txt_adress2.getText());
+                        customer.setAddress3(txt_adress3.getText());
+                        customer.setCity(txt_city.getText());
+
+                        customer.setPhone(txt_phone.getText());
+                        customer.setMobile(txt_mobile.getText());
+                        customer.setEmail(txt_email.getText());
+
+                        boolean saveCustomer = customer.saveNewAssessmant();
+
+                        if (saveCustomer) {
+                            modle.Allert.notificationGood("Added", customer.getFullName());
+                            cleareCus();
+                            ArrayList list = cus.getCustomerFnameList();
+                            TextFields.bindAutoCompletion(txt_fname, list);
+                            // setWardStrretAssesmant();
+                        } else {
+                            modle.Allert.notificationError("Error", null);
+                        }
+
+                    } else {
+                    }
 
                 }
             }
+
         });
     }
 
     @FXML
+
     public void keyListener(KeyEvent event) {
         int length = txt_assesment.getLength();
         // System.out.println(length);
@@ -370,8 +426,10 @@ public class CustomerController implements Initializable {
             txt_adress3.setText(cus.getAddress3());
 
             setWardStrretAssesmant();
-            btn_add.setDisable(true);
+            // btn_add.setDisable(true);
             btn_update.setDisable(false);
+        } else {
+            upcus = null;
         }
 
     }
@@ -389,8 +447,9 @@ public class CustomerController implements Initializable {
             txt_adress1.setText(cus.getAddress1());
             txt_adress2.setText(cus.getAddress2());
             txt_adress3.setText(cus.getAddress3());
+        } else {
+            upcus = null;
         }
-
     }
 
     public void searchCustomerByAssesment() {
@@ -405,8 +464,8 @@ public class CustomerController implements Initializable {
 
         //   customer = cha.searchCustometByAssesmentAndWardStrret();
         setCustometData();
-        setWardStrretAssesmant();
-        btn_add.setDisable(true);
+        //  setWardStrretAssesmant();
+        //  btn_add.setDisable(true);
         btn_update.setDisable(false);
 
     }
@@ -435,7 +494,7 @@ public class CustomerController implements Initializable {
             txt_adress3.setText(null);
             ObservableList WASlist = FXCollections.observableArrayList();
             tbl_asess.setItems(WASlist);
-
+            upcus = null;
         }
     }
 
@@ -465,29 +524,42 @@ public class CustomerController implements Initializable {
     public void updateCustomer() {
 
         btn_update.setOnAction((event) -> {
-            if (selectPcus != null) {
-                upcus.setIdCustomer(selectPcus.getIdCustomer());
+
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmation Dialog");
+            alert.setHeaderText("Are You Sure To Update This ? ");
+            alert.setContentText("Are you ok with this?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == ButtonType.OK) {
+
+                if (selectPcus != null) {
+                    upcus.setIdCustomer(selectPcus.getIdCustomer());
+                }
+                upcus.setFullName(txt_fname.getText());
+                upcus.setNic(txt_nic.getText());
+                upcus.setAddress1(txt_adress1.getText());
+                upcus.setAddress2(txt_adress2.getText());
+                upcus.setAddress3(txt_adress3.getText());
+                upcus.setCity(txt_city.getText());
+                upcus.setPhone(txt_phone.getText());
+                upcus.setMobile(txt_mobile.getText());
+                upcus.setEmail(txt_email.getText());
+                upcus.setAssesmentNO(txt_assesment.getText());
+                upcus.setSelectedWard(com_ward.getSelectionModel().getSelectedItem());
+                upcus.setSelectedStreet(com_street.getSelectionModel().getSelectedItem());
+
+                upcus.updateCustomer();
+                modle.Allert.notificationGood("Updated", "success");
+                cleareCus();
+                upcus = null;
+               
+                // setWardStrretAssesmant();
+                // ... user chose OK
+            } else {
+                // ... user chose CANCEL or closed the dialog
             }
-            upcus.setFullName(txt_fname.getText());
-            upcus.setNic(txt_nic.getText());
-            upcus.setAddress1(txt_adress1.getText());
-            upcus.setAddress2(txt_adress2.getText());
-            upcus.setAddress3(txt_adress3.getText());
-            upcus.setCity(txt_city.getText());
-            upcus.setPhone(txt_phone.getText());
-            upcus.setMobile(txt_mobile.getText());
-            upcus.setEmail(txt_email.getText());
-            upcus.setAssesmentNO(txt_assesment.getText());
-            upcus.setSelectedWard(com_ward.getSelectionModel().getSelectedItem());
-            upcus.setSelectedStreet(com_street.getSelectionModel().getSelectedItem());
-
-            upcus.updateCustomer();
-            modle.Allert.notificationGood("Updated", "success");
-            cleareCus();
-            upcus = null;
-
         });
-
     }
 
 //    public void addApplication() {
@@ -551,6 +623,7 @@ public class CustomerController implements Initializable {
         upcus = null;
         btn_update.setDisable(true);
         btn_add.setDisable(false);
+        upcus = null;
 
     }
 

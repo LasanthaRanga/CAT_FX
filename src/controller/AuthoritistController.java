@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -92,8 +93,6 @@ public class AuthoritistController implements Initializable {
     @FXML
     private JFXButton btn_non;
 
-   
-
     @FXML
     private JFXTextArea txt_coment;
 
@@ -143,7 +142,7 @@ public class AuthoritistController implements Initializable {
         approve();
         nonApprove();
         radio();
-      ///  sendToApprove();
+        ///  sendToApprove();
         close();
 
     }
@@ -244,8 +243,6 @@ public class AuthoritistController implements Initializable {
         });
 
     }
-
-   
 
     @FXML
     private void moreDetaisl(ActionEvent event) {
@@ -548,11 +545,13 @@ public class AuthoritistController implements Initializable {
 //
 //        });
 //    }
-
     public void close() {
 
         btn_reload.setOnAction((event) -> {
-            btn_reload.getParent().getScene().getWindow().hide();
+           
+            Platform.exit();
+            System.exit(0);
+
         });
     }
 

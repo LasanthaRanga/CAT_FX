@@ -70,6 +70,7 @@ public class Customer {
     private String selectedStreet;
     private String selectedWard;
     private String assesmentNO;
+    private int idAssessmant;
     private pojo.Assessment asses;
     private Set<Assessment> assessments = new HashSet<Assessment>(0);
 
@@ -456,6 +457,80 @@ public class Customer {
 
     }
 
+    public boolean saveNewAssessmant() {
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+
+            Criteria criteria = session
+                    .createCriteria(pojo.Customer.class);
+
+            pojo.Customer cus = (pojo.Customer) criteria.add(Restrictions.eq("idCustomer", getIdCustomer())).uniqueResult();
+
+            // pojo.Customer cus = new pojo.Customer();
+            cus.setUserLog(modle.AuthUser.getUserLog());
+            String nic1 = getNic();
+
+            cus.setFullName(getFullName());
+            cus.setStatues(1);
+            cus.setSyn(1);
+            //  cus.setRegDate(new Date());
+
+            session.update(cus);
+
+            Contact contact = (pojo.Contact) session.createCriteria(pojo.Contact.class).add(Restrictions.eq("idContact", getIdContact())).uniqueResult();
+            contact.setCustomer(cus);
+            contact.setAddress1(getAddress1());
+            contact.setAddress2(getAddress2());
+            contact.setAddress3(getAddress3());
+            contact.setCity(getCity());
+            contact.setPhone(getPhone());
+            contact.setMobile(getMobile());
+            contact.setEmail(getEmail());
+            contact.setStatues(1);
+            contact.setSyn(1);
+
+            Assessment assessment = new pojo.Assessment();
+
+            pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getSelectedWard())).uniqueResult();
+            System.out.println(ward.getWardName());
+            Criteria cr = session.createCriteria(pojo.Street.class);
+            cr.add(Restrictions.eq("streetName", getSelectedStreet()));
+            pojo.Street street = (pojo.Street) cr.add(Restrictions.eq("ward", ward)).uniqueResult();
+
+            System.out.println(street.getStreetName());
+
+            assessment.setStreet(street);
+            assessment.setAssessmentNo(getAssesmentNO());
+            assessment.setStatus(1);
+            assessment.setSyn(1);
+            assessment.setCustomer(cus);
+
+            session.save(assessment);
+
+            session.update(contact);
+
+            if (getNic().length() < 9) {
+                cus.setNic("NIC " + cus.getIdCustomer());
+            } else {
+                cus.setNic(getNic());
+            }
+
+            session.update(cus);
+            bt.commit();
+            return true;
+
+        } catch (Exception e) {
+            bt.rollback();
+            e.printStackTrace();
+            return false;
+        } finally {
+            session.close();
+        }
+
+    }
+
     public void updateCustomer() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -465,26 +540,15 @@ public class Customer {
 
             upcus.setFullName(getFullName());
 
-            String selectedWard1 = getSelectedWard();
-            
-            
-            
-          
-            
-
             upcus.setStatues(1);
             upcus.setSyn(1);
 
             upcus.setNic(getNic());
-            
-            
 
             session.update(upcus);
 
             pojo.Contact upcon = (pojo.Contact) session.createCriteria(pojo.Contact.class).add(Restrictions.eq("idContact", getIdContact())).uniqueResult();
-            
-           
-            
+
             upcon.setAddress1(getAddress1());
             upcon.setAddress2(getAddress2());
             upcon.setAddress3(getAddress3());
@@ -495,16 +559,29 @@ public class Customer {
             upcon.setStatues(1);
             upcon.setSyn(1);
 
-//            Set<CustomerHasAssessment> chas = upcus.getCustomerHasAssessments();
-//            for (CustomerHasAssessment cha : chas) {
-//                Assessment assessment = cha.getAssessment();
-//                String asno = getAssesmentNO();
-//                if (assessment.getAssessmentNo().equals(asno)) {
-//                    assessment.setAssessmentNo(asno);
-//                    session.update(assessment);
-//                }
-//
-//            }
+            if (getIdAssessmant() > 0) {
+                Assessment assessment = (pojo.Assessment) session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("idAssessment", getIdAssessmant())).uniqueResult();
+
+                if (getSelectedWard() != null) {
+                    if (getSelectedStreet() != null) {
+                        pojo.Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getSelectedWard())).uniqueResult();
+                        System.out.println(ward.getWardName());
+                        Criteria cr = session.createCriteria(pojo.Street.class);
+                        cr.add(Restrictions.eq("streetName", getSelectedStreet()));
+                        pojo.Street street = (pojo.Street) cr.add(Restrictions.eq("ward", ward)).uniqueResult();
+
+                        System.out.println(street.getStreetName());
+
+                        assessment.setStreet(street);
+                        assessment.setAssessmentNo(getAssesmentNO());
+                        assessment.setStatus(1);
+                        assessment.setSyn(1);
+
+                        session.update(assessment);
+                    }
+                }
+            }
+
             session.update(upcon);
 
             bt.commit();
@@ -841,6 +918,20 @@ public class Customer {
      */
     public void setAsses(pojo.Assessment asses) {
         this.asses = asses;
+    }
+
+    /**
+     * @return the idAssessmant
+     */
+    public int getIdAssessmant() {
+        return idAssessmant;
+    }
+
+    /**
+     * @param idAssessmant the idAssessmant to set
+     */
+    public void setIdAssessmant(int idAssessmant) {
+        this.idAssessmant = idAssessmant;
     }
 
 }

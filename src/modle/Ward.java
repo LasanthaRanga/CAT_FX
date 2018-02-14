@@ -11,6 +11,7 @@ import java.util.Set;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pojo.Street;
 
@@ -118,12 +119,15 @@ public class Ward implements DAO<pojo.Ward> {
     public ObservableList getStreetBySelectedWard() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         ObservableList List = null;
-        Set<pojo.Street> streets = null;
+        List<pojo.Street> streets = null;
         if (getWardname() != null) {
             try {
                 pojo.Ward upWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", getWardname())).uniqueResult();
-                streets = upWard.getStreets();
+
+                streets = session.createCriteria(pojo.Street.class).add(Restrictions.eq("ward", upWard)).addOrder(Order.asc("streetName")).list();
+             
                 List = FXCollections.observableArrayList();
+
                 for (Street street : streets) {
                     List.add(street.getStreetName());
                 }

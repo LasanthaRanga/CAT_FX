@@ -739,6 +739,8 @@ public class Customer {
 
             if (c != null) {
 
+                
+                
                 cus.setFullName(c.getFullName());
                 cus.setNic(c.getNic());
                 cus.setIdCustomer(c.getIdCustomer());
@@ -757,7 +759,7 @@ public class Customer {
                     }
                 }
 
-                WASlist.clear();
+                
 
                 //       }
             }

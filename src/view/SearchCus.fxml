@@ -5,12 +5,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="328.0" prefWidth="746.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="controller.SearchCusController">
+<AnchorPane id="AnchorPane" prefHeight="328.0" prefWidth="746.0" style="-fx-background-color: rgb(238,238,238);" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SearchCusController">
    <children>
-      <JFXTextField fx:id="txt_fullname" layoutX="84.0" layoutY="28.0" prefHeight="25.0" prefWidth="578.0" promptText="Full Name" />
-      <TableView fx:id="tbl_cus" layoutX="14.0" layoutY="79.0" prefHeight="200.0" prefWidth="722.0">
+      <JFXTextField fx:id="txt_fullname" layoutX="14.0" layoutY="28.0" prefHeight="25.0" prefWidth="578.0" promptText="Full Name" />
+      <TableView fx:id="tbl_cus" layoutX="14.0" layoutY="79.0" prefHeight="190.0" prefWidth="722.0">
         <columns>
           <TableColumn fx:id="c_id" prefWidth="42.0" text="ID " />
             <TableColumn fx:id="c_nic" prefWidth="131.0" text="Nic" />
@@ -19,7 +19,13 @@
             <TableColumn fx:id="c_email" prefWidth="117.0" text="Email" />
         </columns>
       </TableView>
-      <JFXTextField fx:id="txt_idCus" layoutX="297.0" layoutY="288.0" prefHeight="25.0" prefWidth="76.0" promptText="Select ID" />
-      <JFXButton fx:id="btn_get" layoutX="375.0" layoutY="288.0" prefHeight="25.0" prefWidth="109.0" text="Get" />
+      <JFXTextField fx:id="txt_idCus" layoutX="14.0" layoutY="288.0" prefHeight="25.0" prefWidth="76.0" promptText="Select ID" />
+      <JFXButton fx:id="btn_get" layoutX="627.0" layoutY="288.0" prefHeight="25.0" prefWidth="109.0" style="-fx-background-color: rgb(62,39,35);" text="Get This" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></JFXButton>
+      <JFXTextField fx:id="txt_assess" layoutX="473.0" layoutY="288.0" prefHeight="25.0" prefWidth="94.0" promptText="Assessmant No" />
+      <JFXTextField fx:id="txt_street" layoutX="263.0" layoutY="288.0" prefHeight="25.0" prefWidth="202.0" promptText="Street" />
+      <JFXTextField fx:id="txt_ward" layoutX="137.0" layoutY="288.0" prefHeight="25.0" prefWidth="120.0" promptText="Ward" />
    </children>
 </AnchorPane>

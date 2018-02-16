@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Feb 16, 2018 8:46:01 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.ChequeBank" table="cheque_bank" catalog="cat" optimistic-lock="version">
+        <id name="idChequeBank" type="java.lang.Integer">
+            <column name="idCheque_Bank" />
+            <generator class="identity" />
+        </id>
+        <property name="bankName" type="string">
+            <column name="BankName" length="100" />
+        </property>
+    </class>
+</hibernate-mapping>

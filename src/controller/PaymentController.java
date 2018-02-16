@@ -512,7 +512,9 @@ public class PaymentController implements Initializable {
 
                             // setup trade licen
                             tradeLicense.setTradeLicenseDate(new Date());
-                            tradeLicense.setLicenNo(nextTradeLicenNo + "");
+                            String format = new SimpleDateFormat("dd/MM/yyyy").format(new java.util.Date());
+
+                            tradeLicense.setLicenNo("KURU.MC/TL/" + format + "/" + nextTradeLicenNo);
                             tradeLicense.setStatus(1);
                             tradeLicense.setSyn(1);
 

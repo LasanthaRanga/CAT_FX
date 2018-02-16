@@ -80,7 +80,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <TableView fx:id="tbl_asess" layoutX="828.0" layoutY="239.0" prefHeight="250.0" prefWidth="428.0">
+      <TableView fx:id="tbl_asess" layoutX="828.0" layoutY="239.0" prefHeight="270.0" prefWidth="428.0">
         <columns>
           <TableColumn fx:id="col_ward" prefWidth="96.0" text="Ward" />
           <TableColumn fx:id="col_street" prefWidth="164.0" text="Street" />

@@ -24,8 +24,8 @@
       </Label>
       <TableView fx:id="tbl_approved_list" layoutX="25.0" layoutY="74.0" onMouseClicked="#selectApplication" prefHeight="531.0" prefWidth="438.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="74.0">
         <columns>
-          <TableColumn fx:id="tbl_clmn_application_no" prefWidth="129.99996948242188" text="Application No" />
-            <TableColumn fx:id="tbl_clmn_allocation" prefWidth="127.0" text="Allocation" />
+          <TableColumn fx:id="tbl_clmn_application_no" prefWidth="126.0" text="Application No" />
+            <TableColumn fx:id="tbl_clmn_allocation" prefWidth="131.0" text="Allocation" />
             <TableColumn fx:id="tbl_clmn_application_date" prefWidth="180.0" text="Application Date" />
         </columns>
       </TableView>

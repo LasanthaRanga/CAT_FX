@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -83,21 +84,21 @@
          <font>
             <Font size="14.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="btn_save_app" layoutX="1089.0" layoutY="405.0" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btn_save_app" layoutX="1096.0" layoutY="435.0" prefHeight="79.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></JFXButton>
-      <JFXButton fx:id="btn_send_approve" layoutX="1087.0" layoutY="468.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
+      <JFXButton fx:id="btn_send_approve" layoutX="914.0" layoutY="489.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></JFXButton>
       <Label fx:id="lbl_idCus" layoutX="56.0" layoutY="418.0" prefHeight="17.0" prefWidth="52.0" />
-      <JFXButton fx:id="btn_approve" layoutX="1089.0" layoutY="510.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #455A64;" text="Approve To Payment" textFill="WHITE">
+      <JFXButton fx:id="btn_approve" layoutX="914.0" layoutY="435.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #455A64;" text="Approve To Payment" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_clear" layoutX="1087.0" layoutY="556.0" onAction="#clearApp" prefHeight="35.0" prefWidth="160.0" style="-fx-background-color: #E64A19;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btn_clear" layoutX="913.0" layoutY="544.0" onAction="#clearApp" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #E64A19;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
@@ -108,16 +109,26 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXTextField>
-      <TableView fx:id="tbl_applicaion" layoutX="108.0" layoutY="435.0" prefHeight="158.0" prefWidth="863.0">
+      <TableView fx:id="tbl_applicaion" layoutX="105.0" layoutY="435.0" prefHeight="158.0" prefWidth="792.0">
          <columns>
             <TableColumn fx:id="c_idApp" prefWidth="93.0" text="Application NO" />
             <TableColumn fx:id="c_type" prefWidth="122.99996948242188" text="Type" />
             <TableColumn fx:id="c_nature" prefWidth="125.0" text="Nature" />
             <TableColumn fx:id="c_alocation" prefWidth="103.0" text="Alocaion" />
             <TableColumn fx:id="c_tax" prefWidth="83.0" text="Tax" />
-            <TableColumn fx:id="c_approve" text="Approve To Paymant" />
-            <TableColumn fx:id="c_tname" prefWidth="249.0" text="Trade Name" />
+            <TableColumn fx:id="c_approve" prefWidth="89.0" text="Approve To Paymant" />
+            <TableColumn fx:id="c_tname" prefWidth="166.0" text="Trade Name" />
          </columns>
       </TableView>
+      <JFXToggleButton fx:id="toggle" layoutX="82.0" layoutY="375.0" onAction="#getToggle" prefHeight="47.0" prefWidth="160.0" text="This Year">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </JFXToggleButton>
+      <JFXButton fx:id="btn_update_app" layoutX="1096.0" layoutY="544.0" onAction="#updateApplication" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #fff176;" text="Update" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
    </children>
 </AnchorPane>

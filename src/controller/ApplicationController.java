@@ -4,12 +4,14 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import com.jfoenix.controls.JFXToggleButton;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -23,6 +25,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -154,6 +158,10 @@ public class ApplicationController implements Initializable {
 
     @FXML
     private TableColumn<AppTbl, String> c_tname;
+    @FXML
+    private JFXToggleButton toggle;
+    @FXML
+    private JFXButton btn_update_app;
 
     /**
      * Initializes the controller class.
@@ -186,11 +194,9 @@ public class ApplicationController implements Initializable {
                 AppTbl selectedApp = tbl_applicaion.getSelectionModel().getSelectedItem();
 
                 if (selectedApp != null) {
-
                     String appNOString = selectedApp.getAppNOString();
                     txt_appno.setText(appNOString);
                     searchApplicationNO();
-
                 }
             }
         });
@@ -252,12 +258,10 @@ public class ApplicationController implements Initializable {
                     txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
                 }
                 if (a.getApproveToPaymant() == 2) {
-                    btn_save_app.setDisable(true);
+                    btn_update_app.setDisable(true);
                 } else {
-
-                    btn_save_app.setText("UPDATE");
+                    btn_update_app.setDisable(false);
                 }
-
                 if (a.getUser() != null) {
                     txt_ro.setText(a.getUser().getFullName());
                 }
@@ -366,25 +370,28 @@ public class ApplicationController implements Initializable {
                     Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
                     try {
 
-                        Integer idCustomer = upcus.getIdCustomer();
-                        pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
-                        loadTable();
-                        Set<Assessment> assessments = load.getAssessments();
+                        txt_assesmantNO.setText(modle.StaticBadu.getAssessment().getAssessmentNo());
+                        com_ward.getSelectionModel().select(modle.StaticBadu.getWard().getWardName());
+                        com_street.getSelectionModel().select(modle.StaticBadu.getStreet().getStreetName());
 
-                        for (Assessment assessment : assessments) {
-
-                            String assessmentNo = assessment.getAssessmentNo();
-                            String streetName = assessment.getStreet().getStreetName();
-                            String wardName = assessment.getStreet().getWard().getWardName();
-
-                            System.out.println(assessmentNo + "  Ases");
-
-                            txt_assesmantNO.setText(assessmentNo);
-                            com_ward.getSelectionModel().select(wardName);
-                            com_street.getSelectionModel().select(streetName);
-
-                        }
-
+//                        Integer idCustomer = upcus.getIdCustomer();
+//                        pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+//                        loadTable();
+//                        Set<Assessment> assessments = load.getAssessments();
+//
+//                        for (Assessment assessment : assessments) {
+//
+//                            String assessmentNo = assessment.getAssessmentNo();
+//                            String streetName = assessment.getStreet().getStreetName();
+//                            String wardName = assessment.getStreet().getWard().getWardName();
+//
+//                            System.out.println(assessmentNo + "  Ases");
+//
+//                            txt_assesmantNO.setText(assessmentNo);
+//                            com_ward.getSelectionModel().select(wardName);
+//                            com_street.getSelectionModel().select(streetName);
+//
+//                        }
 //                        Assessment assessment = (pojo.Assessment) openSession.createCriteria(pojo.Assessment.class).add(Restrictions.eq("idAssessment", upcus.getAsses().getIdAssessment())).uniqueResult();
 //
 //                        String assessmentNo = assessment.getAssessmentNo();
@@ -483,6 +490,8 @@ public class ApplicationController implements Initializable {
         }
     }
 
+    int y = 0;
+
     public void searchCustomerByNIC() {
 
         String text = txt_cus_nic.getText();
@@ -508,18 +517,39 @@ public class ApplicationController implements Initializable {
 
                 Set<Assessment> assessments = load.getAssessments();
 
-                for (Assessment assessment : assessments) {
+                if (assessments.size() == 1) {
+                    for (Assessment assessment : assessments) {
 
-                    String assessmentNo = assessment.getAssessmentNo();
-                    String streetName = assessment.getStreet().getStreetName();
-                    String wardName = assessment.getStreet().getWard().getWardName();
+                        String assessmentNo = assessment.getAssessmentNo();
+                        String streetName = assessment.getStreet().getStreetName();
+                        String wardName = assessment.getStreet().getWard().getWardName();
 
-                    System.out.println(assessmentNo + "  Ases");
+                        System.out.println(assessmentNo + "  Ases");
 
-                    txt_assesmantNO.setText(assessmentNo);
-                    com_ward.getSelectionModel().select(wardName);
-                    com_street.getSelectionModel().select(streetName);
+                        txt_assesmantNO.setText(assessmentNo);
+                        com_ward.getSelectionModel().select(wardName);
+                        com_street.getSelectionModel().select(streetName);
 
+                    }
+
+                } else {
+                    if (y == 0) {
+                        modle.StaticBadu.setpCustomer(load);
+                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/AssessmantCheack.fxml"));
+                        txt_cus_fname.getParent().getScene();
+                        Scene scene = new Scene(paymant);
+                        Stage stage = new Stage();
+
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.show();
+                        y = 1;
+                    } else if (y == 1) {
+                        txt_assesmantNO.setText(modle.StaticBadu.getAssessment().getAssessmentNo());
+                        com_ward.getSelectionModel().select(modle.StaticBadu.getWard().getWardName());
+                        com_street.getSelectionModel().select(modle.StaticBadu.getStreet().getStreetName());
+                        y = 0;
+                    }
                 }
 
             } catch (Exception e) {
@@ -701,96 +731,116 @@ public class ApplicationController implements Initializable {
             e.printStackTrace();
         }
 
-        ro = txt_ro.getText();
-        assesno = txt_assesmantNO.getText();
-        cus_name = txt_cus_fname.getText();
-        cus_nic = txt_cus_nic.getText();
-        appno = txt_appno.getText();
+        try {
 
-        wardname = com_ward.getSelectionModel().getSelectedItem();
-        streetname = com_street.getSelectionModel().getSelectedItem();
-        tradeType = com_trade_type.getSelectionModel().getSelectedItem();
-        nature = com_nature.getSelectionModel().getSelectedItem();
-        subnature = com_subnature.getSelectionModel().getSelectedItem();
+            ro = txt_ro.getText();
+            assesno = txt_assesmantNO.getText();
+            cus_name = txt_cus_fname.getText();
+            cus_nic = txt_cus_nic.getText();
+            appno = txt_appno.getText();
 
-        modle.Ward ward = new modle.Ward();
-        ward.setWardname(wardname);
-        pward = ward.getWardByWardName(wardname);
-        pTradeType = new modle.TradeType().getTreadTypeByTypeName(tradeType);
-        Nature natu = new modle.Nature();
-        pNature = natu.getNatureByNature(nature);
-        pStreet = new modle.Strret().getStreetsByStreetNameAndWard(streetname, pward);
-        pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
-        pro = new modle.RO().getRobyRoname(ro);
+            wardname = com_ward.getSelectionModel().getSelectedItem();
+            streetname = com_street.getSelectionModel().getSelectedItem();
+            tradeType = com_trade_type.getSelectionModel().getSelectedItem();
+            nature = com_nature.getSelectionModel().getSelectedItem();
+            subnature = com_subnature.getSelectionModel().getSelectedItem();
 
-        pCustomer = new modle.Customer().searchCustomer(cus_nic, cus_name);
+            modle.Ward ward = new modle.Ward();
+            ward.setWardname(wardname);
+            pward = ward.getWardByWardName(wardname);
+            pTradeType = new modle.TradeType().getTreadTypeByTypeName(tradeType);
+            Nature natu = new modle.Nature();
+            pNature = natu.getNatureByNature(nature);
+            pStreet = new modle.Strret().getStreetsByStreetNameAndWard(streetname, pward);
+            pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
+            pro = new modle.RO().getRobyRoname(ro);
 
+            // pCustomer = new modle.Customer().searchCustomer(cus_nic, cus_name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void saveApplication() {
         btn_save_app.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+                collectData();
+                Aplication mAplication = new modle.Aplication();
 
-                String btntxt = btn_save_app.getText();
+                boolean hasApplication = mAplication.hasApplication(appno);
 
-                if (btntxt.equals("Save")) {
+                if (hasApplication) {
 
-//                    boolean thiyanawa = searchApplicationNO();
-//                    
-//                    if(!thiyanawa){}
-                    collectData();
-                    //  System.out.println(pCustomer.getFullName());
-                    Application app = new pojo.Application();
-                    app.setApproveToPaymant(0);
-                    app.setCustomer(pCustomer);
-                    app.setSubNature(pSubNature);
-                    app.setTradeNature(pNature);
-                    app.setApplicationNo(appno);
+                    modle.Allert.notificationInfo("Application Number is already exist\n Please Cheack It ", appno);
 
-                    Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
-
-                    if (assesmantPojo != null) {
-
-                        System.out.println(assesmantPojo.getAssessmentNo());
-                        app.setAssessment(assesmantPojo);
-                        app.setTradeType(pTradeType);
-                        app.setUser(pro);
-                        //log wela inna user
-                        app.setUserLog(modle.Log_User.getLogUser());
-
-                        app.setApplicationDate(apdat);
-                        app.setYear(Integer.parseInt(year));
-                        app.setMonth(Integer.parseInt(month));
-                        app.setAllocation(alocation);
-
-                        app.setTradeName(tradeNaem);
-                        app.setTradeAddress1(adl1);
-                        app.setTradeAddress2(adl2);
-                        app.setTradeAddress3(adl3);
-
-                        app.setTaxAmount(txtAmount);
-                        app.setDiscription(discription);
-                        app.setApproveToPaymant(0);
-                        app.setStatues(1);
-                        app.setSyn(1);
-
-                        boolean save = new modle.Aplication().save(app);
-
-                        if (save) {
-                            modle.StaticBadu.setApp(app);
-                            modle.Allert.notificationGood("Saved Application", app.getIdApplication() + "");
-                        } else {
-                            modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
-                        }
-                    } else {
-                        modle.Allert.notificationInfo("Cheack Customer", txt_assesmantNO.getText());
-                    }
                 } else {
-                    saveUpdate();
+
+                    String year = txt_year.getText();
+                    String format = new SimpleDateFormat("yyyy").format(new java.util.Date());
+
+                    if (year.equals(format)) {
+
+                        Application app = new pojo.Application();
+                        app.setApproveToPaymant(0);
+                        app.setCustomer(pCustomer);
+                        app.setSubNature(pSubNature);
+                        app.setTradeNature(pNature);
+                        app.setApplicationNo(appno);
+                        Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+
+                        if (assesmantPojo != null) {
+                            System.out.println(assesmantPojo.getAssessmentNo());
+                            app.setAssessment(assesmantPojo);
+                            app.setTradeType(pTradeType);
+                            app.setUser(pro);
+                            //log wela inna user
+                            app.setUserLog(modle.Log_User.getLogUser());
+
+                            app.setApplicationDate(apdat);
+                            app.setYear(Integer.parseInt(year));
+                            app.setMonth(Integer.parseInt(month));
+                            app.setAllocation(alocation);
+
+                            app.setTradeName(tradeNaem);
+                            app.setTradeAddress1(adl1);
+                            app.setTradeAddress2(adl2);
+                            app.setTradeAddress3(adl3);
+
+                            app.setTaxAmount(txtAmount);
+                            app.setDiscription(discription);
+                            app.setApproveToPaymant(0);
+                            app.setStatues(1);
+                            app.setSyn(1);
+
+                            boolean save = mAplication.save(app);
+
+                            if (save) {
+                                modle.StaticBadu.setApp(app);
+                                modle.Allert.notificationGood("Saved Application", app.getIdApplication() + "");
+                                Runtime.getRuntime().gc();
+                            } else {
+                                modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
+                            }
+                        } else {
+                            modle.Allert.notificationInfo("Cheack Customer", txt_assesmantNO.getText());
+                        }
+
+                    } else {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Confirmation Dialog");
+                        alert.setHeaderText("Pleace Cheack Year.... ");
+                        alert.setContentText(txt_year.getText());
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+
+                        }
+                    }
                 }
+
             }
-        });
+        }
+        );
     }
 
     public void saveUpdate() {
@@ -836,6 +886,7 @@ public class ApplicationController implements Initializable {
             if (update) {
                 modle.StaticBadu.setApp(app);
                 modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());
+                Runtime.getRuntime().gc();
             } else {
                 modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
             }
@@ -920,7 +971,7 @@ public class ApplicationController implements Initializable {
         btn_save_app.setText("Save");
         setApplicationid();
         a = null;
-
+        Runtime.getRuntime().gc();
     }
 
     @FXML
@@ -975,8 +1026,6 @@ public class ApplicationController implements Initializable {
 
                         txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
 
-                        btn_save_app.setText("UPDATE");
-
                         if (a.getUser() != null) {
                             txt_ro.setText(a.getUser().getFullName());
                         }
@@ -995,6 +1044,16 @@ public class ApplicationController implements Initializable {
                 session.close();
             }
         }
+    }
+
+    @FXML
+    private void getToggle(ActionEvent event) {
+        loadTable();
+    }
+
+    @FXML
+    private void updateApplication(ActionEvent event) {
+        saveUpdate();
     }
 
     public class AppTbl {
@@ -1151,7 +1210,13 @@ public class ApplicationController implements Initializable {
         if (upcus != null) {
             Integer idCustomer = upcus.getIdCustomer();
 
-            List<modle.AppTbl> appTbls = aplication.getAppListByCustomer(idCustomer);
+            List<modle.AppTbl> appTbls = null;
+
+            if (toggle.isSelected()) {
+                appTbls = aplication.getAppListByCustomerThisYear(idCustomer);
+            } else {
+                appTbls = aplication.getAppListByCustomer(idCustomer);
+            }
 
             if (appTbls != null) {
 

@@ -5,9 +5,11 @@
  */
 package modle;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import org.apache.poi.hssf.record.chart.DatRecord;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
@@ -190,13 +192,6 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
-    
-    
-    
-    
-    
-    
-    
 
     public List<modle.AppTbl> getAppListToTableForOtho() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
@@ -372,15 +367,11 @@ public class Aplication implements DAO<pojo.Application> {
         }
     }
 
-    
-    
-    
-    
     public List<modle.AppTbl> getAppListByCustomer(int idCustomer) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {            
-            Customer customer = (pojo.Customer)session.load(pojo.Customer.class, idCustomer);            
-            Criteria c = session.createCriteria(pojo.Application.class);           
+        try {
+            Customer customer = (pojo.Customer) session.load(pojo.Customer.class, idCustomer);
+            Criteria c = session.createCriteria(pojo.Application.class);
             c.add(Restrictions.eq("statues", 1));
             c.add(Restrictions.eq("customer", customer));
             List<pojo.Application> list = c.list();
@@ -396,10 +387,47 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
-    
-    
-    
-    
-    
-    
+
+    public List<modle.AppTbl> getAppListByCustomerThisYear(int idCustomer) {
+        String format = new SimpleDateFormat("yyyy").format(new java.util.Date());
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Customer customer = (pojo.Customer) session.load(pojo.Customer.class, idCustomer);
+            Criteria c = session.createCriteria(pojo.Application.class);
+            c.add(Restrictions.eq("statues", 1));
+            c.add(Restrictions.eq("year", Integer.parseInt(format)));
+            c.add(Restrictions.eq("customer", customer));
+            List<pojo.Application> list = c.list();
+            ArrayList<AppTbl> normal = new ArrayList<modle.AppTbl>();
+            for (Application application : list) {
+                normal.add(new AppTbl(application.getIdApplication(), application.getApplicationNo(), application.getTradeType().getTypeName(), application.getTradeNature().getNature(), application.getAllocation(), application.getTaxAmount(), application.getApproveToPaymant(), application.getTradeName()));
+            }
+            return normal;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public boolean hasApplication(String appNO) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria c = session.createCriteria(pojo.Application.class);
+            c.add(Restrictions.eq("applicationNo", appNO));
+            List<pojo.Application> list = c.list();
+            if (list.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return true;
+        } finally {
+            session.close();
+        }
+    }
 }

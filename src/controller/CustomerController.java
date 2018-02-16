@@ -318,9 +318,8 @@ public class CustomerController implements Initializable {
 
                         if (saveCustomer) {
                             modle.Allert.notificationGood("Added", customer.getFullName());
-                            cleareCus();
-                            ArrayList list = cus.getCustomerFnameList();
-                            TextFields.bindAutoCompletion(txt_fname, list);
+                            clearAll(event);   
+                            
                         } else {
                             modle.Allert.notificationError("Error", null);
                         }
@@ -363,9 +362,8 @@ public class CustomerController implements Initializable {
 
                         if (saveCustomer) {
                             modle.Allert.notificationGood("Added", customer.getFullName());
-                            cleareCus();
-                            ArrayList list = cus.getCustomerFnameList();
-                            TextFields.bindAutoCompletion(txt_fname, list);
+                            clearAll(event);
+
                             // setWardStrretAssesmant();
                         } else {
                             modle.Allert.notificationError("Error", null);
@@ -430,6 +428,7 @@ public class CustomerController implements Initializable {
             btn_update.setDisable(false);
         } else {
             upcus = null;
+            Runtime.getRuntime().gc();
         }
 
     }
@@ -449,6 +448,7 @@ public class CustomerController implements Initializable {
             txt_adress3.setText(cus.getAddress3());
         } else {
             upcus = null;
+            Runtime.getRuntime().gc();
         }
     }
 
@@ -551,9 +551,9 @@ public class CustomerController implements Initializable {
 
                 upcus.updateCustomer();
                 modle.Allert.notificationGood("Updated", "success");
-                cleareCus();
+                clearAll(event);
                 upcus = null;
-               
+                Runtime.getRuntime().gc();
                 // setWardStrretAssesmant();
                 // ... user chose OK
             } else {
@@ -605,6 +605,9 @@ public class CustomerController implements Initializable {
     @FXML
     private void clearAll(ActionEvent event) {
 
+        ArrayList list = cus.getCustomerFnameList();
+        TextFields.bindAutoCompletion(txt_fname, list);
+
         txt_nic.setText(null);
         txt_fname.setText(null);
         txt_phone.setText(null);
@@ -624,6 +627,7 @@ public class CustomerController implements Initializable {
         btn_update.setDisable(true);
         btn_add.setDisable(false);
         upcus = null;
+        Runtime.getRuntime().gc();
 
     }
 

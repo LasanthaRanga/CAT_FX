@@ -48,7 +48,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="655.0" layoutY="60.0" prefHeight="428.0" prefWidth="327.0" spacing="4.0" style="-fx-border-color: #bdbdbd;" AnchorPane.bottomAnchor="68.0" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="655.0" layoutY="60.0" prefHeight="476.0" prefWidth="327.0" spacing="4.0" style="-fx-border-color: #bdbdbd;" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label text="Application Details">
                <font>
@@ -252,7 +252,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="995.0" layoutY="60.0" prefHeight="428.0" prefWidth="282.0" spacing="4.0" style="-fx-border-color: #bdbdbd;" AnchorPane.bottomAnchor="68.0" AnchorPane.topAnchor="60.0">
+      <VBox layoutX="995.0" layoutY="60.0" prefHeight="476.0" prefWidth="282.0" spacing="4.0" style="-fx-border-color: #bdbdbd;" AnchorPane.bottomAnchor="20.0" AnchorPane.topAnchor="60.0">
          <children>
             <Label text="Payment Details">
                <font>
@@ -434,14 +434,19 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <VBox layoutX="408.0" layoutY="364.0" prefHeight="177.0" prefWidth="133.0" spacing="5.0" AnchorPane.bottomAnchor="15.0">
+      <VBox layoutX="428.0" layoutY="439.0" prefHeight="106.0" prefWidth="191.0" spacing="5.0" AnchorPane.bottomAnchor="15.0">
          <children>
-            <JFXButton fx:id="btn_reset" onMouseClicked="#resetAll" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #f44336;" text="Reset" textFill="WHITE">
+            <JFXButton fx:id="btn_reset" onMouseClicked="#resetAll" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: rgb(25,118,210);" text="Reset" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </JFXButton>
-            <JFXButton fx:id="btn_printview" layoutX="15.0" layoutY="15.0" onMouseClicked="#showPrintView" prefHeight="31.0" prefWidth="123.0" style="-fx-background-color: #4caf50;" text="Print View" textFill="WHITE">
+            <JFXButton fx:id="btn_printview" layoutX="15.0" layoutY="15.0" onMouseClicked="#showPrintView" prefHeight="31.0" prefWidth="186.0" style="-fx-background-color: #4caf50;" text="Print View" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="btn_cancle" onAction="#cancelPaymant" prefHeight="13.0" prefWidth="181.0" style="-fx-background-color: #f44336;" text="Cancel Paymant" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

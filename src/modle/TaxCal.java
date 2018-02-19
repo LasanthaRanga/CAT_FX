@@ -8,6 +8,7 @@ package modle;
 import java.util.List;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pojo.TaxRate;
 
@@ -21,7 +22,7 @@ public class TaxCal {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
 
-            List<pojo.TaxRate> list = session.createCriteria(pojo.TaxRate.class).add(Restrictions.eq("status", 1)).list();
+            List<pojo.TaxRate> list = session.createCriteria(pojo.TaxRate.class).add(Restrictions.eq("status", 1)).addOrder(Order.asc("idTaxRate")).list();
             return list;
 
         } catch (Exception e) {
@@ -38,19 +39,16 @@ public class TaxCal {
         double rat = 0;
         if (loadTaxRate != null) {
             for (TaxRate taxRate : loadTaxRate) {
-                if (taxRate.getTaxType().equals(TradeType)){
+                if (taxRate.getTaxType().equals(TradeType)) {
                     Double min = taxRate.getMin();
                     Double max = taxRate.getMax();
-                    if (alocation > min && alocation < max) {
+                    if (alocation > min && alocation <= max) {
                         rat = taxRate.getRate();
                         break;
-                    } else {
-                        rat = taxRate.getRate();
                     }
                 }
             }
         }
         return rat;
     }
-
 }

@@ -2,6 +2,7 @@ package controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -31,6 +32,7 @@ import org.controlsfx.control.Notifications;
 import pojo.AplicationPayment;
 import pojo.Application;
 import pojo.CashFlow;
+import pojo.ChequeBank;
 import pojo.Customer;
 import pojo.CustomerHasTradeLicense;
 import pojo.Payment;
@@ -108,6 +110,8 @@ public class PaymentController implements Initializable {
     private JFXCheckBox chb_nbt_allow;
     @FXML
     private JFXDatePicker txt_payment_date;
+    @FXML
+    private JFXComboBox<String> com_bank;
 
     /**
      * Initializes the controller class.
@@ -181,6 +185,7 @@ public class PaymentController implements Initializable {
         });
 
         txt_payment_date.setValue(LocalDate.now());
+
     }
 
     private void setTable() {
@@ -352,10 +357,13 @@ public class PaymentController implements Initializable {
             txt_cheque_no.setDisable(false);
             txt_cheque_date.setDisable(false);
             txt_pay_amount_cheque.setDisable(false);
+            ObservableList bankList = new modle.ChqueBank().getBankList();
+            com_bank.setItems(bankList);
         } else {
             txt_pay_amount_cheque.setDisable(true);
             txt_cheque_no.setDisable(true);
             txt_cheque_date.setDisable(true);
+            com_bank.setItems(null);
         }
     }
 
@@ -430,13 +438,23 @@ public class PaymentController implements Initializable {
                             if (date != null) {
                                 cashFlow.setChequeNo(txt_cheque_no.getText());
                                 cashFlow.setCheque(Double.parseDouble(txt_pay_amount_cheque.getText()));
-
+                                String selectedItem = com_bank.getSelectionModel().getSelectedItem();
+                                if (selectedItem == null) {
+                                    Notifications.create()
+                                            .title("Warning")
+                                            .text("Please select Bank")
+                                            .hideAfter(Duration.seconds(3))
+                                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                                } else {
+                                    ChequeBank selecteChequeBank = new modle.ChqueBank().getSelecteChequeBank(selectedItem);
+                                    cashFlow.setChequeBank(selecteChequeBank);
+                                }
                                 if (cash) {
                                     cashFlow.setCash(Double.parseDouble(txt_pay_amount_cash.getText()));
+
                                 } else {
                                     cashFlow.setCash(0.0);
                                 }
-
                             } else {
                                 status = false;
                                 Notifications.create()
@@ -533,6 +551,9 @@ public class PaymentController implements Initializable {
                             cashFlow.setYear(application.getYear());
                             cashFlow.setMont(application.getMonth());
                             cashFlow.setCfDate(new Date());
+                            cashFlow.setStatus(1);
+                            cashFlow.setSyn(1);
+                            
 
                             aplicationPayment.setSyn(1);
 

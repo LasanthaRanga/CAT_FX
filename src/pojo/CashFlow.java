@@ -1,5 +1,5 @@
 package pojo;
-// Generated Feb 16, 2018 8:45:58 AM by Hibernate Tools 4.3.1
+// Generated Feb 17, 2018 3:18:48 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -12,6 +12,7 @@ public class CashFlow  implements java.io.Serializable {
 
      private Integer idCashFlow;
      private BankInfo bankInfo;
+     private ChequeBank chequeBank;
      private Vort vort;
      private String reciptNo;
      private Double cash;
@@ -22,6 +23,8 @@ public class CashFlow  implements java.io.Serializable {
      private Integer year;
      private Integer mont;
      private Date cfDate;
+     private Integer status;
+     private Integer syn;
 
     public CashFlow() {
     }
@@ -31,8 +34,9 @@ public class CashFlow  implements java.io.Serializable {
         this.bankInfo = bankInfo;
         this.vort = vort;
     }
-    public CashFlow(BankInfo bankInfo, Vort vort, String reciptNo, Double cash, Double cheque, String chequeNo, String applicationNo, Double totale, Integer year, Integer mont, Date cfDate) {
+    public CashFlow(BankInfo bankInfo, ChequeBank chequeBank, Vort vort, String reciptNo, Double cash, Double cheque, String chequeNo, String applicationNo, Double totale, Integer year, Integer mont, Date cfDate, Integer status, Integer syn) {
        this.bankInfo = bankInfo;
+       this.chequeBank = chequeBank;
        this.vort = vort;
        this.reciptNo = reciptNo;
        this.cash = cash;
@@ -43,6 +47,8 @@ public class CashFlow  implements java.io.Serializable {
        this.year = year;
        this.mont = mont;
        this.cfDate = cfDate;
+       this.status = status;
+       this.syn = syn;
     }
    
     public Integer getIdCashFlow() {
@@ -58,6 +64,13 @@ public class CashFlow  implements java.io.Serializable {
     
     public void setBankInfo(BankInfo bankInfo) {
         this.bankInfo = bankInfo;
+    }
+    public ChequeBank getChequeBank() {
+        return this.chequeBank;
+    }
+    
+    public void setChequeBank(ChequeBank chequeBank) {
+        this.chequeBank = chequeBank;
     }
     public Vort getVort() {
         return this.vort;
@@ -128,6 +141,20 @@ public class CashFlow  implements java.io.Serializable {
     
     public void setCfDate(Date cfDate) {
         this.cfDate = cfDate;
+    }
+    public Integer getStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+    public Integer getSyn() {
+        return this.syn;
+    }
+    
+    public void setSyn(Integer syn) {
+        this.syn = syn;
     }
 
 

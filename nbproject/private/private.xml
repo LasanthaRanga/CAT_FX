@@ -3,11 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Customer.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/ApplicationController.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Aplication.java</file>
-            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/Application.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/Payment.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/modle/Payment.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/AplicationPayment.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/TradeLicense.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/controller/PaymantViewController.java</file>
             <file>file:/D:/Techno%20Action/CAT_FX/src/controller/CustomerController.java</file>
+            <file>file:/D:/Techno%20Action/CAT_FX/src/pojo/CashFlow.java</file>
         </group>
     </open-files>
 </project-private>

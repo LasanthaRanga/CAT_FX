@@ -1,9 +1,7 @@
 package modle;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -17,12 +15,18 @@ public class BackUp {
         String backupPath = getBackupPath();
         Date date = new Date();
         String format = new SimpleDateFormat("dd_MMMMM_yyyy_HH_mm_ss").format(date);
-        String name = backupPath+format+".sql";
+        String name = backupPath + format + ".sql";
         System.out.println(name);
+
+        String dump = getDumpPath();
+        String uname = " -uroot";
+        String pass = " -proot";
+        String db = " cat -r";
+
         Runtime r = Runtime.getRuntime();
         boolean b = true;
         try {
-            String s = "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysqldump -uroot -proot cat -r "+name+"";
+            String s = dump + uname + pass + db + name;
             System.out.println(s);
             r.exec(s);
         } catch (Exception e) {
@@ -39,6 +43,21 @@ public class BackUp {
         String parth;
         try {
             BufferedReader br = new BufferedReader(new FileReader("C:\\cat\\file.lasa"));
+            parth = br.readLine();
+            br.close();
+            return parth;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            //br.close();
+        }
+    }
+
+    public static String getDumpPath() {
+        String parth;
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("C:\\cat\\dump.lasa"));
             parth = br.readLine();
             br.close();
             return parth;

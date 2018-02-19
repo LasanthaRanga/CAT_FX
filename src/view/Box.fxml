@@ -53,12 +53,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton accessibleText="about" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="About Us" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </JFXButton>
-      <JFXButton accessibleText="btn_exit" prefHeight="26.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton accessibleText="btn_exit" prefHeight="91.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Exit" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>

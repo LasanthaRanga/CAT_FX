@@ -8,9 +8,14 @@ package controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import com.mchange.util.IntEnumeration;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.DayOfWeek;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -120,6 +125,10 @@ public class PaymantViewController implements Initializable {
     private Label lbl_applicationno;
     @FXML
     private JFXButton btn_cancle;
+    @FXML
+    private JFXButton btn_report;
+    @FXML
+    private JFXButton btn_license;
 
     /**
      * Initializes the controller class.
@@ -397,5 +406,40 @@ public class PaymantViewController implements Initializable {
                 }
             }
         }
+    }
+
+    @FXML
+    private void sheduleReport(ActionEvent event) {
+
+        try {
+
+            LocalDate value = txt_by_date.getValue();
+            String date;
+            if (value != null) {
+
+                Instant instant = Instant.from(txt_by_date.getValue().atStartOfDay(ZoneId.systemDefault()));
+                Date datee = Date.from(instant);
+
+                date = new SimpleDateFormat("yyyy-MM-dd").format(datee);
+            } else {
+                date = new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+            }
+
+            new modle.Report().dayEnd(date, true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void printLicense(ActionEvent event) {
+
+        String rno = lbl_receipt_no.getText();
+        if (rno != null) {
+            new modle.Report().tradeLicense(rno, true);
+        } else {
+            modle.Allert.notificationInfo("Select Paymant", "Pleace Select Valid Paymant");
+        }
+
     }
 }

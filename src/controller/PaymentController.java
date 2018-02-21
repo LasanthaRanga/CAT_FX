@@ -7,7 +7,9 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
@@ -438,6 +440,9 @@ public class PaymentController implements Initializable {
                             if (date != null) {
                                 cashFlow.setChequeNo(txt_cheque_no.getText());
                                 cashFlow.setCheque(Double.parseDouble(txt_pay_amount_cheque.getText()));
+
+                                cashFlow.setCfDate(Date.from(txt_cheque_date.getValue().atStartOfDay().atZone(ZoneId.of("Asia/Colombo")).toInstant()));
+
                                 String selectedItem = com_bank.getSelectionModel().getSelectedItem();
                                 if (selectedItem == null) {
                                     Notifications.create()
@@ -553,7 +558,6 @@ public class PaymentController implements Initializable {
                             cashFlow.setCfDate(new Date());
                             cashFlow.setStatus(1);
                             cashFlow.setSyn(1);
-                            
 
                             aplicationPayment.setSyn(1);
 

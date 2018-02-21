@@ -36,7 +36,7 @@ public class Report {
 
     public void paymentReceipt(int paymentId, boolean print) {
         try {
-            String path = "C:\\cat\\report\\paymentReceipt.jrxml";
+            String path = "C:\\cat\\report\\PrintBill.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(path);
             HashMap param = new HashMap<String, Integer>();
             param.put("paymentId", paymentId);
@@ -55,30 +55,59 @@ public class Report {
                     .position(Pos.BOTTOM_RIGHT).showWarning();
         }
     }
+    
+    
+    
+    public void dayEnd(String date, boolean print) {
+        try {
+            String path = "C:\\cat\\report\\dayEnd.jrxml";
+            JasperReport jr = JasperCompileManager.compileReport(path);
+            HashMap param = new HashMap<String, Integer>();
+            param.put("date_para", date);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
+            if (print) {
+                JasperViewer.viewReport(jp, false);
+            } else {
+                JasperViewer.viewReport(jp, false);
+            }
+        } catch (JRException jRException) {
+            jRException.printStackTrace();
+            Notifications.create()
+                    .title("Warning")
+                    .text("Can not generate report. Something went wrong.\n(" + jRException.getMessage() + ")")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
+        }
+    }
+    
 
-//    public void daily(String day) {
-//        try {
-//            String path = "C:\\cat\\report\\daly.jrxml";
-//            JasperReport jr = JasperCompileManager.compileReport(path);
-//            HashMap param = new HashMap<String, String>();
-//            param.put("dinaya", "2018-02-02");
-//            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
-//
-//            JasperViewer.viewReport(jp, false);
-////            else
-////                JasperViewer.viewReport(jp,false);
-//        } catch (JRException jRException) {
-//            jRException.printStackTrace();
-//            Notifications.create()
-//                    .title("Warning")
-//                    .text("Can not generate report. Something went wrong.\n(" + jRException.getMessage() + ")")
-//                    .hideAfter(Duration.seconds(3))
-//                    .position(Pos.BOTTOM_RIGHT).showWarning();
-//        }
-//    }
-//
-//    public static void main(String[] args) {
-//        new Report().daily("");
-//    }
+    
+    public void tradeLicense(String risit_no, boolean print) {
+        try {
+            String path = "C:\\cat\\report\\TradeLicense.jrxml";
+            JasperReport jr = JasperCompileManager.compileReport(path);
+            HashMap param = new HashMap<String, Integer>();
+            param.put("risit_no", risit_no);
+            JasperPrint jp = JasperFillManager.fillReport(jr, param, this.getConnection());
+            if (print) {
+                JasperViewer.viewReport(jp, false);
+            } else {
+                JasperViewer.viewReport(jp, false);
+            }
+        } catch (JRException jRException) {
+            jRException.printStackTrace();
+            Notifications.create()
+                    .title("Warning")
+                    .text("Can not generate report. Something went wrong.\n(" + jRException.getMessage() + ")")
+                    .hideAfter(Duration.seconds(3))
+                    .position(Pos.BOTTOM_RIGHT).showWarning();
+        }
+    }
+    
+    
+    
+    
+    
+//date_para
 
 }

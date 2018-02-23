@@ -42,7 +42,7 @@ public class AssesmantNo {
                                     Customer c = assessment.getCustomer();
 
                                     cus = new modle.Customer();
-
+                                    StaticBadu.setAssessment(assessment);
                                     System.out.println("FULNAME TIBBA");
 
                                     cus.setFullName(c.getFullName());

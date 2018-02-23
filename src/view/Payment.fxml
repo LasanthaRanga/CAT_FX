@@ -30,7 +30,7 @@
             <TableColumn fx:id="tbl_clmn_application_date" prefWidth="180.0" text="Application Date" />
         </columns>
       </TableView>
-      <Label layoutX="25.0" layoutY="41.0" text="Approved ApplicationList" AnchorPane.bottomAnchor="559.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="41.0">
+      <Label layoutX="25.0" layoutY="41.0" text="Approved Application List" AnchorPane.bottomAnchor="559.0" AnchorPane.leftAnchor="25.0" AnchorPane.topAnchor="41.0">
          <font>
             <Font size="16.0" />
          </font>
@@ -77,15 +77,15 @@
                   <Font size="16.0" />
                </font></JFXTextField>
             <Region layoutX="10.0" layoutY="225.0" prefHeight="15.0" prefWidth="242.0" />
-            <JFXTextField fx:id="txt_trade_address1" editable="false" layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+            <JFXTextField fx:id="txt_trade_address1" editable="false" layoutX="10.0" layoutY="245.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address Line 1">
                <font>
                   <Font size="16.0" />
                </font></JFXTextField>
-            <JFXTextField fx:id="txt_trade_address2" editable="false" layoutX="10.0" layoutY="290.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+            <JFXTextField fx:id="txt_trade_address2" editable="false" layoutX="10.0" layoutY="290.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address Line 2">
                <font>
                   <Font size="16.0" />
                </font></JFXTextField>
-            <JFXTextField fx:id="txt_trade_address3" editable="false" layoutX="10.0" layoutY="315.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address">
+            <JFXTextField fx:id="txt_trade_address3" editable="false" layoutX="10.0" layoutY="315.0" prefHeight="25.0" prefWidth="314.0" promptText="Trade Address Line 3">
                <font>
                   <Font size="16.0" />
                </font></JFXTextField>

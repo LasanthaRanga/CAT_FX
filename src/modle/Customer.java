@@ -739,8 +739,6 @@ public class Customer {
 
             if (c != null) {
 
-                
-                
                 cus.setFullName(c.getFullName());
                 cus.setNic(c.getNic());
                 cus.setIdCustomer(c.getIdCustomer());
@@ -758,8 +756,6 @@ public class Customer {
                         cus.setIdContact(contact.getIdContact());
                     }
                 }
-
-                
 
                 //       }
             }
@@ -870,20 +866,29 @@ public class Customer {
 
             pojo.Ward pward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
 
-            Set<Street> streets = pward.getStreets();
+            
 
-            for (Street street : streets) {
-                if (street.getStreetName().equals(strreet)) {
-                    Set<Assessment> assessments = street.getAssessments();
-                    for (Assessment assessment : assessments) {
-                        String assessmentNo = assessment.getAssessmentNo();
-                        if (assesmantNo.equals(assesmantNo)) {
-                            ass = assessment;
-                            break;
-                        }
-                    }
-                }
-            }
+            Criteria c = session.createCriteria(pojo.Street.class);
+            c.add(Restrictions.eq("ward", pward));
+            pojo.Street ss = (pojo.Street) c.add(Restrictions.eq("streetName", strreet)).uniqueResult();
+
+            Criteria ca = session.createCriteria(pojo.Assessment.class);
+            ca.add(Restrictions.eq("street", ss));
+            System.out.println(assesmantNo);
+            ass = (pojo.Assessment) ca.add(Restrictions.eq("assessmentNo", assesmantNo));
+
+//            for (Street street : streets) {
+//                if (street.getStreetName().equals(strreet)) {
+//                    Set<Assessment> assessments = street.getAssessments();
+//                    for (Assessment assessment : assessments) {
+//                        String assessmentNo = assessment.getAssessmentNo();
+//                        if (assesmantNo.equals(assesmantNo)) {
+//                            ass = assessment;
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
             return ass;
         } catch (Exception e) {
             e.printStackTrace();

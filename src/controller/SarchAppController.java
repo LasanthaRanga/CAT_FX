@@ -16,6 +16,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -24,6 +25,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ToggleGroup;
+import modle.AppHolder;
+import modle.LoadAppList;
 import modle.Nature;
 import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
 import org.hibernate.Criteria;
@@ -111,6 +114,8 @@ public class SarchAppController implements Initializable {
     @FXML
     private JFXDatePicker date_to;
 
+    HashSet<AppHolder> loadAllAppList;
+
     /**
      * Initializes the controller class.
      */
@@ -158,15 +163,13 @@ public class SarchAppController implements Initializable {
             }
 
             if (street != null) {
-                
+
             }
 
             if (assessNo != null) {
                 List<pojo.Assessment> asslist = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("assessmentNo", assessNo)).list();
-                
-                
-                
-               // cry.add(Restrictions.eq("assessment", Acat));
+
+                // cry.add(Restrictions.eq("assessment", Acat));
             }
 
             if (tradeType != null) {
@@ -316,15 +319,23 @@ public class SarchAppController implements Initializable {
                 modle.Allert.notificationInfo("Cheack Date", "To");
             }
         }
-        searchAppList();
+        // searchAppList();
+        loadAllAppList = new modle.LoadAppList().loadAllAppList();
+        
+        
     }
     //==========================================================
 
     @FXML
     private void search(ActionEvent event) {
-        getData();
-        // System.out.println(appNO);
 
+        getData();
+
+        for (AppHolder appHolder : loadAllAppList) {
+            System.out.println(appHolder.getIdApplication());
+        }
+
+        // System.out.println(appNO);
         //   System.out.println(authoritist);
         //   System.out.println(outhorityStatus);
         //   System.out.println(hassCat);

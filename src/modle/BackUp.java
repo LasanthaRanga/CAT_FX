@@ -20,7 +20,7 @@ public class BackUp {
 
         String dump = getDumpPath();
         String uname = " -uroot";
-        String pass = " -p";
+        String pass = " -pYamaha510";
         String db = " cat -r";
 
         Runtime r = Runtime.getRuntime();

@@ -6,18 +6,20 @@
 package controller;
 
 import com.jfoenix.controls.JFXButton;
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+
 import javafx.scene.chart.PieChart;
+
 import modle.Vort;
 
 /**
@@ -32,6 +34,8 @@ public class DashBordController implements Initializable {
     @FXML
     private JFXButton btn_backup;
 
+    
+
     /**
      * Initializes the controller class.
      */
@@ -39,6 +43,8 @@ public class DashBordController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         getVoteDetails();
+      //  mh(, chart1);
+        
 
     }
 
@@ -51,7 +57,9 @@ public class DashBordController implements Initializable {
         for (pojo.Vort vort1 : list) {
             pieData.add(new PieChart.Data(vort1.getVoteName(), vort1.getVoteCurrentBalance()));
         }
+       
         chart1.setData(pieData);
+
     }
 
     @FXML
@@ -60,4 +68,8 @@ public class DashBordController implements Initializable {
 
     }
 
+    
+
+   
+    
 }

@@ -114,7 +114,7 @@
             <TableColumn fx:id="c_idApp" prefWidth="93.0" text="Application NO" />
             <TableColumn fx:id="c_type" prefWidth="122.99996948242188" text="Type" />
             <TableColumn fx:id="c_nature" prefWidth="125.0" text="Nature" />
-            <TableColumn fx:id="c_alocation" prefWidth="103.0" text="Alocaion" />
+            <TableColumn fx:id="c_alocation" prefWidth="103.0" text="Allocaion" />
             <TableColumn fx:id="c_tax" prefWidth="83.0" text="Tax" />
             <TableColumn fx:id="c_approve" prefWidth="89.0" text="Approve To Paymant" />
             <TableColumn fx:id="c_tname" prefWidth="166.0" text="Trade Name" />

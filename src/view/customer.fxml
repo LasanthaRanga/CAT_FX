@@ -84,10 +84,10 @@
         <columns>
           <TableColumn fx:id="col_ward" prefWidth="96.0" text="Ward" />
           <TableColumn fx:id="col_street" prefWidth="164.0" text="Street" />
-            <TableColumn fx:id="col_ases" prefWidth="146.0" text="Assesmant" />
+            <TableColumn fx:id="col_ases" prefWidth="146.0" text="Assessment" />
         </columns>
       </TableView>
-      <JFXButton fx:id="btn_genarate" layoutX="828.0" layoutY="96.0" onAction="#genarateAsessmantNO" prefHeight="30.0" prefWidth="208.0" text="Genarate Assesmant Number">
+      <JFXButton fx:id="btn_genarate" layoutX="828.0" layoutY="96.0" onAction="#genarateAsessmantNO" prefHeight="30.0" prefWidth="208.0" text="Genarate Assessment Number">
          <font>
             <Font size="14.0" />
          </font>

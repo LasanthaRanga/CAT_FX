@@ -330,11 +330,12 @@ public class ApplicationController implements Initializable {
 
                             Integer idCustomer = upcus.getIdCustomer();
                             pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
+                            pCustomer = load;
                             loadTable();
                             Set<Assessment> assessments = load.getAssessments();
 
                             for (Assessment assessment : assessments) {
-
+                                modle.StaticBadu.setAssessment(assessment);
                                 String assessmentNo = assessment.getAssessmentNo();
                                 String streetName = assessment.getStreet().getStreetName();
                                 String wardName = assessment.getStreet().getWard().getWardName();
@@ -365,7 +366,7 @@ public class ApplicationController implements Initializable {
                 System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
                 if (modle.StaticBadu.getpCustomer() != null) {
                     upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
-
+                    pCustomer = upcus.getCustomer();
                     txt_cus_nic.setText(upcus.getNic());
                     Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
                     try {
@@ -373,7 +374,7 @@ public class ApplicationController implements Initializable {
                         txt_assesmantNO.setText(modle.StaticBadu.getAssessment().getAssessmentNo());
                         com_ward.getSelectionModel().select(modle.StaticBadu.getWard().getWardName());
                         com_street.getSelectionModel().select(modle.StaticBadu.getStreet().getStreetName());
-
+                       
 //                        Integer idCustomer = upcus.getIdCustomer();
 //                        pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, idCustomer);
 //                        loadTable();
@@ -457,6 +458,7 @@ public class ApplicationController implements Initializable {
             customer = modle.AssesmantNo.searchByAssesmantNO(selectedWard, selectedStreet, asno);
 
             if (customer == null) {
+                
                 txt_cus_nic.setText(null);
                 txt_cus_fname.setText(null);
                 upcus = null;
@@ -525,7 +527,7 @@ public class ApplicationController implements Initializable {
                         String wardName = assessment.getStreet().getWard().getWardName();
 
                         System.out.println(assessmentNo + "  Ases");
-
+                        modle.StaticBadu.setAssessment(assessment);
                         txt_assesmantNO.setText(assessmentNo);
                         com_ward.getSelectionModel().select(wardName);
                         com_street.getSelectionModel().select(streetName);
@@ -689,7 +691,10 @@ public class ApplicationController implements Initializable {
     String tradeType;
     String nature;
     String subnature;
-
+    
+    
+    
+    pojo.Assessment assessment;
     pojo.Ward pWard;
     pojo.Street pStreet;
     pojo.TradeType pTradeType;
@@ -754,7 +759,7 @@ public class ApplicationController implements Initializable {
             pStreet = new modle.Strret().getStreetsByStreetNameAndWard(streetname, pward);
             pSubNature = new modle.SubNature().getNatureBySubNatureName(subnature);
             pro = new modle.RO().getRobyRoname(ro);
-
+            
             // pCustomer = new modle.Customer().searchCustomer(cus_nic, cus_name);
         } catch (Exception e) {
             e.printStackTrace();
@@ -787,7 +792,7 @@ public class ApplicationController implements Initializable {
                         app.setSubNature(pSubNature);
                         app.setTradeNature(pNature);
                         app.setApplicationNo(appno);
-                        Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+                        Assessment assesmantPojo = modle.StaticBadu.getAssessment();
 
                         if (assesmantPojo != null) {
                             System.out.println(assesmantPojo.getAssessmentNo());

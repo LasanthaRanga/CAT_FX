@@ -24,8 +24,7 @@ public class SQ {
         List.add("What was your favorite sport in high school?");
         List.add("What is the first name of the boy or girl that you first kissed?");
         List.add("What was the name of the hospital where you were born?");
-        List.add("What school did you attend for sixth grade?");
-        List.add("What was your childhood nickname?");
+        List.add("What school did you attend for sixth grade?");       
         List.add("In what town was your first job?");
         List.add("What was the name of the company where you had your first job?");
         return List;

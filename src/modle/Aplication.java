@@ -157,9 +157,9 @@ public class Aplication implements DAO<pojo.Application> {
                     .list();
             ArrayList<Application> ap_list = new ArrayList<pojo.Application>();
             for (Application application : list) {
-                if (application.getAplicationPayments().size() == 0) {
-                    ap_list.add(application);
-                }
+                //if (application.getAplicationPayments().size() == 0) {
+                ap_list.add(application);
+                // }
             }
             return ap_list;
         } catch (Exception e) {

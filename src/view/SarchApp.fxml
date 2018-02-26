@@ -15,7 +15,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SarchAppController">
    <children>
-      <Pane layoutX="22.0" layoutY="23.0" prefHeight="66.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="23.0" prefHeight="66.0" prefWidth="282.0" style="-fx-background-color: rgb(255,224,178);">
          <children>
             <JFXCheckBox fx:id="ch_appno" layoutX="7.0" layoutY="9.0" text="Application NO" />
             <JFXTextField fx:id="txt_appno" layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="252.0" />
@@ -50,13 +50,13 @@
             <JFXRadioButton fx:id="ra_status_pending" layoutX="1.0" layoutY="141.0" onAction="#ra_pending" text="Pending" toggleGroup="$approveStatus" />
          </children>
       </Pane>
-      <Pane layoutX="22.0" layoutY="439.0" prefHeight="93.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="439.0" prefHeight="93.0" prefWidth="282.0" style="-fx-background-color: rgb(129,199,132);">
          <children>
             <JFXCheckBox fx:id="ch_street" layoutX="6.0" layoutY="14.0" onAction="#loadStreet" text="Street" />
             <JFXComboBox fx:id="com_street" layoutX="15.0" layoutY="53.0" prefHeight="25.0" prefWidth="252.0" promptText="Street" />
          </children>
       </Pane>
-      <Pane layoutX="22.0" layoutY="331.0" prefHeight="93.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="331.0" prefHeight="93.0" prefWidth="282.0" style="-fx-background-color: rgb(129,199,132);">
          <children>
             <JFXCheckBox fx:id="ch_ward" layoutX="7.0" layoutY="9.0" onAction="#loadWard" text="Ward" />
             <JFXComboBox fx:id="com_ward" layoutX="15.0" layoutY="51.0" onAction="#getWard" prefHeight="25.0" prefWidth="252.0" promptText="Ward" />
@@ -73,13 +73,13 @@
             <JFXRadioButton fx:id="ra_paid" layoutX="1.0" layoutY="98.0" onAction="#loadPay" text="Paid" toggleGroup="$pay" />
          </children>
       </Pane>
-      <Pane layoutX="22.0" layoutY="220.0" prefHeight="93.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="220.0" prefHeight="93.0" prefWidth="282.0" style="-fx-background-color: rgb(187,222,251);">
          <children>
             <JFXCheckBox fx:id="ch_trade_nature" layoutX="7.0" layoutY="9.0" onAction="#loadTradeNature" text="Trade Nature" />
             <JFXComboBox fx:id="com_trade_nature" layoutX="15.0" layoutY="51.0" prefHeight="25.0" prefWidth="252.0" promptText="Trade Nature" />
          </children>
       </Pane>
-      <Pane layoutX="22.0" layoutY="109.0" prefHeight="93.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="109.0" prefHeight="93.0" prefWidth="282.0" style="-fx-background-color: rgb(187,222,251);">
          <children>
             <JFXCheckBox fx:id="ch_trade_type" layoutX="7.0" layoutY="9.0" onAction="#loadTradType" text="Trade Types" />
             <JFXComboBox fx:id="com_trade_type" labelFloat="true" layoutX="15.0" layoutY="49.0" onAction="#getTradeType" prefHeight="25.0" prefWidth="252.0" promptText="Trade Type" />
@@ -97,22 +97,27 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <TableView layoutX="638.0" layoutY="117.0" prefHeight="362.0" prefWidth="640.0">
-        <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
-        </columns>
-      </TableView>
-      <JFXButton layoutX="1123.0" layoutY="496.0" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: rgb(238,238,238);" text="More" textFill="#9a9a9a">
+      <JFXButton fx:id="btn_All" layoutX="1136.0" layoutY="562.0" onAction="#more" prefHeight="39.0" prefWidth="155.0" style="-fx-background-color: rgb(238,238,238);" text="More" textFill="#9a9a9a">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </JFXButton>
-      <Pane layoutX="22.0" layoutY="548.0" prefHeight="66.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="22.0" layoutY="548.0" prefHeight="66.0" prefWidth="282.0" style="-fx-background-color: rgb(129,199,132);">
          <children>
             <JFXCheckBox fx:id="ch_assesmant" layoutX="7.0" layoutY="9.0" text="Assessmant NO" />
             <JFXTextField fx:id="txt_assesmant" layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="252.0" />
          </children>
       </Pane>
+      <TableView fx:id="tbl_applicaion" layoutX="636.0" layoutY="86.0" onMouseReleased="#selectApp" prefHeight="459.0" prefWidth="655.0">
+         <columns>
+            <TableColumn fx:id="c_idApp" prefWidth="93.0" text="Application NO" />
+            <TableColumn fx:id="c_type" prefWidth="122.99996948242188" text="Type" />
+            <TableColumn fx:id="c_nature" prefWidth="125.0" text="Nature" />
+            <TableColumn fx:id="c_alocation" prefWidth="103.0" text="Allocaion" />
+            <TableColumn fx:id="c_tax" prefWidth="83.0" text="Tax" />
+            <TableColumn fx:id="c_approve" prefWidth="107.0" text="Approve To Paymant" />
+            <TableColumn fx:id="c_tname" prefWidth="148.0" text="Trade Name" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>

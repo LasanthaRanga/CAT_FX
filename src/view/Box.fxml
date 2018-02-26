@@ -13,7 +13,7 @@
             <Image url="@../logo.PNG" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btn_test1" accessibleText="dashboard" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Dash Board" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="btn_test1" accessibleText="dashboard" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #424242;" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

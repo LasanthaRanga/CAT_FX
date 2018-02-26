@@ -5,11 +5,13 @@
  */
 package controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
@@ -19,13 +21,24 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import modle.AppHolder;
+import modle.AppTbl;
 import modle.LoadAppList;
 import modle.Nature;
 import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
@@ -114,7 +127,24 @@ public class SarchAppController implements Initializable {
     @FXML
     private JFXDatePicker date_to;
 
-    HashSet<AppHolder> loadAllAppList;
+    @FXML
+    private TableView<AppTbl> tbl_applicaion;
+    @FXML
+    private TableColumn<AppTbl, String> c_idApp;
+    @FXML
+    private TableColumn<AppTbl, String> c_type;
+    @FXML
+    private TableColumn<AppTbl, String> c_nature;
+    @FXML
+    private TableColumn<AppTbl, Double> c_alocation;
+    @FXML
+    private TableColumn<AppTbl, Double> c_tax;
+    @FXML
+    private TableColumn<AppTbl, Integer> c_approve;
+    @FXML
+    private TableColumn<AppTbl, String> c_tname;
+    @FXML
+    private JFXButton btn_All;
 
     /**
      * Initializes the controller class.
@@ -146,38 +176,21 @@ public class SarchAppController implements Initializable {
     Date fromDate;
     Date toDate;
 
+    HashSet<AppHolder> loadAllAppList;
+    HashSet<AppHolder> filter = new HashSet<>();
+
     public void searchAppList() {
 
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        try {
-
-            Criteria cry = session.createCriteria(pojo.Application.class);
+        filter.clear();
+        for (AppHolder appHolder : loadAllAppList) {
 
             if (appNO != null) {
-                cry.add(Restrictions.eq("applicationNo", appNO));
+                if (appHolder.getApplicationNo().equals(appNO)) {
+                    filter.add(appHolder);
+                }
             }
 
-            if (ward != null) {
-                pojo.Ward cryWard = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
-
-            }
-
-            if (street != null) {
-
-            }
-
-            if (assessNo != null) {
-                List<pojo.Assessment> asslist = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("assessmentNo", assessNo)).list();
-
-                // cry.add(Restrictions.eq("assessment", Acat));
-            }
-
-            if (tradeType != null) {
-            }
-
-            if (tradeNature != null) {
-            }
-
+            //ward street assessmant
             if (authoritist != null) {
             }
 
@@ -185,30 +198,141 @@ public class SarchAppController implements Initializable {
             }
 
             if (hasRO) {
+                if (roname != null) {
+                    if (roname.equals(appHolder.getRoName())) {
+                        if (tradeNature != null) {
+                            if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+
+                            }
+                        } else if (tradeType != null) {
+                            if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+                            }
+                        } else {
+                            if (assessNo != null) {
+                                if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (street != null) {
+                                if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (ward != null) {
+                                if (ward.equals(appHolder.getWardName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else {
+                                filter.add(appHolder);
+                            }
+                        }
+                    }
+                } else {
+                    //RO name Nethuwa Okkoma RO lage
+                    if (appHolder.getRoName() != null) {
+                        if (tradeNature != null) {
+                            if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+                            }
+                        } else if (tradeType != null) {
+                            if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+                            }
+                        } else {
+                            if (assessNo != null) {
+                                if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (street != null) {
+                                if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (ward != null) {
+                                if (ward.equals(appHolder.getWardName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else {
+                                filter.add(appHolder);
+                            }
+                        }
+                    }
+
+                }
             }
 
             if (hasPay) {
             }
 
             if (hasDate) {
+
             }
 
-            List<pojo.Application> list = cry.list();
 
-            for (Application app : list) {
-                String tradeName = app.getTradeName();
-                System.out.println(tradeName);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            session.close();
-        }
+        loadTable();
 
     }
 
-    public void getData() {
+}
+
+public void getData() {
         if (ch_appno.isSelected()) {
             appNO = txt_appno.getText();
         } else {
@@ -319,21 +443,19 @@ public class SarchAppController implements Initializable {
                 modle.Allert.notificationInfo("Cheack Date", "To");
             }
         }
-        // searchAppList();
-        loadAllAppList = new modle.LoadAppList().loadAllAppList();
-        
-        
+
+        if (loadAllAppList == null) {
+            loadAllAppList = new modle.LoadAppList().loadAllAppList();
+        }
+        searchAppList();
+
     }
     //==========================================================
 
     @FXML
-    private void search(ActionEvent event) {
+        private void search(ActionEvent event) {
 
         getData();
-
-        for (AppHolder appHolder : loadAllAppList) {
-            System.out.println(appHolder.getIdApplication());
-        }
 
         // System.out.println(appNO);
         //   System.out.println(authoritist);
@@ -353,7 +475,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void loadTradType(ActionEvent event) {
+        private void loadTradType(ActionEvent event) {
         if (ch_trade_type.isSelected()) {
             loadCombo();
             //  loadTradeNature(event);
@@ -370,7 +492,7 @@ public class SarchAppController implements Initializable {
     int tt;
 
     @FXML
-    private void getTradeType(ActionEvent event) {
+        private void getTradeType(ActionEvent event) {
         tradeType = com_trade_type.getSelectionModel().getSelectedItem();
         if (tradeType != null) {
             tt = new modle.TradeType().loadTreadType(tradeType).getIdTradeType();
@@ -382,7 +504,7 @@ public class SarchAppController implements Initializable {
 
     //============================ Trade Nature
     @FXML
-    private void loadTradeNature(ActionEvent event) {
+        private void loadTradeNature(ActionEvent event) {
 
         if (ch_trade_nature.isSelected()) {
 
@@ -410,7 +532,7 @@ public class SarchAppController implements Initializable {
 
     //=============================== Warda
     @FXML
-    private void loadWard(ActionEvent event) {
+        private void loadWard(ActionEvent event) {
 
         if (ch_ward.isSelected()) {
 
@@ -427,13 +549,13 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void getWard(ActionEvent event) {
+        private void getWard(ActionEvent event) {
         loadStreet(event);
     }
 
     //==================================== Street
     @FXML
-    private void loadStreet(ActionEvent event) {
+        private void loadStreet(ActionEvent event) {
 
         if (ch_street.isSelected()) {
             ward = com_ward.getSelectionModel().getSelectedItem();
@@ -470,7 +592,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void loadAuthoritst(ActionEvent event) {
+        private void loadAuthoritst(ActionEvent event) {
 
         if (ch_Authoritist.isSelected()) {
             hassCat = true;
@@ -491,7 +613,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void loadCatagory(ActionEvent event) {
+        private void loadCatagory(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
             loadOutherCombo();
             hassCat = true;
@@ -503,7 +625,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void removeCat(ActionEvent event) {
+        private void removeCat(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
             hassCat = true;
             com_authoritist.setItems(null);
@@ -516,7 +638,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void ra_all(ActionEvent event) {
+        private void ra_all(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -528,7 +650,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void ra_approve(ActionEvent event) {
+        private void ra_approve(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -540,7 +662,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void ra_none(ActionEvent event) {
+        private void ra_none(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -552,7 +674,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void ra_pending(ActionEvent event) {
+        private void ra_pending(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -574,7 +696,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void loadRo(ActionEvent event) {
+        private void loadRo(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -589,7 +711,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void robyname(ActionEvent event) {
+        private void robyname(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -603,7 +725,7 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void allRO(ActionEvent event) {
+        private void allRO(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -618,7 +740,7 @@ public class SarchAppController implements Initializable {
     //=============================================================== paymant
 
     @FXML
-    private void loadPay(ActionEvent event) {
+        private void loadPay(ActionEvent event) {
         if (ch_pay.isSelected()) {
             //  ra_payNoneApprove.setSelected(true);
             hasPay = true;
@@ -640,7 +762,7 @@ public class SarchAppController implements Initializable {
 
     //Date ===============================================
     @FXML
-    private void loadDate(ActionEvent event) {
+        private void loadDate(ActionEvent event) {
         if (ch_date.isSelected()) {
             LocalDate localDate = date_form.getValue();
             if (localDate != null) {
@@ -656,6 +778,71 @@ public class SarchAppController implements Initializable {
             }
         }
 
+    }
+
+    ObservableList appList = FXCollections.observableArrayList();
+
+    public void loadTable() {
+
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
+        c_idApp.setCellValueFactory(new PropertyValueFactory<>("appNOString"));
+        c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
+        c_nature.setCellValueFactory(new PropertyValueFactory<>("nature"));
+        c_alocation.setCellValueFactory(new PropertyValueFactory<>("alocation"));
+        c_tax.setCellValueFactory(new PropertyValueFactory<>("txt"));
+        c_approve.setCellValueFactory(new PropertyValueFactory<>("payapp"));
+        c_tname.setCellValueFactory(new PropertyValueFactory<>("Tname"));
+
+        appList.clear();
+
+        if (filter != null) {
+            filter.forEach((a) -> {
+                appList.add(new AppTbl(a.getIdApplication(), a.getApplicationNo(), a.getTradeTypeName(), a.getNature(), a.getAllocation(), a.getTaxAmount(), a.getApproveToPaymant(), a.getTradeName()));
+            });
+        }
+        tbl_applicaion.setItems(appList);
+
+    }
+
+    @FXML
+        private void more(ActionEvent event) {
+
+        try {
+            modle.StaticBadu.setApp(app);
+            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/Ditails.fxml"));
+            btn_All.getParent().getScene();
+            Scene scene = new Scene(paymant);
+            Stage stage = new Stage();
+            stage.initStyle(StageStyle.TRANSPARENT);
+            stage.setScene(scene);
+            stage.show();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
+            Logger
+
+.getLogger(PayController.class
+.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    pojo.Application app;
+
+    @FXML
+        private void selectApp(MouseEvent event) {
+        int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        
+
+try {
+            app = (pojo.Application) session.createCriteria(pojo.Application.class
+).add(Restrictions.eq("idApplication", appno)).uniqueResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
     }
 
 }

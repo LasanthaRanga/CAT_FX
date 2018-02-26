@@ -204,7 +204,7 @@ public class PaymentController implements Initializable {
         if (application != null) {
             Customer customer = new modle.Customer().getById(application.getCustomer().getIdCustomer());
             if (customer != null) {
-                txt_application_no.setText(application.getIdApplication() + "");
+                txt_application_no.setText(application.getApplicationNo());
                 txt_allocation.setText(application.getAllocation() + "");
                 txt_tax.setText(application.getTaxAmount() + "");
                 txt_tax_amount.setText(application.getTaxAmount() + "");

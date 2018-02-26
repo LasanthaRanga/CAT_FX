@@ -875,7 +875,7 @@ public class Customer {
             Criteria ca = session.createCriteria(pojo.Assessment.class);
             ca.add(Restrictions.eq("street", ss));
             System.out.println(assesmantNo);
-            ass = (pojo.Assessment) ca.add(Restrictions.eq("assessmentNo", assesmantNo));
+            ass = (pojo.Assessment) ca.add(Restrictions.eq("assessmentNo", assesmantNo)).uniqueResult();
 
 //            for (Street street : streets) {
 //                if (street.getStreetName().equals(strreet)) {

@@ -138,14 +138,14 @@ public class LoadAppList implements Runnable {
                             aprh.setStatues_approve(apr.getStatues());
                             aprh.setIdOtheritisCat(apr.getIdOtheritisCat());
                             Integer idOtheritisCat = apr.getIdOtheritisCat();
-                            Otheritiscat name = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritisCat", idOtheritisCat));
+                            Otheritiscat name = (pojo.Otheritiscat) session.createCriteria(pojo.Otheritiscat.class).add(Restrictions.eq("idOtheritisCat", idOtheritisCat)).uniqueResult();
                             aprh.setOtheritisCat(name.getCatname());
                             aprh.setIdUser(apr.getUser().getIdUser());
                             aprh.setFullName(apr.getUser().getFullName());
                             aprh.setNic(apr.getUser().getNic());
                             aprh.setMobile(apr.getUser().getMobile());
                             aprh.setRegDate(apr.getUser().getRegDate());
-                            aprh.setStatus(apr.getUser().getStatus());
+                            aprh.setStatus(apr.getStatues());
                             aphList.add(aprh);
                         }
                         ah.setApproveList(aphList);

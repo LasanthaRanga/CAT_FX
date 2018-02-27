@@ -194,8 +194,11 @@ public class AuthoritistController implements Initializable {
                 } else {
                     modle.Allert.notificationInfo("Select Your Authoritist", lbl_atype.getText());
                 }
-            }
+            } else {
+                System.out.println("null");
 
+            }
+            radio();
         });
 
     }
@@ -223,7 +226,7 @@ public class AuthoritistController implements Initializable {
                     modle.Allert.notificationInfo("Select Your Authoritist", lbl_atype.getText());
                 }
             }
-
+            radio();
         });
 
     }
@@ -548,7 +551,7 @@ public class AuthoritistController implements Initializable {
     public void close() {
 
         btn_reload.setOnAction((event) -> {
-           
+
             Platform.exit();
             System.exit(0);
 

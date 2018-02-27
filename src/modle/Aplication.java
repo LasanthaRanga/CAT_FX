@@ -326,11 +326,13 @@ public class Aplication implements DAO<pojo.Application> {
     }
 
     public pojo.Apprualstatues getApproveStatus(int no) {
+        System.out.println(no);
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
             Criteria c = session.createCriteria(pojo.Apprualstatues.class);
             pojo.Apprualstatues uniqueResult = (pojo.Apprualstatues) c.add(Restrictions.eq("idApprualStatues", no)).uniqueResult();
+            System.out.println(uniqueResult.getApproveDate());
             return uniqueResult;
         } catch (Exception e) {
             e.printStackTrace();

@@ -21,7 +21,7 @@
             <JFXTextField fx:id="txt_appno" layoutX="14.0" layoutY="32.0" prefHeight="25.0" prefWidth="252.0" />
          </children>
       </Pane>
-      <Pane layoutX="340.0" layoutY="240.0" prefHeight="126.0" prefWidth="282.0" style="-fx-border-color: #bdbdbd;">
+      <Pane layoutX="340.0" layoutY="240.0" prefHeight="126.0" prefWidth="282.0" style="-fx-background-color: rgb(255,241,118);">
          <children>
             <JFXCheckBox fx:id="ch_robill" layoutX="5.0" layoutY="9.0" onAction="#loadRo" text="RO Bills" />
             <JFXComboBox fx:id="com_ronames" layoutX="16.0" layoutY="73.0" prefHeight="25.0" prefWidth="252.0" promptText="RO Name" />

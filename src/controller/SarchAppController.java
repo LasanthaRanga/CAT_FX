@@ -191,15 +191,129 @@ public class SarchAppController implements Initializable {
             }
 
             //ward street assessmant
-            if (authoritist != null) {
-            }
+            if (hasPay) {
+                Integer approveToPaymant = appHolder.getApproveToPaymant();
+                if (approveToPaymant == payStatus) {
+                    if (hasRO) {
+                        if (roname != null) {
+                            if (roname.equals(appHolder.getRoName())) {
+                                if (tradeNature != null) {
+                                    if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
 
-            if (hassCat) {
-            }
+                                        if (assessNo != null) {
+                                            if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (street != null) {
+                                            if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (ward != null) {
+                                            if (ward.equals(appHolder.getWardName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else {
+                                            filter.add(appHolder);
+                                        }
 
-            if (hasRO) {
-                if (roname != null) {
-                    if (roname.equals(appHolder.getRoName())) {
+                                    }
+                                } else if (tradeType != null) {
+                                    if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                        if (assessNo != null) {
+                                            if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (street != null) {
+                                            if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (ward != null) {
+                                            if (ward.equals(appHolder.getWardName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else {
+                                            filter.add(appHolder);
+                                        }
+                                    }
+                                } else {
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+                                }
+                            }
+                        } else {
+                            //RO name Nethuwa Okkoma RO lage
+                            if (appHolder.getRoName() != null) {
+                                if (tradeNature != null) {
+                                    if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
+                                        if (assessNo != null) {
+                                            if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (street != null) {
+                                            if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (ward != null) {
+                                            if (ward.equals(appHolder.getWardName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else {
+                                            filter.add(appHolder);
+                                        }
+                                    }
+                                } else if (tradeType != null) {
+                                    if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                        if (assessNo != null) {
+                                            if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (street != null) {
+                                            if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else if (ward != null) {
+                                            if (ward.equals(appHolder.getWardName())) {
+                                                filter.add(appHolder);
+                                            }
+                                        } else {
+                                            filter.add(appHolder);
+                                        }
+                                    }
+                                } else {
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+
                         if (tradeNature != null) {
                             if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
 
@@ -255,48 +369,133 @@ public class SarchAppController implements Initializable {
                                 filter.add(appHolder);
                             }
                         }
+
+                    }
+                }
+            } else {
+                if (hasRO) {
+                    if (roname != null) {
+                        if (roname.equals(appHolder.getRoName())) {
+                            if (tradeNature != null) {
+                                if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+
+                                }
+                            } else if (tradeType != null) {
+                                if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+                                }
+                            } else {
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+                            }
+                        }
+                    } else {
+                        //RO name Nethuwa Okkoma RO lage
+                        if (appHolder.getRoName() != null) {
+                            if (tradeNature != null) {
+                                if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+                                }
+                            } else if (tradeType != null) {
+                                if (tradeType.equals(appHolder.getTradeTypeName())) {
+                                    if (assessNo != null) {
+                                        if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (street != null) {
+                                        if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else if (ward != null) {
+                                        if (ward.equals(appHolder.getWardName())) {
+                                            filter.add(appHolder);
+                                        }
+                                    } else {
+                                        filter.add(appHolder);
+                                    }
+                                }
+                            } else {
+                                if (assessNo != null) {
+                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (street != null) {
+                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else if (ward != null) {
+                                    if (ward.equals(appHolder.getWardName())) {
+                                        filter.add(appHolder);
+                                    }
+                                } else {
+                                    filter.add(appHolder);
+                                }
+                            }
+                        }
                     }
                 } else {
-                    //RO name Nethuwa Okkoma RO lage
-                    if (appHolder.getRoName() != null) {
-                        if (tradeNature != null) {
-                            if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
 
-                                if (assessNo != null) {
-                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else if (street != null) {
-                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else if (ward != null) {
-                                    if (ward.equals(appHolder.getWardName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else {
-                                    filter.add(appHolder);
-                                }
-                            }
-                        } else if (tradeType != null) {
-                            if (tradeType.equals(appHolder.getTradeTypeName())) {
-                                if (assessNo != null) {
-                                    if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else if (street != null) {
-                                    if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else if (ward != null) {
-                                    if (ward.equals(appHolder.getWardName())) {
-                                        filter.add(appHolder);
-                                    }
-                                } else {
-                                    filter.add(appHolder);
-                                }
-                            }
-                        } else {
+                    if (tradeNature != null) {
+                        if (tradeNature.equals(appHolder.getNature()) && tradeType.equals(appHolder.getTradeTypeName())) {
+
                             if (assessNo != null) {
                                 if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
                                     filter.add(appHolder);
@@ -312,27 +511,64 @@ public class SarchAppController implements Initializable {
                             } else {
                                 filter.add(appHolder);
                             }
+
+                        }
+                    } else if (tradeType != null) {
+                        if (tradeType.equals(appHolder.getTradeTypeName())) {
+                            if (assessNo != null) {
+                                if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (street != null) {
+                                if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else if (ward != null) {
+                                if (ward.equals(appHolder.getWardName())) {
+                                    filter.add(appHolder);
+                                }
+                            } else {
+                                filter.add(appHolder);
+                            }
+                        }
+                    } else {
+                        if (assessNo != null) {
+                            if (assessNo.equals(appHolder.getAssessmantNO()) && ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                filter.add(appHolder);
+                            }
+                        } else if (street != null) {
+                            if (ward.equals(appHolder.getWardName()) && street.equals(appHolder.getStreetName())) {
+                                filter.add(appHolder);
+                            }
+                        } else if (ward != null) {
+                            if (ward.equals(appHolder.getWardName())) {
+                                filter.add(appHolder);
+                            }
+                        } else {
+                            filter.add(appHolder);
                         }
                     }
 
                 }
             }
 
-            if (hasPay) {
-            }
-
             if (hasDate) {
 
             }
 
+            if (authoritist != null) {
+            }
 
-        loadTable();
+            if (hassCat) {
+            }
+
+            loadTable();
+
+        }
 
     }
 
-}
-
-public void getData() {
+    public void getData() {
         if (ch_appno.isSelected()) {
             appNO = txt_appno.getText();
         } else {
@@ -453,7 +689,7 @@ public void getData() {
     //==========================================================
 
     @FXML
-        private void search(ActionEvent event) {
+    private void search(ActionEvent event) {
 
         getData();
 
@@ -475,7 +711,7 @@ public void getData() {
     }
 
     @FXML
-        private void loadTradType(ActionEvent event) {
+    private void loadTradType(ActionEvent event) {
         if (ch_trade_type.isSelected()) {
             loadCombo();
             //  loadTradeNature(event);
@@ -492,7 +728,7 @@ public void getData() {
     int tt;
 
     @FXML
-        private void getTradeType(ActionEvent event) {
+    private void getTradeType(ActionEvent event) {
         tradeType = com_trade_type.getSelectionModel().getSelectedItem();
         if (tradeType != null) {
             tt = new modle.TradeType().loadTreadType(tradeType).getIdTradeType();
@@ -504,7 +740,7 @@ public void getData() {
 
     //============================ Trade Nature
     @FXML
-        private void loadTradeNature(ActionEvent event) {
+    private void loadTradeNature(ActionEvent event) {
 
         if (ch_trade_nature.isSelected()) {
 
@@ -532,7 +768,7 @@ public void getData() {
 
     //=============================== Warda
     @FXML
-        private void loadWard(ActionEvent event) {
+    private void loadWard(ActionEvent event) {
 
         if (ch_ward.isSelected()) {
 
@@ -549,13 +785,13 @@ public void getData() {
     }
 
     @FXML
-        private void getWard(ActionEvent event) {
+    private void getWard(ActionEvent event) {
         loadStreet(event);
     }
 
     //==================================== Street
     @FXML
-        private void loadStreet(ActionEvent event) {
+    private void loadStreet(ActionEvent event) {
 
         if (ch_street.isSelected()) {
             ward = com_ward.getSelectionModel().getSelectedItem();
@@ -592,7 +828,7 @@ public void getData() {
     }
 
     @FXML
-        private void loadAuthoritst(ActionEvent event) {
+    private void loadAuthoritst(ActionEvent event) {
 
         if (ch_Authoritist.isSelected()) {
             hassCat = true;
@@ -613,7 +849,7 @@ public void getData() {
     }
 
     @FXML
-        private void loadCatagory(ActionEvent event) {
+    private void loadCatagory(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
             loadOutherCombo();
             hassCat = true;
@@ -625,7 +861,7 @@ public void getData() {
     }
 
     @FXML
-        private void removeCat(ActionEvent event) {
+    private void removeCat(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
             hassCat = true;
             com_authoritist.setItems(null);
@@ -638,7 +874,7 @@ public void getData() {
     }
 
     @FXML
-        private void ra_all(ActionEvent event) {
+    private void ra_all(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -650,7 +886,7 @@ public void getData() {
     }
 
     @FXML
-        private void ra_approve(ActionEvent event) {
+    private void ra_approve(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -662,7 +898,7 @@ public void getData() {
     }
 
     @FXML
-        private void ra_none(ActionEvent event) {
+    private void ra_none(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -674,7 +910,7 @@ public void getData() {
     }
 
     @FXML
-        private void ra_pending(ActionEvent event) {
+    private void ra_pending(ActionEvent event) {
         if (ch_Authoritist.isSelected()) {
 
         } else {
@@ -696,7 +932,7 @@ public void getData() {
     }
 
     @FXML
-        private void loadRo(ActionEvent event) {
+    private void loadRo(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -711,7 +947,7 @@ public void getData() {
     }
 
     @FXML
-        private void robyname(ActionEvent event) {
+    private void robyname(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -725,7 +961,7 @@ public void getData() {
     }
 
     @FXML
-        private void allRO(ActionEvent event) {
+    private void allRO(ActionEvent event) {
         if (ch_robill.isSelected()) {
             if (ra_byroname.isSelected()) {
                 loadROlist();
@@ -740,7 +976,7 @@ public void getData() {
     //=============================================================== paymant
 
     @FXML
-        private void loadPay(ActionEvent event) {
+    private void loadPay(ActionEvent event) {
         if (ch_pay.isSelected()) {
             //  ra_payNoneApprove.setSelected(true);
             hasPay = true;
@@ -762,7 +998,7 @@ public void getData() {
 
     //Date ===============================================
     @FXML
-        private void loadDate(ActionEvent event) {
+    private void loadDate(ActionEvent event) {
         if (ch_date.isSelected()) {
             LocalDate localDate = date_form.getValue();
             if (localDate != null) {
@@ -805,7 +1041,7 @@ public void getData() {
     }
 
     @FXML
-        private void more(ActionEvent event) {
+    private void more(ActionEvent event) {
 
         try {
             modle.StaticBadu.setApp(app);
@@ -820,9 +1056,8 @@ public void getData() {
         } catch (IOException ex) {
             ex.printStackTrace();
             Logger
-
-.getLogger(PayController.class
-.getName()).log(Level.SEVERE, null, ex);
+                    .getLogger(PayController.class
+                            .getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -830,14 +1065,13 @@ public void getData() {
     pojo.Application app;
 
     @FXML
-        private void selectApp(MouseEvent event) {
+    private void selectApp(MouseEvent event) {
         int appno = tbl_applicaion.getSelectionModel().getSelectedItem().getAppno();
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        
 
-try {
+        try {
             app = (pojo.Application) session.createCriteria(pojo.Application.class
-).add(Restrictions.eq("idApplication", appno)).uniqueResult();
+            ).add(Restrictions.eq("idApplication", appno)).uniqueResult();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

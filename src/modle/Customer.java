@@ -711,6 +711,7 @@ public class Customer {
                     }
                 }
                 Set<Assessment> assessments1 = c.getAssessments();
+                getWASlist().clear();
                 for (Assessment assessment : assessments1) {
                     setAsses(assessment);
                     WSA wsa = new modle.WSA(assessment.getStreet().getWard().getIdWard(), assessment.getStreet().getWard().getWardName(), assessment.getStreet().getIdStreet(), assessment.getStreet().getStreetName(), assessment.getIdAssessment(), assessment.getAssessmentNo());

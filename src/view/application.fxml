@@ -12,7 +12,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationController">
+<AnchorPane id="AnchorPane" fx:id="application_pain" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ApplicationController">
    <children>
       <Label layoutX="560.0" text="Application" textFill="#029400">
          <font>
@@ -84,11 +84,11 @@
          <font>
             <Font size="14.0" />
          </font></JFXTextArea>
-      <JFXButton fx:id="btn_save_app" layoutX="1096.0" layoutY="435.0" prefHeight="79.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
+      <JFXButton fx:id="btn_save_app" layoutX="1096.0" layoutY="435.0" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #388E3C;" text="Save" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></JFXButton>
-      <JFXButton fx:id="btn_send_approve" layoutX="914.0" layoutY="489.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
+      <JFXButton fx:id="btn_send_approve" layoutX="914.0" layoutY="497.0" prefHeight="25.0" prefWidth="160.0" style="-fx-background-color: #1976D2;" text="Send To Approve" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></JFXButton>
@@ -125,9 +125,14 @@
             <Font size="18.0" />
          </font>
       </JFXToggleButton>
-      <JFXButton fx:id="btn_update_app" layoutX="1096.0" layoutY="544.0" onAction="#updateApplication" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #fff176;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btn_update_app" layoutX="1096.0" layoutY="489.0" onAction="#updateApplication" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #fff176;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_deactive" layoutX="1096.0" layoutY="544.0" onAction="#deactivateApp" prefHeight="47.0" prefWidth="160.0" style="-fx-background-color: #E64A19;" text="Deactivate" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="12.0" />
          </font>
       </JFXButton>
    </children>

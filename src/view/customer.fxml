@@ -60,17 +60,17 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXButton fx:id="btn_add" layoutX="210.0" layoutY="555.0" prefHeight="25.0" prefWidth="91.0" style="-fx-background-color: #43A047;" text="Add" textFill="WHITE">
+      <JFXButton fx:id="btn_add" layoutX="50.0" layoutY="538.0" prefHeight="53.0" prefWidth="160.0" style="-fx-background-color: #43A047;" text="Add New Customer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_update" layoutX="422.0" layoutY="555.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btn_update" layoutX="633.0" layoutY="562.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_clear" layoutX="636.0" layoutY="555.0" onAction="#clearAll" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btn_clear" layoutX="828.0" layoutY="562.0" onAction="#clearAll" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -90,6 +90,11 @@
       <JFXButton fx:id="btn_genarate" layoutX="828.0" layoutY="96.0" onAction="#genarateAsessmantNO" prefHeight="30.0" prefWidth="208.0" text="Genarate Assessment Number">
          <font>
             <Font size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton fx:id="btn_add1" layoutX="275.0" layoutY="562.0" onAction="#addAssessmant" prefHeight="29.0" prefWidth="280.0" style="-fx-background-color: #43A047;" text="Add New Assessmant To Old Customer" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
    </children>

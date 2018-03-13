@@ -147,6 +147,10 @@ public class SarchAppController implements Initializable {
     private TableColumn<AppTbl, String> c_tname;
     @FXML
     private JFXButton btn_All;
+    @FXML
+    private JFXButton btn_paymant_report;
+    @FXML
+    private JFXButton btn_app_report;
 
     /**
      * Initializes the controller class.
@@ -4318,6 +4322,7 @@ public class SarchAppController implements Initializable {
     @FXML
     private void loadPay(ActionEvent event) {
         if (ch_pay.isSelected()) {
+            btn_paymant_report.setDisable(false);
             //  ra_payNoneApprove.setSelected(true);
             hasPay = true;
             if (ra_payNoneApprove.isSelected()) {
@@ -4332,6 +4337,7 @@ public class SarchAppController implements Initializable {
             ra_payApprove.setSelected(false);
             ra_paid.setSelected(false);
             ra_payNoneApprove.setSelected(false);
+            btn_paymant_report.setDisable(true);
         }
 
     }
@@ -4352,6 +4358,9 @@ public class SarchAppController implements Initializable {
                 Date date = Date.from(instant);
                 //   System.out.println(localDateTo + "\n" + instant + "\n" + date);
             }
+             btn_paymant_report.setDisable(false);
+        }else{
+            btn_paymant_report.setDisable(true);
         }
 
     }
@@ -4417,6 +4426,20 @@ public class SarchAppController implements Initializable {
         } finally {
             session.close();
         }
+    }
+
+    @FXML
+    private void paymantReport(ActionEvent event) {        
+            new modle.Report().ariasLatter(filter);
+    }
+
+    @FXML
+    private void applicationReport(ActionEvent event) {
+        
+        
+        
+        
+        
     }
 
 }

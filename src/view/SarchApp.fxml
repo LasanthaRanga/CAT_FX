@@ -119,5 +119,7 @@
             <TableColumn fx:id="c_tname" prefWidth="148.0" text="Trade Name" />
          </columns>
       </TableView>
+      <JFXButton fx:id="btn_paymant_report" disable="true" layoutX="636.0" layoutY="579.0" onAction="#paymantReport" text="Paymant Report" />
+      <JFXButton fx:id="btn_app_report" layoutX="766.0" layoutY="579.0" onAction="#applicationReport" text="Application Report" />
    </children>
 </AnchorPane>

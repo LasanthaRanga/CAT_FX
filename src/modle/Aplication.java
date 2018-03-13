@@ -83,7 +83,7 @@ public class Aplication implements DAO<pojo.Application> {
         Transaction bt = session.beginTransaction();
         try {
             session.update(t);
-            session.flush();
+     //       session.flush();
             bt.commit();
             return true;
         } catch (Exception e) {

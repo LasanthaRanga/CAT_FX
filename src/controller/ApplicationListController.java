@@ -27,6 +27,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -34,6 +35,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import modle.Aplication;
 import modle.ApplicationStatus;
 import org.hibernate.Session;
@@ -315,7 +317,9 @@ public class ApplicationListController implements Initializable {
                 return "Approve";
             } else if (payapp == 0) {
                 return "Pending";
-            } else {
+            } else if(payapp==5) {
+                return "Deactivate";
+            }else{
                 return "Paied";
             }
         }
@@ -400,9 +404,21 @@ public class ApplicationListController implements Initializable {
         appList.clear();
         for (modle.AppTbl a : appTbls) {
             appList.add(new AppTbl(a.getAppno(), a.getAppNOString(), a.getType(), a.getNature(), a.getTname(), a.getAlocation(), a.getTxt(), a.getPayapp()));
+            
         }
-        tbl_applicaion.setItems(appList);
-
+        
+//        tbl_applicaion.setItems(appList);
+//        tbl_applicaion.setRowFactory(new Callback<TableView<AppTbl>, TableRow<AppTbl>>() {
+//            @Override
+//            public TableRow<AppTbl> call(TableView<AppTbl> param) {
+//                
+//            }
+//        });
+//        
+        
+     
+        
+        
     }
 
     public class approve {

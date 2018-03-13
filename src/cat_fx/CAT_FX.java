@@ -22,13 +22,16 @@ public class CAT_FX extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/ShopRent/view/main.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
+
         stage.getIcons().add(new Image("/Cat.png"));
         Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
+        // scene.setFill(Color.TRANSPARENT);
+      //  stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
     }
 
     /**

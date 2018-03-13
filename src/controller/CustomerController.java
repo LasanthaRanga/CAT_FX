@@ -119,6 +119,8 @@ public class CustomerController implements Initializable {
     Scene scene;
 
     Customer cus;
+    @FXML
+    private JFXButton btn_add1;
 
     /**
      * Initializes the controller class.
@@ -137,7 +139,6 @@ public class CustomerController implements Initializable {
 
         cus = new modle.Customer();
         ArrayList list = cus.getCustomerFnameList();
-
         TextFields.bindAutoCompletion(txt_fname, list);
         updateCustomer();
 
@@ -290,89 +291,44 @@ public class CustomerController implements Initializable {
             @Override
             public void handle(ActionEvent event) {
 
-                if (upcus == null) {
-                    customer = new Customer();
-                    String nic1 = txt_nic.getText();
-                    customer.setNic(nic1);
+                customer = new Customer();
+                String nic1 = txt_nic.getText();
+                customer.setNic(nic1);
 
-                    Customer searchCustomerByNic = customer.searchCustomerByNic();
-                    if (searchCustomerByNic.getFullName() == null) {
+                Customer searchCustomerByNic = customer.searchCustomerByNic();
+                if (searchCustomerByNic.getFullName() == null) {
 
-                        getSelectedWaredStrret();
+                    getSelectedWaredStrret();
 
-                        customer.setSelectedWard(selectedWard);
-                        customer.setSelectedStreet(selectedStreet);
-                        customer.setAssesmentNO(txt_assesment.getText());
+                    customer.setSelectedWard(selectedWard);
+                    customer.setSelectedStreet(selectedStreet);
+                    customer.setAssesmentNO(txt_assesment.getText());
 
-                        customer.setFullName(txt_fname.getText());
-                        customer.setAddress1(txt_adress1.getText());
-                        customer.setAddress2(txt_adress2.getText());
-                        customer.setAddress3(txt_adress3.getText());
-                        customer.setCity(txt_city.getText());
+                    customer.setFullName(txt_fname.getText());
+                    customer.setAddress1(txt_adress1.getText());
+                    customer.setAddress2(txt_adress2.getText());
+                    customer.setAddress3(txt_adress3.getText());
+                    customer.setCity(txt_city.getText());
 
-                        customer.setPhone(txt_phone.getText());
-                        customer.setMobile(txt_mobile.getText());
-                        customer.setEmail(txt_email.getText());
+                    customer.setPhone(txt_phone.getText());
+                    customer.setMobile(txt_mobile.getText());
+                    customer.setEmail(txt_email.getText());
 
-                        boolean saveCustomer = customer.saveCustomer();
+                    boolean saveCustomer = customer.saveCustomer();
 
-                        if (saveCustomer) {
-                            modle.Allert.notificationGood("Added", customer.getFullName());
-                            clearAll(event);   
-                            
-                        } else {
-                            modle.Allert.notificationError("Error", null);
-                        }
+                    if (saveCustomer) {
+                        modle.Allert.notificationGood("Added", customer.getFullName());
+                        clearAll(event);
 
                     } else {
-
+                        modle.Allert.notificationError("Error", null);
                     }
+
                 } else {
 
-                    Alert alert = new Alert(AlertType.CONFIRMATION);
-                    alert.setTitle("Confirmation Dialog");
-                    alert.setHeaderText("Are You Sure To Add New Assessmant For This Customer ?\n  " + txt_fname.getText());
-                    alert.setContentText("Are you ok with this?");
-
-                    Optional<ButtonType> result = alert.showAndWait();
-                    if (result.get() == ButtonType.OK) {
-
-                        customer = upcus;
-                        System.out.println(upcus.getIdCustomer());
-                        String nic1 = txt_nic.getText();
-                        customer.setNic(nic1);
-
-                        getSelectedWaredStrret();
-
-                        customer.setSelectedWard(selectedWard);
-                        customer.setSelectedStreet(selectedStreet);
-                        customer.setAssesmentNO(txt_assesment.getText());
-
-                        customer.setFullName(txt_fname.getText());
-                        customer.setAddress1(txt_adress1.getText());
-                        customer.setAddress2(txt_adress2.getText());
-                        customer.setAddress3(txt_adress3.getText());
-                        customer.setCity(txt_city.getText());
-
-                        customer.setPhone(txt_phone.getText());
-                        customer.setMobile(txt_mobile.getText());
-                        customer.setEmail(txt_email.getText());
-
-                        boolean saveCustomer = customer.saveNewAssessmant();
-
-                        if (saveCustomer) {
-                            modle.Allert.notificationGood("Added", customer.getFullName());
-                            clearAll(event);
-
-                            // setWardStrretAssesmant();
-                        } else {
-                            modle.Allert.notificationError("Error", null);
-                        }
-
-                    } else {
-                    }
-
                 }
+                ArrayList li = cus.getCustomerFnameList();
+                TextFields.bindAutoCompletion(txt_fname, li);
             }
 
         });
@@ -559,6 +515,8 @@ public class CustomerController implements Initializable {
             } else {
                 // ... user chose CANCEL or closed the dialog
             }
+            ArrayList li = cus.getCustomerFnameList();
+            TextFields.bindAutoCompletion(txt_fname, li);
         });
     }
 
@@ -628,6 +586,57 @@ public class CustomerController implements Initializable {
         btn_add.setDisable(false);
         upcus = null;
         Runtime.getRuntime().gc();
+
+    }
+
+    @FXML
+    private void addAssessmant(ActionEvent event) {
+
+        Alert alert = new Alert(AlertType.CONFIRMATION);
+        alert.setTitle("Confirmation Dialog");
+        alert.setHeaderText("Are You Sure To Add New Assessmant For This Customer ?\n  " + txt_fname.getText());
+        alert.setContentText("Are you ok with this?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK) {
+
+            customer = upcus;
+            System.out.println(upcus.getIdCustomer());
+            String nic1 = txt_nic.getText();
+            customer.setNic(nic1);
+
+            getSelectedWaredStrret();
+
+            customer.setSelectedWard(selectedWard);
+            customer.setSelectedStreet(selectedStreet);
+            customer.setAssesmentNO(txt_assesment.getText());
+
+            customer.setFullName(txt_fname.getText());
+            customer.setAddress1(txt_adress1.getText());
+            customer.setAddress2(txt_adress2.getText());
+            customer.setAddress3(txt_adress3.getText());
+            customer.setCity(txt_city.getText());
+
+            customer.setPhone(txt_phone.getText());
+            customer.setMobile(txt_mobile.getText());
+            customer.setEmail(txt_email.getText());
+
+            boolean saveCustomer = customer.saveNewAssessmant();
+
+            if (saveCustomer) {
+                modle.Allert.notificationGood("Added", customer.getFullName());
+                clearAll(event);
+
+                // setWardStrretAssesmant();
+            } else {
+                modle.Allert.notificationError("Error", null);
+            }
+
+        } else {
+        }
+
+        ArrayList li = cus.getCustomerFnameList();
+        TextFields.bindAutoCompletion(txt_fname, li);
 
     }
 

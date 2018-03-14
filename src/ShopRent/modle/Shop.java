@@ -5,6 +5,8 @@
  */
 package ShopRent.modle;
 
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 import pojo.SrShopNo;
 
 /**
@@ -21,6 +23,85 @@ public class Shop extends Flow {
     private String tradeName;
     private Integer shopStatus;
     private Integer shopSyn;
+    
+    
+    public boolean savePojoShop() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+
+    public boolean updatePojoShop() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+
+    public boolean deactivePojoShop() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+    
+    public boolean searchPojoShopByID(int id) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
+        try {
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();          
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+    
+    public boolean searchPojoShopByName(String name) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();     
+        try {
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();          
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+    
+    
 
     public Shop() {
         super();

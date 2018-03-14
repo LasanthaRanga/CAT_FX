@@ -15,17 +15,14 @@ import org.hibernate.Transaction;
 public class Building extends Street {
 
     private pojo.SrBuilding pojoBuilding;
-    private Integer idBuilding;
-    private Street street;
-    private String buildingName;
-    private Integer buildingStatus;
-    private Integer buildingSyn;
+   
     
-    public boolean savePojoBuilding() {
+    public boolean savePojoBuilding(pojo.SrBuilding building) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
-
+            session.save(building);
+            bt.commit();
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -114,72 +111,5 @@ public class Building extends Street {
 
     /**
      * @return the idBuilding
-     */
-    public Integer getIdBuilding() {
-        return idBuilding;
-    }
-
-    /**
-     * @param idBuilding the idBuilding to set
-     */
-    public void setIdBuilding(Integer idBuilding) {
-        this.idBuilding = idBuilding;
-    }
-
-    /**
-     * @return the street
-     */
-    public Street getStreet() {
-        return street;
-    }
-
-    /**
-     * @param street the street to set
-     */
-    public void setStreet(Street street) {
-        this.street = street;
-    }
-
-    /**
-     * @return the buildingName
-     */
-    public String getBuildingName() {
-        return buildingName;
-    }
-
-    /**
-     * @param buildingName the buildingName to set
-     */
-    public void setBuildingName(String buildingName) {
-        this.buildingName = buildingName;
-    }
-
-    /**
-     * @return the buildingStatus
-     */
-    public Integer getBuildingStatus() {
-        return buildingStatus;
-    }
-
-    /**
-     * @param buildingStatus the buildingStatus to set
-     */
-    public void setBuildingStatus(Integer buildingStatus) {
-        this.buildingStatus = buildingStatus;
-    }
-
-    /**
-     * @return the buildingSyn
-     */
-    public Integer getBuildingSyn() {
-        return buildingSyn;
-    }
-
-    /**
-     * @param buildingSyn the buildingSyn to set
-     */
-    public void setBuildingSyn(Integer buildingSyn) {
-        this.buildingSyn = buildingSyn;
-    }
-
+     */   
 }

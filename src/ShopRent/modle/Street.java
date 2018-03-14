@@ -15,15 +15,7 @@ import org.hibernate.Transaction;
 public class Street extends Ward {
 
     private pojo.Street pojoStreet;
-    private Integer idStreet;
-    private String streetName;
-    private String strretNo;
-    private Integer strretStatus;
-    private Integer strretSyn;
-    
-    
-    
-    
+
     public boolean savePojoStreet() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
@@ -71,36 +63,51 @@ public class Street extends Ward {
             ShopRent.modle.LogWrite.writeLog();
         }
     }
-    
-    public boolean searchPojoStreetByID(int id) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
-        try {
 
-            return true;
+    public pojo.Street searchPojoStreetByID(int id) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+
+        try {
+            nullStreet();
+            setPojoStreet((pojo.Street) session.load(pojo.Street.class, id));
+            if (getPojoStreet() != null) {
+                return pojoStreet;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
+            e.printStackTrace();
+            return null;
         } finally {
             session.close();
             ShopRent.modle.LogWrite.writeLog();
         }
     }
-    
+
     public boolean searchPojoStreetByName(String name) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();     
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
 
             return true;
         } catch (Exception e) {
-            e.printStackTrace();          
+            e.printStackTrace();
             return false;
         } finally {
             session.close();
             ShopRent.modle.LogWrite.writeLog();
         }
     }
-    
-    
+
+    public void nullStreet() {
+        setPojoStreet(null);
+
+    }
+
+    public void setAllDataInStreet() {
+
+        getPojoStreet().getIdStreet();
+
+    }
 
     /**
      * @return the pojoStreet
@@ -115,75 +122,4 @@ public class Street extends Ward {
     public void setPojoStreet(pojo.Street pojoStreet) {
         this.pojoStreet = pojoStreet;
     }
-
-    /**
-     * @return the idStreet
-     */
-    public Integer getIdStreet() {
-        return idStreet;
-    }
-
-    /**
-     * @param idStreet the idStreet to set
-     */
-    public void setIdStreet(Integer idStreet) {
-        this.idStreet = idStreet;
-    }
-
-    /**
-     * @return the streetName
-     */
-    public String getStreetName() {
-        return streetName;
-    }
-
-    /**
-     * @param streetName the streetName to set
-     */
-    public void setStreetName(String streetName) {
-        this.streetName = streetName;
-    }
-
-    /**
-     * @return the strretNo
-     */
-    public String getStrretNo() {
-        return strretNo;
-    }
-
-    /**
-     * @param strretNo the strretNo to set
-     */
-    public void setStrretNo(String strretNo) {
-        this.strretNo = strretNo;
-    }
-
-    /**
-     * @return the strretStatus
-     */
-    public Integer getStrretStatus() {
-        return strretStatus;
-    }
-
-    /**
-     * @param strretStatus the strretStatus to set
-     */
-    public void setStrretStatus(Integer strretStatus) {
-        this.strretStatus = strretStatus;
-    }
-
-    /**
-     * @return the strretSyn
-     */
-    public Integer getStrretSyn() {
-        return strretSyn;
-    }
-
-    /**
-     * @param strretSyn the strretSyn to set
-     */
-    public void setStrretSyn(Integer strretSyn) {
-        this.strretSyn = strretSyn;
-    }
-
 }

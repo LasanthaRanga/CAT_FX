@@ -10,7 +10,9 @@ import ShopRent.modle.Street;
 import ShopRent.modle.TableLoad;
 import com.jfoenix.controls.JFXButton;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +20,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import pojo.SrBuilding;
+import pojo.Ward;
 
 /**
  * FXML Controller class
@@ -67,15 +72,54 @@ public class DashboardController implements Initializable {
         }
     }
 
+    public class WardTable {
+
+        /**
+         * @return the wid
+         */
+        public String getWid() {
+            return wid.get();
+        }
+
+        /**
+         * @return the wname
+         */
+        public String getWname() {
+            return wname.get();
+        }
+
+        private SimpleStringProperty wid;
+        private SimpleStringProperty wname;
+
+        public WardTable(String wid, String wname) {
+            this.wid = new SimpleStringProperty(wid);
+            this.wname = new SimpleStringProperty(wname);
+        }
+
+    }
+
     @FXML
     private void loadtable(ActionEvent event) {
 
-        TableLoad tableLoad = new ShopRent.modle.TableLoad();
+        HashMap<TableColumn, String> hashMap = new HashMap<TableColumn, String>();
+        hashMap.put(col1, "wid");
+        hashMap.put(col2, "wname");
+        java.util.List<pojo.Ward> list = new modle.Ward().loadWardTable();
 
-        modle.Ward ward = new modle.Ward();
-        java.util.List<pojo.Ward> list = ward.loadWardTable();
-        ObservableList List = FXCollections.observableArrayList();
-        tableLoad.load(list, this);
+        ObservableList oList = FXCollections.observableArrayList();
+        for (Ward w : list) {
+            oList.add(new WardTable(w.getIdWard()+"", w.getWardName()));
+        }
+
+        TableLoad tableLoad = new ShopRent.modle.TableLoad();
+        tableLoad.load(oList, tbl1, hashMap);
+
+    }
+
+    @FXML
+    private void getSelected(MouseEvent event) {
+        WardTable name = (DashboardController.WardTable) tbl1.getSelectionModel().getSelectedItem();
+        modle.Allert.notificationGood(name.getWname(), "");
     }
 
 }

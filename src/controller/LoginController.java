@@ -22,10 +22,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -59,6 +61,8 @@ public class LoginController implements Initializable {
     private JFXButton btn_foget;
     @FXML
     private JFXButton btn_min;
+    @FXML
+    private AnchorPane anchor_main;
 
     /**
      * Initializes the controller class.
@@ -216,4 +220,35 @@ public class LoginController implements Initializable {
         window.setIconified(true);
         // window.hide();
     }
+    
+    
+    @FXML
+    private void mouseDragged(MouseEvent event) {
+        cat_fx.CAT_FX.getPrimaryStage().setX(event.getX() + xOffset);
+        cat_fx.CAT_FX.getPrimaryStage().setY(event.getY() + yOffset);
+        //anchor_main.setCursor(Cursor.CLOSED_HAND);
+    }
+
+    @FXML
+    private void mouseReleased(MouseEvent event) {
+       // anchor_main.setCursor(Cursor.DEFAULT);
+    }
+
+    @FXML
+    private void mousePressed(MouseEvent event) {
+        xOffset = cat_fx.CAT_FX.getPrimaryStage().getX() - event.getSceneX();
+        yOffset = cat_fx.CAT_FX.getPrimaryStage().getY() - event.getSceneY();
+    }
+    private double xOffset;
+    private double yOffset;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }

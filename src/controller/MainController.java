@@ -20,10 +20,12 @@ import javafx.event.ActionEvent;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Cursor;
 
 import javafx.scene.Node;
 
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
@@ -78,7 +80,7 @@ public class MainController implements Initializable {
         try {
 
             VBox box = FXMLLoader.load(getClass().getResource("/view/Box.fxml"));
-            
+
             AnchorPane about = FXMLLoader.load(getClass().getResource("/view/About.fxml"));
 
             drawer.setSidePane(box);
@@ -142,8 +144,8 @@ public class MainController implements Initializable {
                                     AnchorPane paymantView = FXMLLoader.load(getClass().getResource("/view/PaymantView.fxml"));
                                     container.getChildren().add(paymantView);
                                     break;
-                                    
-                                case "about":                                    
+
+                                case "about":
                                     container.getChildren().add(about);
                                     break;
 
@@ -219,5 +221,25 @@ public class MainController implements Initializable {
         Platform.exit();
         System.exit(0);
     }
+
+    @FXML
+    private void mouseDragged(MouseEvent event) {
+        cat_fx.CAT_FX.getPrimaryStage().setX(event.getX() + xOffset);
+        cat_fx.CAT_FX.getPrimaryStage().setY(event.getY() + yOffset);
+        anchor_main.setCursor(Cursor.CLOSED_HAND);
+    }
+
+    @FXML
+    private void mouseReleased(MouseEvent event) {
+        anchor_main.setCursor(Cursor.DEFAULT);
+    }
+
+    @FXML
+    private void mousePressed(MouseEvent event) {
+        xOffset = cat_fx.CAT_FX.getPrimaryStage().getX() - event.getSceneX();
+        yOffset = cat_fx.CAT_FX.getPrimaryStage().getY() - event.getSceneY();
+    }
+    private double xOffset;
+    private double yOffset;
 
 }

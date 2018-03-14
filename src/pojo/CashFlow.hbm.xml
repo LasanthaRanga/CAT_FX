@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 17, 2018 3:18:50 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Mar 14, 2018 12:29:13 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.CashFlow" table="cash_flow" catalog="cat" optimistic-lock="version">
         <id name="idCashFlow" type="java.lang.Integer">

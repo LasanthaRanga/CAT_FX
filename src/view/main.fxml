@@ -11,7 +11,7 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor_main" prefHeight="690.0" prefWidth="1300.0" style="-fx-background-radius: 12;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
     <children>
-        <AnchorPane prefHeight="69.0" prefWidth="1300.0" style="-fx-background-color: #9E9E9E;">
+        <AnchorPane onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="69.0" prefWidth="1300.0" style="-fx-background-color: #9E9E9E;">
             <children>
                 <Label layoutX="409.0" layoutY="10.0" text="Kurunegala Municipal Council" textFill="WHITE">
                     <font>

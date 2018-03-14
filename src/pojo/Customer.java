@@ -1,5 +1,5 @@
 package pojo;
-// Generated Feb 4, 2018 3:51:56 PM by Hibernate Tools 4.3.1
+// Generated Mar 14, 2018 12:29:09 PM by Hibernate Tools 4.3.1
 
 
 import java.util.Date;
@@ -21,6 +21,7 @@ public class Customer  implements java.io.Serializable {
      private Integer statues;
      private Integer syn;
      private Set<CustomerHasTradeLicense> customerHasTradeLicenses = new HashSet<CustomerHasTradeLicense>(0);
+     private Set<SrShopRentInfo> srShopRentInfos = new HashSet<SrShopRentInfo>(0);
      private Set<CustomerHasCusCat> customerHasCusCats = new HashSet<CustomerHasCusCat>(0);
      private Set<Assessment> assessments = new HashSet<Assessment>(0);
      private Set<Application> applications = new HashSet<Application>(0);
@@ -33,7 +34,7 @@ public class Customer  implements java.io.Serializable {
     public Customer(UserLog userLog) {
         this.userLog = userLog;
     }
-    public Customer(UserLog userLog, String nic, String fullName, String customercol, Date regDate, Integer statues, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses, Set<CustomerHasCusCat> customerHasCusCats, Set<Assessment> assessments, Set<Application> applications, Set<Contact> contacts) {
+    public Customer(UserLog userLog, String nic, String fullName, String customercol, Date regDate, Integer statues, Integer syn, Set<CustomerHasTradeLicense> customerHasTradeLicenses, Set<SrShopRentInfo> srShopRentInfos, Set<CustomerHasCusCat> customerHasCusCats, Set<Assessment> assessments, Set<Application> applications, Set<Contact> contacts) {
        this.userLog = userLog;
        this.nic = nic;
        this.fullName = fullName;
@@ -42,6 +43,7 @@ public class Customer  implements java.io.Serializable {
        this.statues = statues;
        this.syn = syn;
        this.customerHasTradeLicenses = customerHasTradeLicenses;
+       this.srShopRentInfos = srShopRentInfos;
        this.customerHasCusCats = customerHasCusCats;
        this.assessments = assessments;
        this.applications = applications;
@@ -110,6 +112,13 @@ public class Customer  implements java.io.Serializable {
     
     public void setCustomerHasTradeLicenses(Set<CustomerHasTradeLicense> customerHasTradeLicenses) {
         this.customerHasTradeLicenses = customerHasTradeLicenses;
+    }
+    public Set<SrShopRentInfo> getSrShopRentInfos() {
+        return this.srShopRentInfos;
+    }
+    
+    public void setSrShopRentInfos(Set<SrShopRentInfo> srShopRentInfos) {
+        this.srShopRentInfos = srShopRentInfos;
     }
     public Set<CustomerHasCusCat> getCustomerHasCusCats() {
         return this.customerHasCusCats;

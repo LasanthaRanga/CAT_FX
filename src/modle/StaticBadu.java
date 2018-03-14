@@ -15,6 +15,8 @@ import java.util.Set;
  */
 public class StaticBadu {
 
+    
+    private static controller.CustomerController customerController;
     private static pojo.Application app;
     private static String cus_fullname;
     private static List<modle.Customer> cuslist;
@@ -122,6 +124,20 @@ public class StaticBadu {
      */
     public static void setpCustomer(pojo.Customer apCustomer) {
         pCustomer = apCustomer;
+    }
+
+    /**
+     * @return the customerController
+     */
+    public static controller.CustomerController getCustomerController() {
+        return customerController;
+    }
+
+    /**
+     * @param aCustomerController the customerController to set
+     */
+    public static void setCustomerController(controller.CustomerController aCustomerController) {
+        customerController = aCustomerController;
     }
 
 }

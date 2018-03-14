@@ -19,17 +19,21 @@ import javafx.stage.StageStyle;
  * @author RM.LasanthaRanga@gmail.com
  */
 public class CAT_FX extends Application {
+    
+    private static Stage primaryStage;
 
     @Override
     public void start(Stage stage) throws Exception {
+        primaryStage =stage;
         Parent root = FXMLLoader.load(getClass().getResource("/ShopRent/view/main.fxml"));
         stage.initStyle(StageStyle.TRANSPARENT);
-
+        
         stage.getIcons().add(new Image("/Cat.png"));
         Scene scene = new Scene(root);
-        // scene.setFill(Color.TRANSPARENT);
-      //  stage.setResizable(false);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setResizable(false);
         stage.setScene(scene);
+        
         stage.show();
 
     }
@@ -39,6 +43,13 @@ public class CAT_FX extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+    }
+
+    /**
+     * @return the primaryStage
+     */
+    public static Stage getPrimaryStage() {
+        return primaryStage;
     }
 
 }

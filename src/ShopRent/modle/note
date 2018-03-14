@@ -1,0 +1,15 @@
+Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+Transaction bt = session.beginTransaction();
+try {
+    //code start
+
+    //code end
+    return true;
+} catch (Exception e) {
+    e.printStackTrace();
+    bt.rollback();
+    return false;
+} finally {
+    session.close();
+    ShopRent.modle.LogWrite.writeLog();
+}

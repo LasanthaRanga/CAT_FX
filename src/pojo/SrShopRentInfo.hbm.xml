@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 14, 2018 12:29:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.SrShopRentInfo" table="sr_shop_rent_info" catalog="cat" optimistic-lock="version">
+        <id name="idShopRentInfo" type="java.lang.Integer">
+            <column name="idShop_Rent_Info" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="customer" class="pojo.Customer" fetch="select">
+            <column name="customer_idCustomer" not-null="true" />
+        </many-to-one>
+        <many-to-one name="srShopNo" class="pojo.SrShopNo" fetch="select">
+            <column name="Shop_No_idShop_No" not-null="true" />
+        </many-to-one>
+        <property name="rentalStatic" type="java.lang.Double">
+            <column name="Rental_static" precision="22" scale="0" />
+        </property>
+        <property name="keyMoneyStatic" type="java.lang.Double">
+            <column name="KeyMoney_static" precision="22" scale="0" />
+        </property>
+        <property name="currentRental" type="java.lang.Double">
+            <column name="current_rental" precision="22" scale="0" />
+        </property>
+        <property name="currentKeymoney" type="java.lang.Double">
+            <column name="current_keymoney" precision="22" scale="0" />
+        </property>
+        <property name="currentWarrant" type="java.lang.Double">
+            <column name="current_warrant" precision="22" scale="0" />
+        </property>
+        <property name="startDate" type="date">
+            <column name="start_date" length="10" />
+        </property>
+        <property name="endDate" type="date">
+            <column name="end_date" length="10" />
+        </property>
+        <property name="shopRentInfocol" type="string">
+            <column name="Shop_Rent_Infocol" length="45" />
+        </property>
+        <property name="rentalTypeStatus" type="java.lang.Integer">
+            <column name="rental_type_status" />
+        </property>
+        <set name="srRentals" table="sr_rental" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Shop_Rent_Info_idShop_Rent_Info" not-null="true" />
+            </key>
+            <one-to-many class="pojo.SrRental" />
+        </set>
+    </class>
+</hibernate-mapping>

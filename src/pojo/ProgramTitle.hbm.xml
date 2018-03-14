@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated Feb 4, 2018 3:51:59 PM by Hibernate Tools 4.3.1 -->
+<!-- Generated Mar 14, 2018 12:29:13 PM by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="pojo.ProgramTitle" table="program_title" catalog="cat" optimistic-lock="version">
         <id name="idProgramTitle" type="java.lang.Integer">

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 14, 2018 12:29:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.SrBuilding" table="sr_building" catalog="cat" optimistic-lock="version">
+        <id name="idBuilding" type="java.lang.Integer">
+            <column name="idBuilding" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="street" class="pojo.Street" fetch="select">
+            <column name="street_idStreet" not-null="true" />
+        </many-to-one>
+        <property name="buildingName" type="string">
+            <column name="BuildingName" length="45" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+        <set name="srFlows" table="sr_flow" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Building_idBuilding" not-null="true" />
+            </key>
+            <one-to-many class="pojo.SrFlow" />
+        </set>
+    </class>
+</hibernate-mapping>

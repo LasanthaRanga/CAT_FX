@@ -156,7 +156,7 @@ public class CustomerController implements Initializable {
 
     }
 
-    int x = 0;
+    
 
     @FXML
     public void loadCusByFullname(KeyEvent event) {
@@ -165,11 +165,11 @@ public class CustomerController implements Initializable {
             System.out.println("ENTER GEHUWAA");
             String fname = txt_fname.getText();
 
-            if (x == 0) {
+            
                 modle.StaticBadu.setCus_fullname(fname);
                 List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
                 modle.StaticBadu.setCuslist(searchCustomer);
-                x = 1;
+             
 
                 if (searchCustomer.size() > 1) {
                     if (searchCustomer != null) {
@@ -181,8 +181,8 @@ public class CustomerController implements Initializable {
                             stage.initStyle(StageStyle.TRANSPARENT);
                             stage.setScene(scene);
                             stage.show();
-
-                            x = 2;
+                            modle.StaticBadu.setCustomerController(this);
+                            
 
                         } catch (IOException ex) {
                             ex.printStackTrace();
@@ -199,39 +199,35 @@ public class CustomerController implements Initializable {
                     txt_adress1.setText(upcus.getAddress1());
                     txt_adress2.setText(upcus.getAddress2());
                     txt_adress3.setText(upcus.getAddress3());
-                    txt_nic.setText(upcus.getNic());
-                    x = 0;
-                    // btn_add.setDisable(true);
+                    txt_nic.setText(upcus.getNic());  
                     btn_update.setDisable(false);
-
                     setWardStrretAssesmant();
                 }
 
-            }//x = 0
-            else if (x == 2) {
-                System.out.println(x);
-                System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
-                if (modle.StaticBadu.getpCustomer() != null) {
-                    upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
-                    System.out.println(upcus.getFullName() + "=== up cus");
+           
+            
+        }
+    }
 
-                    txt_fname.setText(upcus.getFullName());
-                    txt_phone.setText(upcus.getPhone());
-                    txt_mobile.setText(upcus.getMobile());
-                    txt_email.setText(upcus.getEmail());
-                    txt_adress1.setText(upcus.getAddress1());
-                    txt_adress2.setText(upcus.getAddress2());
-                    txt_adress3.setText(upcus.getAddress3());
-                    txt_nic.setText(upcus.getNic());
-                    x = 0;
-                    //btn_add.setDisable(true);
-                    btn_update.setDisable(false);
+    public void setCustomerDataBySelect() {
+        
+        System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
+        if (modle.StaticBadu.getpCustomer() != null) {
+            upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
+            System.out.println(upcus.getFullName() + "=== up cus");
 
-                    setWardStrretAssesmant();
-
-                }
-            }// x==2
-
+            txt_fname.setText(upcus.getFullName());
+            txt_phone.setText(upcus.getPhone());
+            txt_mobile.setText(upcus.getMobile());
+            txt_email.setText(upcus.getEmail());
+            txt_adress1.setText(upcus.getAddress1());
+            txt_adress2.setText(upcus.getAddress2());
+            txt_adress3.setText(upcus.getAddress3());
+            txt_nic.setText(upcus.getNic());
+           
+            //btn_add.setDisable(true);
+            btn_update.setDisable(false);
+            setWardStrretAssesmant();
         }
     }
 

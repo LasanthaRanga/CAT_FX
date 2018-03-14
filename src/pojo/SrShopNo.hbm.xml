@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Mar 14, 2018 12:29:13 PM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="pojo.SrShopNo" table="sr_shop_no" catalog="cat" optimistic-lock="version">
+        <id name="idShopNo" type="java.lang.Integer">
+            <column name="idShop_No" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="srFlow" class="pojo.SrFlow" fetch="select">
+            <column name="Flow_idFlow" not-null="true" />
+        </many-to-one>
+        <many-to-one name="srRentalType" class="pojo.SrRentalType" fetch="select">
+            <column name="Rental_type_idRental_type" not-null="true" />
+        </many-to-one>
+        <many-to-one name="srShopType" class="pojo.SrShopType" fetch="select">
+            <column name="Shop_type_idShop_type" not-null="true" />
+        </many-to-one>
+        <property name="shopNo" type="string">
+            <column name="shop_no" length="45" />
+        </property>
+        <property name="tradeName" type="string">
+            <column name="trade_name" length="45" />
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status" />
+        </property>
+        <property name="syn" type="java.lang.Integer">
+            <column name="syn" />
+        </property>
+        <set name="srShopRentInfos" table="sr_shop_rent_info" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Shop_No_idShop_No" not-null="true" />
+            </key>
+            <one-to-many class="pojo.SrShopRentInfo" />
+        </set>
+    </class>
+</hibernate-mapping>

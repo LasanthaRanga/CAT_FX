@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #BDBDBD;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopRent.controller.DashboardController">
+   <children>
+      <JFXButton fx:id="btn_test" layoutX="578.0" layoutY="56.0" onAction="#testClick" text="test" />
+   </children>
+</AnchorPane>

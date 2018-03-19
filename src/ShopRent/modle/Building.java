@@ -5,23 +5,25 @@
  */
 package ShopRent.modle;
 
+import java.util.List;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import pojo.SrBuilding;
 
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class Building extends Street {
+public class Building implements SUD<pojo.SrBuilding> {
 
-    private pojo.SrBuilding pojoBuilding;
-   
-    
-    public boolean savePojoBuilding(pojo.SrBuilding building) {
+    @Override
+    public boolean save(SrBuilding t) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
-            session.save(building);
+            session.save(t);
             bt.commit();
             return true;
         } catch (Exception e) {
@@ -34,7 +36,26 @@ public class Building extends Street {
         }
     }
 
-    public boolean updatePojoBuilding() {
+    @Override
+    public boolean update(SrBuilding t) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        Transaction bt = session.beginTransaction();
+        try {
+            session.update(t);
+            bt.commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            bt.rollback();
+            return false;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+
+    @Override
+    public boolean deactiv(SrBuilding t) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
@@ -50,12 +71,52 @@ public class Building extends Street {
         }
     }
 
-    public boolean deactivePojoBuilding() {
+    @Override
+    public List<SrBuilding> getList() {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<SrBuilding> list = session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("status", 1)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+
+    @Override
+    public SrBuilding getT_By_Id(int id) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding srBuilding = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("idBuilding", id)).uniqueResult();
+            return srBuilding;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+    }
+
+    @Override
+    public SrBuilding getT_By_name(String name) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean isExist(String s) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         Transaction bt = session.beginTransaction();
         try {
-
-            return true;
+            List list = session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("buildingName", s)).list();
+            if (list.size() > 0) {
+                return true;
+            } else {
+                return false;
+            }
         } catch (Exception e) {
             e.printStackTrace();
             bt.rollback();
@@ -64,52 +125,89 @@ public class Building extends Street {
             session.close();
             ShopRent.modle.LogWrite.writeLog();
         }
-    }
-    
-    public boolean searchPojoBuildingByID(int id) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
-        try {
 
-            return true;
+    }
+
+    // method
+    public List<pojo.SrBuilding> getBuildingListBy_StreetID(int streetId) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria criteria = session.createCriteria(pojo.SrBuilding.class);
+            criteria.add(Restrictions.eq("status", 1));
+            criteria.add(Restrictions.eq("street", (pojo.Street) session.load(pojo.Street.class, streetId)));
+            List<pojo.SrBuilding> list = criteria.list();
+            if (list != null) {
+                return list;
+            } else {
+                return null;
+            }
         } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
+            e.printStackTrace();
+            return null;
         } finally {
             session.close();
             ShopRent.modle.LogWrite.writeLog();
         }
-    }
-    
-    public boolean searchPojoBuildingByName(String name) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();     
-        try {
 
-            return true;
+    }
+
+    public String getStreetByBuilidingID(int x) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding name = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("idBuilding", x)).uniqueResult();
+            return name.getStreet().getStreetName();
         } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
+            e.printStackTrace();
+            return null;
         } finally {
             session.close();
             ShopRent.modle.LogWrite.writeLog();
         }
-    }
-    
 
-    /**
-     * @return the pojoBuilding
-     */
-    public pojo.SrBuilding getPojoBuilding() {
-        return pojoBuilding;
     }
 
-    /**
-     * @param pojoBuilding the pojoBuilding to set
-     */
-    public void setPojoBuilding(pojo.SrBuilding pojoBuilding) {
-        this.pojoBuilding = pojoBuilding;
+    public Integer getStreetIDByBuilidingID(int x) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding name = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("idBuilding", x)).uniqueResult();
+            return name.getStreet().getIdStreet();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+
     }
 
-    /**
-     * @return the idBuilding
-     */   
+    public String getWardByBuilidingID(int x) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding name = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("idBuilding", x)).uniqueResult();
+            return name.getStreet().getWard().getWardName();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+
+    }
+
+    public Integer getWardIdByBuilidingID(int x) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding name = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("idBuilding", x)).uniqueResult();
+            return name.getStreet().getWard().getIdWard();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
+
+    }
 }

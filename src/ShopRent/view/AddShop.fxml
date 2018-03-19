@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #fff;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111" fx:controller="ShopRent.controller.AddShopController">
+   <children>
+      <JFXComboBox fx:id="com_ward" layoutX="46.0" layoutY="75.0" onAction="#wardComboOnAction" prefHeight="25.0" prefWidth="141.0" promptText="Ward" />
+      <JFXComboBox fx:id="com_street" layoutX="227.0" layoutY="75.0" onAction="#streetComboOnAction" prefHeight="25.0" prefWidth="141.0" promptText="Street" />
+      <JFXComboBox fx:id="com_building" layoutX="405.0" layoutY="75.0" prefHeight="25.0" prefWidth="141.0" promptText="Building" />
+      <JFXComboBox fx:id="com_flow" layoutX="584.0" layoutY="75.0" prefHeight="25.0" prefWidth="141.0" promptText="Flow" />
+      <JFXTextField fx:id="txt_shopNo" layoutX="1130.0" layoutY="75.0" promptText="Shop Number" />
+      <JFXComboBox fx:id="com_type" layoutX="755.0" layoutY="75.0" prefHeight="25.0" prefWidth="141.0" promptText="Type" />
+      <JFXComboBox fx:id="com_rentType" layoutX="941.0" layoutY="75.0" prefHeight="25.0" prefWidth="141.0" promptText="Rental Type" />
+      <JFXButton fx:id="btn_add" layoutX="1130.0" layoutY="133.0" onAction="#clicAddButtom" prefHeight="25.0" prefWidth="135.0" text="Add" />
+   </children>
+</AnchorPane>

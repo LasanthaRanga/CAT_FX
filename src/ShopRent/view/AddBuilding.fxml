@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopRent.controller.AddBuildingController">
+   <children>
+      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="99.0" layoutY="48.0" onAction="#onActionWard" prefHeight="25.0" prefWidth="149.0" promptText="Ward" />
+      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="285.0" layoutY="48.0" prefHeight="25.0" prefWidth="149.0" promptText="Street" />
+      <JFXTextField fx:id="txt_building" labelFloat="true" layoutX="470.0" layoutY="48.0"  prefHeight="25.0" prefWidth="149.0" promptText="Building Name" />
+      <TableView fx:id="tbl_building" layoutX="99.0" layoutY="167.0" onMouseReleased="#selectBuilding" prefHeight="200.0" prefWidth="640.0">
+        <columns>
+          <TableColumn fx:id="col_ward" prefWidth="111.00003051757812" text="Ward" />
+          <TableColumn fx:id="col_street" prefWidth="258.9999694824219" text="Street" />
+            <TableColumn fx:id="col_building" prefWidth="256.0" text="Building" />
+        </columns>
+      </TableView>
+      <JFXButton fx:id="btn_addBuilding" layoutX="99.0" layoutY="113.0" onAction="#addBuilding" text="Add Building" />
+      <TableView fx:id="tbl_Floor" layoutX="785.0" layoutY="167.0" prefHeight="200.0" prefWidth="467.0">
+        <columns>
+          <TableColumn fx:id="col_floor" prefWidth="197.0" text="Floor" />
+            <TableColumn fx:id="col_shop" prefWidth="157.0" text="Shop Count" />
+        </columns>
+      </TableView>
+      <JFXTextField fx:id="txt_floor" labelFloat="true" layoutX="785.0" layoutY="48.0" prefHeight="25.0" prefWidth="149.0" promptText="Floor" />
+      <JFXButton fx:id="btn_addFloor" layoutX="785.0" layoutY="113.0" onAction="#addFloor" prefHeight="25.0" prefWidth="85.0" text="Add Floor" />
+      <JFXButton fx:id="btn_updateBuilding" layoutX="285.0" layoutY="113.0" onAction="#updateBuilding" text="Update Bulding Name" />
+      <JFXButton fx:id="btn_updateFlor" layoutX="943.0" layoutY="113.0" onAction="#updateFloor" prefHeight="25.0" prefWidth="126.0" text="Update Floor Name" />
+   </children>
+</AnchorPane>

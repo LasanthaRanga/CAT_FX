@@ -3,43 +3,61 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vbox1" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #03A9F4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopRent.controller.BoxController">
     <children>
-      <ImageView fitHeight="293.0" fitWidth="201.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="115.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../logo.PNG" />
          </image>
       </ImageView>
-      <HBox style="-fx-background-color: #8D6E63;">
-         <children>
-            <ImageView fitHeight="27.0" fitWidth="38.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../dashboard.png" />
-               </image>
-            </ImageView>
-         </children>
-      </HBox>
-      <JFXButton fx:id="btn_test1" accessibleText="dashboard" alignment="TOP_CENTER" prefHeight="30.0" prefWidth="212.0" style="-fx-background-color: #8D6E63;" text="Dashboard" textAlignment="CENTER" textFill="WHITE">
+      <JFXButton fx:id="btn_dashboard" accessibleText="dashboard" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Dashboard" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
+         <graphic>
+            <ImageView fx:id="img_dashboard" fitHeight="27.0" fitWidth="33.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../dashboard_2.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </JFXButton>
-        <JFXButton fx:id="btn_test" accessibleText="btn_test1" prefHeight="32.0" prefWidth="200.0" style="-fx-background-color: #8D6E63;" text="Ward &amp; Strret" textAlignment="CENTER" textFill="WHITE">
+        <JFXButton fx:id="btn_bulding" accessibleText="building" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Building" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></JFXButton>
-        <JFXButton accessibleText="customer" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #8D6E63;" text="Customer" textAlignment="CENTER" textFill="WHITE">
+         </font>
+         <graphic>
+            <ImageView fx:id="img_building" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../building.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
+        <JFXButton fx:id="btn_shop" accessibleText="shop" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Add Shop" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></JFXButton>
-      <JFXButton prefHeight="103.0" prefWidth="200.0" style="-fx-background-color: #8D6E63;" />
-      <JFXButton accessibleText="btn_exit" prefHeight="48.0" prefWidth="200.0" style="-fx-background-color: #8D6E63;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+         </font>
+         <graphic>
+            <ImageView fx:id="img_shop" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Shop.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
+      <JFXButton prefHeight="385.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" />
+      <JFXButton accessibleText="btn_exit" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
-         </font></JFXButton>
+         </font>
+         <graphic>
+            <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../Close_Window.png" />
+               </image>
+            </ImageView>
+         </graphic></JFXButton>
     </children>
 </VBox>

@@ -88,10 +88,18 @@ public class MainController implements Initializable {
                             switch (accessibleText) {
 
                                 case "dashboard":
-                                    System.out.println("Clic una");
                                     AnchorPane dashh = FXMLLoader.load(getClass().getResource("/ShopRent/view/dashboard.fxml"));
                                     container.getChildren().add(dashh);
-                                    
+                                    break;
+
+                                case "shop":
+                                    AnchorPane shop = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddShop.fxml"));
+                                    container.getChildren().add(shop);
+                                    break;
+
+                                case "building":
+                                    AnchorPane building = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddBuilding.fxml"));
+                                    container.getChildren().add(building);
                                     break;
 
                                 case "btn_exit":
@@ -121,6 +129,7 @@ public class MainController implements Initializable {
         HamburgerNextArrowBasicTransition hamt = new HamburgerNextArrowBasicTransition(hambuger);
 
         hamt.setRate(1);
+        hambuger.setStyle("-fx-ripple-color:WHITE");
         hambuger.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED,
                 (e) -> {
 

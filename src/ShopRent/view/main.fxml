@@ -11,14 +11,15 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchor_main" prefHeight="690.0" prefWidth="1300.0" style="-fx-background-radius: 12;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopRent.controller.MainController">
     <children>
-        <AnchorPane onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="69.0" prefWidth="1300.0" style="-fx-background-color: #8D6E63;">
+        <AnchorPane fx:id="container" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#closeDrawer" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
+        <AnchorPane onMouseDragged="#mouseDragged" onMousePressed="#mousePressed" onMouseReleased="#mouseReleased" prefHeight="75.0" prefWidth="1300.0" style="-fx-background-color: #03A9F4;">
             <children>
                 <Label layoutX="409.0" layoutY="10.0" text="Kurunegala Municipal Council" textFill="WHITE">
                     <font>
-                        <Font name="Calibri" size="40.0" />
+                        <Font name="Calibri Bold" size="40.0" />
                     </font>
                 </Label>
-                <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" />
+                <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" style="-fx-fill-width: #fff;" />
             <Label fx:id="lbl_logUser" alignment="CENTER_RIGHT" layoutX="850.0" layoutY="44.0" prefHeight="17.0" prefWidth="445.0" text="Label" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />
@@ -44,7 +45,6 @@
             </JFXButton>
             </children>
         </AnchorPane>
-        <AnchorPane fx:id="container" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#closeDrawer" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
-        <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="71.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
+        <JFXDrawer fx:id="drawer" defaultDrawerSize="-180.0" layoutX="-152.0" layoutY="71.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
     </children>
 </AnchorPane>

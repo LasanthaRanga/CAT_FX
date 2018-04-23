@@ -147,10 +147,10 @@ public class SendToApproveController implements Initializable {
                 getSelected();
 
                 Apprualstatues apps = new pojo.Apprualstatues();
-                
+
                 apps.setResiveUser(outhoUser.getIdUser());
                 apps.setApplication(app);
-                apps.setSendDate(new Date());                
+                apps.setSendDate(new Date());
                 apps.setIdOtheritisCat(outo.getIdOtheritisCat());
                 apps.setStatues(0);
                 apps.setSyn(1);

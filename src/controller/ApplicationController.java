@@ -237,7 +237,7 @@ public class ApplicationController implements Initializable {
 
             try {
                 a = (pojo.Application) session.load(pojo.Application.class, a.getIdApplication());
-
+                modle.StaticBadu.setApp(a);
                 modle.Allert.notificationInfo("Find Applicaiton", text);
                 pCustomer = a.getCustomer();
                 txt_allocaton.setText(a.getAllocation() + "");
@@ -249,6 +249,7 @@ public class ApplicationController implements Initializable {
                 txt_discription.setText(a.getDiscription());
 
                 txt_assesmantNO.setText(a.getAssessment().getAssessmentNo());
+                modle.StaticBadu.setAssessment(a.getAssessment());
                 txt_cus_fname.setText(a.getCustomer().getFullName());
                 txt_cus_nic.setText(a.getCustomer().getNic());
 
@@ -274,11 +275,11 @@ public class ApplicationController implements Initializable {
                 if (a.getApplicationDate() != null) {
                     txt_day.setText(new SimpleDateFormat("dd").format(a.getApplicationDate()));
                 }
-                if (a.getApproveToPaymant() == 2) {
-                    btn_update_app.setDisable(true);
-                } else {
-                    btn_update_app.setDisable(false);
-                }
+//                if (a.getApproveToPaymant() == 2) {
+//                    btn_update_app.setDisable(true);
+//                } else {
+//                    btn_update_app.setDisable(false);
+//                }
                 if (a.getUser() != null) {
                     txt_ro.setText(a.getUser().getFullName());
                 }
@@ -876,57 +877,52 @@ public class ApplicationController implements Initializable {
         collectData();
         //  System.out.println(pCustomer.getFullName());
         Aplication mAplication = new modle.Aplication();
-        boolean hasApplication = mAplication.hasApplication(appno);
 
-        if (hasApplication) {
-            modle.Allert.notificationInfo("Application Number is already exist\n Please Cheack It ", appno);
+        Application app = a;
+        app.setApproveToPaymant(0);
+        app.setApplicationNo(appno);
+        // app.setCustomer(pCustomer);
+        app.setSubNature(pSubNature);
+        app.setTradeNature(pNature);
+        app.setApplicationNo(appno);
+
+        //  Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
+        Assessment assesmantPojo = modle.StaticBadu.getAssessment();
+        //  if (assesmantPojo != null) {
+        System.out.println(assesmantPojo.getAssessmentNo());
+        app.setAssessment(assesmantPojo);
+        app.setTradeType(pTradeType);
+        app.setUser(pro);
+        //log wela inna user
+        app.setUserLog(modle.Log_User.getLogUser());
+
+        app.setApplicationDate(apdat);
+        app.setYear(Integer.parseInt(year));
+        app.setMonth(Integer.parseInt(month));
+        app.setAllocation(alocation);
+
+        app.setTradeName(tradeNaem);
+        app.setTradeAddress1(adl1);
+        app.setTradeAddress2(adl2);
+        app.setTradeAddress3(adl3);
+
+        app.setTaxAmount(txtAmount);
+        app.setDiscription(discription);
+        app.setApproveToPaymant(0);
+        app.setStatues(1);
+        app.setSyn(1);
+
+        boolean update = new modle.Aplication().updateApp(app);
+
+        if (update) {
+            modle.StaticBadu.setApp(app);
+            modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());
+            Runtime.getRuntime().gc();
         } else {
-            Application app = a;
-            app.setApproveToPaymant(0);
-            // app.setCustomer(pCustomer);
-            app.setSubNature(pSubNature);
-            app.setTradeNature(pNature);
-            app.setApplicationNo(appno);
-
-            Assessment assesmantPojo = new modle.Customer().getAssesmantPojo(wardname, streetname, assesno);
-
-            //  if (assesmantPojo != null) {
-            System.out.println(assesmantPojo.getAssessmentNo());
-            app.setAssessment(assesmantPojo);
-            app.setTradeType(pTradeType);
-            app.setUser(pro);
-            //log wela inna user
-            app.setUserLog(modle.Log_User.getLogUser());
-
-            app.setApplicationDate(apdat);
-            app.setYear(Integer.parseInt(year));
-            app.setMonth(Integer.parseInt(month));
-            app.setAllocation(alocation);
-
-            app.setTradeName(tradeNaem);
-            app.setTradeAddress1(adl1);
-            app.setTradeAddress2(adl2);
-            app.setTradeAddress3(adl3);
-
-            app.setTaxAmount(txtAmount);
-            app.setDiscription(discription);
-            app.setApproveToPaymant(0);
-            app.setStatues(1);
-            app.setSyn(1);
-
-            boolean update = new modle.Aplication().updateApp(app);
-
-            if (update) {
-                modle.StaticBadu.setApp(app);
-                modle.Allert.notificationGood("Updated Application", txt_aplicaton_No.getText());
-                Runtime.getRuntime().gc();
-            } else {
-                modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
-            }
-//        } else {
-//            modle.Allert.notificationInfo("Cheack Customer", txt_assesmantNO.getText());
-//        }
+            modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
         }
+
+
     }
 
     public void sendToApprove() {

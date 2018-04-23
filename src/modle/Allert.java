@@ -88,7 +88,7 @@ public class Allert {
     }
 
     public static void notificationGood(String title, String mg) {
-        Image image = new Image("/tick.png");
+        Image image = new Image("/Grafics/Good_100px.png");
         Notifications.create()
                 .title(title)
                 .text(mg)

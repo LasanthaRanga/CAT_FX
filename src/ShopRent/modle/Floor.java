@@ -7,6 +7,7 @@ package ShopRent.modle;
 
 import java.util.List;
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
@@ -79,7 +80,7 @@ public class Floor implements SUD<pojo.SrFlow> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             return session.createCriteria(pojo.SrFlow.class).add(Restrictions.eq("status", 1)).list();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             System.out.println(e.getMessage());
             return null;
         } finally {
@@ -113,12 +114,8 @@ public class Floor implements SUD<pojo.SrFlow> {
             cry.add(Restrictions.eq("flowName", s)).list();
             cry.add(Restrictions.eq("srBuilding", (pojo.SrBuilding) session.load(pojo.SrBuilding.class, idBuilding)));
             List list = cry.list();
-            if (list.size() > 0) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
+            return list.size() > 0;
+        } catch (HibernateException e) {
             System.out.println(e.getMessage());
             bt.rollback();
             return true;
@@ -133,15 +130,29 @@ public class Floor implements SUD<pojo.SrFlow> {
             Criteria cry = session.createCriteria(pojo.SrFlow.class);
             cry.add(Restrictions.eq("srBuilding", srBuilding));
             return cry.add(Restrictions.eq("status", 1)).list();
-        } catch (Exception e) {
+        } catch (HibernateException e) {
             System.out.println(e.getMessage());
             return null;
         } finally {
             session.close();
-            
-            
-            
+
         }
     }
+
+    public SrFlow getT_By_name(String name, pojo.SrBuilding building) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Criteria createCriteria = session.createCriteria(pojo.SrFlow.class);
+            createCriteria.add(Restrictions.eq("srBuilding", building));
+            return (SrFlow) createCriteria.add(Restrictions.eq("flowName", name)).uniqueResult();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    
 
 }

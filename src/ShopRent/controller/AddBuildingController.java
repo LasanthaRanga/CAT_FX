@@ -13,6 +13,7 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -55,8 +56,6 @@ public class AddBuildingController implements Initializable {
     @FXML
     private JFXButton btn_updateBuilding;
 
-    ShopRent.modle.GetModle getModle;
-    pojo.SrBuilding selectedSrBuilding;
     @FXML
     private TableView<?> tbl_Floor;
     @FXML
@@ -71,6 +70,9 @@ public class AddBuildingController implements Initializable {
     private JFXButton btn_updateFlor;
 
     public static java.util.logging.Logger logger;
+    ShopRent.modle.GetModle getModle;
+    pojo.SrBuilding selectedSrBuilding;
+    pojo.SrFlow selectedFloor;
 
     /**
      * Initializes the controller class.
@@ -78,10 +80,11 @@ public class AddBuildingController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        
+
         getModle = new ShopRent.modle.GetModle();
         loadWard();
         loadBuilidTable();
+        logger = Logger.getLogger(AddShopController.class.getName());
 
     }
 
@@ -96,7 +99,7 @@ public class AddBuildingController implements Initializable {
 
     @FXML
     private void addBuilding(ActionEvent event) {
-        if (com_ward.getSelectionModel().getSelectedItem().length() > 2 || com_street.getSelectionModel().getSelectedItem().length() > 2) {
+        if (com_ward.getSelectionModel().getSelectedItem() != null && com_street.getSelectionModel().getSelectedItem() != null) {
             if (txt_building.getText().length() > 1) {
                 if (!getModle.getBuilding().isExist(txt_building.getText())) {
                     SrBuilding building = new pojo.SrBuilding();
@@ -111,8 +114,9 @@ public class AddBuildingController implements Initializable {
                     if (save) {
                         modle.Allert.notificationGood("Save", txt_building.getText());
                         loadBuilidTable();
+                        // modle.MyLogger.loggerWrite(logger, Level.INFO, "Save Building -- " + txt_building.getText());
                     } else {
-                        modle.Allert.notificationError("Error", txt_building.getText());
+                        modle.Allert.notificationError("Something Wrong", txt_building.getText());
                     }
                 } else {
                     modle.Allert.notificationInfo("Building Name Ollredy Exist", txt_building.getText());
@@ -128,7 +132,7 @@ public class AddBuildingController implements Initializable {
     @FXML
     private void updateBuilding(ActionEvent event) {
         if (selectedSrBuilding != null) {
-            if (com_ward.getSelectionModel().getSelectedItem().length() > 2 || com_street.getSelectionModel().getSelectedItem().length() > 2) {
+            if (com_ward.getSelectionModel().getSelectedItem() != null && com_street.getSelectionModel().getSelectedItem() != null) {
                 if (txt_building.getText().length() > 1) {
                     if (!getModle.getBuilding().isExist(txt_building.getText())) {
                         SrBuilding building = selectedSrBuilding;
@@ -144,7 +148,7 @@ public class AddBuildingController implements Initializable {
                             modle.Allert.notificationGood("Save", txt_building.getText());
                             loadBuilidTable();
                         } else {
-                            modle.Allert.notificationError("Error", txt_building.getText());
+                            modle.Allert.notificationError("Something Wrong", txt_building.getText());
                         }
                     } else {
                         modle.Allert.notificationInfo("Building Name Ollredy Exist", txt_building.getText());
@@ -194,13 +198,13 @@ public class AddBuildingController implements Initializable {
                         modle.Allert.notificationGood("Save", txt_floor.getText());
                         loadFloorTable();
                     } else {
-                        modle.Allert.notificationError("Somthing Wrong", txt_floor.getText());
+                        modle.Allert.notificationError("Something Wrong", txt_floor.getText());
                     }
                 } else {
                     modle.Allert.notificationError("Olredy Exist", txt_floor.getText());
                 }
             } else {
-                modle.Allert.notificationError("Please Enter Floor Name", "Flor Name Is Empty");
+                modle.Allert.notificationError("Please Enter Floor Name", "Floor Name Is Empty");
             }
         } else {
             modle.Allert.notificationError("NO Selected Buildign", "please Select The building");
@@ -209,7 +213,41 @@ public class AddBuildingController implements Initializable {
 
     @FXML
     private void updateFloor(ActionEvent event) {
+        if (selectedFloor != null) {
+            if (selectedSrBuilding != null) {
+                if (txt_floor.getText().length() > 0) {
+                    if (!getModle.getFloor().isExist(txt_floor.getText(), selectedSrBuilding.getIdBuilding())) {
+                        SrFlow srFlow = getModle.getFloor().getT_By_Id(selectedFloor.getIdFlow());
+                        srFlow.setFlowName(txt_floor.getText());
+                        srFlow.setSrBuilding(getModle.getBuilding().getT_By_Id(selectedSrBuilding.getIdBuilding()));
+                        srFlow.setSyn(1);
+                        srFlow.setStatus(1);
+                        if (getModle.getFloor().update(srFlow)) {
+                            modle.Allert.notificationGood("Update", txt_floor.getText());
+                            loadFloorTable();
+                        } else {
+                            modle.Allert.notificationError("Something Wrong", txt_floor.getText());
+                        }
+                    } else {
+                        modle.Allert.notificationError("Olredy Exist", txt_floor.getText());
+                    }
+                } else {
+                    modle.Allert.notificationError("Please Enter Floor Name", "Floor Name Is Empty");
+                }
+            } else {
+                modle.Allert.notificationError("NO Selected Buildign", "please Select The building");
+            }
+        } else {
+            modle.Allert.notificationInfo("Not Selected Floor", "please Select Floor");
+        }
 
+    }
+
+    @FXML
+    private void selectFloor(MouseEvent event) {
+        FloorTable floor = (FloorTable) tbl_Floor.getSelectionModel().getSelectedItem();
+        txt_floor.setText(floor.getFlorName());
+        selectedFloor = getModle.getFloor().getT_By_Id(floor.getIdFlor());
     }
 
     public class BuildingTable {
@@ -337,7 +375,7 @@ public class AddBuildingController implements Initializable {
         ObservableList<Object> obl = FXCollections.observableArrayList();
         List<SrFlow> list = getModle.getFloor().getList(selectedSrBuilding);
         for (SrFlow srFlow : list) {
-            obl.add(new FloorTable(srFlow.getIdFlow(), srFlow.getFlowName(), 0));
+            obl.add(new FloorTable(srFlow.getIdFlow(), srFlow.getFlowName(), getModle.getShopNo().shopCount(srFlow)));
         }
         new ShopRent.modle.TableLoad().load(obl, tbl_Floor, hashMap);
     }

@@ -8,7 +8,7 @@
             <column name="idFlow" />
             <generator class="identity" />
         </id>
-        <many-to-one name="srBuilding" class="pojo.SrBuilding" fetch="select">
+        <many-to-one name="srBuilding" class="pojo.SrBuilding" fetch="select" >
             <column name="Building_idBuilding" not-null="true" />
         </many-to-one>
         <property name="flowName" type="string">

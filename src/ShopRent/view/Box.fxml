@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
@@ -8,56 +9,234 @@
 
 <VBox fx:id="vbox1" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #03A9F4;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ShopRent.controller.BoxController">
     <children>
-      <ImageView fitHeight="115.0" fitWidth="122.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="185.0" fitWidth="105.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../logo.PNG" />
          </image>
       </ImageView>
-      <JFXButton fx:id="btn_dashboard" accessibleText="dashboard" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Dashboard" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fx:id="img_dashboard" fitHeight="27.0" fitWidth="33.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../dashboard_2.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </JFXButton>
-        <JFXButton fx:id="btn_bulding" accessibleText="building" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Building" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fx:id="img_building" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../building.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
-        <JFXButton fx:id="btn_shop" accessibleText="shop" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Add Shop" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fx:id="img_shop" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Shop.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
-      <JFXButton prefHeight="385.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" />
-      <JFXButton accessibleText="btn_exit" alignment="TOP_RIGHT" contentDisplay="RIGHT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-         <graphic>
-            <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../../Close_Window.png" />
-               </image>
-            </ImageView>
-         </graphic></JFXButton>
+      <ScrollPane hbarPolicy="NEVER" nodeOrientation="RIGHT_TO_LEFT" prefHeight="511.0" prefWidth="200.0" style="-fx-background-color: #FFFFFF;" stylesheets="@myStyle.css">
+         <content>
+            <VBox fx:id="vbox2" prefHeight="333.0" prefWidth="183.0">
+               <children>
+                  <JFXButton fx:id="btn_dashboard" accessibleText="dashboard" alignment="BASELINE_LEFT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Dashboard" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="img_dashboard" fitHeight="27.0" fitWidth="33.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../dashboard_2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_bulding" accessibleText="building" alignment="BASELINE_LEFT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Building" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="img_building" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../building.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton fx:id="btn_shop" accessibleText="shop" alignment="BASELINE_LEFT" graphicTextGap="20.0" onAction="#clickOnAction" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Add Shop" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fx:id="img_shop" fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Shop.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+                  <JFXButton accessibleText="btn_exit" alignment="BASELINE_LEFT" graphicTextGap="20.0" prefHeight="37.0" prefWidth="198.0" style="-fx-background-color: #03A9F4;" text="Exit" textAlignment="CENTER" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="27.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../Close_Window.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </JFXButton>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
     </children>
 </VBox>

@@ -226,8 +226,6 @@ public class ApplicationListController implements Initializable {
             this.payapp = payapp;
             this.Tname = new SimpleStringProperty(Tname);
         }
-        
-        
 
 //        public AppTbl(int appno, String Type, String nature, Double alocation, Double txt, int payapp, String Tname) {
 //            this.appno = appno;
@@ -238,7 +236,6 @@ public class ApplicationListController implements Initializable {
 //            this.payapp = payapp;
 //            this.Tname = new SimpleStringProperty(Tname);
 //        }
-
         /**
          * @return the appno
          */
@@ -317,9 +314,9 @@ public class ApplicationListController implements Initializable {
                 return "Approve";
             } else if (payapp == 0) {
                 return "Pending";
-            } else if(payapp==5) {
+            } else if (payapp == 5) {
                 return "Deactivate";
-            }else{
+            } else {
                 return "Paied";
             }
         }
@@ -364,8 +361,9 @@ public class ApplicationListController implements Initializable {
     }
 
     ObservableList appList = FXCollections.observableArrayList();
-    
+
     public void loadTable(String aapno) {
+       // System.out.println("Mekata awa");
         c_idApp.setCellValueFactory(new PropertyValueFactory<>("appno"));
         c_idApp.setCellValueFactory(new PropertyValueFactory<>("appNOString"));
         c_type.setCellValueFactory(new PropertyValueFactory<>("Type"));
@@ -377,7 +375,7 @@ public class ApplicationListController implements Initializable {
 
         Aplication aplication = new modle.Aplication();
 
- //       int approve = 0;
+        //       int approve = 0;
         int paid = 0;
 
 //        if (ra_approve.isSelected()) {
@@ -403,11 +401,12 @@ public class ApplicationListController implements Initializable {
         List<modle.AppTbl> appTbls = aplication.getAppListToTable(paid, aapno);
         appList.clear();
         for (modle.AppTbl a : appTbls) {
+            //System.out.println("list eka add una");
             appList.add(new AppTbl(a.getAppno(), a.getAppNOString(), a.getType(), a.getNature(), a.getTname(), a.getAlocation(), a.getTxt(), a.getPayapp()));
-            
+
         }
-        
-//        tbl_applicaion.setItems(appList);
+
+        tbl_applicaion.setItems(appList);
 //        tbl_applicaion.setRowFactory(new Callback<TableView<AppTbl>, TableRow<AppTbl>>() {
 //            @Override
 //            public TableRow<AppTbl> call(TableView<AppTbl> param) {
@@ -415,10 +414,7 @@ public class ApplicationListController implements Initializable {
 //            }
 //        });
 //        
-        
-     
-        
-        
+
     }
 
     public class approve {

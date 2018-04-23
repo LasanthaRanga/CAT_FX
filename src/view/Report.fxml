@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ReportController">
+   <children>
+      <AnchorPane layoutX="771.0" layoutY="119.0" prefHeight="370.0" prefWidth="210.0" style="-fx-border-color: #AED581;">
+         <children>
+            <JFXDatePicker fx:id="form" layoutX="20.0" layoutY="70.0" promptText="From" />
+            <JFXDatePicker fx:id="to" layoutX="20.0" layoutY="124.0" promptText="To" />
+            <JFXButton fx:id="btn_ledger" layoutX="20.0" layoutY="189.0" onAction="#ledger" prefHeight="25.0" prefWidth="171.0" style="-fx-background-color: #039BE5;" text="All Paymant Ledger" />
+            <JFXButton fx:id="btn_cancle" layoutX="20.0" layoutY="234.0" onAction="#cancelPaymant" prefHeight="25.0" prefWidth="171.0" style="-fx-background-color: #039BE5;" text="All Cancel Report" />
+            <JFXComboBox fx:id="com_ro" layoutX="20.0" layoutY="283.0" prefHeight="25.0" prefWidth="171.0" promptText="RO Name" />
+            <JFXButton fx:id="btn_withRO" layoutX="20.0" layoutY="324.0" onAction="#withRO" prefHeight="25.0" prefWidth="171.0" style="-fx-background-color: #039BE5;" text="All Paymant with This RO" />
+            <Label layoutX="20.0" layoutY="14.0" prefHeight="35.0" prefWidth="171.0" text="Payment Reports">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="299.0" layoutY="119.0" prefHeight="370.0" prefWidth="430.0" style="-fx-border-color: #FFAB91;">
+         <children>
+            <JFXButton fx:id="btn_arrears" layoutX="21.0" layoutY="192.0" onAction="#arrearsLatter" prefHeight="25.0" prefWidth="188.0" style="-fx-background-color: #039BE5;" text="Send To All By Trade Type" />
+            <JFXComboBox fx:id="com_ro1" layoutX="21.0" layoutY="266.0" onAction="#searchAppNo2" prefHeight="25.0" prefWidth="188.0" promptText="RO Name" />
+            <JFXButton fx:id="btn_arrearsByRO" layoutX="21.0" layoutY="322.0" onAction="#arrearsLatterByRO" prefHeight="25.0" prefWidth="188.0" style="-fx-background-color: #039BE5;" text=" Send To Trade Type wiht RO" />
+            <JFXDatePicker fx:id="pay_end" layoutX="21.0" layoutY="75.0" prefHeight="28.0" prefWidth="188.0" promptText="Pay End Date" />
+            <JFXComboBox fx:id="com_TradeType" layoutX="21.0" layoutY="135.0" onAction="#selectTradeType" prefHeight="25.0" prefWidth="188.0" promptText="Trade Type" />
+            <JFXListView fx:id="list_AppNo" editable="true" layoutX="251.0" layoutY="110.0" onMouseReleased="#getSelectedApp" prefHeight="144.0" prefWidth="159.0" />
+            <JFXTextField fx:id="txt_appNo" layoutX="251.0" layoutY="76.0" onKeyReleased="#searchAppNo" prefHeight="25.0" prefWidth="159.0" promptText="Search Application No." />
+            <JFXButton fx:id="btn_arrearsByRO1" layoutX="251.0" layoutY="322.0" onAction="#arrearsLatterSelectedOne" prefHeight="25.0" prefWidth="159.0" style="-fx-background-color: #039BE5;" text="Send To Selected One" />
+            <Label fx:id="selected_No" alignment="CENTER" contentDisplay="TEXT_ONLY" layoutX="251.0" layoutY="266.0" prefHeight="25.0" prefWidth="159.0" textAlignment="CENTER" />
+            <Label layoutX="21.0" layoutY="14.0" prefHeight="17.0" prefWidth="188.0" text="Arrears Letter">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

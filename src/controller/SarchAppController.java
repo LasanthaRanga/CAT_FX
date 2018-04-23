@@ -41,6 +41,7 @@ import javafx.stage.StageStyle;
 import modle.AppHolder;
 import modle.AppTbl;
 import modle.ApprvalHolder;
+import modle.Export_TO_Excel;
 import modle.LoadAppList;
 import modle.Nature;
 import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
@@ -147,10 +148,9 @@ public class SarchAppController implements Initializable {
     private TableColumn<AppTbl, String> c_tname;
     @FXML
     private JFXButton btn_All;
-    @FXML
     private JFXButton btn_paymant_report;
     @FXML
-    private JFXButton btn_app_report;
+    private JFXButton btn_export;
 
     /**
      * Initializes the controller class.
@@ -3910,7 +3910,7 @@ public class SarchAppController implements Initializable {
             }
 
         }
-            loadTable();
+        loadTable();
 
     }
 
@@ -4358,8 +4358,8 @@ public class SarchAppController implements Initializable {
                 Date date = Date.from(instant);
                 //   System.out.println(localDateTo + "\n" + instant + "\n" + date);
             }
-             btn_paymant_report.setDisable(false);
-        }else{
+            btn_paymant_report.setDisable(false);
+        } else {
             btn_paymant_report.setDisable(true);
         }
 
@@ -4429,17 +4429,9 @@ public class SarchAppController implements Initializable {
     }
 
     @FXML
-    private void paymantReport(ActionEvent event) {        
-            new modle.Report().ariasLatter(filter);
-    }
-
-    @FXML
-    private void applicationReport(ActionEvent event) {
-        
-        
-        
-        
-        
+    private void export(ActionEvent event) {
+        Export_TO_Excel export_TO_Excel = new modle.Export_TO_Excel();
+        export_TO_Excel.setSet(filter);
     }
 
 }

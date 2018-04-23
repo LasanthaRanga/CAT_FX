@@ -114,6 +114,8 @@ public class PaymentController implements Initializable {
     private JFXDatePicker txt_payment_date;
     @FXML
     private JFXComboBox<String> com_bank;
+    @FXML
+    private JFXCheckBox chb_stamp;
 
     /**
      * Initializes the controller class.
@@ -151,7 +153,13 @@ public class PaymentController implements Initializable {
                         txt_vat_amount.setText(vat_amount + "");
                         total += vat_amount;
                     }
-                    total += Double.parseDouble(txt_stamp_amount.getText());
+                    if (chb_stamp.isSelected()) {
+                        pojo.Interest intres = interest.getByName("STAMP");
+                        double stamp_amount = (tax_amount * intres.getRate()) / 100;
+                        txt_stamp_amount.setText(stamp_amount + "");
+                        total += stamp_amount;
+                    }
+                    // total += Double.parseDouble(txt_stamp_amount.getText());
                     txt_total_amount.setText(total + "");
                     txt_pay_amount_cash.setText(total + "");
 
@@ -308,9 +316,25 @@ public class PaymentController implements Initializable {
                 txt_vat_amount.setText("00.00");
             }
 
-            // set stamp
-            total += Double.parseDouble(txt_stamp_amount.getText());
+            if (chb_stamp.isSelected()) {
+                pojo.Interest intres = interest.getByName("STAMP");
+                if (intres != null) {
+                    double stamp_amount = (tax_amount * intres.getRate()) / 100;
+                    txt_stamp_amount.setText(Math.round(stamp_amount * 100.00) / 100.00 + "");
+                    total += stamp_amount;
+                } else {
+                    Notifications.create()
+                            .title("Warning")
+                            .text("Not Found VAT Details.")
+                            .hideAfter(Duration.seconds(3))
+                            .position(Pos.BOTTOM_RIGHT).showWarning();
+                }
+            } else {
+                txt_stamp_amount.setText("00.00");
+            }
 
+            // set stamp
+            // total += Double.parseDouble(txt_stamp_amount.getText());
             // set fields
             txt_total_amount.setText(Math.round(total * 100.00) / 100.00 + "");
             txt_pay_amount_cash.setText(Math.round(total * 100.00) / 100.00 + "");
@@ -625,6 +649,18 @@ public class PaymentController implements Initializable {
                     .position(Pos.BOTTOM_RIGHT).showWarning();
             return false;
         }
+    }
+
+    @FXML
+    private void allowStamp(MouseEvent event) {
+        if (chb_stamp.isSelected()) {
+            txt_stamp_amount.setDisable(false);
+        } else {
+            txt_stamp_amount.setText("00.00");
+            txt_stamp_amount.setDisable(true);
+        }
+        this.setTotal();
+
     }
 
 }

@@ -19,7 +19,7 @@
                         <Font name="Calibri Bold" size="40.0" />
                     </font>
                 </Label>
-                <JFXHamburger fx:id="hambuger" layoutX="14.0" layoutY="20.0" style="-fx-fill-width: #fff;" />
+                <JFXHamburger fx:id="hambuger" layoutX="7.0" layoutY="20.0" style="-fx-fill-width: #fff;" stylesheets="@myStyle.css" />
             <Label fx:id="lbl_logUser" alignment="CENTER_RIGHT" layoutX="850.0" layoutY="44.0" prefHeight="17.0" prefWidth="445.0" text="Label" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="13.0" />

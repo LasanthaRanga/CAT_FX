@@ -5,169 +5,68 @@
  */
 package ShopRent.modle;
 
+import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import pojo.SrRentalType;
 
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class RentType {
+public class RentType implements SUD<pojo.SrRentalType> {
 
-    private pojo.SrRentalType pojoRentalType;
-    private Integer idRentalType;
-    private String RType;
-    private Integer rentTypeStatus;
-    private Integer rentTypeSyn;
-    
-    
-    
-    public boolean savePojoRentType() {
+    @Override
+    public boolean isExist(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean save(SrRentalType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(SrRentalType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deactiv(SrRentalType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SrRentalType> getList() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
         try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            bt.rollback();
-            return false;
+            List list = session.createCriteria(pojo.SrRentalType.class).list();
+            return list;
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            return null;
         } finally {
             session.close();
-            ShopRent.modle.LogWrite.writeLog();
         }
     }
 
-    public boolean updatePojoRentType() {
+    @Override
+    public SrRentalType getT_By_Id(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SrRentalType getT_By_name(String name) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
         try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            bt.rollback();
-            return false;
+            return (pojo.SrRentalType) session.createCriteria(pojo.SrRentalType.class).add(Restrictions.eq("RType", name)).uniqueResult();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            return null;
         } finally {
             session.close();
-            ShopRent.modle.LogWrite.writeLog();
         }
-    }
-
-    public boolean deactivePojoRentType() {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            bt.rollback();
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-    public boolean searchPojoRentTypeByID(int id) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-    public boolean searchPojoRentTypeByName(String name) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();     
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-    
-
-    /**
-     * @return the pojoRentalType
-     */
-    public pojo.SrRentalType getPojoRentalType() {
-        return pojoRentalType;
-    }
-
-    /**
-     * @param pojoRentalType the pojoRentalType to set
-     */
-    public void setPojoRentalType(pojo.SrRentalType pojoRentalType) {
-        this.pojoRentalType = pojoRentalType;
-    }
-
-    /**
-     * @return the idRentalType
-     */
-    public Integer getIdRentalType() {
-        return idRentalType;
-    }
-
-    /**
-     * @param idRentalType the idRentalType to set
-     */
-    public void setIdRentalType(Integer idRentalType) {
-        this.idRentalType = idRentalType;
-    }
-
-    /**
-     * @return the RType
-     */
-    public String getRType() {
-        return RType;
-    }
-
-    /**
-     * @param RType the RType to set
-     */
-    public void setRType(String RType) {
-        this.RType = RType;
-    }
-
-    /**
-     * @return the rentTypeStatus
-     */
-    public Integer getRentTypeStatus() {
-        return rentTypeStatus;
-    }
-
-    /**
-     * @param rentTypeStatus the rentTypeStatus to set
-     */
-    public void setRentTypeStatus(Integer rentTypeStatus) {
-        this.rentTypeStatus = rentTypeStatus;
-    }
-
-    /**
-     * @return the rentTypeSyn
-     */
-    public Integer getRentTypeSyn() {
-        return rentTypeSyn;
-    }
-
-    /**
-     * @param rentTypeSyn the rentTypeSyn to set
-     */
-    public void setRentTypeSyn(Integer rentTypeSyn) {
-        this.rentTypeSyn = rentTypeSyn;
     }
 
 }

@@ -74,51 +74,51 @@ public class MainController implements Initializable {
             drawer.setSidePane(box);
 
             //container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/DashBord.fxml")));
-            for (Node node : box.getChildren()) {
-                String accessibleText = node.getAccessibleText();
-
-                if (accessibleText != null) {
-
-                    node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
-                        try {
-
-                            container.getChildren().removeAll();
-                            container.getChildren().clear();
-
-                            switch (accessibleText) {
-
-                                case "dashboard":
-                                    AnchorPane dashh = FXMLLoader.load(getClass().getResource("/ShopRent/view/dashboard.fxml"));
-                                    container.getChildren().add(dashh);
-                                    break;
-
-                                case "shop":
-                                    AnchorPane shop = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddShop.fxml"));
-                                    container.getChildren().add(shop);
-                                    break;
-
-                                case "building":
-                                    AnchorPane building = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddBuilding.fxml"));
-                                    container.getChildren().add(building);
-                                    break;
-
-                                case "btn_exit":
-                                    System.out.println("EXIT");
-                                    Platform.exit();
-                                    System.exit(0);
-                                    //((Node) (e.getSource())).getScene().getWindow().hide();
-                                    break;
-
-                            }
-                        } catch (Exception ee) {
-                            ee.printStackTrace();
-                        }
-
-                    });
-
-                }
-
-            }
+//            for (Node node : box.getChildren()) {
+//                String accessibleText = node.getAccessibleText();
+//
+//                if (accessibleText != null) {
+//
+//                    node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
+//                        try {
+//
+//                            container.getChildren().removeAll();
+//                            container.getChildren().clear();
+//
+//                            switch (accessibleText) {
+//
+//                                case "dashboard":
+//                                    AnchorPane dashh = FXMLLoader.load(getClass().getResource("/ShopRent/view/dashboard.fxml"));
+//                                    container.getChildren().add(dashh);
+//                                    break;
+//
+//                                case "shop":
+//                                    AnchorPane shop = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddShop.fxml"));
+//                                    container.getChildren().add(shop);
+//                                    break;
+//
+//                                case "building":
+//                                    AnchorPane building = FXMLLoader.load(getClass().getResource("/ShopRent/view/AddBuilding.fxml"));
+//                                    container.getChildren().add(building);
+//                                    break;
+//
+//                                case "btn_exit":
+//                                    System.out.println("EXIT");
+//                                    Platform.exit();
+//                                    System.exit(0);
+//                                    //((Node) (e.getSource())).getScene().getWindow().hide();
+//                                    break;
+//
+//                            }
+//                        } catch (Exception ee) {
+//                            ee.printStackTrace();
+//                        }
+//
+//                    });
+//
+//                }
+//
+//            }
 
         } catch (Exception e) {
             e.printStackTrace();

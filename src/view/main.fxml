@@ -45,6 +45,6 @@
             </children>
         </AnchorPane>
         <AnchorPane fx:id="container" layoutY="69.0" maxHeight="-Infinity" maxWidth="-Infinity" onMouseClicked="#closeDrawer" onMouseEntered="#cloaseDrawerEnterd" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffff;" />
-        <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="71.0" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
+        <JFXDrawer fx:id="drawer" defaultDrawerSize="-240.0" layoutX="-215.0" layoutY="68.0" prefHeight="627.0" prefWidth="200.0" style="-fx-background-color: #ffff;" />
     </children>
 </AnchorPane>

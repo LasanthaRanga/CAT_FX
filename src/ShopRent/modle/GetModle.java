@@ -5,8 +5,6 @@
  */
 package ShopRent.modle;
 
-import modle.Strret;
-
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
@@ -17,6 +15,9 @@ public class GetModle {
     private modle.Ward ward;
     private ShopRent.modle.Building building;
     private ShopRent.modle.Floor floor;
+    private ShopRent.modle.ShopType shopType;
+    private ShopRent.modle.RentType rentType;
+    private ShopRent.modle.ShopNo shopNo;
 
     /**
      * @return the strret
@@ -56,6 +57,36 @@ public class GetModle {
             floor = new Floor();
         }
         return floor;
+    }
+
+    /**
+     * @return the shopType
+     */
+    public ShopRent.modle.ShopType getShopType() {
+        if (shopType == null) {
+            shopType = new ShopType();
+        }
+        return shopType;
+    }
+
+    /**
+     * @return the rentType
+     */
+    public ShopRent.modle.RentType getRentType() {
+        if (rentType == null) {
+            rentType = new RentType();
+        }
+        return rentType;
+    }
+
+    /**
+     * @return the shopNo
+     */
+    public ShopRent.modle.ShopNo getShopNo() {
+        if (shopNo == null) {
+            shopNo = new ShopNo();
+        }
+        return shopNo;
     }
 
 }

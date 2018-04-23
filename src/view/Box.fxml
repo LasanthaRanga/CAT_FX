@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="625.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="vbox1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="200.0" style="-fx-background-color: #9E9E9E;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
     <children>
       <ImageView fitHeight="293.0" fitWidth="201.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -49,6 +49,11 @@
             <Font name="System Bold" size="14.0" />
          </font></JFXButton>
       <JFXButton accessibleText="paymantView" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="Payment View" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <JFXButton accessibleText="Reports" prefHeight="25.0" prefWidth="203.0" style="-fx-background-color: #424242;" text="Reports" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

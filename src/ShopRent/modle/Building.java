@@ -103,7 +103,17 @@ public class Building implements SUD<pojo.SrBuilding> {
 
     @Override
     public SrBuilding getT_By_name(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            SrBuilding srBuilding = (pojo.SrBuilding) session.createCriteria(pojo.SrBuilding.class).add(Restrictions.eq("buildingName", name)).uniqueResult();
+            return srBuilding;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+            ShopRent.modle.LogWrite.writeLog();
+        }
     }
 
     @Override

@@ -8,11 +8,36 @@ and open the template in the editor.
     Author     : RM.LasanthaRanga@gmail.com
 */
 
-.jfx-hamburger-icon
-{
-    -fx-pref-width: 40px;
-    -fx-pref-height: 7px;
-    -fx-background-color : #D63333;
-    -fx-background-radius : 5px;
-    -fx-ripple-color:WHITE;
+.jfx-hamburger {
+	-fx-background-color: transparent;
+}
+
+.jfx-hamburger StackPane {
+	-fx-background-color: white;
+}
+
+.scroll-pane {
+    -fx-background-color: black;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color: #03A9F4;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #BBDEFB;
+    -fx-background-radius: 5em;
 }

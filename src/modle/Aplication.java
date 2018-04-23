@@ -14,11 +14,13 @@ import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
 import pojo.Application;
 import pojo.Apprualstatues;
 import pojo.Customer;
+import pojo.User;
 
 /**
  *
@@ -83,7 +85,7 @@ public class Aplication implements DAO<pojo.Application> {
         Transaction bt = session.beginTransaction();
         try {
             session.update(t);
-     //       session.flush();
+            //       session.flush();
             bt.commit();
             return true;
         } catch (Exception e) {
@@ -432,4 +434,46 @@ public class Aplication implements DAO<pojo.Application> {
             session.close();
         }
     }
+
+    public List<pojo.Application> getApplicationNoList(String TradeType) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            pojo.TradeType uniqueResult = (pojo.TradeType) session.createCriteria(pojo.TradeType.class).add(Restrictions.eq("typeName", TradeType)).uniqueResult();
+            Criteria criteria = session.createCriteria(pojo.Application.class);
+            List<pojo.Application> list = criteria.add(Restrictions.eq("tradeType", uniqueResult)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public List<pojo.Application> getApplicationNoList(String TradeType, String appNo, String Ro) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+            Criteria criteria = session.createCriteria(pojo.Application.class);
+            if (TradeType != null) {
+                pojo.TradeType uniqueResult = (pojo.TradeType) session.createCriteria(pojo.TradeType.class).add(Restrictions.eq("typeName", TradeType)).uniqueResult();
+                criteria.add(Restrictions.eq("tradeType", uniqueResult));
+            }
+            if (appNo != null) {
+                criteria.add(Restrictions.like("applicationNo", appNo, MatchMode.START));
+            }
+            if (Ro != null) {
+                User user = (pojo.User) session.createCriteria(pojo.User.class).add(Restrictions.eq("fullName", Ro)).uniqueResult();
+                criteria.add(Restrictions.eq("user", user));
+            }
+            List<pojo.Application> list = criteria.list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
 }

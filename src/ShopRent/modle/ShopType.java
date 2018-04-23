@@ -5,166 +5,69 @@
  */
 package ShopRent.modle;
 
+import java.util.List;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+import pojo.SrShopType;
 
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
  */
-public class ShopType {
+public class ShopType implements SUD<pojo.SrShopType> {
 
-    private pojo.SrShopType pojoShopType;
-    private Integer idShopType;
-    private String shopType;
-    private Integer shopTypeStatus;
-    private Integer shopTypeSyn;
-    
-    public boolean savePojoShopType() {
+    @Override
+    public boolean isExist(String s) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean save(SrShopType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean update(SrShopType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deactiv(SrShopType t) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public List<SrShopType> getList() {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
         try {
-
-            return true;
+            List list = session.createCriteria(pojo.SrShopType.class).list();
+            return list;
         } catch (Exception e) {
             e.printStackTrace();
-            bt.rollback();
-            return false;
+            return null;
         } finally {
             session.close();
-            ShopRent.modle.LogWrite.writeLog();
         }
+
     }
 
-    public boolean updatePojoShopType() {
+    @Override
+    public SrShopType getT_By_Id(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public SrShopType getT_By_name(String name) {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
         try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            bt.rollback();
-            return false;
+            return (pojo.SrShopType) session.createCriteria(pojo.SrShopType.class).add(Restrictions.eq("shopType", name)).uniqueResult();
+        } catch (HibernateException e) {
+            System.out.println(e.getMessage());
+            return null;
         } finally {
             session.close();
-            ShopRent.modle.LogWrite.writeLog();
         }
-    }
-
-    public boolean deactivePojoShopType() {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
-        Transaction bt = session.beginTransaction();
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            bt.rollback();
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-    public boolean searchPojoShopTypeByID(int id) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();        
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-    public boolean searchPojoShopTypeByName(String name) {
-        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();     
-        try {
-
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();          
-            return false;
-        } finally {
-            session.close();
-            ShopRent.modle.LogWrite.writeLog();
-        }
-    }
-    
-
-    /**
-     * @return the pojoShopType
-     */
-    public pojo.SrShopType getPojoShopType() {
-        return pojoShopType;
-    }
-
-    /**
-     * @param pojoShopType the pojoShopType to set
-     */
-    public void setPojoShopType(pojo.SrShopType pojoShopType) {
-        this.pojoShopType = pojoShopType;
-    }
-
-    /**
-     * @return the idShopType
-     */
-    public Integer getIdShopType() {
-        return idShopType;
-    }
-
-    /**
-     * @param idShopType the idShopType to set
-     */
-    public void setIdShopType(Integer idShopType) {
-        this.idShopType = idShopType;
-    }
-
-    /**
-     * @return the shopType
-     */
-    public String getShopType() {
-        return shopType;
-    }
-
-    /**
-     * @param shopType the shopType to set
-     */
-    public void setShopType(String shopType) {
-        this.shopType = shopType;
-    }
-
-    /**
-     * @return the shopTypeStatus
-     */
-    public Integer getShopTypeStatus() {
-        return shopTypeStatus;
-    }
-
-    /**
-     * @param shopTypeStatus the shopTypeStatus to set
-     */
-    public void setShopTypeStatus(Integer shopTypeStatus) {
-        this.shopTypeStatus = shopTypeStatus;
-    }
-
-    /**
-     * @return the shopTypeSyn
-     */
-    public Integer getShopTypeSyn() {
-        return shopTypeSyn;
-    }
-
-    /**
-     * @param shopTypeSyn the shopTypeSyn to set
-     */
-    public void setShopTypeSyn(Integer shopTypeSyn) {
-        this.shopTypeSyn = shopTypeSyn;
     }
 
 }

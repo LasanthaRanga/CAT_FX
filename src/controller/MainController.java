@@ -145,6 +145,11 @@ public class MainController implements Initializable {
                                     container.getChildren().add(paymantView);
                                     break;
 
+                                case "Reports":
+                                    AnchorPane report = FXMLLoader.load(getClass().getResource("/view/Report.fxml"));
+                                    container.getChildren().add(report);
+                                    break;
+
                                 case "about":
                                     container.getChildren().add(about);
                                     break;

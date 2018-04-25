@@ -7,6 +7,7 @@ package modle;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import org.apache.poi.hssf.record.chart.DatRecord;
@@ -149,6 +150,34 @@ public class Aplication implements DAO<pojo.Application> {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         try {
             List<pojo.Application> list = session.createCriteria(pojo.Application.class)
+                    .add(Restrictions.eq("approveToPaymant", 1))
+                    .add(Restrictions.eq("statues", 1))
+                    .setFetchMode("aplicationPayments", FetchMode.JOIN)
+                    .setFetchMode("tradeType", FetchMode.JOIN)
+                    .setFetchMode("customer", FetchMode.JOIN)
+                    .setFetchMode("apprualstatueses", FetchMode.JOIN)
+                    .setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY)
+                    .list();
+            ArrayList<Application> ap_list = new ArrayList<pojo.Application>();
+            for (Application application : list) {
+                //if (application.getAplicationPayments().size() == 0) {
+                ap_list.add(application);
+                // }
+            }
+            return ap_list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+    
+    public List<pojo.Application> getUnpaiedApprovedApplications(Date date) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            List<pojo.Application> list = session.createCriteria(pojo.Application.class)
+                    .add(Restrictions.eq("applicationDate", date))
                     .add(Restrictions.eq("approveToPaymant", 1))
                     .add(Restrictions.eq("statues", 1))
                     .setFetchMode("aplicationPayments", FetchMode.JOIN)

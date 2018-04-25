@@ -9,6 +9,7 @@ import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import java.time.ZoneId;
 import java.util.Date;
@@ -18,6 +19,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
@@ -116,6 +118,8 @@ public class PaymentController implements Initializable {
     private JFXComboBox<String> com_bank;
     @FXML
     private JFXCheckBox chb_stamp;
+    @FXML
+    private JFXDatePicker date_pick;
 
     /**
      * Initializes the controller class.
@@ -123,7 +127,8 @@ public class PaymentController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        // String format = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+        date_pick.setValue(LocalDate.now());
         tbl_clmn_allocation.setCellValueFactory(new PropertyValueFactory<>("allocation"));
         tbl_clmn_application_no.setCellValueFactory(new PropertyValueFactory<>("applicationNo"));
         tbl_clmn_application_date.setCellValueFactory(new PropertyValueFactory<>("applicationDate"));
@@ -199,7 +204,7 @@ public class PaymentController implements Initializable {
     }
 
     private void setTable() {
-        List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications();
+        List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications(new Date());
         if (unpaiedApprovedApplications != null) {
             ObservableList<Application> list = FXCollections.observableArrayList(unpaiedApprovedApplications);
             tbl_approved_list.setItems(list);
@@ -660,6 +665,18 @@ public class PaymentController implements Initializable {
             txt_stamp_amount.setDisable(true);
         }
         this.setTotal();
+
+    }
+
+    @FXML
+    private void datePickOnAction(ActionEvent event) {
+        Instant instant = Instant.from(date_pick.getValue().atStartOfDay(ZoneId.systemDefault()));
+        Date datee = Date.from(instant);
+        List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications(datee);
+        if (unpaiedApprovedApplications != null) {
+            ObservableList<Application> list = FXCollections.observableArrayList(unpaiedApprovedApplications);
+            tbl_approved_list.setItems(list);
+        }
 
     }
 

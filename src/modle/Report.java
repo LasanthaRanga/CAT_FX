@@ -59,7 +59,7 @@ public class Report {
 
     public void dayEnd(String date, boolean print) {
         try {
-            String path = "C:\\cat\\report\\dayEnd.jrxml";
+            String path = "C:\\cat\\report\\DE.jrxml";
             JasperReport jr = JasperCompileManager.compileReport(path);
             HashMap param = new HashMap<String, Integer>();
             param.put("date_para", date);

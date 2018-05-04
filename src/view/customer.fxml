@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,9 +12,9 @@
 
 <AnchorPane id="AnchorPane" prefHeight="625.0" prefWidth="1300.0" style="-fx-background-color: #ffffff;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CustomerController">
    <children>
-      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="207.0" layoutY="97.0" prefHeight="25.0" prefWidth="147.0" promptText="Ward Name" />
-      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="397.0" layoutY="97.0" prefHeight="25.0" prefWidth="147.0" promptText="Street Name" />
-      <JFXTextField fx:id="txt_assesment" labelFloat="true" layoutX="590.0" layoutY="97.0" onKeyReleased="#keyListener" prefHeight="25.0" prefWidth="147.0" promptText="Assessment No.">
+      <JFXComboBox fx:id="com_ward" labelFloat="true" layoutX="159.0" layoutY="67.0" prefHeight="25.0" prefWidth="147.0" promptText="Ward Name" />
+      <JFXComboBox fx:id="com_street" labelFloat="true" layoutX="159.0" layoutY="143.0" onAction="#StreetOnAction" prefHeight="25.0" prefWidth="147.0" promptText="Street Name" />
+      <JFXTextField fx:id="txt_assesment" labelFloat="true" layoutX="627.0" layoutY="116.0" onKeyReleased="#keyListener" prefHeight="28.0" prefWidth="115.0" promptText="Assessment No.">
          <font>
             <Font size="14.0" />
          </font>
@@ -23,16 +24,16 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="209.0" layoutY="205.0" onKeyReleased="#nicCheack" prefHeight="35.0" prefWidth="172.0" promptText="NIC">
+      <JFXTextField fx:id="txt_nic" labelFloat="true" layoutX="157.0" layoutY="227.0" onKeyReleased="#nicCheack" prefHeight="35.0" prefWidth="172.0" promptText="NIC">
          <font>
             <Font size="18.0" />
          </font>
       </JFXTextField>
-      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="415.0" layoutY="205.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="324.0" promptText="Full Name">
+      <JFXTextField fx:id="txt_fname" labelFloat="true" layoutX="414.0" layoutY="227.0" onKeyReleased="#loadCusByFullname" prefHeight="25.0" prefWidth="324.0" promptText="Full Name">
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_phone" labelFloat="true" layoutX="210.0" layoutY="303.0" prefHeight="35.0" prefWidth="172.0" promptText="Phone No.">
+      <JFXTextField fx:id="txt_phone" labelFloat="true" layoutX="159.0" layoutY="303.0" prefHeight="35.0" prefWidth="172.0" promptText="Phone No.">
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
@@ -44,7 +45,7 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_adress1" labelFloat="true" layoutX="207.0" layoutY="388.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 1">
+      <JFXTextField fx:id="txt_adress1" labelFloat="true" layoutX="156.0" layoutY="388.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 1">
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
@@ -52,7 +53,7 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXTextField fx:id="txt_adress3" labelFloat="true" layoutX="207.0" layoutY="473.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 3">
+      <JFXTextField fx:id="txt_adress3" labelFloat="true" layoutX="156.0" layoutY="473.0" prefHeight="25.0" prefWidth="238.0" promptText="Address Line 3">
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
@@ -60,17 +61,17 @@
          <font>
             <Font size="18.0" />
          </font></JFXTextField>
-      <JFXButton fx:id="btn_add" layoutX="50.0" layoutY="538.0" prefHeight="53.0" prefWidth="160.0" style="-fx-background-color: #43A047;" text="Add New Customer" textFill="WHITE">
+      <JFXButton fx:id="btn_add" layoutX="153.0" layoutY="562.0" prefHeight="29.0" prefWidth="160.0" style="-fx-background-color: #43A047;" text="Add New Customer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_update" layoutX="633.0" layoutY="562.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
+      <JFXButton fx:id="btn_update" layoutX="777.0" layoutY="562.0" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #FDD835;" text="Update" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_clear" layoutX="828.0" layoutY="562.0" onAction="#clearAll" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Clear" textFill="WHITE">
+      <JFXButton fx:id="btn_clear" layoutX="965.0" layoutY="562.0" onAction="#clearAll" prefHeight="25.0" prefWidth="103.0" style="-fx-background-color: #F4511E;" text="Clear" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
@@ -92,10 +93,16 @@
             <Font size="14.0" />
          </font>
       </JFXButton>
-      <JFXButton fx:id="btn_add1" layoutX="275.0" layoutY="562.0" onAction="#addAssessmant" prefHeight="29.0" prefWidth="280.0" style="-fx-background-color: #43A047;" text="Add New Assessmant To Old Customer" textFill="WHITE">
+      <JFXButton fx:id="btn_add1" layoutX="411.0" layoutY="562.0" onAction="#addAssessmant" prefHeight="29.0" prefWidth="280.0" style="-fx-background-color: #43A047;" text="Add New Assessmant To Old Customer" textFill="WHITE">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
       </JFXButton>
+      <JFXButton fx:id="btn_next" layoutX="1171.0" layoutY="562.0" onAction="#next" prefHeight="29.0" prefWidth="85.0" style="-fx-background-color: #2124f8;" text="Next" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </JFXButton>
+      <ListView fx:id="list_assess" layoutX="373.0" layoutY="72.0" onMouseReleased="#selectByList" prefHeight="116.0" prefWidth="200.0" />
    </children>
 </AnchorPane>

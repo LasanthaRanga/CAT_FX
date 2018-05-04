@@ -25,18 +25,21 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SingleSelectionModel;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
@@ -44,6 +47,7 @@ import javafx.stage.StageStyle;
 import modle.Customer;
 import modle.WSA;
 import org.controlsfx.control.textfield.TextFields;
+import pojo.Assessment;
 
 /**
  * FXML Controller class
@@ -121,6 +125,10 @@ public class CustomerController implements Initializable {
     Customer cus;
     @FXML
     private JFXButton btn_add1;
+    @FXML
+    private JFXButton btn_next;
+    @FXML
+    private ListView<String> list_assess;
 
     /**
      * Initializes the controller class.
@@ -156,8 +164,6 @@ public class CustomerController implements Initializable {
 
     }
 
-    
-
     @FXML
     public void loadCusByFullname(KeyEvent event) {
 
@@ -165,52 +171,47 @@ public class CustomerController implements Initializable {
             System.out.println("ENTER GEHUWAA");
             String fname = txt_fname.getText();
 
-            
-                modle.StaticBadu.setCus_fullname(fname);
-                List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
-                modle.StaticBadu.setCuslist(searchCustomer);
-             
+            modle.StaticBadu.setCus_fullname(fname);
+            List<Customer> searchCustomer = new modle.Customer().searchCustomer(fname);
+            modle.StaticBadu.setCuslist(searchCustomer);
 
-                if (searchCustomer.size() > 1) {
-                    if (searchCustomer != null) {
-                        try {
-                            AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
-                            txt_fname.getParent().getScene();
-                            Scene scene = new Scene(paymant);
-                            Stage stage = new Stage();
-                            stage.initStyle(StageStyle.TRANSPARENT);
-                            stage.setScene(scene);
-                            stage.show();
-                            modle.StaticBadu.setCustomerController(this);
-                            
+            if (searchCustomer.size() > 1) {
+                if (searchCustomer != null) {
+                    try {
+                        AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/SearchCus.fxml"));
+                        txt_fname.getParent().getScene();
+                        Scene scene = new Scene(paymant);
+                        Stage stage = new Stage();
+                        stage.initStyle(StageStyle.TRANSPARENT);
+                        stage.setScene(scene);
+                        stage.show();
+                        modle.StaticBadu.setCustomerController(this);
 
-                        } catch (IOException ex) {
-                            ex.printStackTrace();
-                            Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                        Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-
-                } else {
-                    upcus = searchCustomer.get(0);
-                    txt_fname.setText(upcus.getFullName());
-                    txt_phone.setText(upcus.getPhone());
-                    txt_mobile.setText(upcus.getMobile());
-                    txt_email.setText(upcus.getEmail());
-                    txt_adress1.setText(upcus.getAddress1());
-                    txt_adress2.setText(upcus.getAddress2());
-                    txt_adress3.setText(upcus.getAddress3());
-                    txt_nic.setText(upcus.getNic());  
-                    btn_update.setDisable(false);
-                    setWardStrretAssesmant();
                 }
 
-           
-            
+            } else {
+                upcus = searchCustomer.get(0);
+                txt_fname.setText(upcus.getFullName());
+                txt_phone.setText(upcus.getPhone());
+                txt_mobile.setText(upcus.getMobile());
+                txt_email.setText(upcus.getEmail());
+                txt_adress1.setText(upcus.getAddress1());
+                txt_adress2.setText(upcus.getAddress2());
+                txt_adress3.setText(upcus.getAddress3());
+                txt_nic.setText(upcus.getNic());
+                btn_update.setDisable(false);
+                setWardStrretAssesmant();
+            }
+
         }
     }
 
     public void setCustomerDataBySelect() {
-        
+
         System.out.println(modle.StaticBadu.getpCustomer().getFullName() + "=== Static Badu");
         if (modle.StaticBadu.getpCustomer() != null) {
             upcus = new modle.Customer().searchCustomerByID(modle.StaticBadu.getpCustomer().getIdCustomer());
@@ -224,7 +225,7 @@ public class CustomerController implements Initializable {
             txt_adress2.setText(upcus.getAddress2());
             txt_adress3.setText(upcus.getAddress3());
             txt_nic.setText(upcus.getNic());
-           
+
             //btn_add.setDisable(true);
             btn_update.setDisable(false);
             setWardStrretAssesmant();
@@ -311,7 +312,7 @@ public class CustomerController implements Initializable {
                     customer.setEmail(txt_email.getText());
 
                     boolean saveCustomer = customer.saveCustomer();
-
+                    upcus = customer;
                     if (saveCustomer) {
                         modle.Allert.notificationGood("Added", customer.getFullName());
                         clearAll(event);
@@ -339,6 +340,8 @@ public class CustomerController implements Initializable {
         if (event.getCode() == KeyCode.ENTER) {
             System.out.println("ENTER GEHUWAA");
             searchCustomerByAssesment();
+        } else {
+            filterAssessmantList();
         }
 
     }
@@ -621,7 +624,7 @@ public class CustomerController implements Initializable {
 
             if (saveCustomer) {
                 modle.Allert.notificationGood("Added", customer.getFullName());
-                clearAll(event);
+                // clearAll(event);
 
                 // setWardStrretAssesmant();
             } else {
@@ -634,6 +637,63 @@ public class CustomerController implements Initializable {
         ArrayList li = cus.getCustomerFnameList();
         TextFields.bindAutoCompletion(txt_fname, li);
 
+    }
+
+    @FXML
+    private void next(ActionEvent event) {
+        if (upcus != null) {
+            MainController mc = modle.StaticView.getMc();
+            mc.getContainer().getChildren().removeAll();
+
+            modle.StaticView.setCustomer(upcus.getCustomer());
+            modle.StaticView.setAssessment(upcus.getAsses());
+            modle.StaticView.setMcus(upcus);
+
+            try {
+                AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
+                mc.getContainer().getChildren().add(aplication);
+            } catch (Exception e) {
+            }
+        }
+    }
+
+    @FXML
+    private void StreetOnAction(ActionEvent event) {
+
+        String wardName = com_ward.getSelectionModel().getSelectedItem();
+        String streetName = com_street.getSelectionModel().getSelectedItem();
+
+        List<Assessment> as = modle.AssesmantNo.getAssessmantList(wardName, streetName);
+
+        ObservableList<String> oal = FXCollections.observableArrayList();
+
+        for (Assessment a : as) {
+            oal.add(a.getAssessmentNo());
+        }
+        list_assess.setItems(oal);
+    }
+
+    @FXML
+    private void selectByList(MouseEvent event) {
+
+        String asess = list_assess.getSelectionModel().getSelectedItem();
+        txt_assesment.setText(asess);
+        customer = modle.AssesmantNo.searchByAssesmantNO(com_ward.getSelectionModel().getSelectedItem(), com_street.getSelectionModel().getSelectedItem(), asess);
+        setCustometData();
+        btn_update.setDisable(false);
+
+    }
+
+    public void filterAssessmantList() {
+        String wardName = com_ward.getSelectionModel().getSelectedItem();
+        String streetName = com_street.getSelectionModel().getSelectedItem();
+        List<Assessment> as = modle.AssesmantNo.getAssessmantListFilter(wardName, streetName, txt_assesment.getText());
+        ObservableList<String> oal = FXCollections.observableArrayList();
+
+        for (Assessment a : as) {
+            oal.add(a.getAssessmentNo());
+        }
+        list_assess.setItems(oal);
     }
 
 }

@@ -5,14 +5,18 @@
  */
 package modle;
 
+import java.util.List;
 import java.util.Set;
 import org.apache.xmlbeans.impl.xb.xsdschema.RestrictionDocument;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Restrictions;
 import pojo.Assessment;
 import pojo.Contact;
 import pojo.Customer;
 import pojo.Street;
+import pojo.Ward;
 
 /**
  *
@@ -62,7 +66,7 @@ public class AssesmantNo {
                                             cus.setIdContact(contact.getIdContact());
                                             System.out.println("");
                                         }
-                                    }                                    
+                                    }
                                 }
                             }
                         }
@@ -86,6 +90,44 @@ public class AssesmantNo {
             e.printStackTrace();
         } finally {
 
+            session.close();
+        }
+    }
+
+    public static List<pojo.Assessment> getAssessmantList(String ward, String street) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Ward w = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
+            Criteria cryStreet = session.createCriteria(pojo.Street.class);
+            cryStreet.add(Restrictions.eq("ward", w));
+            Street s = (pojo.Street) cryStreet.add(Restrictions.eq("streetName", street)).uniqueResult();
+            List<pojo.Assessment> list = session.createCriteria(pojo.Assessment.class).add(Restrictions.eq("street", s)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+    }
+
+    public static List<pojo.Assessment> getAssessmantListFilter(String ward, String street, String assessmant) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Ward w = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", ward)).uniqueResult();
+            Criteria cryStreet = session.createCriteria(pojo.Street.class);
+            cryStreet.add(Restrictions.eq("ward", w));
+            Street s = (pojo.Street) cryStreet.add(Restrictions.eq("streetName", street)).uniqueResult();
+
+            Criteria cryAssess = session.createCriteria(pojo.Assessment.class);
+            cryAssess.add(Restrictions.eq("street", s));
+            List<pojo.Assessment> list = cryAssess.add(Restrictions.like("assessmentNo", assessmant, MatchMode.START)).list();
+
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
             session.close();
         }
     }

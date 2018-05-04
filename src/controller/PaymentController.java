@@ -120,6 +120,8 @@ public class PaymentController implements Initializable {
     private JFXCheckBox chb_stamp;
     @FXML
     private JFXDatePicker date_pick;
+    @FXML
+    private JFXButton btn_all;
 
     /**
      * Initializes the controller class.
@@ -678,6 +680,15 @@ public class PaymentController implements Initializable {
             tbl_approved_list.setItems(list);
         }
 
+    }
+
+    @FXML
+    private void btnAllOnAction(ActionEvent event) {
+         List<Application> unpaiedApprovedApplications = new modle.Aplication().getUnpaiedApprovedApplications();
+        if (unpaiedApprovedApplications != null) {
+            ObservableList<Application> list = FXCollections.observableArrayList(unpaiedApprovedApplications);
+            tbl_approved_list.setItems(list);
+        }
     }
 
 }

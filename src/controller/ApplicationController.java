@@ -177,6 +177,7 @@ public class ApplicationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
         loadWardCombo();
         loadStrretCombo();
         loadTreadTypeCombo();
@@ -192,6 +193,14 @@ public class ApplicationController implements Initializable {
         Customer cus = new modle.Customer();
         ArrayList list = cus.getCustomerFnameList();
         TextFields.bindAutoCompletion(txt_cus_fname, list);
+
+        if (modle.StaticView.getMcus() != null) {
+            fillContent();
+            pCustomer = modle.StaticView.getMcus().getCustomer();
+            System.out.println("NOT Null");
+        } else {
+            System.out.println("NULL");
+        }
 
         btn_approve.setOnAction((event) -> {
             ApproveToPay();
@@ -209,6 +218,51 @@ public class ApplicationController implements Initializable {
                 }
             }
         });
+
+    }
+
+    public void fillContent() {
+        System.out.println("FILL CUS");
+
+        upcus = modle.StaticView.getMcus();
+        pCustomer = upcus.getCustomer();
+        txt_cus_nic.setText(upcus.getNic());
+        txt_cus_fname.setText(upcus.getFullName());
+        Session openSession = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+
+            Integer idCustomer = upcus.getIdCustomer();
+            pojo.Customer load = (pojo.Customer) openSession.load(pojo.Customer.class, modle.StaticView.getMcus().getIdCustomer());
+            pCustomer = load;
+            loadTable();
+            Set<Assessment> assessments = load.getAssessments();
+
+            for (Assessment assessment : assessments) {
+                modle.StaticBadu.setAssessment(assessment);
+                String assessmentNo = assessment.getAssessmentNo();
+                String streetName = assessment.getStreet().getStreetName();
+                String wardName = assessment.getStreet().getWard().getWardName();
+
+                System.out.println(assessmentNo + "  Ases");
+
+                txt_assesmantNO.setText(assessmentNo);
+                com_ward.getSelectionModel().select(wardName);
+
+                modle.Ward ward = new modle.Ward();
+                String selectedItem = com_ward.getSelectionModel().getSelectedItem();
+                ward.setWardname(selectedItem);
+                ObservableList list = ward.getStreetBySelectedWard();
+                com_street.setItems(list);
+
+                com_street.getSelectionModel().select(streetName);
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            openSession.close();
+        }
 
     }
 
@@ -922,7 +976,6 @@ public class ApplicationController implements Initializable {
             modle.Allert.notificationError("Error", txt_aplicaton_No.getText());
         }
 
-
     }
 
     public void sendToApprove() {
@@ -947,24 +1000,29 @@ public class ApplicationController implements Initializable {
     }
 
     public void ApproveToPay() {
-
         pojo.Application app = modle.StaticBadu.getApp();
-
         if (app != null) {
-
             app.setApproveToPaymant(1);
             boolean update = new modle.Aplication().update(app);
-
             if (update) {
                 modle.Allert.notificationGood("Approve TO Paymant", app.getIdApplication() + "");
                 clearApplication();
+
+                try {
+                    MainController mc = modle.StaticView.getMc();
+                    mc.getContainer().getChildren().removeAll();
+                    AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
+                    mc.getContainer().getChildren().add(aplication);
+                    modle.StaticView.setCustomer(null);
+                    modle.StaticView.setAssessment(null);
+                    modle.StaticView.setMcus(null);
+                } catch (Exception e) {
+                }
+
             } else {
                 modle.Allert.notificationError("Error", "Cannot Approve To Paymant");
-
             }
-
         }
-
     }
 
     public void clearApplication() {

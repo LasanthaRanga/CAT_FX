@@ -403,8 +403,10 @@ public class Customer {
             cus.setSyn(1);
             cus.setRegDate(new Date());
 
-            Serializable savedcus = session.save(cus);
-
+            Serializable save = session.save(cus);
+            
+           // modle.StaticView.getMcus().setIdCustomer(savedcus);
+            
             Contact contact = new pojo.Contact();
             contact.setCustomer(cus);
             contact.setAddress1(getAddress1());

@@ -44,6 +44,20 @@ import pojo.User;
 public class MainController implements Initializable {
 
     /**
+     * @return the container
+     */
+    public AnchorPane getContainer() {
+        return container;
+    }
+
+    /**
+     * @param container the container to set
+     */
+    public void setContainer(AnchorPane container) {
+        this.container = container;
+    }
+
+    /**
      * Initializes the controller class.
      */
     @FXML
@@ -70,6 +84,9 @@ public class MainController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        
+        modle.StaticView.setMc(this);
+        
         Session ses = conn.NewHibernateUtil.getSessionFactory().openSession();
         ses.beginTransaction().commit();
         ses.close();
@@ -85,7 +102,7 @@ public class MainController implements Initializable {
 
             drawer.setSidePane(box);
 
-            container.getChildren().add(FXMLLoader.load(getClass().getResource("/view/DashBord.fxml")));
+            getContainer().getChildren().add(FXMLLoader.load(getClass().getResource("/view/DashBord.fxml")));
 
             for (Node node : box.getChildren()) {
                 String accessibleText = node.getAccessibleText();
@@ -95,63 +112,63 @@ public class MainController implements Initializable {
                     node.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, (e) -> {
                         try {
 
-                            container.getChildren().removeAll();
-                            container.getChildren().clear();
+                            getContainer().getChildren().removeAll();
+                            getContainer().getChildren().clear();
 
                             switch (accessibleText) {
 
                                 case "dashboard":
                                     AnchorPane dashh = FXMLLoader.load(getClass().getResource("/view/DashBord.fxml"));
-                                    container.getChildren().add(dashh);
+                                    getContainer().getChildren().add(dashh);
                                     break;
 
                                 case "btn_test1":
                                     AnchorPane ward = FXMLLoader.load(getClass().getResource("/view/ward.fxml"));
-                                    container.getChildren().add(ward);
+                                    getContainer().getChildren().add(ward);
                                     break;
 
                                 case "btn_test2":
                                     AnchorPane nature = FXMLLoader.load(getClass().getResource("/view/nature.fxml"));
-                                    container.getChildren().add(nature);
+                                    getContainer().getChildren().add(nature);
                                     break;
 
                                 case "customer":
                                     AnchorPane customer = FXMLLoader.load(getClass().getResource("/view/customer.fxml"));
-                                    container.getChildren().add(customer);
+                                    getContainer().getChildren().add(customer);
                                     break;
 
                                 case "Aplication":
                                     AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
-                                    container.getChildren().add(aplication);
+                                    getContainer().getChildren().add(aplication);
                                     break;
 
                                 case "applist":
                                     AnchorPane applist = FXMLLoader.load(getClass().getResource("/view/ApplicationList.fxml"));
-                                    container.getChildren().add(applist);
+                                    getContainer().getChildren().add(applist);
                                     break;
 
                                 case "searchapp":
                                     AnchorPane sarch = FXMLLoader.load(getClass().getResource("/view/SarchApp.fxml"));
-                                    container.getChildren().add(sarch);
+                                    getContainer().getChildren().add(sarch);
                                     break;
 
                                 case "payment":
                                     AnchorPane paymant = FXMLLoader.load(getClass().getResource("/view/Payment.fxml"));
-                                    container.getChildren().add(paymant);
+                                    getContainer().getChildren().add(paymant);
                                     break;
 
                                 case "paymantView":
                                     AnchorPane paymantView = FXMLLoader.load(getClass().getResource("/view/PaymantView.fxml"));
-                                    container.getChildren().add(paymantView);
+                                    getContainer().getChildren().add(paymantView);
                                     break;
 
                                 case "Reports":
                                     AnchorPane report = FXMLLoader.load(getClass().getResource("/view/Report.fxml"));
-                                    container.getChildren().add(report);
+                                    getContainer().getChildren().add(report);
                                     break;
 
                                 case "about":
-                                    container.getChildren().add(about);
+                                    getContainer().getChildren().add(about);
                                     break;
 
                                 case "btn_exit":

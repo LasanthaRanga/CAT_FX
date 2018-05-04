@@ -252,6 +252,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </VBox>
-      <JFXDatePicker fx:id="date_pick" layoutX="292.0" layoutY="32.0" onAction="#datePickOnAction" />
+      <JFXDatePicker fx:id="date_pick" layoutX="220.0" layoutY="32.0" onAction="#datePickOnAction" prefHeight="28.0" prefWidth="142.0" />
+      <JFXButton fx:id="btn_all" layoutX="411.0" layoutY="34.0" onAction="#btnAllOnAction" prefHeight="25.0" prefWidth="49.0" text="All " />
    </children>
 </AnchorPane>

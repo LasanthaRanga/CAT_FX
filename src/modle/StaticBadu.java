@@ -25,6 +25,8 @@ public class StaticBadu {
     private static pojo.Ward ward;
     private static pojo.Street street;
     private static pojo.Assessment assessment;
+    private static List <pojo.Assessment> assessmentList;
+    private static modle.Customer customerModle;
 
     /**
      * @return the ward
@@ -138,6 +140,34 @@ public class StaticBadu {
      */
     public static void setCustomerController(controller.CustomerController aCustomerController) {
         customerController = aCustomerController;
+    }
+
+    /**
+     * @return the assessmentList
+     */
+    public static List <pojo.Assessment> getAssessmentList() {
+        return assessmentList;
+    }
+
+    /**
+     * @param aAssessmentList the assessmentList to set
+     */
+    public static void setAssessmentList(List <pojo.Assessment> aAssessmentList) {
+        assessmentList = aAssessmentList;
+    }
+
+    /**
+     * @return the customerModle
+     */
+    public static modle.Customer getCustomerModle() {
+        return customerModle;
+    }
+
+    /**
+     * @param aCustomerModle the customerModle to set
+     */
+    public static void setCustomerModle(modle.Customer aCustomerModle) {
+        customerModle = aCustomerModle;
     }
 
 }

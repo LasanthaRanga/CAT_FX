@@ -678,9 +678,41 @@ public class CustomerController implements Initializable {
 
         String asess = list_assess.getSelectionModel().getSelectedItem();
         txt_assesment.setText(asess);
-        customer = modle.AssesmantNo.searchByAssesmantNO(com_ward.getSelectionModel().getSelectedItem(), com_street.getSelectionModel().getSelectedItem(), asess);
-        setCustometData();
-        btn_update.setDisable(false);
+
+        List<Assessment> alis = modle.AssesmantNo.getAssessmantByWSA(com_ward.getSelectionModel().getSelectedItem(), com_street.getSelectionModel().getSelectedItem(), asess);
+        if (alis.size() > 1) {
+            customer = null;
+            txt_nic.setText(null);
+            txt_fname.setText(null);
+            txt_phone.setText(null);
+            txt_mobile.setText(null);
+            txt_email.setText(null);
+            txt_adress1.setText(null);
+            txt_adress2.setText(null);
+            txt_adress3.setText(null);
+            // txt_assesment.setText(null);
+            modle.StaticBadu.setAssessmentList(alis);
+            try {
+
+                AnchorPane paymant = javafx.fxml.FXMLLoader.load(getClass().getResource("/view/CustomerView.fxml"));
+                txt_fname.getParent().getScene();
+                Scene scene = new Scene(paymant);
+                Stage stage = new Stage();
+                stage.initStyle(StageStyle.TRANSPARENT);
+                stage.setScene(scene);
+                stage.show();
+                modle.StaticBadu.setCustomerController(this);
+
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(PayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        } else {
+            customer = modle.AssesmantNo.searchByAssesmantNO(com_ward.getSelectionModel().getSelectedItem(), com_street.getSelectionModel().getSelectedItem(), asess);
+            setCustometData();
+            btn_update.setDisable(false);
+        }
 
     }
 
@@ -694,6 +726,13 @@ public class CustomerController implements Initializable {
             oal.add(a.getAssessmentNo());
         }
         list_assess.setItems(oal);
+    }
+
+    public void setDataBySelectedCustomer() {
+        customer = modle.StaticBadu.getCustomerModle();
+        setCustometData();
+        btn_update.setDisable(false);
+
     }
 
 }

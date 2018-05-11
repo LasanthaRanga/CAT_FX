@@ -37,7 +37,7 @@ public class AssesmantNo {
                 for (Street street1 : streets) {
 
                     if (street1.getStreetName().equals(street)) {
-                        System.out.println("Samana Una");
+                        //  System.out.println("Samana Una");
                         Set<Assessment> assessments = street1.getAssessments();
                         for (Assessment assessment : assessments) {
 
@@ -47,7 +47,7 @@ public class AssesmantNo {
 
                                     cus = new modle.Customer();
                                     StaticBadu.setAssessment(assessment);
-                                    System.out.println("FULNAME TIBBA");
+                                    //    System.out.println("FULNAME TIBBA");
 
                                     cus.setFullName(c.getFullName());
                                     cus.setNic(c.getNic());
@@ -130,6 +130,29 @@ public class AssesmantNo {
         } finally {
             session.close();
         }
+    }
+
+    public static List<pojo.Assessment> getAssessmantByWSA(String w, String s, String a) {
+
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            Ward ward = (pojo.Ward) session.createCriteria(pojo.Ward.class).add(Restrictions.eq("wardName", w)).uniqueResult();
+            Criteria cryStreet = session.createCriteria(pojo.Street.class);
+            cryStreet.add(Restrictions.eq("ward", ward));
+            cryStreet.add(Restrictions.eq("streetName", s));
+            Street street = (pojo.Street) cryStreet.uniqueResult();
+
+            Criteria cryAssess = session.createCriteria(pojo.Assessment.class);
+            cryAssess.add(Restrictions.eq("street", street));
+            List<pojo.Assessment> list = cryAssess.add(Restrictions.eq("assessmentNo", a)).list();
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
+
     }
 
 }

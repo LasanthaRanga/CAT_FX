@@ -196,8 +196,9 @@ public class ApplicationController implements Initializable {
 
         if (modle.StaticView.getMcus() != null) {
             fillContent();
-            pCustomer = modle.StaticView.getMcus().getCustomer();
+            pCustomer = modle.StaticView.getCustomerByID(modle.StaticView.getMcus().getIdCustomer());
             System.out.println("NOT Null");
+           // System.out.println("XXXXXX" + modle.StaticView.getCustomer().getIdCustomer());
         } else {
             System.out.println("NULL");
         }

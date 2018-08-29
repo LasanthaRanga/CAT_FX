@@ -21,7 +21,7 @@ public class DB {
     public static java.sql.Connection getConnection() throws Exception {
         if (c == null) {
             Class.forName("com.mysql.jdbc.Driver");
-            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/cat", "root", "Yamaha510");
+            c = DriverManager.getConnection("jdbc:mysql://localhost:3306/cat", "root", "root");
             
         }
         return c;

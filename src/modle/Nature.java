@@ -210,9 +210,8 @@ public class Nature {
         Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
         pojo.TradeNature upNature = null;
         try {
-            upNature = (pojo.TradeNature) session.createCriteria(pojo.TradeNature.class).add(Restrictions.eq("nature", natureName)).uniqueResult();
-
-            session.beginTransaction().commit();
+            List<pojo.TradeNature> list = session.createCriteria(pojo.TradeNature.class).add(Restrictions.eq("nature", natureName)).list();
+            return list.get(0);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

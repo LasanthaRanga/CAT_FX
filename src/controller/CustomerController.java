@@ -195,6 +195,7 @@ public class CustomerController implements Initializable {
 
             } else {
                 upcus = searchCustomer.get(0);
+                System.out.println(upcus.getIdCustomer() + "XXXXx");
                 txt_fname.setText(upcus.getFullName());
                 txt_phone.setText(upcus.getPhone());
                 txt_mobile.setText(upcus.getMobile());
@@ -648,11 +649,13 @@ public class CustomerController implements Initializable {
             modle.StaticView.setCustomer(upcus.getCustomer());
             modle.StaticView.setAssessment(upcus.getAsses());
             modle.StaticView.setMcus(upcus);
-
+            System.out.println(upcus.getIdCustomer() + "UPCUS id");
+           
             try {
                 AnchorPane aplication = FXMLLoader.load(getClass().getResource("/view/application.fxml"));
                 mc.getContainer().getChildren().add(aplication);
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }

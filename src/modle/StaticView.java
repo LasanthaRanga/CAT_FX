@@ -5,6 +5,8 @@
  */
 package modle;
 
+import org.hibernate.Session;
+
 /**
  *
  * @author RM.LasanthaRanga@gmail.com
@@ -70,6 +72,18 @@ public class StaticView {
      */
     public static void setMcus(modle.Customer aMcus) {
         mcus = aMcus;
+    }
+
+    public static pojo.Customer getCustomerByID(int id) {
+        Session session = conn.NewHibernateUtil.getSessionFactory().openSession();
+        try {
+            return (pojo.Customer) session.load(pojo.Customer.class, id);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        } finally {
+            session.close();
+        }
     }
 
 }
